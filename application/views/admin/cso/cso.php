@@ -5,9 +5,7 @@
     <?php $this->load->view('includes/meta.php') ?>
     <?php $this->load->view('includes/css.php') ?> 
 
-     <script 
-src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js">
-  </script>
+  
 
 
 </head>
@@ -74,31 +72,43 @@ src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js">
                                                     </div>
 
                                                     <div class="form-group">
-                                                        <label >Description</label>
-                                                            <textarea class="form-control">
-                                                                
-                                                            </textarea>
+                                                        <label >Address</label>
+                                                            <input  type="text" class="form-control" name="address"  placeholder="" required>      
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label >Contact Person</label>
+                                                            <input  type="text" class="form-control" name="contact_person"  placeholder="" >      
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label >Contact Number</label>
+                                                           <input  type="number" class="form-control" name="contact_number"  placeholder="">      
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label >Email</label>
+                                                           <input  type="email" class="form-control" name="email"  placeholder="" >      
                                                     </div>
 
                                                      <div class="form-group">
                                                         <label >COR</label>
-                                                            <input  type="file" class="form-control" id="cor"  onchange="ValidateSingleInput(this);" name="cor"  placeholder="" required>      
+                                                            <input  type="file" class="form-control" id="cor"  onchange="ValidateSingleInput(this);" name="cor"  placeholder="" >      
                                                     </div>
-
                                                  
 
 
-                                                    <div class="form-group">
+                                                <div class="form-group">
                                                         <label >BYLAWS</label>
-                                                            <input  type="file" class="form-control" name="bylaws" onchange="ValidateSingleInput(this);"  placeholder="" required>      
+                                                            <input  type="file" class="form-control" name="bylaws" onchange="ValidateSingleInput(this);"  placeholder="" >      
                                                     </div>
-
+ 
                                                      <div class="form-group">
                                                         <label >ARTICLE</label>
-                                                            <input  type="file" class="form-control" name="article" onchange="ValidateSingleInput(this);"  placeholder="" required>      
-                                                    </div>
+                                                            <input  type="file" class="form-control" name="article" onchange="ValidateSingleInput(this);"  placeholder="" >      
+                                                    </div> 
 
-                                                    
+                                   
                                                     <button  type="submit" class="btn mt-1 pr-4 pl-4 btn-add-cso sub-button"> Submit</button>
                                                     
                                                     <div class="alert"></div>
@@ -107,20 +117,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js">
                                         </div>
                                     </div> 
                                 </div>
-                                <div class="row">
-                                     <div id="canvas_container">
-                                        <canvas id="pdf_renderer"></canvas>
-                                    </div>
-                                        <div id="navigation_controls">
-                                            <button id="go_previous" class="btn ">Previous</button>
-                                            <input id="current_page" value="1" type="number"/>
-                                            <button id="go_next" class="btn ">Next</button>
-                                        </div>
-                                        <div id="zoom_controls">  
-                                            <button id="zoom_in" class="btn " >+</button>
-                                            <button id="zoom_out" class="btn ">-</button>
-                                        </div>
-                                </div>
+                               
                             </div>
                         </div>
                     </div>
@@ -141,81 +138,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js">
      <?php $this->load->view('includes/scripts.php') ?> 
 
 
-     <script type="text/javascript">
-
-
-         var myState = {
-            pdf: null,
-            currentPage: 1,
-            zoom: 1
-        }
-     
-        pdfjsLib.getDocument('./x.pdf').then((pdf) => {
-     
-            myState.pdf = pdf;
-            render();
-        });
-        function render() {
-            myState.pdf.getPage(myState.currentPage).then((page) => {
-         
-                var canvas = document.getElementById("pdf_renderer");
-                var ctx = canvas.getContext('2d');
-     
-                var viewport = page.getViewport(myState.zoom);
-                canvas.width = viewport.width;
-                canvas.height = viewport.height;
-         
-                page.render({
-                    canvasContext: ctx,
-                    viewport: viewport
-                });
-            });
-        }
-        document.getElementById('go_previous').addEventListener('click', (e) => {
-            if(myState.pdf == null || myState.currentPage == 1) 
-              return;
-            myState.currentPage -= 1;
-            document.getElementById("current_page").value = myState.currentPage;
-            render();
-        });
-        document.getElementById('go_next').addEventListener('click', (e) => {
-            if(myState.pdf == null || myState.currentPage > myState.pdf._pdfInfo.numPages) 
-               return;
-            myState.currentPage += 1;
-            document.getElementById("current_page").value = myState.currentPage;
-            render();
-        });
-        document.getElementById('current_page').addEventListener('keypress', (e) => {
-            if(myState.pdf == null) return;
-         
-            // Get key code 
-            var code = (e.keyCode ? e.keyCode : e.which);
-         
-            // If key code matches that of the Enter key 
-            if(code == 13) {
-                var desiredPage = 
-                document.getElementById('current_page').valueAsNumber;
-                                 
-                if(desiredPage >= 1 && desiredPage <= myState.pdf._pdfInfo.numPages) {
-                    myState.currentPage = desiredPage;
-                    document.getElementById("current_page").value = desiredPage;
-                    render();
-                }
-            }
-        });
-        document.getElementById('zoom_in').addEventListener('click', (e) => {
-            if(myState.pdf == null) return;
-            myState.zoom += 0.5;
-            render();
-        });
-        document.getElementById('zoom_out').addEventListener('click', (e) => {
-            if(myState.pdf == null) return;
-            myState.zoom -= 0.5;
-            render();
-        });
-         
-
-     </script>
+   
    
 </body>
 

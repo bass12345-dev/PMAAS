@@ -38,6 +38,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.7.1/sweetalert2.all.min.js" integrity="sha512-KfbhdnXs2iEeelTjRJ+QWO9veR3rm6BocSoNoZ4bpPIZCsE1ysIRHwV80yazSHKmX99DM0nzjoCZjsjNDE628w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script 
+    src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js">
+  </script>
 
     <script type="text/javascript">
 
@@ -45,7 +48,7 @@
 
 
       var base_url = '<?php echo base_url(); ?>';
-      var _validFileExtensions = [".pdf", ".docx"];    
+      var _validFileExtensions = [".pdf"];    
 
 
 
@@ -193,7 +196,7 @@
                 // data: "song_title",
                 data: null,
                 render: function (data, type, row) {
-                    return '<a href="javascript:;"  class="a"  data-id="'+data['res_center_id']+'" data-code="'+data['res_center_code']+'"  style="color: #000;" id="view_transactions" >'+data['res_center_name']+'</a>';
+                    return '<a href="javascript:;"  class="a"  data-id="'+data['res_center_id']+'" data-code="'+data['res_center_code']+'"  style="color: #000;"  >'+data['res_center_name']+'</a>';
                 }
 
             },
@@ -241,11 +244,7 @@
 
     })
 
-   $(document).on('click','a#view_transactions',function (e) {
 
-    window.location.href = base_url + 'responsibility_center/view_transactions?id=' + $(this).data('id') + '&&code_number=' + $(this).data('code') ;
-
-   })
 
 
 
@@ -422,7 +421,7 @@
                 // data: "song_title",
                 data: null,
                 render: function (data, type, row) {
-                    return '<span href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['type_act_name']+'</span>';
+                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['type_act_name']+'</a>';
                 }
 
             },
@@ -432,7 +431,7 @@
                 render: function (data, type, row) {
                     return '<ul class="d-flex justify-content-center">\
                                 <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'+data['type_act_id']+'" data-name="'+data['type_act_name']+'" id="update-activity"><i class="fa fa-edit"></i></a></li>\
-                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'+data['type_act_id']+'" data-name="'+data['type_act_name']+'" id="update-under-activity"><i class="fa fa-table"></i></a></li>\
+                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'+data['type_act_id']+'" data-name="'+data['type_act_name']+'" id="update-under-activity"><i class="fa fa-arrow-down"></i></a></li>\
                                 <li><a href="javascript:;" data-id="'+data['type_act_id']+'"  id="delete-activity"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>\
                                 </ul>';
                 }
@@ -442,16 +441,18 @@
         });
 
 
-    
-
-    var under_type_activity_table = $('#under_activity_table').DataTable({
 
 
+
+    var under_type_activity_table =  $('#under_activity_table').DataTable({
+
+            
 
             "ajax" : {
-                        "url": base_url + 'Type_of_Activity/get_under_type?id=' + $('input[name=activity_id]').val(),
+                        "url": base_url + 'Type_of_Activity/get_under_type?id=' + $(this).data('id'),
                         "dataSrc": "",
             },
+           
              'columns': [
             {
                 // data: "song_title",
@@ -474,17 +475,31 @@
             },
           ]
     });
-
+    
 
     $(document).on('click','a#update-under-activity',function (e) {
 
-   
-        $('#update_under_activity_modal').modal('show');
-        $('input[id=act_id]').val($(this).data('id'));
-        $('.type_of_training_title').text($(this).data('name'));
-        $('.under_type_label').text($(this).data('name'));
+      
+        $('#under_type_activity_card').removeAttr('hidden');
+        
+
+       
 
      });
+
+
+    // $(document).on('click','a#update-under-activity',function (e) {
+
+   
+    //     $('#update_under_activity_modal').modal('show');
+    //     $('input[id=act_id]').val($(this).data('id'));
+    //     $('.type_of_training_title').text($(this).data('name'));
+    //     $('.under_type_label').text($(this).data('name'));
+
+
+       
+
+    //  });
 
 
      $('#add_under_activity_form').on('submit', function(e) {
@@ -974,6 +989,7 @@
 
 
       var transaction_table = $('#transactions_table').DataTable({
+        scrollX: true,
 
 
       })
@@ -1019,6 +1035,134 @@
             })
 
          })
+
+
+
+       /*================================
+    User Section
+    ==================================*/
+
+
+       var users_table = $('#users_table').DataTable({
+
+             scrollX: true,
+
+           "ajax" : {
+                        "url": base_url + 'Users/get',
+                        "dataSrc": "",
+            },
+             'columns': [
+            {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['user_id']+'"  style="color: #000;" class="table-font-size "  >'+data['name']+'</a>';
+                }
+
+            },
+              {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['user_id']+'"  style="color: #000;" class="table-font-size "  >'+data['username']+'</a>';
+                }
+
+            },
+              {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['user_id']+'"  style="color: #000;" class="table-font-size "  >'+data['user_type']+'</a>';
+                }
+
+            },
+
+            {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<ul class="d-flex justify-content-center">\
+                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'+data['cso_id']+'" data-name="'+data['cso_name']+'" id="update-responsible"><i class="fa fa-edit"></i></a></li>\
+                                '+row.action+'\
+                                \
+                                </ul>';
+                }
+
+            },
+          ]
+
+
+      })
+   
+
+
+     $('#add_user_form').on('submit', function(e) {
+    e.preventDefault();
+
+    $.ajax({
+            type: "POST",
+            url: base_url + 'Users/add',
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData:false,
+            dataType: 'json',
+            beforeSend: function() {
+                $('.btn-add-user').text('Please wait...');
+                $('.btn-add-user').attr('disabled','disabled');
+            },
+             success: function(data)
+            {            
+                if (data.response) {
+                    $('#add_user_form')[0].reset();
+                    $('.btn-add-user').text('Submit');
+                    $('.btn-add-user').removeAttr('disabled');
+                    $('.alert').html(' <div class="alert-dismiss mt-2">\
+                                                        <div class="alert alert-success alert-dismissible fade show" role="alert">\
+                                                            <strong>'+data.message+'.\
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class="fa fa-times"></span>\
+                                                            </button>\
+                                                            </div>\
+                                                    </div>');
+                    
+                    setTimeout(function() { 
+                        $('.alert').html('')
+                    }, 3000);
+                    users_table.ajax.reload();
+                }else {
+                    $('.btn-add-user').text('Submit');
+                   $('.btn-add-user').removeAttr('disabled');
+                     $('.alert').html(' <div class="alert-dismiss mt-2">\
+                                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">\
+                                                            <strong>'+data.message+'.\
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class="fa fa-times"></span>\
+                                                            </button>\
+                                                            </div>\
+                                                    </div>');
+                }
+           },
+            error: function(xhr) { // if error occured
+                alert("Error occured.please try again");
+                $('.btn-add-user').text('Submit');
+                $('.btn-add-user').removeAttr('disabled');
+            },
+
+
+        });
+
+    });
+
+
+
+    $(document).on('click','a#delete-user',function (e) {
+
+
+        var id = $(this).data('id');   
+        var table = users_table;
+        var url = 'Users/delete'
+        del(id,table,url);        
+     })
+
 
 
 

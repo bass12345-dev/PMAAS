@@ -52,35 +52,43 @@ class Cso extends CI_Controller {
 
 	public function view_transactions(){
 
-		 $data['title'] = $this->GetModel->get($this->cso,array('cso_id' => $_GET['id']))[0]['cso_name'];
-       
+		$data['title'] = $this->GetModel->get($this->cso,array('cso_id' => $_GET['id']))[0]['cso_name'];
+     
 		$this->load->view('admin/cso/view/transactions',$data);
+
+	}
+
+
+	public function view_profile(){
+
+		$data['title'] = 'View Profile';
+		$data['data'] = $this->GetModel->get($this->cso,array('cso_id' => $_GET['id']))[0];
+		$this->load->view('admin/cso/view/view_profile',$data);
 
 	}
 
 
 
 	public function add() {
-
-		// $s = $this->do_upload();
-
-
-
-
-	
 		$data = array(
 
-					'cso_name' => $this->input->post('cor'),
+					'cso_name' => $this->input->post('cso'),
+					'address' => $this->input->post('address'),
+					'contact_person' => $this->input->post('contact_person'),
+					'contact_number' => $this->input->post('contact_number'),
+					'email' => $this->input->post('email'),
 					'created' =>  date('Y-m-d H:i:s', time()),
-					'cor' => $this->do_upload(),
+					'cor' => ($_FILES['cor']['tmp_name'] === '' ) ? '' : $this->upload_cor(),
+					'by_laws' =>  ($_FILES['bylaws']['tmp_name'] === '' ) ? '' : $this->upload_bylaws(),
+					'article' => ($_FILES['article']['tmp_name'] === '' ) ? '' : $this->upload_articles(),
 					
 		);
 
-		echo json_encode($data);
+	
 
-		// $result  = $this->AddModel->addData($this->cso,$data);
-		// $params = array('cond' => $result, 'message' => 'Successfully Added');
-		// $this->load->library('Condition', $params);
+		$result  = $this->AddModel->addData($this->cso,$data);
+		$params = array('cond' => $result, 'message' => 'Successfully Added');
+		$this->load->library('Condition', $params);
 
 		
 	}
@@ -89,14 +97,45 @@ class Cso extends CI_Controller {
 
 	                            // 'profile_picture' => ($_FILES['userfile']['tmp_name'] === '' ) ? $this->input->post('image_name') : $this->upload_image(),
 
-	function upload_image(){
 
-    if (isset($_FILES['userfile'])) {
 
-        $extension = explode('.', $_FILES['userfile']['name']);
+	function upload_cor(){
+
+    if (isset($_FILES['cor'])) {
+
+        $extension = explode('.', $_FILES['cor']['name']);
         $new_name = rand().'.' . $extension[1];
-        $destination = './uploads/profile_pic/'. $new_name;
-        move_uploaded_file($_FILES['userfile']['tmp_name'], $destination);
+        $destination = './uploads/cso_files/cor/'. $new_name;
+        move_uploaded_file($_FILES['cor']['tmp_name'], $destination);
+        return $new_name;
+      # code...
+    }
+
+}
+
+
+	function upload_bylaws(){
+
+    if (isset($_FILES['bylaws'])) {
+
+        $extension = explode('.', $_FILES['bylaws']['name']);
+        $new_name = rand().'.' . $extension[1];
+        $destination = './uploads/cso_files/bylaws/'. $new_name;
+        move_uploaded_file($_FILES['bylaws']['tmp_name'], $destination);
+        return $new_name;
+      # code...
+    }
+
+}
+
+	function upload_articles(){
+
+    if (isset($_FILES['article'])) {
+
+        $extension = explode('.', $_FILES['article']['name']);
+        $new_name = rand().'.' . $extension[1];
+        $destination = './uploads/cso_files/articles/'. $new_name;
+        move_uploaded_file($_FILES['article']['tmp_name'], $destination);
         return $new_name;
       # code...
     }
@@ -105,44 +144,129 @@ class Cso extends CI_Controller {
 
 
 
-
-	// public function do_upload()
-   //      {
-   //             $config['upload_path']          = './cso_files/';//file save path
-   //          	$config['allowed_types']        = 'pdf';
-   //          	$config['max_size']             = 100000;
-
-
-   //          	 $this->load->library('upload', $config);
+	private function do_upload_bylaws()
+        {
+               $config['upload_path']          = './uploads/cso_files/articles/';//file save path
+            	$config['allowed_types']        = 'pdf';
+            	$config['max_size']             = 100000;
 
 
-   //              if ($this->upload->do_upload($file))
-   //              {
+            	 $this->load->library('upload', $config);
+
+
+                if ($this->upload->do_upload('bylaws'))
+                {
                         
-   //                       $file = array('upload_data' => $this->upload->data());
+                         $file = array('upload_data' => $this->upload->data());
 
-   //                       $data = array(
-	// 												'message' => 'Uploaded Successfully',
-	// 												'response' => true,
-	// 												'file_name' => date('Y-m-d H:i:s', time()).'_'. $file['upload_data']['file_name']
-	// 												);
+                         $data = array(
+													'message' => 'Uploaded Successfully',
+													'response' => true,
+													'file_name' => date('Y-m-d H:i:s', time()).'_'. $file['upload_data']['file_name'].'.'.rand()
+													);
                       
-   //              }
-   //              else
-   //              {
+                }
+                else
+                {
                        
-   //                  $data = array(
-	// 												'message' => $this->upload->display_errors(),
-	// 												'response' => false,
-	// 												'file_name' =>''
-	// 												);   
+                    $data = array(
+													'message' => $this->upload->display_errors(),
+													'response' => false,
+													'file_name' =>''
+													);   
                 	
                         
-   //              }
+                }
 
-   //              return $data;
+                return $data;
 
-   //      }
+        }
+
+
+
+
+	private function do_upload_articles()
+        {
+               $config['upload_path']          = './uploads/cso_files/articles/';//file save path
+            	$config['allowed_types']        = 'pdf';
+            	$config['max_size']             = 100000;
+
+
+            	 $this->load->library('upload', $config);
+
+
+                if ($this->upload->do_upload('article'))
+                {
+                        
+                         $file = array('upload_data' => $this->upload->data());
+
+                         $data = array(
+													'message' => 'Uploaded Successfully',
+													'response' => true,
+													'file_name' => date('Y-m-d H:i:s', time()).'_'. $file['upload_data']['file_name'].'.'.rand()
+													);
+                      
+                }
+                else
+                {
+                       
+                    $data = array(
+													'message' => $this->upload->display_errors(),
+													'response' => false,
+													'file_name' =>''
+													);   
+                	
+                        
+                }
+
+                return $data;
+
+        }
+
+
+
+
+
+
+
+
+	public function do_upload_cor()
+        {
+               $config['upload_path']          = './uploads/cso_files/cor/';//file save path
+            	$config['allowed_types']        = 'pdf';
+            	$config['max_size']             = 100000;
+
+
+            	 $this->load->library('upload', $config);
+
+
+                if ($this->upload->do_upload('cor'))
+                {
+                        
+                         $file = array('upload_data' => $this->upload->data());
+
+                         $data = array(
+													'message' => 'Uploaded Successfully',
+													'response' => true,
+													'file_name' => date('Y-m-d H:i:s', time()).'_'. $file['upload_data']['file_name'].'.'.rand()
+													);
+                      
+                }
+                else
+                {
+                       
+                    $data = array(
+													'message' => $this->upload->display_errors(),
+													'response' => false,
+													'file_name' =>''
+													);   
+                	
+                        
+                }
+
+                return $data;
+
+        }
 
 
 

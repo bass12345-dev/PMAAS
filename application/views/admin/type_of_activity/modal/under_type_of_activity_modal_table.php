@@ -13,7 +13,7 @@
                   <div class="modal-body">
                      <div class="row">
                         <div class="col-md-6">
-                            <div class="data-tables">
+                            <!-- <div class="data-tables">
                                 <table id="under_activity_table" style="width:100%" class="text-center">
                                     <thead class="bg-light text-capitalize">
                                         <tr>
@@ -23,7 +23,7 @@
                                     </thead>
                                                
                                 </table>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="col-md-6">
                             <div class="card">                                     

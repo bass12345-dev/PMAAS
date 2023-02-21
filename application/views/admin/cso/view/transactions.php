@@ -47,7 +47,7 @@
                             <ul class="breadcrumbs pull-left">
                                 <li><a href="<?php echo base_url() ?>">Home</a></li>
                                  <li><a href="<?php echo base_url() ?>cso">CSO</a></li>
-                                <li><a href="<?php echo base_url() ?>"><?php echo $title ?></a></li>
+                                <li><a href="<?php echo base_url() ?>cso/view_transactions?id=<?php echo $_GET['id'] ?>"><?php echo $title ?></a></li>
                               
                                 
                                 
@@ -67,16 +67,18 @@
                     <div class="col-12 mt-5">
                         <div class="card " style="border: 1px solid;">
                             <div class="card-body">
-                                <a href="<?php echo base_url() ?>cso/add_trans?id=<?php echo $_GET['id'] ?>" class="btn  mb-3 btn-success" > View Profile</a> 
-                                <a href="<?php echo base_url() ?>cso/add_trans?id=<?php echo $_GET['id'] ?>" class="btn  mb-3 sub-button pull-right" > Add Transactions</a> 
+                                
+                               
                                 <div class="row">
                                     <div class="col-md-2">
-                                        <div class="card p-0">      
-                                            <h3 class="header-title">NAME OF CSO : </h3>                               
-                                            <h2 ><?php echo $title ?></h2>                   
+                                        <div class="card p-0 mt-5">      
+                                                            
+                                            <center><h2 ><?php echo $title ?></h2> </center>   
+                                            <a href="<?php echo base_url() ?>cso/view_profile?id=<?php echo $_GET['id'] ?>" class="btn  mt-3 btn-success" > View Profile</a>                
                                         </div>
                                     </div>
                                     <div class="col-md-10 ">
+                                         <a href="<?php echo base_url() ?>cso/add_trans?id=<?php echo $_GET['id'] ?>" class="btn  mb-3 mt-2 sub-button pull-right" > Add Transactions</a> 
                                         <div class="data-tables">
                                             <table id="transactions_table" style="width:100%" class="text-center">
                                                 <thead class="bg-light text-capitalize">

@@ -78,6 +78,58 @@
                     </div>
                     <!-- data table end -->
                 </div>
+
+                 <div class="row" id="under_type_activity_card" hidden>
+                    <!-- data table start -->
+                    <div class="col-12 mt-5">
+                        <div class="card" style="border: 1px solid;">
+                            <div class="card-body">
+                                <!-- <div class="row">
+                                    <div class="col-md-6">
+                                        <h4 class="header-title"><?php echo $title ?></h4>
+                                    </div>
+                                    <div class="col-md-6">
+                                         <button class="btn btn-primary pull-right mb-2">Add</button>
+                                    </div>
+                                </div>    -->
+                               
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="data-tables">
+                                            <div class="data-tables">
+                                                <table id="under_activity_table" style="width:100%" class="text-center">
+                                                    <thead class="bg-light text-capitalize">
+                                                        <tr>
+                                                            <th>Type</th>
+                                                            <th>Actions</th>
+                                                        </tr>
+                                                    </thead>
+                                                               
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="card">                                     
+                                            <h4 class="header-title">Add Type of Activity</h4>
+                                                <form id="add_activity_form">
+                                                    <div class="form-group">
+                                                        <label for="exampleInputEmail1">Type of Activity</label>
+                                                            <input  type="text" class="form-control" id="activity" name="activity"  placeholder="" required>      
+                                                    </div>
+                                                    <button  type="submit" class="btn  mt-1 pr-4 pl-4 btn-add-activity b sub-button"> Submit</button>
+                                                    
+                                                    <div class="alert"></div>
+                                                   <!--  -->
+                                                </form>                                         
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- data table end -->
+                </div>
             </div>
         </div>
         <!-- main content area end -->
