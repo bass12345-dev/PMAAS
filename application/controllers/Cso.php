@@ -26,6 +26,21 @@ class Cso extends CI_Controller {
 	}
 
 
+	public function sample()
+	{   
+        $data['title'] = 'CSO';
+       
+	require_once(APPPATH.'helpers/TCPDF/tcpdf.php');
+
+
+
+	$this->load->view('sample',$data);
+
+	}
+
+
+
+
 
 	public function add_trans(){
 
@@ -69,6 +84,24 @@ class Cso extends CI_Controller {
 
 		
 	}
+
+
+
+	                            // 'profile_picture' => ($_FILES['userfile']['tmp_name'] === '' ) ? $this->input->post('image_name') : $this->upload_image(),
+
+	function upload_image(){
+
+    if (isset($_FILES['userfile'])) {
+
+        $extension = explode('.', $_FILES['userfile']['name']);
+        $new_name = rand().'.' . $extension[1];
+        $destination = './uploads/profile_pic/'. $new_name;
+        move_uploaded_file($_FILES['userfile']['tmp_name'], $destination);
+        return $new_name;
+      # code...
+    }
+
+}
 
 
 
