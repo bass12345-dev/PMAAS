@@ -83,7 +83,7 @@
 
                                                     <div class="form-group">
                                                         <label >Contact Number</label>
-                                                           <input  type="number" class="form-control" name="contact_number"  placeholder="">      
+                                                           <input  type="text" value="09" class="form-control contact_number" name="contact_number"  placeholder="" data-mask="09000000000">      
                                                     </div>
 
                                                     <div class="form-group">
@@ -127,7 +127,7 @@
         </div>
         <!-- main content area end -->
         <!-- footer area start-->
-    <?php $this->load->view('admin/responsibility_center/modal/update_res_modal.php') ?> 
+    
     <?php $this->load->view('includes/offset.php') ?>  
         <!-- footer area end-->
     </div>
@@ -138,7 +138,9 @@
      <?php $this->load->view('includes/scripts.php') ?> 
 
 
-   
+    <script type="text/javascript">
+        // $('.contact_number').mask('(000) 000-0000');
+    </script>
    
 </body>
 

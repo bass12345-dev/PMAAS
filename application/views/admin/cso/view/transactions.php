@@ -78,9 +78,16 @@
                                         </div>
                                     </div>
                                     <div class="col-md-10 ">
-                                         <a href="<?php echo base_url() ?>cso/add_trans?id=<?php echo $_GET['id'] ?>" class="btn  mb-3 mt-2 sub-button pull-right" > Add Transactions</a> 
+
+                                        <div class="row">
+                                            <div class="col-md-6"><input type="text" class="form-control pull-right mt-2" name="daterange" value="01/01/2023 - 01/15/2023" /></div>
+                                             <div class="col-md-6">  <a href="<?php echo base_url() ?>cso/add_trans?id=<?php echo $_GET['id'] ?>" class="btn  mb-3 mt-2 sub-button pull-right" > Add Transactions</a> </div>
+                                            
+                                        </div>
+                                          
+                                       
                                         <div class="data-tables">
-                                            <table border="0" >
+                                          <!--   <table border="0" >
                                                 <tbody><tr>
                                                     <td>Start Date:</td>
                                                     <td><input type="text" id="min" class="form-control" name="min"></td>
@@ -90,7 +97,9 @@
                                                     <td><input type="text" id="max" class="form-control" name="max"></td>
                                                 </tr>
                                             </tbody>
-                                        </table>
+                                        </table> -->
+
+                                      
                                             <table id="transactions_table" style="width:100%" class="text-center">
                                                 <thead class="bg-light text-capitalize">
                                                     <tr>
@@ -120,6 +129,15 @@
        
   
      <?php $this->load->view('includes/scripts.php') ?> 
+     <script type="text/javascript">
+         $(function() {
+  $('input[name="daterange"]').daterangepicker({
+            opens: 'left'
+          }, function(start, end, label) {
+            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+          });
+        });
+     </script>
    
 </body>
 

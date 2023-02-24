@@ -44,6 +44,12 @@
     <script 
     src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js">
   </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+
+
+  
 
     <script type="text/javascript">
 
@@ -447,7 +453,7 @@
 
 
 
-    var under_type_activity_table =  $('#under_activity_table').DataTable({
+    var  under_type_activity_table = $('#under_activity_table').DataTable({
 
             
 
@@ -478,14 +484,18 @@
             },
           ]
     });
+
     
 
     $(document).on('click','a#update-under-activity',function (e) {
 
       
         $('#under_type_activity_card').removeAttr('hidden');
-        
+        // alert($(this).data('id'))
 
+
+
+       
        
 
      });
@@ -890,7 +900,8 @@
                 data: null,
                 render: function (data, type, row) {
                     return '<ul class="d-flex justify-content-center">\
-                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'+data['cso_id']+'" data-name="'+data['cso_name']+'" id="update-responsible"><i class="fa fa-edit"></i></a></li>\
+                               \
+                                  <li class="mr-1 "><a href="javascript:;" data-id="'+data['cso_id']+'"  id="view-cso"  class="text-success action-icon"><i class="ti-eye"></i></a></li>\
                                 <li><a href="javascript:;" data-id="'+data['cso_id']+'"  id="delete-cso"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>\
                                 </ul>';
                 }
@@ -903,12 +914,178 @@
       });
 
 
+      $(document).on('click','a#view-cso',function (e) {
+
+        window.location.href = base_url + 'cso/view_profile?id=' + $(this).data('id')  ;
+
+      })
+
+
+
+
+
+       $(document).on('click','a#update-cso',function (e) {
+
+        $('#update_cso_modal').modal('show');
+        $('input[name=cso_id]').val($(this).data('id'));
+        $('input[name=update_address]').val($(this).data('address'));
+        $('input[name=update_contact_person]').val($(this).data('contact-person'));
+        $('input[name=update_contact_number]').val($(this).data('contact-number'));
+        $('input[name=update_email]').val($(this).data('email'));
+        $('input[name=update_cso]').val($(this).data('name'));
+        
+
+   });
+
+
+       $(document).on('click','a#update_cor',function (e) {
+
+         $('#update_cor_modal').modal('show');
+         $('input[name=cor_cso_id]').val($(this).data('id'));
+         $('input[name=cor_name]').val($(this).data('cor_name'));
+       
+
+         // console.log($(this).data('name'))
+
+       })
+
+
 
         $(document).on('click','a#view_trans',function (e) {
 
     window.location.href = base_url + 'cso/view_transactions?id=' + $(this).data('id')  ;
 
    });
+
+
+
+        $('#update_cor_form').on('submit', function(e) {
+        e.preventDefault();
+
+        
+        $.ajax({
+             type: "POST",
+            url: base_url + 'Cso/update_cor',
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData:false,
+            dataType: 'json',
+            beforeSend: function() {
+                $('.update-cor-cso-save').html('<div class="loader"></div>');
+                $('.update-cor-cso-save').prop("disabled", true);
+                
+            },
+             success: function(data)
+            {            
+                if (data.response) {
+                    $('#update_cor_modal').modal('hide');
+                    $('.update-cor-cso-save').prop("disabled", false);
+                    $('.update-cor-cso-save').text('Save Changes');
+                        Toastify({
+                                  text: data.message,
+                                  className: "info",
+                                  style: {
+                                    "background" : "linear-gradient(to right, #00b09b, #96c93d)",
+                                    "height" : "60px",
+                                    "width" : "350px",
+                                    "font-size" : "20px"
+                                  }
+                                }).showToast();
+
+                         Load.load_cso_profile();
+                           
+             
+                }else {
+                    $('.update-cor-cso-save').prop("disabled", false);
+                    $('.update-cor-cso-save').text('Save Changes');
+                      Toastify({
+                                  text: data.message,
+                                  className: "info",
+                                  style: {
+                                    "background" : "linear-gradient(to right, #00b09b, #96c93d)",
+                                    "height" : "60px",
+                                    "width" : "350px",
+                                    "font-size" : "20px"
+                                  }
+                                }).showToast();
+                   
+                }
+           },
+            error: function(xhr) { // if error occured
+                alert("Error occured.please try again");
+                 $('.update-cor-cso-save').prop("disabled", false);
+                 $('.update-cor-cso-save').text('Save Changes');
+            },
+
+        })
+
+
+    })
+
+
+      $('#update_cso_form').on('submit', function(e) {
+    e.preventDefault();
+
+
+
+    $.ajax({
+            type: "POST",
+            url: base_url + 'Cso/update',
+            data: $(this).serialize(),
+            dataType: 'json',
+            beforeSend: function() {
+                $('.update-cso-save').html('<div class="loader"></div>');
+                $('.update-cso-save').prop("disabled", true);
+                
+            },
+             success: function(data)
+            {            
+                if (data.response) {
+                    // $('#update_cso_modal').modal('hide');
+                    $('.update-cso-save').prop("disabled", false);
+                    $('.update-cso-save').text('Save Changes');
+                        Toastify({
+                                  text: data.message,
+                                  className: "info",
+                                  style: {
+                                    "background" : "linear-gradient(to right, #00b09b, #96c93d)",
+                                    "height" : "60px",
+                                    "width" : "350px",
+                                    "font-size" : "20px"
+                                  }
+                                }).showToast();
+
+                         Load.load_cso_profile();
+                }else {
+                    $('.update-cso-save').prop("disabled", false);
+                    $('.update-cso-save').text('Save Changes');
+                      Toastify({
+                                  text: data.message,
+                                  className: "info",
+                                  style: {
+                                    "background" : "linear-gradient(to right, #00b09b, #96c93d)",
+                                    "height" : "60px",
+                                    "width" : "350px",
+                                    "font-size" : "20px"
+                                  }
+                                }).showToast();
+                   
+                }
+           },
+            error: function(xhr) { // if error occured
+                alert("Error occured.please try again");
+                 $('.update-cso-save').prop("disabled", false);
+                    $('.update-cso-save').text('Save Changes');
+            },
+
+        })
+
+        
+    })
+
+
+   
 
 
 
@@ -990,26 +1167,26 @@
    Transactions Section
     ==================================*/
 
-    var minDate, maxDate;
+//     var minDate, maxDate;
  
-// Custom filtering function which will search data in column four between two values
-$.fn.dataTable.ext.search.push(
-    function( settings, data, dataIndex ) {
-        var min = minDate.val();
-        var max = maxDate.val();
-        var date = new Date( data[4] );
+// // Custom filtering function which will search data in column four between two values
+// $.fn.dataTable.ext.search.push(
+//     function( settings, data, dataIndex ) {
+//         var min = minDate.val();
+//         var max = maxDate.val();
+//         var date = new Date( data[4] );
  
-        if (
-            ( min === null && max === null ) ||
-            ( min === null && date <= max ) ||
-            ( min <= date   && max === null ) ||
-            ( min <= date   && date <= max )
-        ) {
-            return true;
-        }
-        return false;
-    }
-);
+//         if (
+//             ( min === null && max === null ) ||
+//             ( min === null && date <= max ) ||
+//             ( min <= date   && max === null ) ||
+//             ( min <= date   && date <= max )
+//         ) {
+//             return true;
+//         }
+//         return false;
+//     }
+// );
 
 
       var transaction_table = $('#transactions_table').DataTable({
@@ -1019,21 +1196,21 @@ $.fn.dataTable.ext.search.push(
       })
 
 
-       // Create date inputs
-    minDate = new DateTime($('#min'), {
-        format: 'MMMM Do YYYY'
-    });
-    maxDate = new DateTime($('#max'), {
-        format: 'MMMM Do YYYY'
-    });
+    //    // Create date inputs
+    // minDate = new DateTime($('#min'), {
+    //     format: 'MMMM Do YYYY'
+    // });
+    // maxDate = new DateTime($('#max'), {
+    //     format: 'MMMM Do YYYY'
+    // });
  
-    // DataTables initialisation
+    // // DataTables initialisation
    
  
-    // Refilter the table
-    $('#min, #max').on('change', function () {
-        transaction_table.draw();
-    });
+    // // Refilter the table
+    // $('#min, #max').on('change', function () {
+    //     transaction_table.draw();
+    // });
 
    
 

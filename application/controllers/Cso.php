@@ -68,6 +68,16 @@ class Cso extends CI_Controller {
 	}
 
 
+	public function get_profile(){
+
+		$data = [];
+
+		$data['data'] = $this->GetModel->get($this->cso,array('cso_id' => $_POST['id']))[0];
+		echo json_encode($data);
+
+	}
+
+
 
 	public function add() {
 		$data = array(
@@ -306,46 +316,60 @@ class Cso extends CI_Controller {
 
 		$data = array(
 
-				// 'res_center_code' => $_POST['update_center_code'],
-				'res_center_name' =>$_POST['update_center_name']
+					'cso_name' => $this->input->post('update_cso'),
+					'address' => $this->input->post('update_address'),
+					'contact_person' => $this->input->post('update_contact_person'),
+					'contact_number' => $this->input->post('update_contact_number'),
+					'email' => $this->input->post('update_email'),
 		);
 
-		$where = array('res_center_id'=>$_POST['res_center_id']);
+		$where = array('cso_id'=>$this->input->post('cso_id'));
 
-		$update = $this->UpdateModel->update1($where,$data,$this->responsibility_center);
+		$update = $this->UpdateModel->update1($where,$data,$this->cso);
 		$params = array('cond' => $update, 'message' => 'Successfully Updated');
 		$this->load->library('Condition', $params);
 
-		// if ($this->GetModel->get($this->responsibility_center,array('res_center_code' => $data['res_center_code']))) {
-
-		// 		$data = array(
-		// 		'message' => 'Error Duplicate Code',
-		// 		'response' => false
-				
-		// 		);
-		// }else {
-			
-		// 	$result = $this->UpdateModel->update1($where,$data,$this->responsibility_center);
-
-		// 	if ($result) {
-
-		// 		$data = array(
-		// 		'message' => 'Data Updated Successfully',
-		// 		'response' => true
-		// 		);
-		// 	}else {
-
-		// 		$data = array(
-		// 		'message' => 'Error',
-		// 		'response' => false
-		// 		);
-		// 	}
-		// }
-		
-		
-
-
-		// echo json_encode($data);
 
 	}
+
+
+
+	public function update_cor(){
+
+
+		$data = array(
+
+					
+					'cor' => ($_FILES['update_cor']['tmp_name'] === '' ) ? $this->input->post('cor_name') : $this->upload_update_cor(),
+					
+					
+		);
+
+	
+		$where = array('cso_id'=>$this->input->post('cor_cso_id'));
+
+		$update = $this->UpdateModel->update1($where,$data,$this->cso);
+		$params = array('cond' => $update, 'message' => 'Successfully Updated');
+		$this->load->library('Condition', $params);
+
+
+
+
+	}
+
+	function upload_update_cor(){
+
+    if (isset($_FILES['update_cor'])) {
+
+        $extension = explode('.', $_FILES['update_cor']['name']);
+        $new_name = rand().'.' . $extension[1];
+        $destination = './uploads/cso_files/cor/'. $new_name;
+        move_uploaded_file($_FILES['update_cor']['tmp_name'], $destination);
+        return $new_name;
+      # code...
+    }
+
+}
+
+
 }

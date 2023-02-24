@@ -6,9 +6,9 @@
     <?php $this->load->view('includes/css.php') ?> 
 
 
-       <script 
-src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js">
-  </script>
+       
+
+
 
 
 </head>
@@ -77,46 +77,54 @@ src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js">
 
                                      <div class="col-md-6 ">
                                         <div class="data-tables">
-                                             <table class="tablesaw table-bordered table-hover table" data-tablesaw-mode="swipe" data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap data-tablesaw-mode-switch id="patient1_table">
+                                             <table class="tablesaw table-bordered table-hover table" data-tablesaw-mode="swipe" data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap data-tablesaw-mode-switch id="_table">
                                                 
                                                    <tr>
                                                         <td colspan = "2">
-                                                        <a  href    = "#" class = "mt-2  mb-2 btn sub-button text-left  btn-rounded btn-md btn-block"><i class = "fa fa-user" aria-hidden = "true"></i> CSO Information</a></td>
+                                                        <a  href    = "javascript:;" class = "mt-2  mb-2 btn sub-button text-center  btn-rounded btn-md btn-block"><i class = "fa fa-user" aria-hidden = "true"></i> CSO Information</a>
+                                                        <a  href    = "javascript:;" id="update-cso"
+
+                                                       
+
+                                                         class = "mt-2  mb-2  text-center  btn-rounded btn-md btn-block"><i class = "fa fa-edit" aria-hidden = "true"></i> Update CSO Information</a>
+                                                    </td>
+
                                                     </tr>
                                                     <tr>
                                                         <td>CSO</td>
-                                                        <td><?php echo $data['cso_name'] ?></td>
+                                                        <td class="cso_name"></td>
                                                     </tr>
                                                     <tr>
                                                         <td>Address</td>
-                                                        <td><?php echo $data['address'] ?></td>
+                                                        <td class="cso_address"></td>
                                                     </tr>
                                                      <tr>
                                                         <td>Contact Person</td>
-                                                        <td><?php echo $data['contact_person'] ?></td>
+                                                        <td class="contact_person"></td>
                                                     </tr>
                                                      <tr>
                                                         <td>Contact Number</td>
-                                                        <td><?php echo $data['contact_number'] ?></td>
+                                                        <td class="contact_number"></td>
                                                     </tr>
                                                      <tr>
                                                         <td>Email</td>
-                                                        <td><?php echo $data['email'] ?></td>
+                                                        <td class="email"></td>
                                                     </tr>
 
                                                      <tr>
                                                         <td>COR</td>
-                                                        <td><a href="javascript:;" id="view_cor" data-id="<?php echo $data['cor'] ?>">View COR</a></td>
+                                                        <td><a href="javascript:;" id="view_cor" >View COR</a>
+                                                        <a href="javascript:;" class="btn btn-rounded btn-secondary pull-right" id="update_cor" >Update COR</a></td>
                                                     </tr>
 
                                                      <tr>
                                                         <td>Bylaws</td>
-                                                       <td><a href="javascript:;"  id="view_bylaws" data-id="<?php echo $data['by_laws'] ?>">View Bylaws</a></td>
+                                                       <td><a href="javascript:;"  id="view_bylaws" >View Bylaws</a> <a href="javascript:;" class="btn btn-rounded btn-secondary pull-right"   >Update Bylaws</a></td>
                                                     </tr>
 
                                                       <tr>
                                                         <td>Article</td>
-                                                        <td><a href="javascript:;" id="view_article" data-id="<?php echo $data['article'] ?>">View Article</a></td>
+                                                        <td><a href="javascript:;" id="view_article"  >View Article</a> <a href="javascript:;" class="btn btn-rounded btn-secondary pull-right"  >Update Article</a></td>
                                                     </tr>
                                                   
                                             </table>
@@ -140,13 +148,15 @@ src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js">
                                        
                                         
                                             <div id="canvas_container" >
-                                                <img src="" id="pdf_error" height="600px"  width ="600px" hidden>
+                                                <img src="./../assets/images/not_found.jpg" id="pdf_error" height="600px"  width ="600px" >
                                         <canvas id="pdf_renderer" style="width: 100%;"></canvas>
                                         
                                     </div>
                                         
                                        
                                     </div>
+
+                                   
                                     
                                 </div>
                             </div>
@@ -158,7 +168,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js">
         </div>
         <!-- main content area end -->
        
-  
+    <?php $this->load->view('admin/cso/modal/update_cso_modal') ?> 
+    <?php $this->load->view('admin/cso/modal/update_cor_modal') ?>
      <?php $this->load->view('includes/scripts.php') ?> 
 
 
@@ -172,13 +183,21 @@ src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js">
 
 
         $(document).on('click','a#view_cor',function (e) {
+
+
             if ($(this).data('id') == '') {
+
                  $('#pdf_error').removeAttr('hidden');
-                $('#pdf_error').attr("src","./../assets/images/not_found.jpg");
+                  $('#pdf_renderer').attr('hidden','hidden');
+                   $('#navigation_controls').attr('hidden','hidden');
+               
             }
             else {
                 $("a#download").attr("href", base_url + "uploads/cso_files/cor/" + $(this).data('id') );
                  $('#navigation_controls').removeAttr('hidden');
+                 $('#pdf_renderer').removeAttr('hidden');
+                  $('#pdf_error').attr('hidden','hidden');
+
 
             pdfjsLib.getDocument('./../uploads/cso_files/cor/'+$(this).data('id')).then((pdf) => {
      
@@ -194,11 +213,14 @@ src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js">
 
             if ($(this).data('id') == '') {
                  $('#pdf_error').removeAttr('hidden');
-                $('#pdf_error').attr("src","./../assets/images/not_found.jpg");
+                 $('#pdf_renderer').attr('hidden','hidden');
+                 $('#navigation_controls').attr('hidden','hidden');
+              
             }else{
              $("a#download").attr("href", base_url + "uploads/cso_files/bylaws/" + $(this).data('id') );
              $('#navigation_controls').removeAttr('hidden');
-
+             $('#pdf_renderer').removeAttr('hidden');
+              $('#pdf_error').attr('hidden','hidden');
             pdfjsLib.getDocument('./../uploads/cso_files/bylaws/'+$(this).data('id')).then((pdf) => {
                 myState.pdf = pdf;
                 render();
@@ -209,10 +231,14 @@ src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js">
 
             if ($(this).data('id') == '') {               
                 $('#pdf_error').removeAttr('hidden');
-                $('#pdf_error').attr("src","./../assets/images/not_found.jpg");
+                $('#pdf_renderer').attr('hidden','hidden');
+                $('#navigation_controls').attr('hidden','hidden');
+               
             }else{
                 $("a#download").attr("href", base_url + "uploads/cso_files/articles/" + $(this).data('id') );
                 $('#navigation_controls').removeAttr('hidden');
+                $('#pdf_renderer').removeAttr('hidden');
+                 $('#pdf_error').attr('hidden','hidden');
                 pdfjsLib.getDocument('./../uploads/cso_files/articles/'+$(this).data('id')).then((pdf) => {
      
                 myState.pdf = pdf;
@@ -282,8 +308,109 @@ src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js">
         //     myState.zoom -= 0.5;
         //     render();
         // });
+
+
+    class load_data {
+      constructor() {
+     
+      }
+
+
+        load_cso_profile(){
+
+
+        $.ajax({
+                            type: "POST",
+                            url: base_url + 'Cso/get_profile',
+                            data : {'id' : '<?php echo $_GET['id'] ?>'},
+                            cache: false,
+                            dataType: 'json',  
+                            success: function(data){
+                                console.log(data)
+                                $('.cso_name').text(data.data.cso_name)
+                                $('.cso_address').text(data.data.address)
+                                $('.contact_number').text(data.data.contact_number)
+                                $('.contact_person').text(data.data.contact_person)
+                                $('.email').text(data.data.email)
+
+
+                                $('#update-cso').data('id',data.data.cso_id);
+                                $('#update-cso').data('name',data.data.cso_name);
+                                $('#update-cso').data('address',data.data.address);
+                                $('#update-cso').data('contact-person',data.data.contact_person);
+                                $('#update-cso').data('contact-number',data.data.contact_number);
+                                $('#update-cso').data('email',data.data.email);
+
+
+                                $('#view_cor').data('id',data.data.cor);
+                                $('#view_bylaws').data('id',data.data.by_laws);
+                                $('#view_article').data('id',data.data.article);
+
+
+                                $('#update_cor').data('id',data.data.cso_id);
+                                $('#update_cor').data('cor_name',data.data.cor);
+                               
+                                
+
+
+
+
+
+
+                                       
+                            }
+
+                    })
+
+                }
+
+
+  }
+
+    let Load = new load_data();
+    Load.load_cso_profile();
+
+
+
+      function ValidateSingleInput1(oInput) {
+
+       
+
+        if (oInput.type == "file") {
+            var sFileName = oInput.value;
+             if (sFileName.length > 0) {
+                var blnValid = false;
+                for (var j = 0; j < _validFileExtensions.length; j++) {
+                    var sCurExtension = _validFileExtensions[j];
+                    if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                         $('button.update-cor-cso-save').removeClass('d-none')
+                        blnValid = true;
+                        break;
+                         
+                         
+                    }
+
+                }
+                 
+                if (!blnValid) {
+                    alert("Sorry, " + sFileName + " is invalid, allowed extension is " + _validFileExtensions.join(", ") + ' only');
+                    $('button.update-cor-cso-save').addClass('d-none')
+                    oInput.value = "";
+                    return false;
+                    
+                     
+                }
+            }
+        }
+        return true;
+
+    }
+
+
      </script>
    
+
+                                                 
 </body>
 
 </html>
