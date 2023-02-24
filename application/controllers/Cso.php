@@ -372,4 +372,89 @@ class Cso extends CI_Controller {
 }
 
 
+    public function update_bylaws(){
+
+
+		$data = array(
+
+					
+					'by_laws' => ($_FILES['update_bylaws']['tmp_name'] === '' ) ? $this->input->post('bylaws_name') : $this->upload_update_bylaws(),
+					
+					
+		);
+
+	
+		$where = array('cso_id'=>$this->input->post('bylaws_cso_id'));
+
+		$update = $this->UpdateModel->update1($where,$data,$this->cso);
+		$params = array('cond' => $update, 'message' => 'Successfully Updated');
+		$this->load->library('Condition', $params);
+
+
+
+
+	}
+
+
+
+
+function upload_update_bylaws(){
+
+    if (isset($_FILES['update_bylaws'])) {
+
+        $extension = explode('.', $_FILES['update_bylaws']['name']);
+        $new_name = rand().'.' . $extension[1];
+        $destination = './uploads/cso_files/bylaws/'. $new_name;
+        move_uploaded_file($_FILES['update_bylaws']['tmp_name'], $destination);
+        return $new_name;
+      # code...
+    }
+
+
+}
+
+
+
+ public function update_article(){
+
+
+		$data = array(
+
+					
+					'article' => ($_FILES['update_article']['tmp_name'] === '' ) ? $this->input->post('article_name') : $this->upload_update_article(),
+					
+					
+		);
+
+	
+		$where = array('cso_id'=>$this->input->post('article_cso_id'));
+
+		$update = $this->UpdateModel->update1($where,$data,$this->cso);
+		$params = array('cond' => $update, 'message' => 'Successfully Updated');
+		$this->load->library('Condition', $params);
+
+
+
+
+	}
+
+
+
+
+function upload_update_article(){
+
+    if (isset($_FILES['update_article'])) {
+
+        $extension = explode('.', $_FILES['update_article']['name']);
+        $new_name = rand().'.' . $extension[1];
+        $destination = './uploads/cso_files/articles/'. $new_name;
+        move_uploaded_file($_FILES['update_article']['tmp_name'], $destination);
+        return $new_name;
+      # code...
+    }
+
+
+}
+
+
 }

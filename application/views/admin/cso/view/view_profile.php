@@ -119,12 +119,12 @@
 
                                                      <tr>
                                                         <td>Bylaws</td>
-                                                       <td><a href="javascript:;"  id="view_bylaws" >View Bylaws</a> <a href="javascript:;" class="btn btn-rounded btn-secondary pull-right"   >Update Bylaws</a></td>
+                                                       <td><a href="javascript:;"  id="view_bylaws" >View Bylaws</a> <a href="javascript:;" class="btn btn-rounded btn-secondary pull-right" id="update_bylaws"   >Update Bylaws</a></td>
                                                     </tr>
 
                                                       <tr>
                                                         <td>Article</td>
-                                                        <td><a href="javascript:;" id="view_article"  >View Article</a> <a href="javascript:;" class="btn btn-rounded btn-secondary pull-right"  >Update Article</a></td>
+                                                        <td><a href="javascript:;" id="view_article"  >View Article</a> <a href="javascript:;" class="btn btn-rounded btn-secondary pull-right" id="update_article"  >Update Article</a></td>
                                                     </tr>
                                                   
                                             </table>
@@ -170,6 +170,8 @@
        
     <?php $this->load->view('admin/cso/modal/update_cso_modal') ?> 
     <?php $this->load->view('admin/cso/modal/update_cor_modal') ?>
+    <?php $this->load->view('admin/cso/modal/update_bylaws_modal') ?>
+    <?php $this->load->view('admin/cso/modal/update_article_modal') ?>
      <?php $this->load->view('includes/scripts.php') ?> 
 
 
@@ -349,8 +351,12 @@
 
                                 $('#update_cor').data('id',data.data.cso_id);
                                 $('#update_cor').data('cor_name',data.data.cor);
+
+                                $('#update_bylaws').data('id',data.data.cso_id);
+                                $('#update_bylaws').data('bylaws_name',data.data.by_laws);
                                
-                                
+                                $('#update_article').data('id',data.data.cso_id);
+                                $('#update_article').data('article_name',data.data.article);
 
 
 
@@ -406,6 +412,77 @@
 
     }
 
+
+
+    function ValidateSingleInput2(oInput) {
+
+       
+
+        if (oInput.type == "file") {
+            var sFileName = oInput.value;
+             if (sFileName.length > 0) {
+                var blnValid = false;
+                for (var j = 0; j < _validFileExtensions.length; j++) {
+                    var sCurExtension = _validFileExtensions[j];
+                    if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                         $('button.update-bylaws-cso-save').removeClass('d-none')
+                        blnValid = true;
+                        break;
+                         
+                         
+                    }
+
+                }
+                 
+                if (!blnValid) {
+                    alert("Sorry, " + sFileName + " is invalid, allowed extension is " + _validFileExtensions.join(", ") + ' only');
+                    $('button.update-bylaws-cso-save').addClass('d-none')
+                    oInput.value = "";
+                    return false;
+                    
+                     
+                }
+            }
+        }
+        return true;
+
+    }
+
+
+
+    function ValidateSingleInput3(oInput) {
+
+       
+
+        if (oInput.type == "file") {
+            var sFileName = oInput.value;
+             if (sFileName.length > 0) {
+                var blnValid = false;
+                for (var j = 0; j < _validFileExtensions.length; j++) {
+                    var sCurExtension = _validFileExtensions[j];
+                    if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                         $('button.update-article-cso-save').removeClass('d-none')
+                        blnValid = true;
+                        break;
+                         
+                         
+                    }
+
+                }
+                 
+                if (!blnValid) {
+                    alert("Sorry, " + sFileName + " is invalid, allowed extension is " + _validFileExtensions.join(", ") + ' only');
+                    $('button.update-article-cso-save').addClass('d-none')
+                    oInput.value = "";
+                    return false;
+                    
+                     
+                }
+            }
+        }
+        return true;
+
+    }
 
      </script>
    

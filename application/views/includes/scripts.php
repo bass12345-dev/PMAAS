@@ -951,11 +951,166 @@
 
 
 
+       $(document).on('click','a#update_bylaws',function (e) {
+
+         $('#update_bylaws_modal').modal('show');
+         $('input[name=bylaws_cso_id]').val($(this).data('id'));
+         $('input[name=bylaws_name]').val($(this).data('bylaws_name'));
+       
+
+         // console.log($(this).data('name'))
+
+       })
+
+        $(document).on('click','a#update_article',function (e) {
+
+         $('#update_article_modal').modal('show');
+         $('input[name=article_cso_id]').val($(this).data('id'));
+         $('input[name=article_name]').val($(this).data('article_name'));
+       
+
+         // console.log($(this).data('name'))
+
+       })
+
+
         $(document).on('click','a#view_trans',function (e) {
 
     window.location.href = base_url + 'cso/view_transactions?id=' + $(this).data('id')  ;
 
    });
+
+
+        $('#update_article_form').on('submit', function(e) {
+        e.preventDefault();
+
+        
+        $.ajax({
+             type: "POST",
+            url: base_url + 'Cso/update_article',
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData:false,
+            dataType: 'json',
+            beforeSend: function() {
+                $('.update-article-cso-save').html('<div class="loader"></div>');
+                $('.update-article-cso-save').prop("disabled", true);
+                
+            },
+             success: function(data)
+            {            
+                if (data.response) {
+                    $('#update_article_modal').modal('hide');
+                    $('.update-article-cso-save').prop("disabled", false);
+                    $('.update-article-cso-save').text('Save Changes');
+                        Toastify({
+                                  text: data.message,
+                                  className: "info",
+                                  style: {
+                                    "background" : "linear-gradient(to right, #00b09b, #96c93d)",
+                                    "height" : "60px",
+                                    "width" : "350px",
+                                    "font-size" : "20px"
+                                  }
+                                }).showToast();
+
+                         Load.load_cso_profile();
+                           
+             
+                }else {
+                    $('.update-article-cso-save').prop("disabled", false);
+                    $('.update-article-cso-save').text('Save Changes');
+                      Toastify({
+                                  text: data.message,
+                                  className: "info",
+                                  style: {
+                                    "background" : "linear-gradient(to right, #00b09b, #96c93d)",
+                                    "height" : "60px",
+                                    "width" : "350px",
+                                    "font-size" : "20px"
+                                  }
+                                }).showToast();
+                   
+                }
+           },
+            error: function(xhr) { // if error occured
+                alert("Error occured.please try again");
+                 $('.update-article-cso-save').prop("disabled", false);
+                 $('.update-article-cso-save').text('Save Changes');
+            },
+
+        })
+
+
+    })
+
+
+
+          $('#update_bylaws_form').on('submit', function(e) {
+        e.preventDefault();
+
+        
+        $.ajax({
+             type: "POST",
+            url: base_url + 'Cso/update_bylaws',
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData:false,
+            dataType: 'json',
+            beforeSend: function() {
+                $('.update-bylaws-cso-save').html('<div class="loader"></div>');
+                $('.update-bylaws-cso-save').prop("disabled", true);
+                
+            },
+             success: function(data)
+            {            
+                if (data.response) {
+                    $('#update_bylaws_modal').modal('hide');
+                    $('.update-bylaws-cso-save').prop("disabled", false);
+                    $('.update-bylaws-cso-save').text('Save Changes');
+                        Toastify({
+                                  text: data.message,
+                                  className: "info",
+                                  style: {
+                                    "background" : "linear-gradient(to right, #00b09b, #96c93d)",
+                                    "height" : "60px",
+                                    "width" : "350px",
+                                    "font-size" : "20px"
+                                  }
+                                }).showToast();
+
+                         Load.load_cso_profile();
+                           
+             
+                }else {
+                    $('.update-bylaws-cso-save').prop("disabled", false);
+                    $('.update-bylaws-cso-save').text('Save Changes');
+                      Toastify({
+                                  text: data.message,
+                                  className: "info",
+                                  style: {
+                                    "background" : "linear-gradient(to right, #00b09b, #96c93d)",
+                                    "height" : "60px",
+                                    "width" : "350px",
+                                    "font-size" : "20px"
+                                  }
+                                }).showToast();
+                   
+                }
+           },
+            error: function(xhr) { // if error occured
+                alert("Error occured.please try again");
+                 $('.update-bylaws-cso-save').prop("disabled", false);
+                 $('.update-bylaws-cso-save').text('Save Changes');
+            },
+
+        })
+
+
+    })
+
 
 
 
