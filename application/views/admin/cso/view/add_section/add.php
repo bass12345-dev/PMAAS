@@ -76,18 +76,18 @@
                             <div class="card-body">                              
                                 <form>
                                       <div class="form-row">
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-6">
                                           <label for="inputEmail4">PMAS NO</label>
                                           <input type="email" class="form-control" id="inputEmail4" placeholder="PMAS NO">
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-6">
                                           <label for="inputPassword4">Date & Time Filed</label>
                                           <input type="date" class="form-control" id="inputPassword4" placeholder="">
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <!-- <div class="form-group col-md-4">
                                           <label for="inputPassword4">Approved By</label>
                                           <input type="text" class="form-control" id="inputPassword4" placeholder="Approved By">
-                                        </div>
+                                        </div> -->
                                       </div>
                                       <div class="form-row">
                                         <div class="form-group col-md-6">

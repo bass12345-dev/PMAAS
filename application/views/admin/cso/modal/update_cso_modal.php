@@ -24,16 +24,16 @@
                       </div>
                        <div class="form-group">
                           <label for="exampleInputPassword1">Contact Person</label><span class="text-danger">*</span>
-                          <input type="text" class="form-control" name="update_contact_person"  placeholder="" required>
+                          <input type="text" class="form-control" name="update_contact_person"  placeholder="">
                       </div>
                       <div class="form-group">
                           <label for="exampleInputPassword1">Contact Number</label><span class="text-danger">*</span>
-                          <input type="text" class="form-control" name="update_contact_number"  placeholder="" required>
+                          <input type="text" class="form-control" name="update_contact_number"  placeholder=""  data-mask="09000000000">
                       </div>
 
                       <div class="form-group">
                           <label for="exampleInputPassword1">Email</label><span class="text-danger">*</span>
-                          <input type="text" class="form-control" name="update_email"  placeholder="" required>
+                          <input type="text" class="form-control" name="update_email"  placeholder="">
                       </div>
                       
                       

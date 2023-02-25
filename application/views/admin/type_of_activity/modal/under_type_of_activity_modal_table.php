@@ -13,17 +13,22 @@
                   <div class="modal-body">
                      <div class="row">
                         <div class="col-md-6">
-                            <!-- <div class="data-tables">
-                                <table id="under_activity_table" style="width:100%" class="text-center">
+                            <div class="data-tables">
+                               <button type="button" class="btn btn-sm btn-success btn-rounded mb-3 pull-right" id="reload_data">Reload Data</button>
+                                <table id="under_activity_table1" style="width:100%" class="text-center">
                                     <thead class="bg-light text-capitalize">
                                         <tr>
                                             <th>Type</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
+
+                                    <tbody>
+                                    </tbody>
                                                
                                 </table>
-                            </div> -->
+                                
+                            </div>
                         </div>
                         <div class="col-md-6">
                             <div class="card">                                     

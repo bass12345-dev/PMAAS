@@ -77,6 +77,15 @@ class Type_of_activity extends CI_Controller {
 		$this->load->library('Condition', $params);
 	}
 
+
+	public function delete_(){
+
+		$where = 'under_type_act_id ='.$_POST['id'];
+		$delete = $this->DeleteModel->delete($this->under_type_of_activity,$where);
+		$params = array('cond' => $delete, 'message' => 'Successfully Deleted');
+		$this->load->library('Condition', $params);
+	}
+
 	public function update(){
 
 

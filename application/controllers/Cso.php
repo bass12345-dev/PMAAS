@@ -67,6 +67,15 @@ class Cso extends CI_Controller {
 
 	}
 
+	public function print(){
+
+
+		$data['title'] = 'CSO';
+		require_once(APPPATH.'helpers/TCPDF/tcpdf.php');
+		$this->load->view('sample',$data);
+
+	}
+
 
 	public function get_profile(){
 

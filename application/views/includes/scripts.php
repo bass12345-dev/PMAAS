@@ -453,61 +453,128 @@
 
 
 
-    var  under_type_activity_table = $('#under_activity_table').DataTable({
+    // var  under_type_activity_table = $('#under_activity_table').DataTable({
 
             
 
-            "ajax" : {
-                        "url": base_url + 'Type_of_Activity/get_under_type?id=' + $(this).data('id'),
-                        "dataSrc": "",
-            },
+    //         "ajax" : {
+    //                     "url": base_url + 'Type_of_Activity/get_under_type?id=' + $(this).data('id'),
+    //                     "dataSrc": "",
+    //         },
            
-             'columns': [
-            {
-                // data: "song_title",
-                data: null,
-                render: function (data, type, row) {
-                    return '<span href="javascript:;"   data-id="'+data['under_type_act_id']+'"  style="color: #000;" >'+data['under_type_act_name']+'</span>';
-                }
+    //          'columns': [
+    //         {
+    //             // data: "song_title",
+    //             data: null,
+    //             render: function (data, type, row) {
+    //                 return '<span href="javascript:;"   data-id="'+data['under_type_act_id']+'"  style="color: #000;" >'+data['under_type_act_name']+'</span>';
+    //             }
 
-            },
-            {
-                // data: "song_title",
-                data: null,
-                render: function (data, type, row) {
-                    return '<ul class="d-flex justify-content-center">\
-                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'+data['type_act_id']+'" data-name="'+data['type_act_name']+'" id="update-activity"><i class="fa fa-edit"></i></a></li>\
-                                <li><a href="javascript:;" data-id="'+data['type_act_id']+'"  id="delete-activity"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>\
-                                </ul>';
-                }
+    //         },
+    //         {
+    //             // data: "song_title",
+    //             data: null,
+    //             render: function (data, type, row) {
+    //                 return '<ul class="d-flex justify-content-center">\
+    //                             <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'+data['type_act_id']+'" data-name="'+data['type_act_name']+'" id="update-activity"><i class="fa fa-edit"></i></a></li>\
+    //                             <li><a href="javascript:;" data-id="'+data['type_act_id']+'"  id="delete-activity"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>\
+    //                             </ul>';
+    //             }
 
-            },
-          ]
-    });
+    //         },
+    //       ]
+    // });
 
     
 
     $(document).on('click','a#update-under-activity',function (e) {
 
       
-        $('#under_type_activity_card').removeAttr('hidden');
-        // alert($(this).data('id'))
+        // $('#under_type_activity_card').removeAttr('hidden');
 
+        
+        $('#update_under_activity_modal').modal('show');
+        $('input[id=act_id]').val($(this).data('id'));
+        $('.type_of_training_title').text($(this).data('name'));
+        $('.under_type_label').text($(this).data('name'));
+        load_under_type($(this).data('id'));
 
-
-       
        
 
      });
+
+    function load_under_type(id){
+          
+         
+         var table = $('#under_activity_table1')
+         table.find('tbody').html('')
+          var tr1 = $('<tr>')
+          tr1.html('<th class="py-1 px-2 text-center">Please Wait</th>')
+                    table.find('tbody').append(tr1)
+        setTimeout(() => {
+
+            
+            $.ajax({
+            // JSON FILE URL
+            url: base_url + 'Type_of_Activity/get_under_type?id=' + id,
+            // Type of Return Data
+            dataType: 'json',
+            // Error Function
+            error: err => {
+                console.log(err)
+                alert("An error occured")
+               
+              
+            },
+            // Succes Function
+            success: function(resp) {
+                tr1.html('')
+                    table.find('tbody').append(tr1)
+                if (resp.length > 0) {
+                    // If returned json data is not empty
+                    var i = 1;
+                    // looping the returned data
+                    Object.keys(resp).map(k => {
+                        // creating new table row element
+                        var tr = $('<tr>')
+                         
+                            // second column data
+                        tr.append('<td class="py-1 px-2">' + resp[k].under_type_act_name + '</td>')
+                            // third column data
+                        tr.append('<td class="py-1 px-2"><ul class="d-flex justify-content-center">\
+                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="" data-name="" id="update-activity"><i class="fa fa-edit"></i></a></li>\
+                                 <li><a href="javascript:;" data-id="'+resp[k].under_type_act_id+'" data-idd= "'+resp[k].typ_ac_id+'"  id="delete-under-activity"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>\
+                                </ul></td>')
+                         
+
+                        // Append table row item to table body
+                        table.find('tbody').append(tr)
+                    })
+                } else {
+                    // If returned json data is empty
+                    var tr = $('<tr>')
+                    tr.append('<th class="py-1 px-2 text-center">No data to display</th>')
+                    table.find('tbody').append(tr)
+                }
+              
+            }
+        })
+
+            }, 500)
+        
+    }
+
+
+    //   $('#reload_data').click(function() {
+    //     // refreshing the table data
+    //     load_under_type
+    // })
 
 
     // $(document).on('click','a#update-under-activity',function (e) {
 
    
-    //     $('#update_under_activity_modal').modal('show');
-    //     $('input[id=act_id]').val($(this).data('id'));
-    //     $('.type_of_training_title').text($(this).data('name'));
-    //     $('.under_type_label').text($(this).data('name'));
+        
 
 
        
@@ -517,7 +584,7 @@
 
      $('#add_under_activity_form').on('submit', function(e) {
     e.preventDefault();
-
+    var id = $('input[id=act_id]').val();
 
              $.ajax({
             type: "POST",
@@ -531,6 +598,8 @@
             success : function(data)
             {
 
+                // load_under_type();
+                load_under_type(id);
                 $('#add_under_activity_form')[0].reset();
                 $('.btn-add-under-activity').text('Submit');
                 $('.btn-add-under-activity').removeAttr('disabled');
@@ -545,7 +614,7 @@
 
         
                 setTimeout(function() { 
-                        $('.alert').html('')
+                        $('.alert-add-under-activity').html('')
                     }, 3000);
                    
                 under_type_activity_table.ajax.reload();
@@ -616,6 +685,76 @@
 
     });
 
+
+
+         $(document).on('click','a#delete-under-activity',function (e) {
+
+
+        var id = $(this).data('id');
+        var idd = $(this).data('idd');
+
+              Swal.fire({
+        title: "Are you sure?",
+        text: "You wont be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true
+    }).then(function(result) {
+        if (result.value) {
+            
+                    $.ajax({
+                            type: "POST",
+                            url: base_url + 'Type_of_Activity/delete_',
+                            data: {id:id},
+                            cache: false,
+                            dataType: 'json', 
+                            beforeSend : function(){
+
+                                  Swal.fire({
+                                title: "",
+                                text: "Please Wait",
+                                icon: "",
+                                showCancelButton: false,
+                                showConfirmButton : false,
+                                reverseButtons: false,
+                                allowOutsideClick : false
+                            })
+
+                            },
+                            success: function(data){
+                               if (data.response) {
+
+                                  Swal.fire(
+                "",
+                "Deleted Successfully",
+                "success"
+            )
+                                  load_under_type(idd);
+                                
+                               }
+
+                              
+                            }
+                    })
+
+
+
+            // result.dismiss can be "cancel", "overlay",
+            // "close", and "timer"
+        } else if (result.dismiss === "cancel") {
+           swal.close()
+
+        }
+    });
+        
+
+        
+     })
+
+
+ 
 
        $(document).on('click','a#delete-activity',function (e) {
 
@@ -1346,6 +1485,7 @@
 
       var transaction_table = $('#transactions_table').DataTable({
         scrollX: true,
+
 
 
       })

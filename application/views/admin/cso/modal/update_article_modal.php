@@ -4,7 +4,7 @@
               <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Update COR</h5>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Update Article</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -15,7 +15,7 @@
                       <input type="hidden" class="form-control" name="article_cso_id" placeholder="" required>
                       <input type="hidden" class="form-control" name="article_name" placeholder="" required>
                       <div class="form-group">
-                          <label for="exampleInputPassword1">COR</label>
+                          <label for="exampleInputPassword1">Article</label>
                           <span class="text-danger">*</span>
                           <input type="file" class="form-control" name="update_article"  placeholder="" onchange="ValidateSingleInput3(this);">
                       </div>
