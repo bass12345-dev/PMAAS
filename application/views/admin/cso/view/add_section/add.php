@@ -10,6 +10,11 @@
             font-weight: bold;
             font-size: 20px;
         }
+
+        .input {
+
+            border: 1px solid;
+        }
     </style>
 
 
@@ -78,7 +83,7 @@
                                       <div class="form-row">
                                         <div class="form-group col-md-6">
                                           <label for="inputEmail4">PMAS NO</label>
-                                          <input type="email" class="form-control" id="inputEmail4" placeholder="PMAS NO">
+                                          <input type="email" class="form-control input" id="inputEmail4" placeholder="PMAS NO">
                                         </div>
                                         <div class="form-group col-md-6">
                                           <label for="inputPassword4">Date & Time Filed</label>
@@ -90,14 +95,13 @@
                                         </div> -->
                                       </div>
                                       <div class="form-row">
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-6" >
                                           <label for="inputEmail4">Responsibility Center</label>
-                                            <select id="inputState" class="form-control">
-                                                <option selected>Sample1</option> 
-                                                <option selected>Sample2</option> 
-                                                <option selected></option>
-                                                <option selected>Regular Monthly</option> 
-                                                <option selected>Training</option>                                            
+                                            <select id="inputState" class="form-control responsibility"  >
+                                                <option >Sample1</option> 
+                                                <option >Sample2</option> 
+                                                <option>Regular Monthly</option> 
+                                                <option >Training</option>                                            
                                           </select>
                                         </div>
                                         <div class="form-group col-md-3">
@@ -141,7 +145,7 @@
                                                     <div class="form-row">
                                                         <div class="form-group col-md-6">
                                                           <label for="inputEmail4">No. of Participants</label>
-                                                          <input type="email" class="form-control" id="inputEmail4" placeholder="">
+                                                          <input type="email" class="form-control " id="inputEmail4" placeholder="">
                                                         </div>
                                                         <div class="form-group col-md-6">
                                                           <label for="inputPassword4">Female</label>
@@ -289,33 +293,36 @@
                                                         </div>
                                                       </div>  
 
-                                                      <div class="form-group row">
+
+                                                     <div class="form-group row">
                                                         <label for="inputPassword3" class="col-sm-4 col-form-label">Are book of accounts updated</label>
-                                                        <div class="col-sm-8">
-                                                          <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input" >
-                                                            <label class="custom-control-label" for="customCheckDisabled">Yes </label>
-                                                          </div>
-                                                          <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input"  >
-                                                            <label class="custom-control-label" for="customCheckDisabled">No </label>
+                                                          <div class="col-sm-8">
+                                                             <div class="custom-control ">
+                                                            <input type="checkbox" value="1" >
+                                                            <label  >Yes </label>
                                                           </div>
 
+                                                           <div class="custom-control ">
+                                                            <input type="checkbox" value="2" >
+                                                            <label  >Yes </label>
+                                                          </div>
                                                         </div>
                                                       </div>
 
+
+
                                                       <div class="form-group row">
                                                         <label for="inputPassword3" class="col-sm-4 col-form-label">Is the aging of accounts listed at the back?</label>
-                                                        <div class="col-sm-8">
-                                                          <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input"  >
-                                                            <label class="custom-control-label" for="customCheckDisabled">Yes </label>
-                                                          </div>
-                                                          <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox" class="custom-control-input"   >
-                                                            <label class="custom-control-label" for="customCheckDisabled">No </label>
+                                                            <div class="col-sm-8">
+                                                             <div class="custom-control ">
+                                                            <input type="checkbox" >
+                                                            <label  >Yes </label>
                                                           </div>
 
+                                                           <div class="custom-control ">
+                                                            <input type="checkbox" >
+                                                            <label  >Yes </label>
+                                                          </div>
                                                         </div>
                                                       </div>
 
@@ -351,6 +358,18 @@
        
   
      <?php $this->load->view('includes/scripts.php') ?> 
+
+
+     <script type="text/javascript">
+         
+
+            var select2 =     $('.responsibility').select2({
+
+                });
+        
+
+        select2.data('select2').$selection.css({'height' : '37px','border' : '1px solid'});
+     </script>
    
 </body>
 

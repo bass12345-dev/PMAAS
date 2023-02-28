@@ -70,13 +70,7 @@
                                 
                                
                                 <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="card p-0 mt-5">      
-                                                            
-                                            <center><h2 ><?php echo $title ?></h2> </center>   
-                                            <a href="<?php echo base_url() ?>cso/view_profile?id=<?php echo $_GET['id'] ?>" class="btn  mt-3 btn-success" > View Profile</a>                
-                                        </div>
-                                    </div>
+                                   
                                     <div class="col-md-10 ">
 
                                         <div class="row">
@@ -130,6 +124,15 @@
 
                                                 </tbody>
                                             </table>
+                                        </div>
+                                    </div>
+
+
+                                     <div class="col-md-2">
+                                        <div class="card p-0 mt-5">      
+                                                            
+                                            <center><h2 ><?php echo $title ?></h2> </center>   
+                                            <a href="<?php echo base_url() ?>cso/view_profile?id=<?php echo $_GET['id'] ?>" class="btn  mt-3 btn-success" > View Profile</a>                
                                         </div>
                                     </div>
                                     

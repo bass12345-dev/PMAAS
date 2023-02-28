@@ -57,7 +57,7 @@
                                                     </tr>
                                                 </thead>
                                             </table>
-                                             <button  type="button" class="btn mt-1 mb-4 pr-4 pl-4  btn-danger " id="delete-multiple-center">Delete</button>
+                                             <!-- <button  type="button" class="btn mt-1 mb-4 pr-4 pl-4  btn-danger " id="delete-multiple-center">Delete</button> -->
                                         </div>
                                     </div>
                                     <div class="col-md-6">
