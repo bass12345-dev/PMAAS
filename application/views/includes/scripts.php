@@ -543,7 +543,7 @@
                         tr.append('<td class="py-1 px-2">' + resp[k].under_type_act_name + '</td>')
                             // third column data
                         tr.append('<td class="py-1 px-2"><ul class="d-flex justify-content-center">\
-                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="" data-name="" id="update-activity"><i class="fa fa-edit"></i></a></li>\
+                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-idd= "'+resp[k].typ_ac_id+'"  data-id="'+resp[k].under_type_act_id+'" data-name="'+resp[k].under_type_act_name+'"  id="update-under-type-activity"><i class="fa fa-edit"></i></a></li>\
                                  <li><a href="javascript:;" data-id="'+resp[k].under_type_act_id+'" data-idd= "'+resp[k].typ_ac_id+'"  id="delete-under-activity"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>\
                                 </ul></td>')
                          
@@ -564,6 +564,84 @@
             }, 500)
         
     }
+
+
+
+
+    $(document).on('click','a#update-under-type-activity',function (e) {
+
+            
+
+           
+
+        $('#update_under_activity_modal').modal('hide')
+        $('input[name=update_under_activity]').val($(this).data('name'))
+        $('input[name=under_activity_id]').val($(this).data('id'));
+        $('input[name=under_activity_idd]').val($(this).data('idd'));
+        $('#update_under_type_activity_modal').modal('show')
+      
+       
+
+     });
+
+
+      $(document).on('click','.close-under',function (e) {
+              $('#update_under_type_activity_modal').modal('hide')
+             $('#update_under_activity_modal').modal('show')
+           
+       });
+
+
+           $('#update_under_type_form').on('submit', function(e) {
+    e.preventDefault();
+
+         var id = $('input[name=under_activity_idd]').val();
+
+             $.ajax({
+            type: "POST",
+            url: base_url + 'Type_of_Activity/update_',
+            data: $(this).serialize(),
+            dataType: 'json',
+            beforeSend: function() {
+                $('.btn-update-under-activity').text('Please wait...');
+                $('.btn-update-under-activity').attr('disabled','disabled');
+            },
+            success : function(data)
+            {
+
+                // load_under_type();
+                load_under_type(id);
+                
+                $('.btn-update-under-activity').text('Submit');
+                $('.btn-update-under-activity').removeAttr('disabled');
+               var alert =  $('.alert-update_-under-activity').html(' <div class="alert-dismiss mt-2">\
+                                                        <div class="alert alert-success alert-dismissible fade show" role="alert">\
+                                                            <strong>'+data.message+'.\
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span class="fa fa-times"></span>\
+                                                            </button>\
+                                                            </div>\
+                                                    </div>');
+                
+
+        
+                setTimeout(function() { 
+                        $('.alert-update_-under-activity').html('')
+                    }, 3000);
+                   
+                 $('#update_under_type_activity_modal').modal('hide')
+             $('#update_under_activity_modal').modal('show')
+
+            },
+             error: function(xhr) { // if error occured
+                alert("Error occured.please try again");
+                $('.btn-update-under-activity').text('Submit');
+                $('.btn-update-under-activity').removeAttr('disabled');
+            },
+
+        })
+
+        })
+
 
 
     //   $('#reload_data').click(function() {

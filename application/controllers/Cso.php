@@ -39,13 +39,20 @@ class Cso extends CI_Controller {
 	}
 
 
+		public function add_trans2(){
+
+		 $data['title'] = $this->GetModel->get($this->cso,array('cso_id' => $_GET['id']))[0]['cso_name'];
+		$this->load->view('admin/cso/view/add_section/add',$data);
+	}
+
+
 
 
 
 	public function add_trans(){
 
 		 $data['title'] = $this->GetModel->get($this->cso,array('cso_id' => $_GET['id']))[0]['cso_name'];
-		$this->load->view('admin/cso/view/add_section/add',$data);
+		$this->load->view('admin/cso/view/add_section/add1',$data);
 	}
 
 

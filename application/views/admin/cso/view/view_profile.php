@@ -148,6 +148,10 @@
                                        
                                         
                                             <div id="canvas_container" >
+
+                                                <div class="loader-div" hidden >
+                                                    <div class="loader"></div>
+                                                </div>
                                                 <img src="./../assets/images/not_found.jpg" id="pdf_error" height="600px"  width ="600px" >
                                         <canvas id="pdf_renderer" style="width: 100%;"></canvas>
                                         
@@ -185,20 +189,25 @@
 
 
         $(document).on('click','a#view_cor',function (e) {
-
+            $('.loader-div').removeAttr('hidden');
 
             if ($(this).data('id') == '') {
 
                  $('#pdf_error').removeAttr('hidden');
                   $('#pdf_renderer').attr('hidden','hidden');
                    $('#navigation_controls').attr('hidden','hidden');
-               
+                    $('.loader-div').attr('hidden','hidden');
+                   
+                    
             }
             else {
                 $("a#download").attr("href", base_url + "uploads/cso_files/cor/" + $(this).data('id') );
                  $('#navigation_controls').removeAttr('hidden');
                  $('#pdf_renderer').removeAttr('hidden');
                   $('#pdf_error').attr('hidden','hidden');
+                    
+                    $('.loader-div').attr('hidden','hidden');
+
 
 
             pdfjsLib.getDocument('./../uploads/cso_files/cor/'+$(this).data('id')).then((pdf) => {
@@ -212,17 +221,19 @@
 
 
         $(document).on('click','a#view_bylaws',function (e) {
-
+             $('.loader-div').removeAttr('hidden');
             if ($(this).data('id') == '') {
                  $('#pdf_error').removeAttr('hidden');
                  $('#pdf_renderer').attr('hidden','hidden');
                  $('#navigation_controls').attr('hidden','hidden');
+                 $('.loader-div').attr('hidden','hidden');
               
             }else{
              $("a#download").attr("href", base_url + "uploads/cso_files/bylaws/" + $(this).data('id') );
              $('#navigation_controls').removeAttr('hidden');
              $('#pdf_renderer').removeAttr('hidden');
               $('#pdf_error').attr('hidden','hidden');
+              $('.loader-div').attr('hidden','hidden');
             pdfjsLib.getDocument('./../uploads/cso_files/bylaws/'+$(this).data('id')).then((pdf) => {
                 myState.pdf = pdf;
                 render();
@@ -230,17 +241,19 @@
              }
          })
          $(document).on('click','a#view_article',function (e) {
-
+            $('.loader-div').removeAttr('hidden');
             if ($(this).data('id') == '') {               
                 $('#pdf_error').removeAttr('hidden');
                 $('#pdf_renderer').attr('hidden','hidden');
                 $('#navigation_controls').attr('hidden','hidden');
+                $('.loader-div').attr('hidden','hidden');
                
             }else{
                 $("a#download").attr("href", base_url + "uploads/cso_files/articles/" + $(this).data('id') );
                 $('#navigation_controls').removeAttr('hidden');
                 $('#pdf_renderer').removeAttr('hidden');
                  $('#pdf_error').attr('hidden','hidden');
+                 $('.loader-div').attr('hidden','hidden');
                 pdfjsLib.getDocument('./../uploads/cso_files/articles/'+$(this).data('id')).then((pdf) => {
      
                 myState.pdf = pdf;

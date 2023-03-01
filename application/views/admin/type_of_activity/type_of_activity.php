@@ -136,6 +136,7 @@
         <!-- footer area start-->
     <?php $this->load->view('admin/type_of_activity/modal/update_activity_modal.php') ?> 
     <?php $this->load->view('admin/type_of_activity/modal/under_type_of_activity_modal_table.php') ?>
+    <?php $this->load->view('admin/type_of_activity/modal/update_under_type_of_activity') ?>
     <?php $this->load->view('includes/offset.php') ?>  
         <!-- footer area end-->
     </div>

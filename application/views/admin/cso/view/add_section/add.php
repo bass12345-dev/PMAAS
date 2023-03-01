@@ -80,14 +80,25 @@
                         <div class="card ">
                             <div class="card-body">                              
                                 <form>
-                                      <div class="form-row">
+                                     <div class="form-row">
                                         <div class="form-group col-md-6">
                                           <label for="inputEmail4">PMAS NO</label>
                                           <input type="email" class="form-control input" id="inputEmail4" placeholder="PMAS NO">
                                         </div>
                                         <div class="form-group col-md-6">
                                           <label for="inputPassword4">Date & Time Filed</label>
-                                          <input type="date" class="form-control" id="inputPassword4" placeholder="">
+                                          <input type="date" class="form-control input" id="inputPassword4" placeholder="">
+                                        </div>
+                                        <!-- <div class="form-group col-md-4">
+                                          <label for="inputPassword4">Approved By</label>
+                                          <input type="text" class="form-control" id="inputPassword4" placeholder="Approved By">
+                                        </div> -->
+                                      </div>
+                                      <div class="form-row">
+                                       
+                                        <div class="form-group col-md-6">
+                                          <label for="inputPassword4">Responsible Section</label>
+                                          <input type="text" class="form-control input" id="inputPassword4" placeholder="">
                                         </div>
                                         <!-- <div class="form-group col-md-4">
                                           <label for="inputPassword4">Approved By</label>
@@ -106,7 +117,7 @@
                                         </div>
                                         <div class="form-group col-md-3">
                                           <label for="inputEmail4">Type of Activity</label>
-                                            <select id="inputState" class="form-control">
+                                            <select id="inputState" class="form-control input">
                                                 <option selected>Regular Monthly Meeting</option> 
                                                 <option selected>Regular Monthly COOP Visit</option> 
                                                 <option selected>Job Vacancy Solicitation</option> 
@@ -116,7 +127,7 @@
                                         </div>
                                         <div class="form-group col-md-3">   
                                         <label for="inputEmail4">Type</label>
-                                          <select id="inputState" class="form-control">
+                                          <select id="inputState" class="form-control input">
                                                 <option selected>SKL</option> 
                                                 <option selected>MDT</option> 
                                                 <option selected>CD</option> 
@@ -128,12 +139,9 @@
                                        <div class="form-row">
                                         <div class="form-group col-md-6">
                                           <label for="inputEmail4">Date and Time</label>
-                                          <input type="date" class="form-control" id="inputEmail4" placeholder="Email">
+                                          <input type="date" class="form-control input" id="inputEmail4" placeholder="Email">
                                         </div>
-                                        <div class="form-group col-md-6">
-                                          <label for="inputPassword4">Project Title</label>
-                                          <input type="text" class="form-control" id="inputPassword4" placeholder="Project Title">
-                                        </div>
+                                        
                                       </div>
 
                                       <div class="row">
@@ -142,14 +150,22 @@
                                                 <div class="card-body"> 
                                                     <i><h5>For Training Use Only</h5></i>
 
+                                                     <div class="form-row">
+                                                        <div class="form-group col-md-12">
+                                                          <label for="inputEmail4">Title of Training</label>
+                                                          <input type="email" class="form-control input " id="inputEmail4" placeholder="">
+                                                        </div>
+                                                       
+                                                      </div>
+
                                                     <div class="form-row">
                                                         <div class="form-group col-md-6">
                                                           <label for="inputEmail4">No. of Participants</label>
-                                                          <input type="email" class="form-control " id="inputEmail4" placeholder="">
+                                                          <input type="email" class="form-control input" id="inputEmail4" placeholder="">
                                                         </div>
                                                         <div class="form-group col-md-6">
                                                           <label for="inputPassword4">Female</label>
-                                                          <input type="text" class="form-control" id="inputPassword4" placeholder="">
+                                                          <input type="text" class="form-control input" id="inputPassword4" placeholder="">
                                                         </div>
                                                        
                                                       </div>
@@ -157,11 +173,11 @@
                                                       <div class="form-row">
                                                          <div class="form-group col-md-6">
                                                           <label for="inputPassword4">Over-all Ratings</label>
-                                                          <input type="text" class="form-control" id="inputPassword4" placeholder="">
+                                                          <input type="text" class="form-control input" id="inputPassword4" placeholder="">
                                                         </div>
                                                         <div class="form-group col-md-6">
                                                           <label for="inputPassword4">Name of the Trainor</label>
-                                                          <input type="text" class="form-control" id="inputPassword4" placeholder="">
+                                                          <input type="text" class="form-control input" id="inputPassword4" placeholder="">
                                                         </div>
                                                        
                                                       </div>
@@ -174,7 +190,7 @@
                                                      <div class="form-group row">
                                                         <label for="inputEmail3" class="col-sm-3 col-form-label">Prepared By :</label>
                                                         <div class="col-sm-9">
-                                                          <input type="email" class="form-control" id="inputEmail3" placeholder="">
+                                                          <input type="email" class="form-control mx-sm-3 input" id="inputEmail3" placeholder="">
                                                         </div>
                                                       </div>
                                                     
@@ -185,12 +201,19 @@
                                         <div class="col-6 mt-3 mb-3">
                                              <div class="card " style="border: 1px solid;">
                                                 <div class="card-body"> 
+
+                                                    <div class="form-group row">
+                                                        <label for="inputEmail3" class="col-sm-4 col-form-label ">Project Title</label>
+                                                        <div class="col-sm-8">
+                                                           <input type="text" class="form-control input" id="inputPassword4" placeholder="Project Title">
+                                                        </div>
+                                                      </div>
                                                    
                                               
                                                       <div class="form-group row">
-                                                        <label for="inputEmail3" class="col-sm-4 col-form-label">Period (Mo-Year)/as of :</label>
+                                                        <label for="inputEmail3" class="col-sm-4 col-form-label ">Period (Mo-Year)/as of :</label>
                                                         <div class="col-sm-8">
-                                                          <input type="email" class="form-control" id="inputEmail3" placeholder="">
+                                                          <input type="email" class="form-control input" id="inputEmail3" placeholder="">
                                                         </div>
                                                       </div>
                                                       <div class="form-group row">
@@ -198,7 +221,7 @@
                                                         <div class="col-sm-3">
                                                            
                                                               <div class="form-group">
-                                                                <input type="text" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Present">
+                                                                <input type="text" id="inputPassword6" class="form-control mx-sm-3 input" aria-describedby="passwordHelpInline" placeholder="Present">
                                                               </div>
                                                            
                                                         </div>
@@ -206,7 +229,7 @@
                                                             <xform class="form-inline">
                                                               <div class="form-group">
                                                                 
-                                                                <input type="text" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Absent">
+                                                                <input type="text" id="inputPassword6" class="form-control mx-sm-3 input" aria-describedby="passwordHelpInline" placeholder="Absent">
                                                               
                                                               </div>
                                                             </form>
@@ -218,7 +241,7 @@
                                                            
                                                               <div class="form-group">
                                                                
-                                                                <input type="text" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Delinquent">
+                                                                <input type="text" id="inputPassword6" class="form-control mx-sm-3 input" aria-describedby="passwordHelpInline" placeholder="Delinquent">
                                                                
                                                               </div>
                                                            
@@ -227,7 +250,7 @@
                                                             <form class="form-inline">
                                                               <div class="form-group">
                                                                 
-                                                                <input type="text" id="inputPassword6" class="form-control mx-sm-3" aria-describedby="passwordHelpInline" placeholder="Overdue">
+                                                                <input type="text" id="inputPassword6" class="form-control mx-sm-3 input" aria-describedby="passwordHelpInline" placeholder="Overdue">
                                                               
                                                               </div>
                                                             </form>
@@ -237,35 +260,35 @@
                                                       <div class="form-group row">
                                                         <label for="inputPassword3" class="col-sm-4 col-form-label">Total Production</label>
                                                         <div class="col-sm-8">
-                                                          <input type="text" class="form-control" id="inputPassword3" placeholder="">
+                                                          <input type="text" class="form-control input" id="inputPassword3" placeholder="">
                                                         </div>
                                                       </div>
 
                                                       <div class="form-group row">
                                                         <label for="inputPassword3" class="col-sm-4 col-form-label">Total Collection/Sales</label>
                                                         <div class="col-sm-8">
-                                                          <input type="text" class="form-control" id="inputPassword3" placeholder="">
+                                                          <input type="text" class="form-control input" id="inputPassword3" placeholder="">
                                                         </div>
                                                       </div>
 
                                                       <div class="form-group row">
                                                         <label for="inputPassword3" class="col-sm-4 col-form-label">Total Released/Purchases</label>
                                                         <div class="col-sm-8">
-                                                          <input type="text" class="form-control" id="inputPassword3" placeholder="">
+                                                          <input type="text" class="form-control input" id="inputPassword3" placeholder="">
                                                         </div>
                                                       </div>
 
                                                        <div class="form-group row">
                                                         <label for="inputPassword3" class="col-sm-4 col-form-label">Total Delinquent Account</label>
                                                         <div class="col-sm-8">
-                                                          <input type="text" class="form-control" id="inputPassword3" placeholder="">
+                                                          <input type="text" class="form-control input" id="inputPassword3" placeholder="">
                                                         </div>
                                                       </div>
 
                                                        <div class="form-group row">
                                                         <label for="inputPassword3" class="col-sm-4 col-form-label">Total Over-due Account</label>
                                                         <div class="col-sm-8">
-                                                          <input type="text" class="form-control" id="inputPassword3" placeholder="">
+                                                          <input type="text" class="form-control input" id="inputPassword3" placeholder="">
                                                         </div>
                                                       </div>
 
@@ -273,7 +296,7 @@
                                                       <div class="form-group row">
                                                         <label for="inputPassword3" class="col-sm-4 col-form-label">Cash in Bank</label>
                                                         <div class="col-sm-8">
-                                                          <input type="text" class="form-control" id="inputPassword3" placeholder="">
+                                                          <input type="text" class="form-control input" id="inputPassword3" placeholder="">
                                                         </div>
                                                       </div>
 
@@ -281,7 +304,7 @@
                                                       <div class="form-group row">
                                                         <label for="inputPassword3" class="col-sm-4 col-form-label">Cash on hand</label>
                                                         <div class="col-sm-8">
-                                                          <input type="text" class="form-control" id="inputPassword3" placeholder="">
+                                                          <input type="text" class="form-control input" id="inputPassword3" placeholder="">
                                                         </div>
                                                       </div>
 
@@ -289,7 +312,7 @@
                                                       <div class="form-group row">
                                                         <label for="inputPassword3" class="col-sm-4 col-form-label">Inventories(Store)</label>
                                                         <div class="col-sm-8">
-                                                          <input type="password" class="form-control" id="inputPassword3" placeholder="">
+                                                          <input type="password" class="form-control input" id="inputPassword3" placeholder="">
                                                         </div>
                                                       </div>  
 

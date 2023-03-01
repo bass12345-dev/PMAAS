@@ -102,4 +102,21 @@ class Type_of_activity extends CI_Controller {
 		$this->load->library('Condition', $params);
 
 	}
+
+	public function update_(){
+
+
+		$data = array(
+
+				'under_type_act_name' => $_POST['update_under_activity'],
+			
+		);
+
+		$where = array('under_type_act_id'=>$_POST['under_activity_id']);
+
+		$update = $this->UpdateModel->update1($where,$data,$this->under_type_of_activity);
+		$params = array('cond' => $update, 'message' => 'Successfully Updated');
+		$this->load->library('Condition', $params);
+
+	}
 }
