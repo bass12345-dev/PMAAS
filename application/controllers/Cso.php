@@ -4,10 +4,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Cso extends CI_Controller {
 
 	public $cso = 'cso';
+	public $type_of_activity = 'type_of_activity';
+	public $under_type_of_activity = 'under_type_of_activity';
+	public $responsibility_center = 'responsibility_center';
 	public $order_by_desc = 'desc';
 	public $order_by_asc = 'asc';
 	public $order_key = 'created';
 	public $order_key_code = 'res_center_code';
+	public $order_key_name = 'type_act_name';
+
+	public $order_under_type_act_name = 'under_type_act_name';
+
 
 	public function __construct()
     {
@@ -52,6 +59,9 @@ class Cso extends CI_Controller {
 	public function add_trans(){
 
 		 $data['title'] = $this->GetModel->get($this->cso,array('cso_id' => $_GET['id']))[0]['cso_name'];
+		 $data['activities'] = $this->GetModel->getALL($this->type_of_activity,$this->order_by_asc,$this->order_key_name); 
+		 $data['under_type_activies'] = $this->GetModel->getALL($this->under_type_of_activity,$this->order_by_asc,$this->order_under_type_act_name);
+		 $data['responsibilityL_centers'] = $this->GetModel->getALL($this->responsibility_center,$this->order_by_asc,$this->order_key_code); 
 		$this->load->view('admin/cso/view/add_section/add1',$data);
 	}
 

@@ -321,22 +321,62 @@
                     <form action="" method="post" role="form">
                         <div class="form-wizard-header">
                             <p>Fill all form field to go next step</p>
-                            <ul class="list-unstyled form-wizard-steps clearfix">
+                           <!--  <ul class="list-unstyled form-wizard-steps clearfix">
                                 <li class="active"><span>1</span></li>
                                 <li><span>2</span></li>
                                 <li><span>3</span></li>
                                 <li><span>4</span></li>
                                 
                                
-                            </ul>
+                            </ul> -->
                         </div>
                         <fieldset class="wizard-fieldset show">
                             <h5>Information</h5>
-                            <div class="form-group">
-                                <label for="inputEmail4">PMAS NO</label>
-                                <input type="text" class="form-control input" id="inputEmail4" placeholder="PMAS NO">
+                              <div class="form-group">
+                                <label >PMAS NO</label>
+                                <div class="input-group mb-3">
+                               <div class="input-group-prepend">
+                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo date('Y', time()) ?></button>
+                                    <div class="dropdown-menu">
+                                      <a class="dropdown-item" href="#">Action</a>
+                                      <a class="dropdown-item" href="#">Another action</a>
+                                      <a class="dropdown-item" href="#">Something else here</a>
+                                      
+                                    </div>
+
+                                  </div>
+
+                                  <div class="input-group-prepend">
+                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo date('m', time()) ?></button>
+                                    <div class="dropdown-menu">
+                                      <a class="dropdown-item" href="#">Action</a>
+                                      <a class="dropdown-item" href="#">Another action</a>
+                                      <a class="dropdown-item" href="#">Something else here</a>
+                                      
+                                    </div>
+                                    
+                                  </div>
+                                  <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                              </div>
                                 <div class="wizard-form-error"></div>
                             </div>
+
+
+                             <!-- <div class="form-group">
+                                <label >PMAS NO</label>
+                               <div class="input-group mb-3">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text" id="basic-addon1"><?php echo date('Y', time()).' - '.date('m', time())  ?></span>
+                                      </div>
+                                      <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                    </div>
+                                <div class="wizard-form-error"></div>
+                            </div> -->
+                            <!-- div class="form-group">
+                                <label >PMAS NO</label>
+                                <input type="text" class="form-control input"  placeholder="PMAS NO">
+                                <div class="wizard-form-error"></div>
+                            </div> -->
                             <div class="form-group">
                                 <label for="inputPassword4">Date & Time Filed</label>
                                 <input type="date" class="form-control input" id="inputPassword4" placeholder="">
@@ -354,9 +394,20 @@
                                <div class="col-12">Type of Activity</div>
                                     <div class="form-group">
                                         <select class="form-control">
-                                            <option value="">Sample</option>
-                                            <option value="">sample1</option>
-                                            <option value="">Sample2</option>
+                                            <?php 
+
+                                                foreach ($activities as $row) :
+                                                    
+
+                                           ?>
+
+                                           <option value="<?php echo $row['type_act_id'] ?>"><?php echo $row['type_act_name'] ?></option>
+
+                                           <?php 
+
+                                                endforeach;
+                                            ?>
+                                            
                                         </select>
                                     </div>
                                 <div class="wizard-form-error"></div>
@@ -366,9 +417,15 @@
                                <div class="col-12">Type </div>
                                     <div class="form-group">
                                         <select class="form-control">
-                                            <option value="">Sample</option>
-                                            <option value="">sample1</option>
-                                            <option value="">Sample2</option>
+                                            <?php 
+
+                                                foreach ($under_type_activies as $row) :
+                                           ?>
+                                           <option value="<?php echo $row['under_type_act_id'] ?>"><?php echo $row['under_type_act_name'] ?></option>
+                                           <?php 
+
+                                                endforeach;
+                                            ?>       
                                         </select>
                                     </div>
                                 <div class="wizard-form-error"></div>
@@ -376,7 +433,19 @@
 
                             <div class="form-group">     
                                <div class="col-12">Responsibility Center</div>
-                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
+                                 <div class="form-group">
+                                        <select class="form-control responsibility" style="width: 100%;">
+                                            <?php 
+
+                                                foreach ($responsibilityL_centers as $row) :
+                                           ?>
+                                           <option value="<?php echo $row['res_center_id'] ?>"><?php echo $row['res_center_code'] ?> - <?php echo $row['res_center_name'] ?></option>
+                                           <?php 
+
+                                                endforeach;
+                                            ?>       
+                                        </select>
+                                    </div>
                                 <div class="wizard-form-error"></div>
                             </div>
 
@@ -387,7 +456,8 @@
                             </div>
                                 
                             <div class="form-group clearfix">
-                                <a href="javascript:;" class="form-wizard-previous-btn float-left">Previous</a>
+                                 <a href="javascript:;" class="form-wizard-submit float-right">Submit</a>
+                                <!-- <a href="javascript:;" class="form-wizard-previous-btn float-left">Previous</a> -->
                                 <a href="javascript:;" class="form-wizard-next-btn float-right">Next</a>
                             </div>
                         </fieldset> 
@@ -423,6 +493,7 @@
                                 <a href="javascript:;" class="form-wizard-next-btn float-right">Next</a>
                             </div>
                         </fieldset> 
+
                         <fieldset class="wizard-fieldset">
                             <h5>Payment Information</h5>
                             <!-- <div class="form-group">
@@ -644,7 +715,7 @@
                             <div class="form-group clearfix">
                                 <a href="javascript:;" class="form-wizard-previous-btn float-left">Previous</a>
                                
-                                <a href="javascript:;" class="form-wizard-submit float-right">Submit</a>
+                                <!-- <a href="javascript:;" class="form-wizard-submit float-right">Submit</a> -->
                             </div>
                         </fieldset> 
                     </form>
@@ -805,7 +876,15 @@
         }
     });
 });
+    
 
+
+        var select2 =     $('.responsibility').select2({
+
+                });
+        
+
+        select2.data('select2').$selection.css({'height' : '49px','border' : '1px solid'});
 
 
 
