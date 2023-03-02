@@ -5,6 +5,7 @@
     <?php $this->load->view('includes/meta.php') ?>
     <?php $this->load->view('includes/css.php') ?> 
 
+
     <style type="text/css">
         label {
             font-weight: bold;
@@ -16,7 +17,7 @@
             border: 1px solid;
         }
 
-
+/*
         body {
   background-color: #ffffff;
   color: #444444;
@@ -25,11 +26,12 @@
   font-weight: 300;
   margin: 0;
   padding: 0;
-}
+}*/
 .wizard-content-left {
   background-blend-mode: darken;
   background-color: rgba(0, 0, 0, 0.45);
-/*  background-image: url("https://i.ibb.co/X292hJF/form-wizard-bg-2.jpg");*/
+  background-image: url("./../sss.png");
+ /* background-image: url("https://i.ibb.co/X292hJF/form-wizard-bg-2.jpg");*/
   background-position: center center;
   background-size: cover;
   height: 100vh;
@@ -107,7 +109,7 @@
   text-align: center;
 }
 .form-wizard .form-wizard-next-btn, .form-wizard .form-wizard-previous-btn, .form-wizard .form-wizard-submit {
-  background-color: #d65470;
+  background-color: #3F6BA4;
   color: #ffffff;
   display: inline-block;
   min-width: 100px;
@@ -137,7 +139,7 @@
   width: 100%;
 }
 .form-wizard .form-wizard-previous-btn {
-  background-color: #fb1647;
+  background-color: #3F6BA4;
 }
 .form-wizard .form-control {
   font-weight: 300;
@@ -202,18 +204,18 @@
   width: 50%;
 }
 .form-wizard .form-wizard-steps li.active span, .form-wizard .form-wizard-steps li.activated span {
-  background-color: #d65470;
+  background-color: #3F6BA4;
   color: #ffffff;
 }
 .form-wizard .form-wizard-steps li.active::after, .form-wizard .form-wizard-steps li.activated::after {
-  background-color: #d65470;
+  background-color: #3F6BA4;
   left: 50%;
   width: 50%;
-  border-color: #d65470;
+  border-color: #3F6BA4;
 }
 .form-wizard .form-wizard-steps li.activated::after {
   width: 100%;
-  border-color: #d65470;
+  border-color: #3F6BA4;
 }
 .form-wizard .form-wizard-steps li:last-child::after {
   left: 0;
@@ -301,19 +303,19 @@
             </div>
            
          
-            <div class="main-content-inner ">
+            <div class="main-content-inner " style="background-color: #fff;">
 
-                    <section class="wizard-section">
-        <div class="row no-gutters">
-            <div class="col-lg-6 col-md-6">
-                <div class="wizard-content-left d-flex justify-content-center align-items-center">
+                <section class="wizard-section" style="background-color: #fff;">
+                    <div class="row no-gutters">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="wizard-content-left d-flex justify-content-center align-items-center">
 
-                    
-                        <canvas id="pdf_renderer"  ></canvas>
-                   
-                    
-                </div>
-            </div>
+                                
+                                 <!--    <canvas id="pdf_renderer" style="height: 500px;"  ></canvas> -->
+                               
+                                
+                            </div>
+                        </div>
             <div class="col-lg-6 col-md-6">
                 <div class="form-wizard">
                     <form action="" method="post" role="form">
@@ -324,6 +326,7 @@
                                 <li><span>2</span></li>
                                 <li><span>3</span></li>
                                 <li><span>4</span></li>
+                                
                                
                             </ul>
                         </div>
@@ -331,7 +334,7 @@
                             <h5>Information</h5>
                             <div class="form-group">
                                 <label for="inputEmail4">PMAS NO</label>
-                                <input type="email" class="form-control input" id="inputEmail4" placeholder="PMAS NO">
+                                <input type="text" class="form-control input" id="inputEmail4" placeholder="PMAS NO">
                                 <div class="wizard-form-error"></div>
                             </div>
                             <div class="form-group">
@@ -358,6 +361,30 @@
                                     </div>
                                 <div class="wizard-form-error"></div>
                             </div>
+
+                             <div class="form-group">     
+                               <div class="col-12">Type </div>
+                                    <div class="form-group">
+                                        <select class="form-control">
+                                            <option value="">Sample</option>
+                                            <option value="">sample1</option>
+                                            <option value="">Sample2</option>
+                                        </select>
+                                    </div>
+                                <div class="wizard-form-error"></div>
+                            </div>
+
+                            <div class="form-group">     
+                               <div class="col-12">Responsibility Center</div>
+                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
+                                <div class="wizard-form-error"></div>
+                            </div>
+
+                            <div class="form-group">     
+                               <div class="col-12">Date And Time</div>
+                                <input type="date" class="form-control input" id="inputPassword4" placeholder="">
+                                <div class="wizard-form-error"></div>
+                            </div>
                                 
                             <div class="form-group clearfix">
                                 <a href="javascript:;" class="form-wizard-previous-btn float-left">Previous</a>
@@ -367,23 +394,28 @@
                         <fieldset class="wizard-fieldset">
                             <h5>Bank Information</h5>
                             <div class="form-group">
-                                <input type="text" class="form-control wizard-required" id="bname">
-                                <label for="bname" class="wizard-form-text-label">Bank Name*</label>
+                                <div class="col-12">Title of Training</div>
+                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
                                 <div class="wizard-form-error"></div>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control wizard-required" id="brname">
-                                <label for="brname" class="wizard-form-text-label">Branch Name*</label>
+                                <div class="col-12">No of partcipants</div>
+                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
                                 <div class="wizard-form-error"></div>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control wizard-required" id="acname">
-                                <label for="acname" class="wizard-form-text-label">Account Name*</label>
+                                 <div class="col-12">Female</div>
+                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
                                 <div class="wizard-form-error"></div>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control wizard-required" id="acon">
-                                <label for="acon" class="wizard-form-text-label">Account Number*</label>
+                                <div class="col-12">Over-all Ratings</div>
+                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
+                                <div class="wizard-form-error"></div>
+                            </div>
+                             <div class="form-group">
+                                <div class="col-12">Name of Trainor</div>
+                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
                                 <div class="wizard-form-error"></div>
                             </div>
                             <div class="form-group clearfix">
@@ -393,7 +425,7 @@
                         </fieldset> 
                         <fieldset class="wizard-fieldset">
                             <h5>Payment Information</h5>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 Payment Type
                                 <div class="wizard-form-radio">
                                     <input name="radio-name" id="mastercard" type="radio">
@@ -403,13 +435,108 @@
                                     <input name="radio-name" id="visacard" type="radio">
                                     <label for="visacard">Visa Card</label>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="form-group">
-                                <input type="text" class="form-control wizard-required" id="honame">
-                                <label for="honame" class="wizard-form-text-label">Holder Name*</label>
+                                <div class="col-12">Project Title</div>
+                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
                                 <div class="wizard-form-error"></div>
                             </div>
-                            <div class="row">
+
+                            <div class="form-group">
+                                <div class="col-12">Period (Mo - Year)/as of</div>
+                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
+                                <div class="wizard-form-error"></div>
+                            </div>
+                            
+                             <h2>Attendance</h2>
+                             <div class="row">
+
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <div class="col-12">Present</div>
+                                        <input type="text" class="form-control input" id="inputPassword4" placeholder="">
+                                        <div class="wizard-form-error"></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <div class="col-12">Absent</div>
+                                        <input type="text" class="form-control input" id="inputPassword4" placeholder="">
+                                        <div class="wizard-form-error"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h2>NOM - Borrowers</h2>
+                             <div class="row">
+
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <div class="col-12">Delinquent</div>
+                                        <input type="text" class="form-control input" id="inputPassword4" placeholder="">
+                                        <div class="wizard-form-error"></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <div class="col-12">Overdue</div>
+                                        <input type="text" class="form-control input" id="inputPassword4" placeholder="">
+                                        <div class="wizard-form-error"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                             <div class="form-group">
+                                <div class="col-12">Total Production</div>
+                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
+                                <div class="wizard-form-error"></div>
+                            </div>
+
+                             <div class="form-group">
+                                <div class="col-12">Total Collection/Sales</div>
+                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
+                                <div class="wizard-form-error"></div>
+                            </div>
+
+                             <div class="form-group">
+                                <div class="col-12">Total Released/Purchases</div>
+                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
+                                <div class="wizard-form-error"></div>
+                            </div>
+
+                             <div class="form-group">
+                                <div class="col-12">Total Delinquent Account</div>
+                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
+                                <div class="wizard-form-error"></div>
+                            </div>
+                           
+
+                           <div class="form-group">
+                                <div class="col-12">Total Over-due Account</div>
+                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
+                                <div class="wizard-form-error"></div>
+                            </div>
+
+
+                              <div class="form-group">
+                                <div class="col-12">Cash in bank</div>
+                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
+                                <div class="wizard-form-error"></div>
+                            </div>
+
+                             <div class="form-group">
+                                <div class="col-12">Cash on hand</div>
+                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
+                                <div class="wizard-form-error"></div>
+                            </div>
+
+                             <div class="form-group">
+                                <div class="col-12">Inventories(Store)</div>
+                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
+                                <div class="wizard-form-error"></div>
+                            </div>
+                           <!--  <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <div class="form-group">
                                         <input type="text" class="form-control wizard-required" id="cardname">
@@ -424,8 +551,8 @@
                                         <div class="wizard-form-error"></div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
+                            </div> -->
+                          <!--   <div class="row">
                                 <div class="col-12">Expiry Date</div>
                                 <div class="col-lg-4 col-md-4 col-sm-4">
                                     <div class="form-group">
@@ -513,9 +640,10 @@
                                         </select>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="form-group clearfix">
                                 <a href="javascript:;" class="form-wizard-previous-btn float-left">Previous</a>
+                               
                                 <a href="javascript:;" class="form-wizard-submit float-right">Submit</a>
                             </div>
                         </fieldset> 
