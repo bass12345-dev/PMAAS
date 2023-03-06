@@ -110,15 +110,21 @@ class Cso extends CI_Controller {
 
 		$data = array(
 
-					'pmas_no' => date('Y', time()).' - '.date('m', time()).' - '.$this->input->post('pmas_number'),
-					'date_and_time_filed' => $this->input->post('date_and_time_filed'),
+					'pmas_no' => date('Y', time()).'-'.date('m', time()).'-'.$this->input->post('pmas_number'),
+					// 'date_and_time_filed' => $this->input->post('date_and_time_filed'),
+					'date_and_time_filed' =>  date("Y/m/d H:i:s", strtotime($this->input->post('date_and_time_filed'))),
 					'type_of_monitoring_id' => $this->input->post('type_of_monitoring_id'),
 					'type_of_activity_id' => $this->input->post('type_of_activity_id'),
 					'under_type_of_activity_id' => $this->input->post('under_type_of_activity_id'),
+					'date_time' =>  date("Y/m/d H:i:s", strtotime($this->input->post('date_time'))),
+					'responsibility_center_id' =>   $this->input->post('responsibility_center_id'),
+					'cso_id' => $this->input->post('cso_id')
 					
 					
 		);
 
+		
+		
 		$result  = $this->AddModel->addData($this->transactions,$data);
 		$params = array('cond' => $result, 'message' => 'Successfully Added');
 		$this->load->library('Condition', $params);

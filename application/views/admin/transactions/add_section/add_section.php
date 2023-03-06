@@ -24,7 +24,7 @@
                     <!-- nav and search button -->
                     <div class="col-md-6 col-sm-8 clearfix">
                         <span style="font-size:23px;">
-                            <a href="<?php echo base_url() ?>cso/view_transactions?id=<?php echo $_GET['id'] ?>" style="color: #000;">
+                            <a href="<?php echo base_url() ?>Transactions" style="color: #000;">
                             <i class="fa fa-arrow-left"></i>
                             </a>
                         </span>
@@ -45,10 +45,9 @@
                             <h4 class="page-title pull-left"><?php echo $title ?></h4>
                             <ul class="breadcrumbs pull-left">
                                 <li><a href="<?php echo base_url() ?>">Home</a></li>
-                                <li><a href="<?php echo base_url() ?>cso">CSO</a></li>
-                                <li><a href="<?php echo base_url() ?>cso/view_transactions?id=<?php echo $_GET['id'] ?>"><?php echo $title ?></a></li>
-                                <li><a href="javascript:;">Add Transaction</a></li>
-                                <!-- <li><span><?php echo $title ?></span></li> -->
+                                <li><a href="<?php echo base_url() ?>transactions">Transactions</a></li>
+                                <li><a href="<?php echo base_url() ?>transactions/add_transactions"><?php echo $title ?></a></li>
+                               
                                 
                                 
                                 
@@ -92,7 +91,7 @@
                           
                               <div class="form-group">
                                 <label >PMAS NO</label>
-                                <input type="hidden" value="<?php echo $_GET['id'] ?>" name="cso_id">
+                              
                                 <div class="input-group mb-3">
                                <div class="input-group-prepend">
                                     <button class="btn btn-outline-secondary " type="button" ><?php echo date('Y', time()) ?></button>
@@ -169,7 +168,7 @@
                             </div>
                         </fieldset> 
                         <fieldset class="wizard-fieldset">
-                            <h5>Account Information</h5>
+                            <h5>Information</h5>
 
                              <div class="form-group">     
                                <div class="col-12">Responsible Section</div>
@@ -254,6 +253,27 @@
                                 <div class="wizard-form-error"></div>
                             </div>
 
+
+
+                            <div class="form-group">     
+                               <div class="col-12">Name of CSO</div>
+                                 <div class="form-group">
+                                        <select class="form-control cso" name="cso_id" style="width: 100%;">
+
+                                            <?php 
+
+                                                foreach ($cso as $row) :
+                                           ?>
+                                           <option value="<?php echo $row['cso_id'] ?>"> <?php echo $row['cso_name'] ?></option>
+                                           <?php 
+
+                                                endforeach;
+                                            ?>       
+                                        </select>
+                                    </div>
+                                <div class="wizard-form-error"></div>
+                            </div>
+
                             <div class="form-group">     
                                <div class="col-12">Date And Time</div>
                                   <div class="input-group date" id="id_1">
@@ -268,270 +288,24 @@
                                 <!-- <input type="date" class="form-control input" id="datepicker2" placeholder=""  onkeypress="return false;"> -->
                                 <div class="wizard-form-error"></div>
                             </div>
+
+                       
+                            <?php $this->load->view('admin/transactions/add_section/for_training') ?>
+                            <?php $this->load->view('admin/transactions/add_section/for_project_monitoring') ?>
+
+
+
+                        
                                 
                             <div class="form-group clearfix">
                                  <button type="submit" class="form-wizard-submit float-right btn-add-transaction">  Submit</button>
                                 <a href="javascript:;" class="form-wizard-previous-btn float-left">Previous</a>
-                              <!--   <a href="javascript:;" class="form-wizard-next-btn float-right">Next</a> -->
+                                <!-- <a href="javascript:;" class="form-wizard-next-btn float-right">Next</a> -->
                             </div>
                         </fieldset> 
-                        <fieldset class="wizard-fieldset">
-                            <h5>Bank Information</h5>
-                            <div class="form-group">
-                                <div class="col-12">Title of Training</div>
-                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
-                                <div class="wizard-form-error"></div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-12">No of partcipants</div>
-                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
-                                <div class="wizard-form-error"></div>
-                            </div>
-                            <div class="form-group">
-                                 <div class="col-12">Female</div>
-                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
-                                <div class="wizard-form-error"></div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-12">Over-all Ratings</div>
-                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
-                                <div class="wizard-form-error"></div>
-                            </div>
-                             <div class="form-group">
-                                <div class="col-12">Name of Trainor</div>
-                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
-                                <div class="wizard-form-error"></div>
-                            </div>
-                            <div class="form-group clearfix">
-                                <a href="javascript:;" class="form-wizard-previous-btn float-left">Previous</a>
-                                <a href="javascript:;" class="form-wizard-next-btn float-right">Next</a>
-                            </div>
-                        </fieldset> 
+                      
 
-                        <fieldset class="wizard-fieldset">
-                            <h5>Payment Information</h5>
-                            <!-- <div class="form-group">
-                                Payment Type
-                                <div class="wizard-form-radio">
-                                    <input name="radio-name" id="mastercard" type="radio">
-                                    <label for="mastercard">Master Card</label>
-                                </div>
-                                <div class="wizard-form-radio">
-                                    <input name="radio-name" id="visacard" type="radio">
-                                    <label for="visacard">Visa Card</label>
-                                </div>
-                            </div> -->
-                            <div class="form-group">
-                                <div class="col-12">Project Title</div>
-                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
-                                <div class="wizard-form-error"></div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-12">Period (Mo - Year)/as of</div>
-                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
-                                <div class="wizard-form-error"></div>
-                            </div>
-                            
-                             <h2>Attendance</h2>
-                             <div class="row">
-
-                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                        <div class="col-12">Present</div>
-                                        <input type="text" class="form-control input" id="inputPassword4" placeholder="">
-                                        <div class="wizard-form-error"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                        <div class="col-12">Absent</div>
-                                        <input type="text" class="form-control input" id="inputPassword4" placeholder="">
-                                        <div class="wizard-form-error"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <h2>NOM - Borrowers</h2>
-                             <div class="row">
-
-                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                        <div class="col-12">Delinquent</div>
-                                        <input type="text" class="form-control input" id="inputPassword4" placeholder="">
-                                        <div class="wizard-form-error"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                        <div class="col-12">Overdue</div>
-                                        <input type="text" class="form-control input" id="inputPassword4" placeholder="">
-                                        <div class="wizard-form-error"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                             <div class="form-group">
-                                <div class="col-12">Total Production</div>
-                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
-                                <div class="wizard-form-error"></div>
-                            </div>
-
-                             <div class="form-group">
-                                <div class="col-12">Total Collection/Sales</div>
-                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
-                                <div class="wizard-form-error"></div>
-                            </div>
-
-                             <div class="form-group">
-                                <div class="col-12">Total Released/Purchases</div>
-                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
-                                <div class="wizard-form-error"></div>
-                            </div>
-
-                             <div class="form-group">
-                                <div class="col-12">Total Delinquent Account</div>
-                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
-                                <div class="wizard-form-error"></div>
-                            </div>
-                           
-
-                           <div class="form-group">
-                                <div class="col-12">Total Over-due Account</div>
-                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
-                                <div class="wizard-form-error"></div>
-                            </div>
-
-
-                              <div class="form-group">
-                                <div class="col-12">Cash in bank</div>
-                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
-                                <div class="wizard-form-error"></div>
-                            </div>
-
-                             <div class="form-group">
-                                <div class="col-12">Cash on hand</div>
-                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
-                                <div class="wizard-form-error"></div>
-                            </div>
-
-                             <div class="form-group">
-                                <div class="col-12">Inventories(Store)</div>
-                                <input type="text" class="form-control input" id="inputPassword4" placeholder="">
-                                <div class="wizard-form-error"></div>
-                            </div>
-                           <!--  <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control wizard-required" id="cardname">
-                                        <label for="cardname" class="wizard-form-text-label">Card Number*</label>
-                                        <div class="wizard-form-error"></div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control wizard-required" id="cvc">
-                                        <label for="cvc" class="wizard-form-text-label">CVC*</label>
-                                        <div class="wizard-form-error"></div>
-                                    </div>
-                                </div>
-                            </div> -->
-                          <!--   <div class="row">
-                                <div class="col-12">Expiry Date</div>
-                                <div class="col-lg-4 col-md-4 col-sm-4">
-                                    <div class="form-group">
-                                        <select class="form-control">
-                                            <option value="">Date</option>
-                                            <option value="">1</option>
-                                            <option value="">2</option>
-                                            <option value="">3</option>
-                                            <option value="">4</option>
-                                            <option value="">5</option>
-                                            <option value="">6</option>
-                                            <option value="">7</option>
-                                            <option value="">8</option>
-                                            <option value="">9</option>
-                                            <option value="">10</option>
-                                            <option value="">11</option>
-                                            <option value="">12</option>
-                                            <option value="">13</option>
-                                            <option value="">14</option>
-                                            <option value="">15</option>
-                                            <option value="">16</option>
-                                            <option value="">17</option>
-                                            <option value="">18</option>
-                                            <option value="">19</option>
-                                            <option value="">20</option>
-                                            <option value="">21</option>
-                                            <option value="">22</option>
-                                            <option value="">23</option>
-                                            <option value="">24</option>
-                                            <option value="">25</option>
-                                            <option value="">26</option>
-                                            <option value="">27</option>
-                                            <option value="">28</option>
-                                            <option value="">29</option>
-                                            <option value="">30</option>
-                                            <option value="">31</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4">
-                                    <div class="form-group">
-                                        <select class="form-control">
-                                            <option value="">Month</option>
-                                            <option value="">jan</option>
-                                            <option value="">Feb</option>
-                                            <option value="">March</option>
-                                            <option value="">April</option>
-                                            <option value="">May</option>
-                                            <option value="">June</option>
-                                            <option value="">Jully</option>
-                                            <option value="">August</option>
-                                            <option value="">Sept</option>
-                                            <option value="">Oct</option>
-                                            <option value="">Nov</option>
-                                            <option value="">Dec</option>   
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-4">
-                                    <div class="form-group">
-                                        <select class="form-control">
-                                            <option value="">Years</option>
-                                            <option value="">2019</option>
-                                            <option value="">2020</option>
-                                            <option value="">2021</option>
-                                            <option value="">2022</option>
-                                            <option value="">2023</option>
-                                            <option value="">2024</option>
-                                            <option value="">2025</option>
-                                            <option value="">2026</option>
-                                            <option value="">2027</option>
-                                            <option value="">2028</option>
-                                            <option value="">2029</option>
-                                            <option value="">2030</option>
-                                            <option value="">2031</option>
-                                            <option value="">2032</option>
-                                            <option value="">2033</option>
-                                            <option value="">2034</option>
-                                            <option value="">2035</option>
-                                            <option value="">2036</option>
-                                            <option value="">2037</option>
-                                            <option value="">2038</option>
-                                            <option value="">2039</option>
-                                            <option value="">2040</option>  
-                                        </select>
-                                    </div>
-                                </div>
-                            </div> -->
-                            <div class="form-group clearfix">
-                                <a href="javascript:;" class="form-wizard-previous-btn float-left">Previous</a>
-                               
-                                <!-- <a href="javascript:;" class="form-wizard-submit float-right">Submit</a> -->
-                            </div>
-                        </fieldset> 
+                        
                     </form>
                 </div>
             </div>
@@ -616,6 +390,11 @@
             next.parents('.wizard-fieldset').removeClass("show","400");
             currentActiveStep.removeClass('active').addClass('activated').next().addClass('active',"400");
             next.parents('.wizard-fieldset').next('.wizard-fieldset').addClass("show","400");
+
+
+           
+
+
             jQuery(document).find('.wizard-fieldset').each(function(){
                 if(jQuery(this).hasClass('show')){
                     var formAtrr = jQuery(this).attr('data-tab-content');
@@ -625,6 +404,11 @@
                             var innerWidth = jQuery(this).innerWidth();
                             var position = jQuery(this).position();
                             jQuery(document).find('.form-wizard-step-move').css({"left": position.left, "width": innerWidth});
+
+
+
+
+
                         }else{
                             jQuery(this).removeClass('active');
                         }
@@ -672,25 +456,25 @@
         });
     });
     // focus on input field check empty or not
-    // jQuery(".form-control").on('focus', function(){
-    //     var tmpThis = jQuery(this).val();
-    //     if(tmpThis == '' ) {
-    //         jQuery(this).parent().addClass("focus-input");
-    //     }
-    //     else if(tmpThis !='' ){
-    //         jQuery(this).parent().addClass("focus-input");
-    //     }
-    // }).on('blur', function(){
-    //     var tmpThis = jQuery(this).val();
-    //     if(tmpThis == '' ) {
-    //         jQuery(this).parent().removeClass("focus-input");
-    //         jQuery(this).siblings('.wizard-form-error').slideDown("3000");
-    //     }
-    //     else if(tmpThis !='' ){
-    //         jQuery(this).parent().addClass("focus-input");
-    //         jQuery(this).siblings('.wizard-form-error').slideUp("3000");
-    //     }
-    // });
+    jQuery(".form-control").on('focus', function(){
+        var tmpThis = jQuery(this).val();
+        if(tmpThis == '' ) {
+            jQuery(this).parent().addClass("focus-input");
+        }
+        else if(tmpThis !='' ){
+            jQuery(this).parent().addClass("focus-input");
+        }
+    }).on('blur', function(){
+        var tmpThis = jQuery(this).val();
+        if(tmpThis == '' ) {
+            jQuery(this).parent().removeClass("focus-input");
+            jQuery(this).siblings('.wizard-form-error').slideDown("3000");
+        }
+        else if(tmpThis !='' ){
+            jQuery(this).parent().addClass("focus-input");
+            jQuery(this).siblings('.wizard-form-error').slideUp("3000");
+        }
+    });
 });
     
         
@@ -715,20 +499,41 @@
         var select2 =     $('.responsibility').select2({});
         select2.data('select2').$selection.css({'height' : '40px','border' : '1px solid'});
 
+         var cso_select =     $('.cso').select2({});
+        cso_select.data('select2').$selection.css({'height' : '40px','border' : '1px solid'});
+
 
 
      
         $( "#myselect" ).on( "change", function() {
         var text = $('#myselect').find('option:selected').text().toString().toLowerCase();
+
+
         if (text == 'training') {
-                $('#under_type_activity_select').removeAttr('hidden');
-            }else {
+                $('#under_type_activity_select').removeAttr('hidden').fadeIn("slow");
+                $('#under_type_activity_select').find('select[name=under_type_of_activity_id]').css('border' , '1px solid red');
+                $('.for_training').removeAttr('hidden').fadeIn("slow");
+                $('.for_project_monitoring').attr('hidden','hidden');
+                
+            }else if (text == 'regular monthly project monitoring') {
                 $('#under_type_activity_select').attr('hidden','hidden');
+                 $('.for_training').attr('hidden','hidden');
+                $('.for_project_monitoring').removeAttr('hidden').fadeIn("slow");
+            }else {
+
+                 $('#under_type_activity_select').attr('hidden','hidden');
+                 $('.for_training').attr('hidden','hidden');
+                $('.for_project_monitoring').attr('hidden','hidden');
+
             }
         })
 
        
+         $( "select[name=under_type_of_activity_id]" ).on( "change", function() {
 
+                $('#under_type_activity_select').find('select[name=under_type_of_activity_id]').css('border' , '1px solid ');
+
+         })
   
         
 

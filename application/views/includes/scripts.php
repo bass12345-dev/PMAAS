@@ -1,7 +1,9 @@
  <script src="<?php echo base_url(); ?>assets/js/vendor/modernizr-2.8.3.min.js"></script>
     <!-- offset area end -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"></script>
     <!-- jquery latest version -->
-    <script src="<?php echo base_url(); ?>assets/js/vendor/jquery-2.2.4.min.js"></script>
+    <!-- <script src="<?php echo base_url(); ?>assets/js/vendor/jquery-2.2.4.min.js"></script> -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- bootstrap 4 js -->
     <script src="<?php echo base_url(); ?>assets/js/popper.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
@@ -24,6 +26,8 @@
     <script src="<?php echo base_url(); ?>assets/js/line-chart.js"></script>
     <!-- all pie chart -->
     <script src="<?php echo base_url(); ?>assets/js/pie-chart.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
       <!-- Start datatable js -->
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
     <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
@@ -32,7 +36,7 @@
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.4/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.print.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+  
     <script src="https://cdn.datatables.net/datetime/1.3.0/js/dataTables.dateTime.min.js"></script>
 
     <!-- others plugins -->
@@ -49,9 +53,9 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js" integrity="sha512-RCgrAvvoLpP7KVgTkTctrUdv7C6t7Un3p1iaoPr1++3pybCyCsCZZN7QEHMZTcJTmcJ7jzexTO+eFpHk4OCFAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-  
+<script src="<?php echo base_url(); ?>assets/datepicker/bootstrap-datetimepicker.min.js"></script>
+
+
 
     <script type="text/javascript">
 
@@ -1640,9 +1644,10 @@
           $('#transactions_form').on('submit', function(e) {
         e.preventDefault();
 
+           
             $.ajax({
             type: "POST",
-            url: base_url + 'Cso/add_transaction',
+            url: base_url + 'Transactions/add',
             data: $(this).serialize(),
             dataType: 'json',
             beforeSend: function() {
@@ -1651,12 +1656,19 @@
             },
             success : function(data)
             {
-
+                    if(data.response) {
+                        alert(data.message)
+                    }
             }
 
             })
+
+
         })
 
+
+
+        
 
 
        /*================================
