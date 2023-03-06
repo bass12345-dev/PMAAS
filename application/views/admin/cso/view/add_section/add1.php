@@ -141,7 +141,7 @@
 .form-wizard .form-wizard-previous-btn {
   background-color: #3F6BA4;
 }
-.form-wizard .form-control {
+/*.form-wizard .form-control {
   font-weight: 300;
   height: auto !important;
   padding: 15px;
@@ -151,7 +151,7 @@
 }
 .form-wizard .form-control:focus {
   box-shadow: none;
-}
+}*/
 .form-wizard .form-group {
   position: relative;
   margin: 25px 0;
@@ -318,7 +318,7 @@
                         </div>
             <div class="col-lg-6 col-md-6">
                 <div class="form-wizard">
-                    <form action="" method="post" role="form">
+                    <form id="transactions_form" >
                         <div class="form-wizard-header">
                             <p>Fill all form field to go next step</p>
                            <!--  <ul class="list-unstyled form-wizard-steps clearfix">
@@ -332,31 +332,43 @@
                         </div>
                         <fieldset class="wizard-fieldset show">
                             <h5>Information</h5>
+                          
                               <div class="form-group">
                                 <label >PMAS NO</label>
                                 <div class="input-group mb-3">
                                <div class="input-group-prepend">
-                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo date('Y', time()) ?></button>
-                                    <div class="dropdown-menu">
-                                      <a class="dropdown-item" href="#">Action</a>
-                                      <a class="dropdown-item" href="#">Another action</a>
-                                      <a class="dropdown-item" href="#">Something else here</a>
+                                    <button class="btn btn-outline-secondary " type="button" ><?php echo date('Y', time()) ?></button>
+                                   <!--  <div class="dropdown-menu">
+
+                                           <?php
+
+                                            $var = 2080;
+
+                                            for ($i= date('Y', time()); $i <=  $var; $i++) { 
+
+                                               echo '<a class="dropdown-item" href="#">'.$i.'</a>';
+                                                // code...
+                                            }
+
+                                         ?> 
                                       
-                                    </div>
+                                    </div> -->
 
                                   </div>
 
                                   <div class="input-group-prepend">
-                                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo date('m', time()) ?></button>
-                                    <div class="dropdown-menu">
+                                    <!-- <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo date('m', time()) ?></button> -->
+
+                                    <button class="btn btn-outline-secondary " type="button" ><?php echo date('m', time()) ?></button>
+                                   <!--  <div class="dropdown-menu">
                                       <a class="dropdown-item" href="#">Action</a>
                                       <a class="dropdown-item" href="#">Another action</a>
                                       <a class="dropdown-item" href="#">Something else here</a>
                                       
-                                    </div>
+                                    </div> -->
                                     
                                   </div>
-                                  <input type="text" class="form-control" aria-label="Text input with dropdown button">
+                                  <input type="number" class="form-control input" name="pmas_number" aria-label="Text input with dropdown button" >
                               </div>
                                 <div class="wizard-form-error"></div>
                             </div>
@@ -379,21 +391,44 @@
                             </div> -->
                             <div class="form-group">
                                 <label for="inputPassword4">Date & Time Filed</label>
-                                <input type="date" class="form-control input" id="inputPassword4" placeholder="">
+                                <input type="date" class="form-control input" name="date_and_time_filed"  placeholder="" onkeypress="return false;" >
                                 <div class="wizard-form-error"></div>
                             </div>
                             
                           
                             <div class="form-group clearfix">
-                                <a href="javascript:;" class="form-wizard-next-btn float-right">Next</a>
+                                <button type="button" class="form-wizard-next-btn float-right" id="first-next">Next</button>
                             </div>
                         </fieldset> 
                         <fieldset class="wizard-fieldset">
                             <h5>Account Information</h5>
+
+                             <div class="form-group">     
+                               <div class="col-12">Responsible Section</div>
+                                    <div class="form-group">
+                                        <select class="form-control input" name="type_of_monitoring_id"   >
+                                            <?php 
+
+                                                foreach ($responsible as $row) :
+                                                    
+
+                                           ?>
+
+                                           <option value="<?php echo $row['type_mon_id'] ?>"><?php echo $row['type_mon_name'] ?></option>
+
+                                           <?php 
+
+                                                endforeach;
+                                            ?>
+                                            
+                                        </select>
+                                    </div>
+                                <div class="wizard-form-error"></div>
+                            </div>
                             <div class="form-group">     
                                <div class="col-12">Type of Activity</div>
                                     <div class="form-group">
-                                        <select class="form-control">
+                                        <select class="form-control input" id="myselect" name="type_of_activity_id"  >
                                             <?php 
 
                                                 foreach ($activities as $row) :
@@ -413,10 +448,10 @@
                                 <div class="wizard-form-error"></div>
                             </div>
 
-                             <div class="form-group">     
+                             <div class="form-group" id="under_type_activity_select" hidden>     
                                <div class="col-12">Type </div>
                                     <div class="form-group">
-                                        <select class="form-control">
+                                        <select class="form-control input" name="under_type_of_activity_id">
                                             <?php 
 
                                                 foreach ($under_type_activies as $row) :
@@ -437,7 +472,7 @@
                                         <select class="form-control responsibility" style="width: 100%;">
                                             <?php 
 
-                                                foreach ($responsibilityL_centers as $row) :
+                                                foreach ($responsibility_centers as $row) :
                                            ?>
                                            <option value="<?php echo $row['res_center_id'] ?>"><?php echo $row['res_center_code'] ?> - <?php echo $row['res_center_name'] ?></option>
                                            <?php 
@@ -451,14 +486,14 @@
 
                             <div class="form-group">     
                                <div class="col-12">Date And Time</div>
-                                <input type="date" class="form-control input" id="inputPassword4" placeholder="">
+                                <input type="text" class="form-control input" id="datepicker2" placeholder=""  onkeypress="return false;">
                                 <div class="wizard-form-error"></div>
                             </div>
                                 
                             <div class="form-group clearfix">
-                                 <a href="javascript:;" class="form-wizard-submit float-right">Submit</a>
-                                <!-- <a href="javascript:;" class="form-wizard-previous-btn float-left">Previous</a> -->
-                                <a href="javascript:;" class="form-wizard-next-btn float-right">Next</a>
+                                 <button type="submit" class="form-wizard-submit float-right btn-add-transaction">  Submit</button>
+                                <a href="javascript:;" class="form-wizard-previous-btn float-left">Previous</a>
+                              <!--   <a href="javascript:;" class="form-wizard-next-btn float-right">Next</a> -->
                             </div>
                         </fieldset> 
                         <fieldset class="wizard-fieldset">
@@ -788,6 +823,8 @@
         parentFieldset.find('.wizard-required').each(function(){
             var thisValue = jQuery(this).val();
 
+            console.log(thisValue)
+
             if( thisValue == "") {
                 jQuery(this).siblings(".wizard-form-error").slideDown();
                 nextWizardStep = false;
@@ -856,35 +893,44 @@
         });
     });
     // focus on input field check empty or not
-    jQuery(".form-control").on('focus', function(){
-        var tmpThis = jQuery(this).val();
-        if(tmpThis == '' ) {
-            jQuery(this).parent().addClass("focus-input");
-        }
-        else if(tmpThis !='' ){
-            jQuery(this).parent().addClass("focus-input");
-        }
-    }).on('blur', function(){
-        var tmpThis = jQuery(this).val();
-        if(tmpThis == '' ) {
-            jQuery(this).parent().removeClass("focus-input");
-            jQuery(this).siblings('.wizard-form-error').slideDown("3000");
-        }
-        else if(tmpThis !='' ){
-            jQuery(this).parent().addClass("focus-input");
-            jQuery(this).siblings('.wizard-form-error').slideUp("3000");
-        }
-    });
+    // jQuery(".form-control").on('focus', function(){
+    //     var tmpThis = jQuery(this).val();
+    //     if(tmpThis == '' ) {
+    //         jQuery(this).parent().addClass("focus-input");
+    //     }
+    //     else if(tmpThis !='' ){
+    //         jQuery(this).parent().addClass("focus-input");
+    //     }
+    // }).on('blur', function(){
+    //     var tmpThis = jQuery(this).val();
+    //     if(tmpThis == '' ) {
+    //         jQuery(this).parent().removeClass("focus-input");
+    //         jQuery(this).siblings('.wizard-form-error').slideDown("3000");
+    //     }
+    //     else if(tmpThis !='' ){
+    //         jQuery(this).parent().addClass("focus-input");
+    //         jQuery(this).siblings('.wizard-form-error').slideUp("3000");
+    //     }
+    // });
 });
     
 
 
-        var select2 =     $('.responsibility').select2({
+        var select2 =     $('.responsibility').select2({});
+        select2.data('select2').$selection.css({'height' : '40px','border' : '1px solid'});
+        $( "#datepicker1" ).datepicker("option", "dateFormat", "yy-mm-dd");
+        $( "#datepicker2" ).datepicker("option", "showAnim", 'blind');
+        $( "#myselect" ).on( "change", function() {
+        var text = $('#myselect').find('option:selected').text().toString().toLowerCase();
+        if (text == 'training') {
+                $('#under_type_activity_select').removeAttr('hidden');
+            }
+        })
 
-                });
+       
+
+  
         
-
-        select2.data('select2').$selection.css({'height' : '49px','border' : '1px solid'});
 
 
 

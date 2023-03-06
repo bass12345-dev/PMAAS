@@ -7,6 +7,8 @@ class Cso extends CI_Controller {
 	public $type_of_activity = 'type_of_activity';
 	public $under_type_of_activity = 'under_type_of_activity';
 	public $responsibility_center = 'responsibility_center';
+	public $responsible_section = 'type_of_monitoring';
+	public $transactions = 'transactions';
 	public $order_by_desc = 'desc';
 	public $order_by_asc = 'asc';
 	public $order_key = 'created';
@@ -61,7 +63,8 @@ class Cso extends CI_Controller {
 		 $data['title'] = $this->GetModel->get($this->cso,array('cso_id' => $_GET['id']))[0]['cso_name'];
 		 $data['activities'] = $this->GetModel->getALL($this->type_of_activity,$this->order_by_asc,$this->order_key_name); 
 		 $data['under_type_activies'] = $this->GetModel->getALL($this->under_type_of_activity,$this->order_by_asc,$this->order_under_type_act_name);
-		 $data['responsibilityL_centers'] = $this->GetModel->getALL($this->responsibility_center,$this->order_by_asc,$this->order_key_code); 
+		 $data['responsibility_centers'] = $this->GetModel->getALL($this->responsibility_center,$this->order_by_asc,$this->order_key_code); 
+		 $data['responsible'] =  $this->GetModel->getALL($this->responsible_section,$this->order_by_asc,$this->order_key);
 		$this->load->view('admin/cso/view/add_section/add1',$data);
 	}
 
@@ -100,6 +103,26 @@ class Cso extends CI_Controller {
 
 		$data['data'] = $this->GetModel->get($this->cso,array('cso_id' => $_POST['id']))[0];
 		echo json_encode($data);
+
+	}
+
+	public function add_transaction() {
+
+		$data = array(
+
+					'pmas_no' => date('Y', time()).' - '.date('m', time()).' - '.$this->input->post('pmas_number'),
+					'date_and_time_filed' => $this->input->post('date_and_time_filed'),
+					'type_of_monitoring_id' => $this->input->post('type_of_monitoring_id'),
+					'type_of_activity_id' => $this->input->post('type_of_activity_id'),
+					'under_type_of_activity_id' => $this->input->post('under_type_of_activity_id'),
+					
+					
+		);
+
+		$result  = $this->AddModel->addData($this->transactions,$data);
+		$params = array('cond' => $result, 'message' => 'Successfully Added');
+		$this->load->library('Condition', $params);
+
 
 	}
 

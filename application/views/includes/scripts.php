@@ -49,7 +49,8 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js" integrity="sha512-RCgrAvvoLpP7KVgTkTctrUdv7C6t7Un3p1iaoPr1++3pybCyCsCZZN7QEHMZTcJTmcJ7jzexTO+eFpHk4OCFAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
   
 
     <script type="text/javascript">
@@ -1628,6 +1629,33 @@
             })
 
          })
+
+
+
+    /*================================
+    Transaction Section
+    ==================================*/
+
+
+          $('#transactions_form').on('submit', function(e) {
+        e.preventDefault();
+
+            $.ajax({
+            type: "POST",
+            url: base_url + 'Cso/add_transaction',
+            data: $(this).serialize(),
+            dataType: 'json',
+            beforeSend: function() {
+               $('.btn-add-transaction').html('<div class="loader"></div>');
+                $('.btn-add-transaction').prop("disabled", true);
+            },
+            success : function(data)
+            {
+
+            }
+
+            })
+        })
 
 
 
