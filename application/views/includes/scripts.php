@@ -1567,12 +1567,7 @@
 // );
 
 
-      var transaction_table = $('#transactions_table').DataTable({
-        scrollX: true,
 
-
-
-      })
 
 
     //    // Create date inputs
@@ -1641,8 +1636,94 @@
     ==================================*/
 
 
+          var transaction_table = $('#transactions_table').DataTable({
+        scrollX: true,
+
+        "ajax" : {
+                        "url": base_url + 'Transactions/get_transactions',
+                        "dataSrc": "",
+            },
+             'columns': [
+            {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['pmas_no']+'</a>';
+                }
+
+            },
+             {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['date_and_time_filed']+'</a>';
+                }
+
+            },
+             {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['type_mon_name']+'</a>';
+                }
+
+            },
+             {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['type_act_name']+'</a>';
+                }
+
+            },
+             {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['responsibility_center']+'</a>';
+                }
+
+            },
+             {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['date_time']+'</a>';
+                }
+
+            },
+            
+             
+
+            {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<ul class="d-flex justify-content-center">\
+                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'+data['type_act_id']+'" data-name="'+data['type_act_name']+'" id="update-activity"><i class="fa fa-edit"></i></a></li>\
+                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'+data['transaction_id']+'" data-a="'+data['is_training']+'" data-b="'+data['is_project_monitoring']+'"  id="view_more_transaction"><i class="fa fa-eye"></i></a></li>\
+                                <li><a href="javascript:;" data-id="'+data['type_act_id']+'"  id="delete-activity"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>\
+                                </ul>';
+                }
+
+            },
+          ]
+
+
+
+      })
+
+
           $('#transactions_form').on('submit', function(e) {
         e.preventDefault();
+
+
+
+            if ( $('input[name=pmas_number]') == ' ' ) {
+                alert('something')
+            }else {
+
+
 
            
             $.ajax({
@@ -1654,17 +1735,102 @@
                $('.btn-add-transaction').html('<div class="loader"></div>');
                 $('.btn-add-transaction').prop("disabled", true);
             },
-            success : function(data)
-            {
-                    if(data.response) {
-                        alert(data.message)
-                    }
-            }
+            success: function(data)
+            {            
+                if (data.response) {
+                    $('#transactions_form')[0].reset();
+                    $('.btn-add-transaction').prop("disabled", false);
+                    $('.btn-add-transaction').text('Submit');
+                        Toastify({
+                                  text: data.message,
+                                  className: "info",
+                                  style: {
+                                    "background" : "linear-gradient(to right, #00b09b, #96c93d)",
+                                    "height" : "60px",
+                                    "width" : "350px",
+                                    "font-size" : "20px"
+                                  }
+                                }).showToast();
+
+                      
+
+                      $('a.form-wizard-previous-btn').click();
+                     
+                           
+             
+                }else {
+                    $('.btn-add-transaction').prop("disabled", false);
+                    $('.btn-add-transaction').text('Submit');
+                      Toastify({
+                                  text: data.message,
+                                  className: "info",
+                                  style: {
+                                    "background" : "linear-gradient(to right, #00b09b, #96c93d)",
+                                    "height" : "60px",
+                                    "width" : "350px",
+                                    "font-size" : "20px"
+                                  }
+                                }).showToast();
+
+                       $('a.form-wizard-previous-btn').click();
+                   
+                }
+           },
+            error: function(xhr) { // if error occured
+                alert("Error occured.please try again");
+                 $('.btn-add-transaction').prop("disabled", false);
+                 $('.btn-add-transaction').text('Submit');
+            },
 
             })
 
+        }
 
-        })
+
+        });
+
+
+
+
+
+
+           $(document).on('click','a#view_more_transaction',function (e) {
+
+
+            
+                
+            //     const a = $(this).data('a');
+            //     const b = $(this).data('b');
+            //     const id = $(this).data('id');
+
+
+            // if (a == 1 || b ==  1) {
+            //     if (a) {
+                    
+            //         load_training_modal();
+            //     }
+
+            //     if (b) {
+            //         alert('project')
+            //     }
+
+            // }else {
+
+            //     alert('wala')
+            // }
+
+
+
+           });
+
+
+    function load_training_modal(){
+
+    }
+
+
+
+
 
 
 

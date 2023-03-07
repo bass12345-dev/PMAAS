@@ -32,7 +32,7 @@
                     </div>
                     <!-- profile info & task notification -->
                     <div class="col-md-6 col-sm-4 clearfix">
-                        <a href="<?php echo base_url() ?>login" class="pull-right text-danger" style="font-size: 20px;">Logout</a>
+                        <a href="<?php echo base_url() ?>Out/sign_out" class="pull-right text-danger" style="font-size: 20px;">Logout</a>
                      
                     </div>
                 </div>
@@ -125,7 +125,7 @@
                                     </div> -->
                                     
                                   </div>
-                                  <input type="number" class="form-control input" name="pmas_number" aria-label="Text input with dropdown button" >
+                                  <input type="number" class="form-control  wizard-required input " name="pmas_number"  >
                               </div>
                                 <div class="wizard-form-error"></div>
                             </div>
@@ -146,7 +146,7 @@
                                 <input type="text" class="form-control input"  placeholder="PMAS NO">
                                 <div class="wizard-form-error"></div>
                             </div> -->
-                            <div class="form-group">
+                          <!--   <div class="form-group">
                                 <label for="inputPassword4">Date & Time Filed</label>
 
                                   <div class="input-group date" id="id_0">
@@ -158,10 +158,10 @@
                             </div>
                         </div>
                               
-                                <!-- <input type="text" class="form-control input" name="date_and_time_filed"  placeholder="" onkeypress="return false;" > -->
+                              
                                 <div class="wizard-form-error"></div>
-                            </div>
-                            
+                            </div> -->
+                          
                           
                             <div class="form-group clearfix">
                                 <button type="button" class="form-wizard-next-btn float-right" id="first-next">Next</button>
@@ -219,7 +219,7 @@
                                <div class="col-12">Type </div>
                                     <div class="form-group">
                                         <select class="form-control input" name="under_type_of_activity_id">
-                                            <option value="0" selected></option>
+                                            <!-- <option value="0" selected></option> -->
                                             <?php 
 
                                                 foreach ($under_type_activies as $row) :
@@ -258,7 +258,7 @@
                             <div class="form-group">     
                                <div class="col-12">Name of CSO</div>
                                  <div class="form-group">
-                                        <select class="form-control cso" name="cso_id" style="width: 100%;">
+                                        <select class="form-control cso wizard-required" name="cso_id" style="width: 100%;" >
 
                                             <?php 
 
@@ -496,6 +496,14 @@
             "format": "YYYY/MM/DD hh:mm:ss A",
         });
 
+          $('#id_2').datetimepicker({
+            "allowInputToggle": true,
+            "showClose": true,
+            "showClear": true,
+            "showTodayButton": true,
+            "format": "YYYY/MM/DD hh:mm:ss A",
+        });
+
         var select2 =     $('.responsibility').select2({});
         select2.data('select2').$selection.css({'height' : '40px','border' : '1px solid'});
 
@@ -511,7 +519,7 @@
 
         if (text == 'training') {
                 $('#under_type_activity_select').removeAttr('hidden').fadeIn("slow");
-                $('#under_type_activity_select').find('select[name=under_type_of_activity_id]').css('border' , '1px solid red');
+                // $('#under_type_activity_select').find('select[name=under_type_of_activity_id]').css('border' , '1px solid red');
                 $('.for_training').removeAttr('hidden').fadeIn("slow");
                 $('.for_project_monitoring').attr('hidden','hidden');
                 
