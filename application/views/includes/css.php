@@ -15,7 +15,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.jqueryui.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.3.4/css/buttons.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/datetime/1.3.0/css/dataTables.dateTime.min.css">
-
+    
 
 <!-- others css -->
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/typography.css">

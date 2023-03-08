@@ -41,8 +41,8 @@
                                     <div class="col-md-12 ">
 
                                         <div class="row">
-                                            <div class="col-md-6"><input type="text" class="form-control pull-right mt-2" name="daterange" value="01/01/2023 - 01/15/2023" /></div>
-                                             <div class="col-md-6">  <a href="<?php echo base_url() ?>Transactions/add_transactions" class="btn  mb-3 mt-2 sub-button pull-right" > Add Transactions</a> </div>
+                                            <div class="col-md-3"><input type="text" class="form-control pull-right mt-2" name="daterange" value="01/01/2023 - 01/15/2023" /></div>
+                                             <div class="col-md-9">  <a href="<?php echo base_url() ?>Transactions/add_transactions" class="btn  mb-3 mt-2 sub-button pull-right" > Add Transactions</a> </div>
                                             
                                         </div>
                                           
@@ -91,7 +91,7 @@
         </div>
         <!-- main content area end -->
        
-  
+    <?php $this->load->view('admin/transactions/modal/view_more_transaction') ?> 
      <?php $this->load->view('includes/scripts.php') ?> 
      <script type="text/javascript">
          $(function() {

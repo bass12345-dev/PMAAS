@@ -55,7 +55,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
              $this->db->join('type_of_monitoring','type_of_monitoring.type_mon_id = transactions.type_of_monitoring_id');
              $this->db->join('type_of_activity','type_of_activity.type_act_id = transactions.type_of_activity_id');
               $this->db->join('responsibility_center','responsibility_center.res_center_id = transactions.responsibility_center_id');
-            $this->db->order_by($order_key,$order_by);
+            $this->db->order_by('transactions.pmas_no','desc');
             return $this->db->get()->result_array();
       }
 

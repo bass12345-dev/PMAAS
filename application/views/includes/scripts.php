@@ -36,8 +36,8 @@
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.4/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.print.min.js"></script>
-  
     <script src="https://cdn.datatables.net/datetime/1.3.0/js/dataTables.dateTime.min.js"></script>
+
 
     <!-- others plugins -->
     <script src="<?php echo base_url(); ?>assets/js/plugins.js"></script>
@@ -54,6 +54,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script src="<?php echo base_url(); ?>assets/datepicker/bootstrap-datetimepicker.min.js"></script>
+
 
 
 
@@ -1638,6 +1639,7 @@
 
           var transaction_table = $('#transactions_table').DataTable({
         scrollX: true,
+        "ordering": false,
 
         "ajax" : {
                         "url": base_url + 'Transactions/get_transactions',
@@ -1701,6 +1703,7 @@
                 render: function (data, type, row) {
                     return '<ul class="d-flex justify-content-center">\
                                 <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'+data['type_act_id']+'" data-name="'+data['type_act_name']+'" id="update-activity"><i class="fa fa-edit"></i></a></li>\
+                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'+data['type_act_id']+'" data-name="'+data['type_act_name']+'" id="update-activity"><i class="fa fa-print"></i></a></li>\
                                 <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'+data['transaction_id']+'" data-a="'+data['is_training']+'" data-b="'+data['is_project_monitoring']+'"  id="view_more_transaction"><i class="fa fa-eye"></i></a></li>\
                                 <li><a href="javascript:;" data-id="'+data['type_act_id']+'"  id="delete-activity"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>\
                                 </ul>';
@@ -1711,7 +1714,38 @@
 
 
 
-      })
+      });
+
+
+
+        $(document).on('click','a#view_more_transaction',function (e) {
+
+
+            $('#view_more_modal').modal('show')
+                
+            //     const a = $(this).data('a');
+            //     const b = $(this).data('b');
+            //     const id = $(this).data('id');
+
+
+            // if (a == 1 || b ==  1) {
+            //     if (a) {
+                    
+            //         load_training_modal();
+            //     }
+
+            //     if (b) {
+            //         alert('project')
+            //     }
+
+            // }else {
+
+            //     alert('wala')
+            // }
+
+
+
+           });
 
 
           $('#transactions_form').on('submit', function(e) {
@@ -1794,34 +1828,7 @@
 
 
 
-           $(document).on('click','a#view_more_transaction',function (e) {
 
-
-            
-                
-            //     const a = $(this).data('a');
-            //     const b = $(this).data('b');
-            //     const id = $(this).data('id');
-
-
-            // if (a == 1 || b ==  1) {
-            //     if (a) {
-                    
-            //         load_training_modal();
-            //     }
-
-            //     if (b) {
-            //         alert('project')
-            //     }
-
-            // }else {
-
-            //     alert('wala')
-            // }
-
-
-
-           });
 
 
     function load_training_modal(){
