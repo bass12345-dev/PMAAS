@@ -39,7 +39,8 @@ class Transactions extends CI_Controller {
 	public function view_info() {
 
 		$data['title'] = 'Transactions';
-		$data['transaction_data'] = $this->GetModel->getTransaction_data($this->transactions,array('transaction_id' => $_GET['id']))[0]; 
+		$data['transaction_data'] = $this->GetModel->getTransaction_data($this->transactions,array('transaction_id' => $_GET['id']))[0];
+		$data['responsible'] =  $this->GetModel->getALL($this->responsible_section,$this->order_by_asc,$this->order_key);
 		$this->load->view('admin/transactions/view/view_more',$data);
 
 	}
