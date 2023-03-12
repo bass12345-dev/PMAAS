@@ -1650,7 +1650,7 @@
                 // data: "song_title",
                 data: null,
                 render: function (data, type, row) {
-                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['pmas_no']+'</a>';
+                    return '<b><a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['pmas_no']+'</a></b>';
                 }
 
             },
@@ -1702,8 +1702,6 @@
                 data: null,
                 render: function (data, type, row) {
                     return '<ul class="d-flex justify-content-center">\
-                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'+data['type_act_id']+'" data-name="'+data['type_act_name']+'" id="update-activity"><i class="fa fa-edit"></i></a></li>\
-                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'+data['type_act_id']+'" data-name="'+data['type_act_name']+'" id="update-activity"><i class="fa fa-print"></i></a></li>\
                                 <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'+data['transaction_id']+'" data-a="'+data['is_training']+'" data-b="'+data['is_project_monitoring']+'"  id="view_more_transaction"><i class="fa fa-eye"></i></a></li>\
                                 <li><a href="javascript:;" data-id="'+data['type_act_id']+'"  id="delete-activity"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>\
                                 </ul>';
@@ -1721,7 +1719,8 @@
         $(document).on('click','a#view_more_transaction',function (e) {
 
 
-            $('#view_more_modal').modal('show')
+            window.location.href = base_url + 'transactions/view_info?id=' + $(this).data('id');
+            // ('#view_more_modal').modal('show')
                 
             //     const a = $(this).data('a');
             //     const b = $(this).data('b');

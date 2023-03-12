@@ -35,6 +35,15 @@ class Transactions extends CI_Controller {
 		$this->load->view('admin/transactions/transactions',$data);
 	}
 
+
+	public function view_info() {
+
+		$data['title'] = 'Transactions';
+		$data['transaction_data'] = $this->GetModel->getTransaction_data($this->transactions,array('transaction_id' => $_GET['id']))[0]; 
+		$this->load->view('admin/transactions/view/view_more',$data);
+
+	}
+
 	public function add_transactions(){
 
 		$data['title'] = 'Add Transactions';

@@ -61,7 +61,7 @@
                                         </table> -->
 
                                       
-                                            <table id="transactions_table" style="width:100%" class="text-center">
+                                            <table id="transactions_table" style="width:100%" class="text-center stripe">
                                                 <thead class="bg-light text-capitalize">
                                                     <tr>
                                                         <th>PMAS NO</th>

@@ -107,22 +107,7 @@
                                                        <th>Actions</th>  
                                                     </tr>
                                                 </thead> 
-                                                <tbody>
-                                                    <tr>
-                                                        <td>asasd</td>
-                                                         <td>asasd</td>
-                                                          <td>asasd</td>
-                                                           <td>asasd</td>
-                                                            <td>asasd</td>
-                                                             <td>asasd</td>
-                                                              <td>asasd</td>
-                                                               <td><ul class="d-flex justify-content-center">
-                                <li class="mr-3 "><a href="<?php echo base_url() ?>cso/print" class="text-secondary action-icon"  id="update-responsible"><i class="fa fa-print"></i></a></li>
-                            
-                                </ul></td>
-                                                    </tr>
-
-                                                </tbody>
+                                               
                                             </table>
                                         </div>
                                     </div>
