@@ -1694,6 +1694,14 @@
                 }
 
             },
+            // {
+            //     // data: "song_title",
+            //     data: null,
+            //     render: function (data, type, row) {
+            //         return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['name']+'</a>';
+            //     }
+
+            // },
             
              
 

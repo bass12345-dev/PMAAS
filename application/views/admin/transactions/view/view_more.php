@@ -142,10 +142,19 @@
 
 
 
-                                             <section id="header_section">                                           
+                                               <section id="header_section">                                           
                                                 <div class = "row justify-content-center mb-3">
                                                     <div class = "col-md-12 ml-auto mr-auto ">
                                                         <div class = "clearfix">
+                                                            <div class=" float-right ml-xl-5">
+                                                                 <h7 style="font-weight: bold;">NAME OF CSO  </h7>
+                                                                <h7>&nbsp; :</h7>
+                                                                <span>________________________________</span>
+                                                                <br>
+                                                                <h7 style="font-weight: bold;">PROJECT TITLE  </h7>
+                                                                <h7 >:</h7>
+                                                                <span >________________________________</span>
+                                                            </div>
                                                             <div class=" float-left ml-xl-5">
                                                                 <h7 style="font-weight: bold;">*RESPONSIBILITY CENTER  </h7>
                                                                 <h7>:</h7>
@@ -154,8 +163,21 @@
                                                                 <h7 style="font-weight: bold;">Date And Time  </h7>
                                                                 <h7 style="margin-left: 79px;">:</h7>
                                                                 <span >__________________________________</span>
+                                                            </div>     
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
 
-                                                                <!-- <div class="for_training_only mt-auto row justify-content-center" style="border: 1px solid; padding: 20px 0 200px 0; margin: 0;" >
+
+                                            <section>
+
+                                                <div class = "row justify-content-center mb-3">
+                                                    <div class = "col-md-12 ml-auto mr-auto ">
+                                                        <div class = "clearfix">
+                                                            <div class=" float-left ml-xl-5">
+                                                                 <div class="col-md-6"  style="border: 1px solid; padding: 20px 0 200px 0; margin: 0;">
+                                                                <div class="for_training_only " >
                                                                     <div class = "clearfix">
                                                                         <div class = "col-md-12 ml-auto mr-auto ">
                                                                             <div class=" float-left ml-xl-1">
@@ -186,23 +208,67 @@
                                                                     </div>
                                                                     
                                                                     
-                                                                </div> -->
-                                                               
-                                                            </div>     
+                                                                </div>
+                                                    </div>
+                                                            </div>
                                                             <div class=" float-left ml-xl-5">
-                                                                <h7 style="font-weight: bold;">NAME OF CSO  </h7>
-                                                                <h7>&nbsp; :</h7>
-                                                                <span>________________________________</span>
-                                                                <br>
-                                                                <h7 style="font-weight: bold;">PROJECT TITLE  </h7>
-                                                                <h7 >:</h7>
-                                                                <span >________________________________</span>
-                                                               
+                                                                <div class="col-md-6">
+                                                        <div class="for_training_only " >
+                                                                    <div class = "clearfix">
+                                                                        <div class = "col-md-12 ">
+                                                                                                                                                              
+                                                                           <table style="white-space: nowrap;" class=" table table-sm ">
+                                                                                  <tr>
+                                                                                    <td>Period (Mo-Year)/as of</td>
+                                                                                    <td> : </td>
+                                                                                    <td><strong><u><span id="resident_name">_________________</span></u></strong></td>
+                                                                                  </tr>
+                                                                                  <tr>
+                                                                                    <td>Attendance</td>
+                                                                                    <td> : </td>
+                                                                                    <td><strong><u><label>Present : </label>&nbsp;<span id="resident_age">_____</span> <label>Absent : </label>&nbsp;<span id="resident_age">_____</span></u></strong></td>
+                                                                                  </tr>
+                                                                                   <tr>
+                                                                                    <td>NOM-Borrowers</td>
+                                                                                    <td> : </td>
+                                                                                    <td><strong><u><label>Delinquent : </label>&nbsp;<span id="resident_age">_____</span> <label>Overdue : </label>&nbsp;<span id="resident_age">_____</span></u></strong></td>
+                                                                                  </tr>
+                                                                                  <tr>
+                                                                                    <td>Status</td>
+                                                                                    <td> : </td>
+                                                                                    <td><strong><u><span id="resident_civil_status">______</span></u></strong></td>
+                                                                                  </tr>
+                                                                                  <tr>
+                                                                                    <td>Address</td>
+                                                                                    <td> : </td>
+                                                                                    <td><strong><u><span class="text-capitalize" id="resident_purok">_________</span></u></strong></td>
+                                                                                  </tr>
+                                                                                  <tr>
+                                                                                    <td>Record</td>
+                                                                                    <td> : </td>
+                                                                                    <td><strong><u><span id="resident_record">_______________
+                                                                                  </tr>
+                                                                                </table>
+
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    
+                                                                </div>
+                                                    </div>
                                                             </div>     
                                                         </div>
                                                     </div>
                                                 </div>
+                                                
                                             </section>
+
+
+
+
+
 
 
                                             <section>

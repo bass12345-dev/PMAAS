@@ -40,7 +40,7 @@
                                                 <!-- <i class="ti-thumb-up"></i>  -->
 
                                                 Number of all Transactions</div>
-                                                <h2>2,315</h2>
+                                                <h2><?php echo $count ?></h2>
                                                 </div>
                                                 <!-- <canvas id="seolinechart1" height="50"></canvas> -->
                                                 </div>
