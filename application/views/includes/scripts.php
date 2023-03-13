@@ -1895,7 +1895,7 @@
                 data: null,
                 render: function (data, type, row) {
                     return '<ul class="d-flex justify-content-center">\
-                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'+data['cso_id']+'" data-name="'+data['cso_name']+'" id="update-responsible"><i class="fa fa-edit"></i></a></li>\
+                                '+row.action1+'\
                                 '+row.action+'\
                                 \
                                 </ul>';
@@ -1905,7 +1905,18 @@
           ]
 
 
-      })
+      });
+
+
+
+       $(document).on('click','a#view-user',function (e) {
+
+            // window.location.href = base_url + 'MyProfile';
+
+       });
+
+
+       
    
 
 

@@ -27,9 +27,7 @@
             <?php $this->load->view('includes/breadcrumbs.php') ?> 
             <!-- page title area end -->
             <div class="main-content-inner">
-
                 <div class="row">
-
                     <div class="col-lg-8">
                         <div class="row">
                             <div class="col-md-4 mt-5 mb-3">
@@ -38,7 +36,6 @@
                                         <div class="p-3 d-flex justify-content-between align-items-center">
                                             <div class="seofct-icon">
                                                 <!-- <i class="ti-thumb-up"></i>  -->
-
                                                 Number of all Transactions</div>
                                                 <h2><?php echo $count ?></h2>
                                                 </div>
@@ -61,72 +58,59 @@
                                              
                         </div>
                     </div>
-
-
                 </div>
 
 
 
                 <div class="row">
-               <div class="col-lg-12 mt-sm-30 mt-xs-30">
-                    <div class="card">
-                    <div class="card-body">
-                    <div class="d-sm-flex justify-content-between align-items-center">
-                    <h4 class="header-title">New Transaction</h4>
-                    <div class="trd-history-tabs">
-                  <!--   <ul class="nav" role="tablist">
-                    <li>
-                    <a class="active" data-toggle="tab" href="#buy_order" role="tab">Buy Order</a>
-                    </li>
-                    <li>
-                    <a data-toggle="tab" href="#sell_order" role="tab">Sell Order</a>
-                    </li>
-                    </ul> -->
+                    <div class="col-lg-12 mt-sm-30 mt-xs-30">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-sm-flex justify-content-between align-items-center">
+                                    <h4 class="header-title">New Transaction</h4>                             
+                                     <select class="custome-select border-0 pr-3">
+                                        <option selected>Last 24 Hours</option>
+                                        <option value="0">01 July 2018</option>
+                                    </select>
+                                </div>
+                                <div class="trad-history mt-4">
+                                    <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="buy_order" role="tabpanel">
+                                    <div class="table-responsive">
+                                    <table class="dbkit-table">
+                                    <tr class="heading-td">
+                                    <td>PMAS NO</td>
+                                    <td>Date & Time Filed</td>
+                                    <td>Person Responsible</td>
+                                    <td>Type of Activity</td>
+                                    <td>CSO</td>
+                                    <td>Date And Time</td>
+                                    </tr>
+                                
+                                 
+                                    </table>
+                                    </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="sell_order" role="tabpanel">
+                                    <div class="table-responsive">
+                                    <table class="dbkit-table">
+                                    <tr class="heading-td">
+                                    <td>Trading ID</td>
+                                    <td>Time</td>
+                                    <td>Status</td>
+                                    <td>Amount</td>
+                                    <td>Last Trade</td>
+                                    </tr>
+                                    
+                                    </table>
+                                    </div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                     <select class="custome-select border-0 pr-3">
-                    <option selected>Last 24 Hours</option>
-                    <option value="0">01 July 2018</option>
-                    </select>
-                    </div>
-                    <div class="trad-history mt-4">
-                    <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="buy_order" role="tabpanel">
-                    <div class="table-responsive">
-                    <table class="dbkit-table">
-                    <tr class="heading-td">
-                    <td>PMAS NO</td>
-                    <td>Date & Time Filed</td>
-                    <td>Responsible Section</td>
-                    <td>Type of Activity</td>
-                    <td>Responsibility Center</td>
-                    <td>Date And Time</td>
-                    </tr>
-                
-                 
-                    </table>
-                    </div>
-                    </div>
-                    <div class="tab-pane fade" id="sell_order" role="tabpanel">
-                    <div class="table-responsive">
-                    <table class="dbkit-table">
-                    <tr class="heading-td">
-                    <td>Trading ID</td>
-                    <td>Time</td>
-                    <td>Status</td>
-                    <td>Amount</td>
-                    <td>Last Trade</td>
-                    </tr>
-                    
-                    </table>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-                    </div>
-
-</div>
+                </div>
 
 
 

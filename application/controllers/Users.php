@@ -29,6 +29,17 @@ class Users extends CI_Controller {
 	}
 
 
+	public function get_my_profile(){
+
+		$data = [];
+		$item = $this->GetModel->get($this->users,array('user_id' => $this->session->userdata('user_id')))[0];
+		$data['first_name'] = $item['first_name'].' '.$item['middle_name'].' '.$item['last_name'].' '.$item['extension'];
+		$data['username'] = $item['username'];
+		$data['user_type'] = $item['user_type'];
+		echo json_encode($data);
+	}
+
+
 		public function add() {
 
 	
@@ -112,7 +123,9 @@ class Users extends CI_Controller {
 						'user_type' => $row['user_type'],
 						'username' => $row['username'],
 						'user_id' => $row['user_id'],
-						'action' => ($this->session->userdata('user_type') == 'admin') ? '<li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>' : ' '
+						'action' => ($this->session->userdata('user_type') == 'admin') ? '<li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>' : ' ',
+						'action1' => ($this->session->userdata('user_type') == 'admin') ? '<li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user"  class="text-secondary action-icon"><i class="ti-edit"></i></a></li>' : '<li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="view-user"  class="text-secondary action-icon"><i class="ti-eye"></i></a></li>',
+
 				);
 		}
 
