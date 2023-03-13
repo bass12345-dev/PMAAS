@@ -72,249 +72,50 @@
             </div>
             <!-- page title area end -->
             <div class="main-content-inner ">
-
-
                 <div class="row">
                     <!-- data table start -->
                     <div class="col-12 mt-5">
                         <div class="card " style="border: 1px solid;">
                             <div class="card-body">
-                               
                                 <div class="row">
-
-                                     <div class="col-md-3 ">
-                                        <div class="data-tables">
-                                             <table class="tablesaw table-bordered table-hover table" >
-                                                
-                                                   <tr>
-                                                        <td colspan = "2">
-                                                        <a  href    = "javascript:;" class = "mt-2  mb-2 btn sub-button text-center  btn-rounded btn-md btn-block"><i class = "fa fa-user" aria-hidden = "true"></i>PMAS Information</a>
-                                                        <a  href    = "javascript:;" id="update-cso"
-
-                                                       
-
-                                                         class = "mt-2  mb-2  text-center  btn-rounded btn-md btn-block"><i class = "fa fa-edit" aria-hidden = "true"></i>Update PMAS</a>
-                                                    </td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td>PMAS Number</td>
-                                                        <td class="cso_name"><?php echo $transaction_data['pmas_no'] ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Date & Time Filed</td>
-                                                        <td class="cso_address"><?php echo date('M,d Y', strtotime($transaction_data['date_and_time_filed'])).' '.date('h:i a', strtotime($transaction_data['date_and_time_filed'])) ?></td>
-                                                    </tr>
-                                                     <tr>
-                                                        <td>Responsible Section</td>
-                                                        <td class="contact_person"><?php echo $transaction_data['type_mon_name'] ?></td>
-                                                    </tr>
-                                                     <tr>
-                                                        <td>Type of Activity</td>
-                                                        <td class="contact_number"><?php echo $transaction_data['type_act_name'] ?></td>
-                                                    </tr>
-                                                     <tr>
-                                                        <td>Responsibility Center</td>
-                                                        <td class="email"><?php echo $transaction_data['res_center_code'].' - '.$transaction_data['res_center_name'] ?></td>
-                                                    </tr>
-                                                     <tr>
-                                                        <td>Date & Time</td>
-                                                        <td class="email"><?php echo date('M,d Y', strtotime($transaction_data['date_time'])).' '.date('h:i a', strtotime($transaction_data['date_time'])) ?></</td>
-                                                    </tr>
-
-                                                    <?php
-
-                                                        if ($transaction_data['is_training'] == 1) {
-                                                            // code...
-                                                        
-                                                        $training_data =  $this->GetModel->getTransactionTraining_data(array('transaction_id' => $_GET['id']))[0]; 
-
-                                                     ?>
-                                                      <tr class="training_section">
-                                                        <td colspan = "2">
-                                                        <a  href    = "javascript:;" class = "mt-2  mb-2 btn sub-button text-center  btn-rounded btn-md btn-block">About Training</a>
-                                                       
-                                                    </td>
-
-                                                    </tr>
-
-                                                     <tr>
-                                                        <td>Title of Training</td>
-                                                        <td class="cso_name"><?php echo $training_data['title_of_training'] ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Number of Participants</td>
-                                                        <td class="cso_address"><?php echo $training_data['no_of_participants'] ?></td>
-                                                    </tr>
-                                                     <tr>
-                                                        <td>Female</td>
-                                                        <td class="contact_person"><?php echo $training_data['female'] ?></td>
-                                                    </tr>
-                                                     <tr>
-                                                        <td>Male</td>
-                                                        <td class="contact_number"><?php echo $training_data['no_of_participants'] - $training_data['female'] ?></td>
-                                                    </tr>
-                                                     <tr>
-                                                        <td>Over All Ratings</td>
-                                                        <td class="email"><?php echo $training_data['over_all_ratings'] ?></td>
-                                                    </tr>
-                                                     <tr>
-                                                        <td>Name of Trainor</td>
-                                                        <td class="email"><?php echo $training_data['name_of_trainor'] ?></td>
-                                                    </tr>
-
-                                                <?php } ?>
-
-
-                                                 <?php
-
-                                                        if ($transaction_data['is_project_monitoring'] == 1) {
-                                                            // code...
-                                                        
-                                                         $project_data =  $this->GetModel->getTransactionProject_data(array('transaction_id' => $_GET['id']))[0]; 
-
-
-                                                     ?>
-
-
-                                                     <tr class="training_section">
-                                                        <td colspan = "2">
-                                                        <a  href    = "javascript:;" class = "mt-2  mb-2 btn sub-button text-center  btn-rounded btn-md btn-block">Project Monitoring</a>
-                                                       
-                                                    </td>
-                                                    <tr>
-                                                        <td>Project Title</td>
-                                                        <td class="cso_name"><?php echo $project_data['project_title'] ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Period (Mo - Year)/as of</td>
-                                                        <td class="cso_address"><?php echo date('M,d Y', strtotime($project_data['period'])) ?></td>
-                                                    </tr>
-                                                     <tr class="training_section">
-                                                        <td colspan = "2">
-                                                        <h5  class = "  text-center">Attendance</h5>
-                                                       
-                                                    </td>
-                                                    </tr>
-                                                     <tr>
-                                                        <td>Present</td>
-                                                        <td class="contact_person"><?php echo $project_data['attendance_present']  ?> </td>
-                                                    </tr>
-                                                     <tr>
-                                                        <td>Absent</td>
-                                                        <td class="contact_person"><?php echo $project_data['attendance_absent']  ?></td>
-                                                    </tr>
-
-
-                                                    <tr class="training_section">
-                                                        <td colspan = "2">
-                                                        <h5  class = "  text-center">Nom - Borrowers</h5>
-                                                       
-                                                    </td>
-                                                    </tr>
-                                                     <tr>
-                                                        <td>Delinquent</td>
-                                                        <td class="contact_person"><?php echo $project_data['nom_borrowers_delinquent']  ?></td>
-                                                    </tr>
-                                                     <tr>
-                                                        <td>Overdue</td>
-                                                        <td class="contact_person"><?php echo $project_data['nom_borrowers_overdue']  ?></td>
-                                                    </tr>
-
-                                                     <tr>
-                                                        <td>Total Production</td>
-                                                        <td class="contact_person"><?php echo $project_data['total_production']  ?></td>
-                                                    </tr>
-
-                                                      <tr>
-                                                        <td>Total Collection/Sales</td>
-                                                        <td class="contact_person">&#8369; <?php echo $project_data['total_collection_sales']  ?></td>
-                                                    </tr>
-
-
-                                                     <tr>
-                                                        <td>Total Released/Purchases</td>
-                                                        <td class="contact_person"> &#8369; <?php echo $project_data['total_released_purchases']  ?></td>
-                                                    </tr>
-
-                                                     <tr>
-                                                        <td>Total Delinquent Account</td>
-                                                        <td class="contact_person"> &#8369; <?php echo $project_data['total_delinquent_account']  ?></td>
-                                                    </tr>
-
-
-                                                     <tr>
-                                                        <td>Total Over-due Account</td>
-                                                        <td class="contact_person">&#8369; <?php echo $project_data['total_over_due_account']  ?></td>
-                                                    </tr>
-
-                                                      <tr>
-                                                        <td>Cash in bank</td>
-                                                        <td class="contact_person"> &#8369; <?php echo $project_data['cash_in_bank']  ?></td>
-                                                    </tr>
-
-                                                     <tr>
-                                                        <td>Cash on hand</td>
-                                                        <td class="contact_person"> &#8369; <?php echo   $project_data['cash_on_hand']  ?></td>
-                                                    </tr>
-                                                     
-
-                                                      <tr>
-                                                        <td>Inventories(Store)</td>
-                                                        <td class="contact_person"><?php echo $project_data['inventories']  ?></td>
-                                                    </tr>
-                                                     
-                                                     <?php } ?>
-
-
-                                            </table>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-md-9 ">
-
-
-                                        <div id="navigation_controls" class="mb-3" >
-                                           
-
-                                             <a href="javascript:;" onclick="jQuery('.brgy-clearance').print()"  class="btn btn-success btn-rounded pull-right">Print</a>
-                                        </div>
-
-                                       <div class="card-body mt-5 brgy-clearance ">
-                                        
-                                        <div class = "row justify-content-center mb-3">
-                                                <div class = "col-md-12 ml-auto mr-auto ">
-                                                <div class = "clearfix">
-                                                <div class=" float-right ml-xl-5">
-                                                        <div class="pmas_code">
-                                                        <label style="font-weight: bold;">PMAS NO</label>
-                                                        <label style="font-weight: bold;"><?php echo $transaction_data['pmas_no'] ?></label>
-                                                        </div>
-                                                        <label style="margin-top: 10px;">Date & Time Filed</label> : <span id="resident_name" style="font-weight: bold; text-decoration: underline;"><?php echo date('M,d Y', strtotime($transaction_data['date_and_time_filed'])).' '.date('h:i a', strtotime($transaction_data['date_and_time_filed'])) ?></span><br>
-                                                        <label>Approved By : _______________( )MC ( )MTC/B</label>
-                                                </div>
-                                                <div class=" float-left ml-xl-5">
-                                                        <h6 style="font-weight: bold;">OFFICE OF THE CITY MAYOR</h6>
-                                                        <h6 style="font-weight: bold;">Cooperative & Public Employment Services Division</h6>
-                                                        <label style="font-size: 18px;">Oroquieta City</label>
-                                                </div>     
+                                    <?php $this->load->view('admin/transactions/view/view_info') ?> 
+                                        <div class="col-md-9 ">
+                                            <div id="navigation_controls" class="mb-3" >
+                                                <a href="javascript:;" onclick="jQuery('.brgy-clearance').print()"  class="btn btn-success btn-rounded pull-right">Print</a>
+                                            </div>
+                                        <div class="card-body mt-5 brgy-clearance ">
+                                            <section id="header_section">                                           
+                                                <div class = "row justify-content-center mb-3">
+                                                    <div class = "col-md-12 ml-auto mr-auto ">
+                                                        <div class = "clearfix">
+                                                            <div class=" float-right ml-xl-5">
+                                                                <div class="pmas_code">
+                                                                <label style="font-weight: bold;">PMAS NO</label>
+                                                                <label style="font-weight: bold;"><?php echo $transaction_data['pmas_no'] ?></label>
+                                                                </div>
+                                                                <label style="margin-top: 10px;">Date & Time Filed</label> : <span id="resident_name" style="font-weight: bold; text-decoration: underline;"><?php echo date('M,d Y', strtotime($transaction_data['date_and_time_filed'])).' '.date('h:i a', strtotime($transaction_data['date_and_time_filed'])) ?></span><br>
+                                                                <label>Approved By : _______________( )MC ( )MTC/B</label>
+                                                            </div>
+                                                            <div class=" float-left ml-xl-5">
+                                                                <h6 style="font-weight: bold;">OFFICE OF THE CITY MAYOR</h6>
+                                                                <h6 style="font-weight: bold;">Cooperative & Public Employment Services Division</h6>
+                                                                <label style="font-size: 18px;">Oroquieta City</label>
+                                                            </div>     
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </section>
 
 
-
+                                            <section id="responsible_section">
                                                 <div class = "row justify-content-center text-center ">
                                                     <div class = "col-md-12 ml-auto mr-auto ">
-                                                    <div class = "clearfix">
-                                                  
-                                                    
-                                                                <strong>
-
-                                                                    <span class = "text-uppercase mt-5" style = "font-size: 18px;">Project Monitoring and Activity Sheet</span><br>
-                                                                    <label>Responsible Section : </label>
-
-                                                                    <?php 
+                                                        <div class = "clearfix">
+                                                            <strong>
+                                                                <span class = "text-uppercase mt-5" style = "font-size: 18px;">Project Monitoring and Activity Sheet</span><br>
+                                                                    <label style="font-weight: bold; font-size: 17px;">Responsible Section : </label>
+                                                                    <span> <label>[&#10003;]<?php echo $transaction_data['type_mon_name'] ?></label>  </span><br>
+                                                                 <!--    <?php 
                                                                             foreach ($responsible as $row) :
                                                                        ?>
                                                                      <span> [<?php if ($transaction_data['type_mon_id'] == $row['type_mon_id']) {
@@ -328,17 +129,170 @@
 
                                                                             endforeach;
                                                                         ?>
-                                                                      
-                                                                </strong>
-                                                            </div>
+                                                                       -->
+
+
+                                                                    <label style="font-weight: bold; font-size: 17px;">Type of Activity : </label>
+                                                                    <span> <label>(&#10003;)<?php echo $transaction_data['type_act_name'] ?></label>  </span><br>
+                                                            </strong>
                                                         </div>
                                                     </div>
+                                                </div>
+                                            </section>
 
 
 
-                                   
-                                    
-                                    </div>
+                                             <section id="header_section">                                           
+                                                <div class = "row justify-content-center mb-3">
+                                                    <div class = "col-md-12 ml-auto mr-auto ">
+                                                        <div class = "clearfix">
+                                                            <div class=" float-left ml-xl-5">
+                                                                <h7 style="font-weight: bold;">*RESPONSIBILITY CENTER  </h7>
+                                                                <h7>:</h7>
+                                                                <span>__________________________________</span>
+                                                                <br>
+                                                                <h7 style="font-weight: bold;">Date And Time  </h7>
+                                                                <h7 style="margin-left: 79px;">:</h7>
+                                                                <span >__________________________________</span>
+
+                                                                <!-- <div class="for_training_only mt-auto row justify-content-center" style="border: 1px solid; padding: 20px 0 200px 0; margin: 0;" >
+                                                                    <div class = "clearfix">
+                                                                        <div class = "col-md-12 ml-auto mr-auto ">
+                                                                            <div class=" float-left ml-xl-1">
+                                                                                <i><h6 style="font-weight: bold;">For Training Use Only</h6></i>
+                                                                            </div><br>
+                                                                            <label style="font-weight: bold;">Title of Training : </label><br>
+                                                                            <span>__________________________________________________________</span><br>
+                                                                             
+                                                                            <label style="font-weight: bold;">No. of Participants : </label>
+                                                                             <span>____</span>
+                                                                            
+
+                                                                          
+                                                                            <label style="font-weight: bold;">Female : </label>
+                                                                             <span>______</span>
+                                                                             <br>  
+                                                                             <label style="font-weight: bold;">Over-all Ratings : </label>
+                                                                             <span>______</span>
+                                                                             <br>  
+                                                                              <label style="font-weight: bold;">Name of Trainor : </label>
+                                                                             <span>______________-</span>
+                                                                             <br>                                                                                            
+
+
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    
+                                                                </div> -->
+                                                               
+                                                            </div>     
+                                                            <div class=" float-left ml-xl-5">
+                                                                <h7 style="font-weight: bold;">NAME OF CSO  </h7>
+                                                                <h7>&nbsp; :</h7>
+                                                                <span>________________________________</span>
+                                                                <br>
+                                                                <h7 style="font-weight: bold;">PROJECT TITLE  </h7>
+                                                                <h7 >:</h7>
+                                                                <span >________________________________</span>
+                                                               
+                                                            </div>     
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+
+
+                                            <section>
+                                                 <div class="row justify-content-center ">
+                                                    <div class="col-md-6"  style="border: 1px solid; padding: 20px 0 200px 0; margin: 0;">
+                                                        <div class="for_training_only " >
+                                                                    <div class = "clearfix">
+                                                                        <div class = "col-md-12 ml-auto mr-auto ">
+                                                                            <div class=" float-left ml-xl-1">
+                                                                                <i><h6 style="font-weight: bold;">For Training Use Only</h6></i>
+                                                                            </div><br>
+                                                                            <label style="font-weight: bold;">Title of Training : </label><br>
+                                                                            <span>__________________________________________________________</span><br>
+                                                                             
+                                                                            <label style="font-weight: bold;">No. of Participants : </label>
+                                                                             <span>____</span>
+                                                                            
+
+                                                                          
+                                                                            <label style="font-weight: bold;">Female : </label>
+                                                                             <span>______</span>
+                                                                             <br>  
+                                                                             <label style="font-weight: bold;">Over-all Ratings : </label>
+                                                                             <span>______</span>
+                                                                             <br>  
+                                                                              <label style="font-weight: bold;">Name of Trainor : </label>
+                                                                             <span>______________-</span>
+                                                                             <br>                                                                                            
+
+
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    
+                                                                </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="for_training_only " >
+                                                                    <div class = "clearfix">
+                                                                        <div class = "col-md-12 ">
+                                                                                                                                                              
+                                                                           <table style="white-space: nowrap;" class=" table table-sm ">
+                                                                                  <tr>
+                                                                                    <td>Period (Mo-Year)/as of</td>
+                                                                                    <td> : </td>
+                                                                                    <td><strong><u><span id="resident_name">_________________</span></u></strong></td>
+                                                                                  </tr>
+                                                                                  <tr>
+                                                                                    <td>Attendance</td>
+                                                                                    <td> : </td>
+                                                                                    <td><strong><u><label>Present : </label>&nbsp;<span id="resident_age">_____</span> <label>Absent : </label>&nbsp;<span id="resident_age">_____</span></u></strong></td>
+                                                                                  </tr>
+                                                                                   <tr>
+                                                                                    <td>NOM-Borrowers</td>
+                                                                                    <td> : </td>
+                                                                                    <td><strong><u><label>Delinquent : </label>&nbsp;<span id="resident_age">_____</span> <label>Overdue : </label>&nbsp;<span id="resident_age">_____</span></u></strong></td>
+                                                                                  </tr>
+                                                                                  <tr>
+                                                                                    <td>Status</td>
+                                                                                    <td> : </td>
+                                                                                    <td><strong><u><span id="resident_civil_status">______</span></u></strong></td>
+                                                                                  </tr>
+                                                                                  <tr>
+                                                                                    <td>Address</td>
+                                                                                    <td> : </td>
+                                                                                    <td><strong><u><span class="text-capitalize" id="resident_purok">_________</span></u></strong></td>
+                                                                                  </tr>
+                                                                                  <tr>
+                                                                                    <td>Record</td>
+                                                                                    <td> : </td>
+                                                                                    <td><strong><u><span id="resident_record">_______________
+                                                                                  </tr>
+                                                                                </table>
+
+
+
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    
+                                                                </div>
+                                                    </div>
+                                                </div>
+
+                                                
+                                            </section>
+
+
 
                                                  <div class="row justify-content-center border-top">
                                  <div class="col-sm-4 mt-2 border-right">
