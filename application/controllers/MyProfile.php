@@ -5,6 +5,7 @@ class MyProfile extends CI_Controller {
 
 	public $users = 'users';
 
+
 	public function __construct()
     {
         parent::__construct();
@@ -12,12 +13,16 @@ class MyProfile extends CI_Controller {
          if (!$this->session->userdata('user_id')) {
             redirect('login');
         }
+
+   	 	
     }
     
 
 
 	public function index()
 	{
+
+		
 		$data['title'] = 'My Profile';
 		
 		$this->load->view('admin/myprofile/my_profile',$data);
@@ -78,23 +83,33 @@ class MyProfile extends CI_Controller {
 	}
 	public function update_profile_pic(){
 
-		// $data = array(
+		$data = array(
 
-		// 				'profile_pic' => ($_FILES['profile_pic']['tmp_name'] === '' ) ? '' : $this->upload_image(),
-						
-					
-		// 		);
+						'profile_pic' => ($_FILES['update_profile_pic']['tmp_name'] === '' ) ? $this->session->userdata('profile_pic') : $this->upload_image(),					
+				);
+		$where = array('user_id'=>$this->session->userdata('user_id'));
+		$user_data = $this->GetModel->get($this->users,array('user_id' => $where['user_id']))[0];
+
+
+		
+		$update = $this->UpdateModel->update1($where,$data,$this->users);
+		$params = array('cond' => $update, 'message' => 'Successfully Updated');
+		$this->load->library('Condition', $params);
+		
+
+
+		
 
 	}
 
 		function upload_image(){
 
-    if (isset($_FILES['profile_pic'])) {
+    if (isset($_FILES['update_profile_pic'])) {
 
-        $extension = explode('.', $_FILES['profile_pic']['name']);
+        $extension = explode('.', $_FILES['update_profile_pic']['name']);
         $new_name = rand().'.' . $extension[1];
         $destination = './uploads/profile_pic/'. $new_name;
-        move_uploaded_file($_FILES['profile_pic']['tmp_name'], $destination);
+        move_uploaded_file($_FILES['update_profile_pic']['tmp_name'], $destination);
         return $new_name;
       # code...
     }

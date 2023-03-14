@@ -83,7 +83,8 @@
                             console.log(event.target.result);
                             
                             $('#imgPreview').attr('src', event.target.result);
-                            $("#imgPreview").removeClass('d-none')
+                            $("#imgPreview").removeClass('d-none');
+                            $('button.btn-update-prof-pic').removeClass('d-none');
                           }
                           reader.readAsDataURL(file);
                         break;
@@ -94,6 +95,7 @@
                     alert("Sorry, " + sFileName + " is invalid, allowed extension is " + validImageExtensions.join(", ") + ' only');
                     oInput.value = "";
                     $("#imgPreview").addClass('d-none')
+                    $('button.btn-update-prof-pic').addClass('d-none');
                     return false;
                 }
             }
@@ -2039,22 +2041,48 @@
             cache: false,
             processData:false,
             dataType: 'json',
-            beforeSend: function() {
-                $('.btn-update-prof-pic').text('Please wait...');
-                $('.btn-update-prof-pic').attr('disabled','disabled');
+             beforeSend : function(){
+
+                                  Swal.fire({
+                                title: "",
+                                text: "Please Wait",
+                                icon: "",
+                                showCancelButton: false,
+                                showConfirmButton : false,
+                                reverseButtons: false,
+                                allowOutsideClick : false
+                            })
+
             },
              success: function(data)
             {            
                 if (data.response) {
-              
+
+                        Swal.close();
+                         $('#update_pic_modal').modal('hide')
+                      Toastify({
+                                  text: data.message,
+                                  className: "info",
+                                  style: {
+                                    "background" : "linear-gradient(to right, #00b09b, #96c93d)",
+                                    "height" : "60px",
+                                    "width" : "350px",
+                                    "font-size" : "20px"
+                                  }
+                                }).showToast();
+
+
+                      load_my_profile();
+                        
+
                 }else {
                  
                 }
            },
             error: function(xhr) { // if error occured
                 alert("Error occured.please try again");
-                $('.btn-add-user').text('Submit');
-                $('.btn-add-user').removeAttr('disabled');
+                $('.btn-update-prof-pic').text('Save Changes');
+                $('.btn-update-prof-pic').removeAttr('disabled');
             },
 
 

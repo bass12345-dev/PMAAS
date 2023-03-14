@@ -38,11 +38,29 @@
                                                 <!-- <i class="ti-thumb-up"></i>  -->
                                                 Number of all Transactions</div>
                                                 <h2><?php echo $count ?></h2>
-                                                </div>
+                                        </div>
+
                                                 <!-- <canvas id="seolinechart1" height="50"></canvas> -->
-                                                </div>
-                                                </div>
-                                                </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 mt-5 mb-3">
+                                <div class="card">
+                                    <div class="seo-fact sbg1">
+                                        <div class="p-3 d-flex justify-content-between align-items-center">
+                                            <div class="seofct-icon">
+                                                <!-- <i class="ti-thumb-up"></i>  -->
+                                                Pending Transactions</div>
+                                                <h2><?php echo $count ?></h2>
+                                        </div>
+                                        
+                                                <!-- <canvas id="seolinechart1" height="50"></canvas> -->
+                                    </div>
+
+                                </div>
+                            </div>
                                                <!--  <div class="col-md-6 mt-md-5 mb-3">
                                                 <div class="card">
                                                 <div class="seo-fact sbg2">

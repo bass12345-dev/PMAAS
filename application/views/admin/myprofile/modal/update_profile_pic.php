@@ -23,7 +23,7 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn  btn-update-center sub-button" name="btn-update-prof-pic " >Save changes</button>
+                    <button type="submit" class="btn  btn-update-center sub-button btn-update-prof-pic d-none" name="btn-update-prof-pic " >Save changes</button>
                   </div>
                   </form>
 

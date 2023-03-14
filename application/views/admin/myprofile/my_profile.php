@@ -122,18 +122,12 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="col-md-6  mt-2 ">
-
-                                       
-                                        
-                                            <div id="canvas_container " >
-
-                                                <img src="" id="profile_pic" height="600px"  width ="600px" >
-                                                 <button class="btn btn-block btn-rounded btn-success update_profile_picture">Update Profile Picture</button>
-                                        
-                                            </div>
-                                        
-                                       
+                                    <div class="col-md-6  mt-2 ">                                       
+                                                
+                                                <div class="text-center mb-2">
+                                                    <img src="" class="rounded" id="profile_pic" alt="..." style="height: 500px; width: 500px;">
+                                                </div>                                            
+                                                 <button class="btn btn-block btn-rounded btn-success update_profile_picture">Update Profile Picture</button>   
                                     </div>
 
                                    
