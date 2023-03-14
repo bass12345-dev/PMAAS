@@ -15,7 +15,7 @@
                     </div>
              <div class="col-sm-6 clearfix">
                         <div class=" pull-right">
-                            <a href="<?php echo base_url() ?>MyProfile" style="color: #000; font-size: 20px;"><?php echo $this->session->userdata('first_name').' '.$this->session->userdata('middle_name').' '.$this->session->userdata('last_name').' '.$this->session->userdata('extension') ?></a>
+                            <a href="<?php echo base_url() ?>MyProfile" style="color: #000; font-size: 20px;"><?php echo $this->session->userdata('first_name').' '.$this->session->userdata('middle_name').' '.$this->session->userdata('last_name').' '.$this->session->userdata('extension').' || '.$this->session->userdata('user_type') ?> </a>
                            <!--  <img class="avatar user-thumb" src="assets/images/author/avatar.png" alt="avatar">
                             <h4 class="user-name dropdown-toggle" data-toggle="dropdown">Kumkum Rai <i class="fa fa-angle-down"></i></h4>
                             <div class="dropdown-menu">

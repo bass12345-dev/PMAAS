@@ -16,8 +16,14 @@ class Back_up extends CI_Controller {
 
 	public function index()
 	{
-		$data['title'] = 'Back Up Database';
-		$this->load->view('admin/back_up_database/back_up',$data);
+
+        if ($this->session->userdata('user_type') == 'admin' ) {
+           $data['title'] = 'Back Up Database';
+        $this->load->view('admin/back_up_database/back_up',$data);
+        }else {
+            echo 'error';
+        }
+		
 	}
 
 

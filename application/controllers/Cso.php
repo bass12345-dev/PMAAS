@@ -25,13 +25,19 @@ class Cso extends CI_Controller {
          if (!$this->session->userdata('user_id')) {
             redirect('login');
         }
+
     }
 	
 	public function index()
 	{   
-        $data['title'] = 'CSO';
-       
-		$this->load->view('admin/cso/cso',$data);
+
+		if ($this->session->userdata('user_type') == 'admin' ) {
+        	$data['title'] = 'CSO';       
+			$this->load->view('admin/cso/cso',$data);
+        }else {
+        	echo 'error';
+        }
+        
 	}
 
 
@@ -81,9 +87,14 @@ class Cso extends CI_Controller {
 
 	public function view_profile(){
 
-		$data['title'] = 'View Profile';
+		if ($this->session->userdata('user_type') == 'admin' ) {
+        	$data['title'] = 'View Profile';
 		$data['data'] = $this->GetModel->get($this->cso,array('cso_id' => $_GET['id']))[0];
 		$this->load->view('admin/cso/view/view_profile',$data);
+        }else {
+        	echo 'error';
+        }
+		
 
 	}
 

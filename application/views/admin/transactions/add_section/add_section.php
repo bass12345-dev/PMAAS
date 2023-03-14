@@ -95,7 +95,7 @@
                                 <div class="input-group mb-3">
                                <div class="input-group-prepend">
                                     <button class="btn btn-outline-secondary " type="button" ><?php echo date('Y', time()) ?></button>
-                                   <!--  <div class="dropdown-menu">
+                                   <div class="dropdown-menu">
 
                                            <?php
 
@@ -109,23 +109,24 @@
 
                                          ?> 
                                       
-                                    </div> -->
-
+                                    </div> 
                                   </div>
 
                                   <div class="input-group-prepend">
                                     <!-- <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo date('m', time()) ?></button> -->
 
                                     <button class="btn btn-outline-secondary " type="button" ><?php echo date('m', time()) ?></button>
-                                   <!--  <div class="dropdown-menu">
+                                <div class="dropdown-menu">
                                       <a class="dropdown-item" href="#">Action</a>
                                       <a class="dropdown-item" href="#">Another action</a>
                                       <a class="dropdown-item" href="#">Something else here</a>
                                       
-                                    </div> -->
+                                    </div>
+
+                                    
                                     
                                   </div>
-                                  <input type="number" class="form-control  wizard-required input " name="pmas_number"  >
+                                  <input type="number" class="form-control  wizard-required input " value="" name="pmas_number"  >
                               </div>
                                 <div class="wizard-form-error"></div>
                             </div>
@@ -333,37 +334,18 @@
 
      <script type="text/javascript">
 
-          var myState = {
-            pdf: null,
-            currentPage: 1,
-            zoom: 1
+        function date(){
+             $.ajax({
+
+                    url: "https://worldtimeapi.org/api/ip",
+                    success: function(result) {
+                      console.log(result.datetime)
+                      $("#tm").text(result.datetime);
+                    }
+                  });
         }
-         
 
-         pdfjsLib.getDocument(base_url + 'x.pdf').then((pdf) => {
-                myState.pdf = pdf;
-                render();
-                 });
-
-
-
-
-        function render() {
-            myState.pdf.getPage(myState.currentPage).then((page) => {
-         
-                var canvas = document.getElementById("pdf_renderer");
-                var ctx = canvas.getContext('2d');
-     
-                var viewport = page.getViewport(myState.zoom);
-                canvas.width = viewport.width;
-                canvas.height = viewport.height;
-         
-                page.render({
-                    canvasContext: ctx,
-                    viewport: viewport
-                });
-            });
-        }
+        date();
 
 
         jQuery(document).ready(function() {

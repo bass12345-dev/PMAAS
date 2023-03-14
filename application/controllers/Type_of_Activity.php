@@ -22,8 +22,13 @@ class Type_of_activity extends CI_Controller {
 	
 	public function index()
 	{   
-        $data['title'] = 'Type of Activity';
-		$this->load->view('admin/type_of_activity/type_of_activity',$data);
+		if ($this->session->userdata('user_type') == 'admin' ) {
+        		$data['title'] = 'Type of Activity';
+				$this->load->view('admin/type_of_activity/type_of_activity',$data);
+        }else {
+        	echo 'error';
+        }
+        
 	}
 
 

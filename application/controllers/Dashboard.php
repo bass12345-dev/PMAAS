@@ -19,7 +19,7 @@ class Dashboard extends CI_Controller {
 	{
 		 $data['title'] = 'Dahboard';
 		 $data['count'] = $this->CountModel->count($this->transactions);
-		$this->load->view('admin/dashboard',$data);
+		$this->load->view('admin/dashboard/dashboard',$data);
 	}
 
 

@@ -21,8 +21,13 @@ class Responsible_section extends CI_Controller {
 
 	public function index()
 	{	
-		$data['title'] = 'Responsible Section';
-		$this->load->view('admin/responsible_section/responsible_section',$data);
+			if ($this->session->userdata('user_type') == 'admin' ) {
+        	$data['title'] = 'Responsible Section';
+			$this->load->view('admin/responsible_section/responsible_section',$data);
+        }else {
+        	echo 'error';
+        }
+		
 	}
 
 

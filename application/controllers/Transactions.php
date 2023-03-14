@@ -53,11 +53,20 @@ class Transactions extends CI_Controller {
 		$data['responsibility_centers'] = $this->GetModel->getALL($this->responsibility_center,$this->order_by_asc,$this->order_key_code); 
 		$data['responsible'] =  $this->GetModel->getALL($this->responsible_section,$this->order_by_asc,$this->order_key);
 		$data['cso'] = $this->GetModel->getALL($this->cso,$this->order_by_asc,$this->order_key);
-		
+		$data['last'] = $this->GetModel->get_last_pmas_number();
 		$this->load->view('admin/transactions/add_section/add_section',$data);
 	}
 
 
+	public function get_last_pmas_no(){
+
+		$last = $this->GetModel->get_last_pmas_number();
+
+		
+
+	}
+
+	
 
 
 	public function get_transactions(){
@@ -120,9 +129,27 @@ class Transactions extends CI_Controller {
 
 	public function add() {
 
-		$data = array(
+		$last = $this->GetModel->get_last_pmas_number();
 
-					'pmas_no' => date('Y', time()).'-'.date('m', time()).'-'.$this->input->post('pmas_number'),
+		// echo date('Y', time()).date('m', time()) ;
+		// echo date('Y', strtotime($last['pmas_no'])).date('m', strtotime($last['pmas_no'])) ;
+
+		$number = 0;
+
+		if (date('Y', strtotime($last['pmas_no'])).date('m', strtotime($last['pmas_no'])) < date('Y', time()).date('m', time())) {
+				
+
+				$number = 1;
+		}else {
+
+			$number =  $last['number'] + 1;
+		}
+
+
+		
+		$data = array(
+					'pmas_no' => date('Y', time()).'-'.date('m', time()).'-'.$number,
+					'number' => $number,
 					// 'date_and_time_filed' => $this->input->post('date_and_time_filed'),
 					// 'date_and_time_filed' =>  date("Y/m/d H:i:s", strtotime($this->input->post('date_and_time_filed'))),
 					'date_and_time_filed' =>  date('Y-m-d H:i:s', time()),

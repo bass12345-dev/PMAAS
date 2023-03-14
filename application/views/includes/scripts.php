@@ -1150,7 +1150,7 @@
                 // data: "song_title",
                 data: null,
                 render: function (data, type, row) {
-                    return '<a href="javascript:;"   data-id="'+data['cso_id']+'"  style="color: #000;" class="table-font-size a" id="view_trans" >'+data['cso_name']+'</a>';
+                    return '<a href="javascript:;"   data-id="'+data['cso_id']+'"  style="color: #000;" class="table-font-size a" id="view_tran" >'+data['cso_name']+'</a>';
                 }
 
             },
@@ -1160,7 +1160,7 @@
                 render: function (data, type, row) {
                     return '<ul class="d-flex justify-content-center">\
                                \
-                                  <li class="mr-1 "><a href="javascript:;" data-id="'+data['cso_id']+'"  id="view-cso"  class="text-success action-icon"><i class="ti-eye"></i></a></li>\
+                                  <li class="mr-1 "><a href="javascript:;" data-id="'+data['cso_id']+'"  id="view-cso"  class="text-secondary action-icon"><i class="ti-eye"></i></a></li>\
                                 <li><a href="javascript:;" data-id="'+data['cso_id']+'"  id="delete-cso"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>\
                                 </ul>';
                 }

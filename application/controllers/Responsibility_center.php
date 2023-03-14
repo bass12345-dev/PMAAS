@@ -20,9 +20,13 @@ class Responsibility_center extends CI_Controller {
 	
 	public function index()
 	{   
-        $data['title'] = 'Responsibility Center';
-       
-		$this->load->view('admin/responsibility_center/responsibility_center',$data);
+		if ($this->session->userdata('user_type') == 'admin' ) {
+        	$data['title'] = 'Responsibility Center';       
+			$this->load->view('admin/responsibility_center/responsibility_center',$data);
+        }else {
+        	echo 'error';
+        }
+        
 	}
 
 	public function view_transactions(){
