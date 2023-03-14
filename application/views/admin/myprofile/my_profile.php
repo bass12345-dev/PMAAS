@@ -5,6 +5,20 @@
     <?php $this->load->view('includes/meta.php') ?>
     <?php $this->load->view('includes/css.php') ?> 
 
+    <style type="text/css">
+          .holder {
+                height: 300px;
+                width: 300px;
+                border: 2px solid black;
+            }
+            .img {
+                max-width: 300px;
+                max-height: 300px;
+                min-width: 300px;
+                min-height: 300px;
+            }
+    </style>
+
 
        
 
@@ -80,6 +94,9 @@
                                                    <tr>
                                                         <td colspan = "2">
                                                         <a  href    = "javascript:;" class = "mt-2  mb-2 btn sub-button text-center  btn-rounded btn-md btn-block"><i class = "fa fa-user" aria-hidden = "true"></i> Personal Information</a>
+
+                                                        <a  href    = "javascript:;"  id="update-personal-information"
+                                                         class = "mt-2  mb-2  text-center  btn-rounded btn-md btn-block"><i class = "fa fa-edit" aria-hidden = "true"></i> Update Personal Information</a>
                                                        
                                                     </td>
 
@@ -99,23 +116,22 @@
                                                     
                                                   
                                             </table>
-                                            <button class="btn btn-block btn-rounded btn-success">Update</button>
+                                            <button class="btn btn-block btn-rounded btn-success update_password">Update Credentials</button>
+
+                                          
                                         </div>
                                     </div>
                                     
-                                    <div class="col-md-6 ">
+                                    <div class="col-md-6  mt-2 ">
 
                                        
                                         
-                                            <div id="canvas_container" >
+                                            <div id="canvas_container " >
 
-                                                <div class="loader-div" hidden >
-                                                    <div class="loader"></div>
-                                                </div>
-                                                <img src="./../assets/images/not_found.jpg" id="pdf_error" height="600px"  width ="600px" >
-                                        <canvas id="pdf_renderer" style="width: 100%;"></canvas>
+                                                <img src="" id="profile_pic" height="600px"  width ="600px" >
+                                                 <button class="btn btn-block btn-rounded btn-success update_profile_picture">Update Profile Picture</button>
                                         
-                                    </div>
+                                            </div>
                                         
                                        
                                     </div>
@@ -132,7 +148,7 @@
         </div>
         <!-- main content area end -->
        
-
+        <?php $this->load->view('admin/myprofile/modal/update_profile_pic') ?> 
      <?php $this->load->view('includes/scripts.php') ?> 
 
 
@@ -142,15 +158,26 @@
           function    load_my_profile(){
 
 
-        $.ajax({
+            $.ajax({
                             type: "POST",
-                            url: base_url + 'Users/get_my_profile',
+                            url: base_url + 'MyProfile/get_my_profile',
                             cache: false,
                             dataType: 'json',  
                             success: function(data){
                                 // console.log(data)
-                                // $('.cso_name').text(data.data.cso_name)
-                               
+                                $('.name').text(data.name);
+                                $('.user_type').text(data.user_type);
+                                $('.username').text(data.username);
+                                $("#profile_pic").attr("src",data.profile_pic);
+                                
+                                
+                                $('#update-personal-information').attr('data-first-name', data.first_name);
+                                $('#update-personal-information').attr('data-middle-name', data.middle_name);
+                                $('#update-personal-information').attr('data-last-name', data.last_name);
+                                $('#update-personal-information').attr('data-extension', data.extension);
+                                $('#update-personal-information').attr('data-username', data.username);
+                           
+
 
 
 

@@ -65,8 +65,41 @@
 
       var base_url = '<?php echo base_url(); ?>';
       var _validFileExtensions = [".pdf"];    
+      var validImageExtensions = [".png",".jpg","jpeg"];
 
 
+       function ValidateImage(oInput) {
+        if (oInput.type == "file") {
+            const file = oInput.files[0];
+            var sFileName = oInput.value;
+             if (sFileName.length > 0) {
+                var blnValid = false;
+                for (var j = 0; j < validImageExtensions.length; j++) {
+                    var sCurExtension = validImageExtensions[j];
+                    if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                        blnValid = true;
+                        let reader = new FileReader();
+                        reader.onload = function(event){
+                            console.log(event.target.result);
+                            
+                            $('#imgPreview').attr('src', event.target.result);
+                            $("#imgPreview").removeClass('d-none')
+                          }
+                          reader.readAsDataURL(file);
+                        break;
+                    }
+                }
+                 
+                if (!blnValid) {
+                    alert("Sorry, " + sFileName + " is invalid, allowed extension is " + validImageExtensions.join(", ") + ' only');
+                    oInput.value = "";
+                    $("#imgPreview").addClass('d-none')
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 
     function ValidateSingleInput(oInput) {
         if (oInput.type == "file") {
@@ -1985,9 +2018,285 @@
         var table = users_table;
         var url = 'Users/delete'
         del(id,table,url);        
-     })
+     });
 
 
+    $(document).on('click','button.update_profile_picture',function (e) {
+
+        $('#update_pic_modal').modal('show')
+
+    });
+
+
+    $('#update_profile_pic').on('submit', function(e) {
+    e.preventDefault();
+
+    $.ajax({
+            type: "POST",
+            url: base_url + 'MyProfile/update_profile_pic',
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData:false,
+            dataType: 'json',
+            beforeSend: function() {
+                $('.btn-update-prof-pic').text('Please wait...');
+                $('.btn-update-prof-pic').attr('disabled','disabled');
+            },
+             success: function(data)
+            {            
+                if (data.response) {
+              
+                }else {
+                 
+                }
+           },
+            error: function(xhr) { // if error occured
+                alert("Error occured.please try again");
+                $('.btn-add-user').text('Submit');
+                $('.btn-add-user').removeAttr('disabled');
+            },
+
+
+        });
+
+    });
+
+
+    $(document).on('click','a#update-personal-information',function (e) {
+
+        e.preventDefault();
+
+
+         Swal.fire({
+          title: 'Update Personal Information',
+          html: '<input type="text" id="first_name" value="'+$(this).data('first-name')+'"  class="swal2-input" placeholder="First Name" >\
+          <input type="text" id="middle_name" value="'+$(this).data('middle-name')+'"  class="swal2-input" placeholder="Middle Name" >\
+          <input type="text" id="last_name" value="'+$(this).data('last-name')+'"  class="swal2-input" placeholder="Last Name" >\
+          <input type="text" id="extension" value="'+$(this).data('extension')+'"  class="swal2-input" placeholder="Extension" >\
+          <input type="text" id="username" value="'+$(this).data('username')+'"  class="swal2-input" placeholder="Username" >',
+          confirmButtonText: 'Sign in',
+          focusConfirm: false,
+          showLoaderOnConfirm: true,
+          preConfirm: () => {
+            const first_name = Swal.getPopup().querySelector('#first_name').value;
+            const last_name = Swal.getPopup().querySelector('#last_name').value;
+            const username = Swal.getPopup().querySelector('#username').value;
+            const extension = Swal.getPopup().querySelector('#extension').value;
+
+            if (!first_name ) {
+              Swal.showValidationMessage(`Please Fill up First Name`)
+            }
+
+            if (!last_name) {
+                Swal.showValidationMessage(`Please Fill up Last Name`)
+            }
+
+            if (!username) {
+                Swal.showValidationMessage(`Please Fill up Username`)
+            }
+
+            return { first_name: first_name, last_name: last_name , extension : extension , username : username }
+          }
+        }).then((result) => {
+
+                    const first_name = result.value.first_name;
+                    const middle_name = result.value.middle_name;
+                    const last_name = result.value.last_name;
+                    const extension = result.value.extension;
+                    const username = result.value.username;
+
+
+
+
+                    $.ajax({
+                            type: "POST",
+                            url: base_url + 'MyProfile/update_personal_info',
+                            data: { first_name : first_name , middle_name : middle_name , last_name : last_name , extension : extension , username : username },
+                            cache: false,
+                            dataType: 'json', 
+                            beforeSend : function(){
+
+                                  Swal.fire({
+                                title: "",
+                                text: "Please Wait",
+                                icon: "",
+                                showCancelButton: false,
+                                showConfirmButton : false,
+                                reverseButtons: false,
+                                allowOutsideClick : false
+                            })
+
+                            },
+                            success: function(data){
+                                Swal.close()
+                               if (data.response) {
+
+
+
+                                load_my_profile();
+                                     Toastify({
+                                  text: data.message,
+                                  className: "info",
+                                  style: {
+                                    "background" : "linear-gradient(to right, #00b09b, #96c93d)",
+                                    "height" : "60px",
+                                    "width" : "350px",
+                                    "font-size" : "20px"
+                                  }
+                                }).showToast();
+                                  
+                                    // $('#update_cre_modal').modal('show')
+                                    
+                               }else {
+
+                                    Swal.fire(
+                                        "",
+                                        data.message,
+                                        "error"
+                                    )
+                               }
+
+                                
+                            }
+                    })
+                  
+                  })
+       
+
+    })
+
+    //update password
+
+    $(document).on('click','button.update_password',function (e) {
+
+        Swal.fire({
+                  title: 'Enter your Old Password',
+                  html: `
+                  <input type="password" id="password" class="swal2-input" >`,
+                  confirmButtonText: 'Submit',
+                  focusConfirm: false,
+                  showCancelButton: true,
+                  preConfirm: () => {
+                   
+                    const password = Swal.getPopup().querySelector('#password').value
+                    if ( !password) {
+                      Swal.showValidationMessage(`Please enter  password`)
+                    }
+                    return { password: password }
+                  }
+                }).then((result) => {
+
+                    const pass = result.value.password;
+                    $.ajax({
+                            type: "POST",
+                            url: base_url + 'MyProfile/check_old_password',
+                            data: {pass: pass },
+                            cache: false,
+                            dataType: 'json', 
+                            beforeSend : function(){
+
+                                  Swal.fire({
+                                title: "",
+                                text: "Please Wait",
+                                icon: "",
+                                showCancelButton: false,
+                                showConfirmButton : false,
+                                reverseButtons: false,
+                                allowOutsideClick : false
+                            })
+
+                            },
+                            success: function(data){
+                                Swal.close()
+                               if (data.response) {
+
+                                    update_credentials_swal();
+                                    // $('#update_cre_modal').modal('show')
+                                    
+                               }else {
+
+                                    Swal.fire(
+                                        "",
+                                        data.message,
+                                        "error"
+                                    )
+                               }
+
+                                
+                            }
+                    })
+                  
+                })
+
+
+
+
+})
+
+
+function update_credentials_swal(){
+    Swal.fire({
+          title: 'Update Credentials Form',
+          html: `<input type="text" id="password" class="swal2-input" placeholder="Password">
+          <input type="text" id="confirm_password" class="swal2-input" placeholder="Confirm Password">`,
+          confirmButtonText: 'Sign in',
+          focusConfirm: false,
+          showLoaderOnConfirm: true,
+          preConfirm: () => {
+            const password = Swal.getPopup().querySelector('#password').value
+            const confirm_password = Swal.getPopup().querySelector('#confirm_password').value
+            if (!password || !confirm_password) {
+              Swal.showValidationMessage(`Please enter password`)
+            }
+
+            if (password != confirm_password) {
+                Swal.showValidationMessage(`Password Don't Match`)
+            }
+            return { password: password, confirm_password: confirm_password }
+          }
+        }).then((result) => {
+           const pass = result.value.confirm_password;
+                    $.ajax({
+                            type: "POST",
+                            url: base_url + 'MyProfile/update_password',
+                            data: {pass: pass },
+                            cache: false,
+                            dataType: 'json', 
+                            beforeSend : function(){
+
+                                  Swal.fire({
+                                title: "",
+                                text: "Please Wait",
+                                icon: "",
+                                showCancelButton: false,
+                                showConfirmButton : false,
+                                reverseButtons: false,
+                                allowOutsideClick : false
+                            })
+
+                            },
+                            success: function(data){
+                                Swal.close()
+                               if (data.response) {
+
+                                    window.location.href = base_url + 'Out/sign_out'
+                                  
+                                    
+                               }else {
+
+                                    Swal.fire(
+                                        "",
+                                        data.message,
+                                        "error"
+                                    )
+                               }
+
+                                
+                            }
+                    })
+        })
+}
 
 
 

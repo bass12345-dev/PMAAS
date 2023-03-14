@@ -29,15 +29,7 @@ class Users extends CI_Controller {
 	}
 
 
-	public function get_my_profile(){
-
-		$data = [];
-		$item = $this->GetModel->get($this->users,array('user_id' => $this->session->userdata('user_id')))[0];
-		$data['first_name'] = $item['first_name'].' '.$item['middle_name'].' '.$item['last_name'].' '.$item['extension'];
-		$data['username'] = $item['username'];
-		$data['user_type'] = $item['user_type'];
-		echo json_encode($data);
-	}
+	
 
 
 		public function add() {
@@ -143,45 +135,6 @@ class Users extends CI_Controller {
 	}
 
 
-
-
-	// public function do_upload()
-   //      {
-   //             $config['upload_path']          = './files/profile_pic/';//file save path
-   //          	$config['allowed_types']        = 'pdf';
-   //          	$config['max_size']             = 100000;
-
-
-   //          	 $this->load->library('upload', $config);
-
-
-   //              if ($this->upload->do_upload($file))
-   //              {
-                        
-   //                       $file = array('upload_data' => $this->upload->data());
-
-   //                       $data = array(
-	// 												'message' => 'Uploaded Successfully',
-	// 												'response' => true,
-	// 												'file_name' => date('Y-m-d H:i:s', time()).'_'. $file['upload_data']['file_name']
-	// 												);
-                      
-   //              }
-   //              else
-   //              {
-                       
-   //                  $data = array(
-	// 												'message' => $this->upload->display_errors(),
-	// 												'response' => false,
-	// 												'file_name' =>''
-	// 												);   
-                	
-                        
-   //              }
-
-   //              return $data;
-
-   //      }
 
 
 
