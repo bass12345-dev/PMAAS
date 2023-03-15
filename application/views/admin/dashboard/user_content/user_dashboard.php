@@ -9,7 +9,7 @@
                                             <div class="seofct-icon">
                                                 <!-- <i class="ti-thumb-up"></i>  -->
                                                 Number of all Transactions</div>
-                                                <h2><?php echo $count ?></h2>
+                                                <h2><?php echo $count_user_completed ?></h2>
                                         </div>
 
                                                 <!-- <canvas id="seolinechart1" height="50"></canvas> -->
@@ -25,7 +25,7 @@
                                             <div class="seofct-icon">
                                                 <!-- <i class="ti-thumb-up"></i>  -->
                                                 Pending Transactions</div>
-                                                <h2><?php echo $count ?></h2>
+                                                <h2><?php echo $count_user_pending ?></h2>
                                         </div>
                                         
                                                 <!-- <canvas id="seolinechart1" height="50"></canvas> -->
@@ -50,15 +50,15 @@
                     <div class="card">
                     <div class="card-body">
                         <div class="col-md-2 pull-right "   >
-                            <select class="form-control " >
-                            <option >2023</option>
+                            <select class="form-control " id="user_year" onchange="load_graph(this)"  >
+                            <option selected >2023</option>
                             <option>2024</option>
                             <option>2025</option>
                             
                         </select>
                         </div>
                         
-                        <canvas id="bar-chart" width="800" height="450"></canvas>
+                        <canvas id="user-bar-chart" width="800" height="450"></canvas>
                   
                     </div>
                     </div>

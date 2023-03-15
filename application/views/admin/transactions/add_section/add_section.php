@@ -24,7 +24,7 @@
                     <!-- nav and search button -->
                     <div class="col-md-6 col-sm-8 clearfix">
                         <span style="font-size:23px;">
-                            <a href="<?php echo base_url() ?>Transactions" style="color: #000;">
+                            <a href="<?php echo base_url() ?>Pending_transactions" style="color: #000;">
                             <i class="fa fa-arrow-left"></i>
                             </a>
                         </span>
@@ -45,7 +45,7 @@
                             <h4 class="page-title pull-left"><?php echo $title ?></h4>
                             <ul class="breadcrumbs pull-left">
                                 <li><a href="<?php echo base_url() ?>">Home</a></li>
-                                <li><a href="<?php echo base_url() ?>transactions">Transactions</a></li>
+                                <li><a href="<?php echo base_url() ?>Pending_transactions">Pending Transactions</a></li>
                                 <li><a href="<?php echo base_url() ?>transactions/add_transactions"><?php echo $title ?></a></li>
                                
                                 
@@ -345,6 +345,21 @@
                   });
         }
 
+        function get_last_pmas_number(){
+
+             $.ajax({
+
+                    url: base_url + 'Transactions/get_last_pmas_no',
+                    dataType : 'text',
+                    success: function(result) {
+                        
+                      $('input[name=pmas_number]').val(parseInt(result) );
+                    
+                    }
+                  });
+
+        }
+        get_last_pmas_number();
         date();
 
 

@@ -138,14 +138,7 @@
               
             </div>
         </div>
-        <!-- main content area end -->
-        <!-- footer area start-->
-      <!--   <footer>
-            <div class="footer-area">
-                <p>© Copyright 2018. All right reserved. Template by <a href="https://colorlib.com/wp/">Colorlib</a>.</p>
-            </div>
-        </footer> -->
-        <!-- footer area end-->
+      
     </div>
     <!-- page container area end -->
     <!-- offset area start -->
@@ -154,7 +147,19 @@
      <?php $this->load->view('includes/scripts.php') ?> 
 
      <script>
-         new Chart(document.getElementById("bar-chart"), {
+
+        var year = $('#user_year option:selected').val();;
+
+        function load_graph($this){
+
+                load_user_chart($this.value)
+        }
+
+        function load_user_chart(year){
+
+            
+
+         new Chart(document.getElementById("user-bar-chart"), {
     type: 'bar',
     data: {
       labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
@@ -170,10 +175,21 @@
       legend: { display: false },
       title: {
         display: true,
-        text: 'Predicted world population (millions) in 2050'
+        text: 'Transactions in ' + year
+      },
+      animation:{
+      onProgress: function (animation){
+         animation.animationObject.currentStep / animation.animationObject.numSteps;
       }
     }
+    }
 });
+
+     }
+
+
+
+     load_user_chart(year);
      </script>
    
 </body>

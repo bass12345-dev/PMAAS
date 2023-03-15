@@ -18,7 +18,16 @@ class Dashboard extends CI_Controller {
 	public function index()
 	{
 		 $data['title'] = 'Dahboard';
-		 $data['count'] = $this->CountModel->count($this->transactions);
+		 if ($this->session->userdata('user_type') == 'admin') {
+		 	$data['count'] = $this->CountModel->count($this->transactions);
+		 }else {
+
+		 	$data['count_user_pending'] = $this->CountModel->countUserTran($this->transactions,array('created_by' => $this->session->userdata('user_id')),array('status' => 'pending'));
+		 	$data['count_user_completed'] = $this->CountModel->countUserTran($this->transactions,array('created_by' => $this->session->userdata('user_id')),array('status' => 'completed'));
+
+		 }
+		 
+		
 		$this->load->view('admin/dashboard/dashboard',$data);
 	}
 

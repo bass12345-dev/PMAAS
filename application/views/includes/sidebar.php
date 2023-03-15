@@ -16,7 +16,7 @@
                              ?>
                             <li><a href="<?php echo base_url() ?>"><i class="ti-map-alt"></i> <span>Dashboard</span></a></li>
                             <li><a href="<?php echo base_url() ?>transactions"><i class="ti-map-alt"></i> <span>All Transactions</span></a></li>
-                            <li><a href="<?php echo base_url() ?>transactions"><i class="ti-map-alt"></i> <span>Pending Transactions</span></a></li>
+                            <li><a href="<?php echo base_url() ?>pending_transactions"><i class="ti-map-alt"></i> <span>Pending Transactions</span></a></li>
                             <li><a href="<?php echo base_url() ?>cso"><i class="ti-map-alt"></i> <span>CSO</span></a></li>
                             <li><a href="<?php echo base_url() ?>responsibility_center"><i class="ti-map-alt"></i> <span>Responsibilty Center</span></a></li>
                             <li><a href="<?php echo base_url() ?>responsible_section"><i class="ti-map-alt"></i> <span>Responsible Section</span></a></li>

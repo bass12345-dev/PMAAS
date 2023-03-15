@@ -23,6 +23,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         return $this->db->get()->num_rows();
     }
 
+    public function countUserTran($table,$where1,$where2){
+
+        $this->db->from($table);
+      $this->db->where($where1);
+      $this->db->where($where2);
+        return $this->db->get()->num_rows();
+
+    }
+
 
 
    } 

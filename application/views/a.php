@@ -1,70 +1,33 @@
+<?php
+include "../../../database/db.php";
 
-       var myState = {
-            pdf: null,
-            currentPage: 1,
-            zoom: 1
-        }
-     
-        pdfjsLib.getDocument('./../x.pdf').then((pdf) => {
-     
-            myState.pdf = pdf;
-            render();
-        });
-        function render() {
-            myState.pdf.getPage(myState.currentPage).then((page) => {
-         
-                var canvas = document.getElementById("pdf_renderer");
-                var ctx = canvas.getContext('2d');
-     
-                var viewport = page.getViewport(myState.zoom);
-                canvas.width = viewport.width;
-                canvas.height = viewport.height;
-         
-                page.render({
-                    canvasContext: ctx,
-                    viewport: viewport
-                });
-            });
-        }
-        document.getElementById('go_previous').addEventListener('click', (e) => {
-            if(myState.pdf == null || myState.currentPage == 1) 
-              return;
-            myState.currentPage -= 1;
-            document.getElementById("current_page").value = myState.currentPage;
-            render();
-        });
-        document.getElementById('go_next').addEventListener('click', (e) => {
-            if(myState.pdf == null || myState.currentPage > myState.pdf._pdfInfo.numPages) 
-               return;
-            myState.currentPage += 1;
-            document.getElementById("current_page").value = myState.currentPage;
-            render();
-        });
-        document.getElementById('current_page').addEventListener('keypress', (e) => {
-            if(myState.pdf == null) return;
-         
-            // Get key code 
-            var code = (e.keyCode ? e.keyCode : e.which);
-         
-            // If key code matches that of the Enter key 
-            if(code == 13) {
-                var desiredPage = 
-                document.getElementById('current_page').valueAsNumber;
-                                 
-                if(desiredPage >= 1 && desiredPage <= myState.pdf._pdfInfo.numPages) {
-                    myState.currentPage = desiredPage;
-                    document.getElementById("current_page").value = desiredPage;
-                    render();
-                }
-            }
-        });
-        document.getElementById('zoom_in').addEventListener('click', (e) => {
-            if(myState.pdf == null) return;
-            myState.zoom += 0.5;
-            render();
-        });
-        document.getElementById('zoom_out').addEventListener('click', (e) => {
-            if(myState.pdf == null) return;
-            myState.zoom -= 0.5;
-            render();
-        });
+$year = $con->real_escape_string(strip_tags($_POST['year']));
+
+
+$and = 'AND YEAR(date_attendance) = '.$year;
+$months = array();
+$ontime = array();
+$late = array();
+
+
+for ($m = 1; $m <= 12; $m++) {
+$sql = "SELECT * FROM employee_attendance WHERE MONTH(date_attendance) = '$m' AND status_PM = 1 $and AND time_in_PM != '00:00:00'";
+$oquery = $con->query($sql);
+array_push($ontime, $oquery->num_rows);
+$sql = "SELECT * FROM employee_attendance WHERE MONTH(date_attendance) = '$m' AND status_PM = 0 $and";
+$lquery = $con->query($sql);
+array_push($late, $lquery->num_rows);
+$num = str_pad( $m, 2, 0, STR_PAD_LEFT );
+$month =  date('M', mktime(0, 0, 0, $m, 1));
+array_push($months, $month);
+
+# code...
+}
+
+$data['label'] = $months;
+$data['late'] = $late;
+$data['ontime'] = $ontime;
+
+
+echo json_encode($data);
+?>

@@ -84,6 +84,53 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       }
 
 
+
+      public function getUserPendingTransactions($table,$where){
+
+            $this->db->from($table);
+             $this->db->join('type_of_monitoring','type_of_monitoring.type_mon_id = transactions.type_of_monitoring_id');
+             $this->db->join('type_of_activity','type_of_activity.type_act_id = transactions.type_of_activity_id');
+              $this->db->join('responsibility_center','responsibility_center.res_center_id = transactions.responsibility_center_id');
+             // $this->db->join('trainings','trainings.transact_id = transactions.transaction_id');
+              $this->db->join('users','users.user_id = transactions.created_by');
+              $this->db->where($where);
+               $this->db->where('transactions.status','pending');
+            $this->db->order_by('transactions.pmas_no','desc');
+            return $this->db->get()->result_array();
+      }
+
+      public function getAdminPendingTransactions($table){
+
+            $this->db->from($table);
+             $this->db->join('type_of_monitoring','type_of_monitoring.type_mon_id = transactions.type_of_monitoring_id');
+             $this->db->join('type_of_activity','type_of_activity.type_act_id = transactions.type_of_activity_id');
+              $this->db->join('responsibility_center','responsibility_center.res_center_id = transactions.responsibility_center_id');
+             // $this->db->join('trainings','trainings.transact_id = transactions.transaction_id');
+              $this->db->join('users','users.user_id = transactions.created_by');
+           
+               $this->db->where('transactions.status','pending');
+            $this->db->order_by('transactions.pmas_no','desc');
+            return $this->db->get()->result_array();
+      }
+
+      public function getUserCompletedTransactions($table,$where){
+
+
+         $this->db->from($table);
+             $this->db->join('type_of_monitoring','type_of_monitoring.type_mon_id = transactions.type_of_monitoring_id');
+             $this->db->join('type_of_activity','type_of_activity.type_act_id = transactions.type_of_activity_id');
+              $this->db->join('responsibility_center','responsibility_center.res_center_id = transactions.responsibility_center_id');
+             // $this->db->join('trainings','trainings.transact_id = transactions.transaction_id');
+              $this->db->join('users','users.user_id = transactions.created_by');
+              $this->db->where($where);
+               $this->db->where('transactions.status','completed');
+            $this->db->order_by('transactions.pmas_no','desc');
+            return $this->db->get()->result_array();
+
+
+      }
+
+
       public function getTransactionTraining_data($where){
 
          $this->db->from('transactions');
@@ -101,6 +148,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
          $this->db->where($where);
          return $this->db->get()->result_array();
       }
+
+
+
+
+       // $purok = array(
+       //      'purok_records.purok_id' => $purok_info['purok_id'],
+       //      'purok_records.purok_name' => $purok_info['purok_name'],
+       //  );
+
+       //  $this->db->select('count(*) as count');
+       //  $this->db->from('purok_records,resident_records ');
+       //  // $this->db->where('resident_records.household_id = household.household_id');
+       //  // $this->db->where('residence_household.household_id = household.household_id');
+       //  $this->db->where('purok_records.purok_id = resident_records.purok_id');
+       //  $this->db->where($purok);
+       //  return $this->db->get()->result_array()[0];
 
 
    } 

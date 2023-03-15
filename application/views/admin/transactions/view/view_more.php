@@ -80,6 +80,7 @@
                                 <div class="row">
                                     <?php $this->load->view('admin/transactions/view/view_info') ?> 
                                         <div class="col-md-9 ">
+                                            <div class="card " style="border: 1px solid;">
                                             <div id="navigation_controls" class="mb-3" >
                                                 <a href="javascript:;" onclick="jQuery('.brgy-clearance').print()"  class="btn btn-success btn-rounded pull-right">Print</a>
                                             </div>
@@ -465,7 +466,7 @@
                                     </div>
 
                                    
-                                    
+                                    </div>
                                 </div>
                             </div>
                         </div>
