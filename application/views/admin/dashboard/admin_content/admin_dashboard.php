@@ -9,7 +9,7 @@
                                             <div class="seofct-icon">
                                                 <!-- <i class="ti-thumb-up"></i>  -->
                                                 Number of all Transactions</div>
-                                                <h2><?php echo $count ?></h2>
+                                                <h2><?php echo $count_admin_completed ?></h2>
                                         </div>
 
                                                 <!-- <canvas id="seolinechart1" height="50"></canvas> -->
@@ -25,7 +25,7 @@
                                             <div class="seofct-icon">
                                                 <!-- <i class="ti-thumb-up"></i>  -->
                                                 Pending Transactions</div>
-                                                <h2><?php echo $count ?></h2>
+                                                <h2><?php echo $count_admin_pending ?></h2>
                                         </div>
                                         
                                                 <!-- <canvas id="seolinechart1" height="50"></canvas> -->

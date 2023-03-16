@@ -41,30 +41,20 @@
                                     <div class="col-md-12 ">
 
                                         <div class="row">
-                                            <div class="col-md-3"><input type="text" class="form-control pull-right mt-2" name="daterange" value="01/01/2023 - 01/15/2023" /></div>
+                                           
 
 
                                             <?php if ($this->session->userdata('user_type') == 'user') {
                                                 // code...
                                              ?>
-                                             <div class="col-md-9">  <a href="<?php echo base_url() ?>Pending_transactions/add_transactions" class="btn  mb-3 mt-2 sub-button pull-right" > Add Transactions</a> </div>
+                                             <div class="col-md-12">  <a href="<?php echo base_url() ?>Pending_transactions/add_transactions" class="btn  mb-3 mt-2 sub-button pull-right" > Add Transactions</a> </div>
                                          <?php } ?>
                                             
                                         </div>
                                           
                                        
                                         <div class="data-tables">
-                                          <!--   <table border="0" >
-                                                <tbody><tr>
-                                                    <td>Start Date:</td>
-                                                    <td><input type="text" id="min" class="form-control" name="min"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>End date:</td>
-                                                    <td><input type="text" id="max" class="form-control" name="max"></td>
-                                                </tr>
-                                            </tbody>
-                                        </table> -->
+                                      
 
                                       
                                             <table id="pending_transactions_table" style="width:100%" class="text-center stripe">

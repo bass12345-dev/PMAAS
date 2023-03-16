@@ -65,6 +65,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
              $this->db->join('type_of_activity','type_of_activity.type_act_id = transactions.type_of_activity_id');
               $this->db->join('responsibility_center','responsibility_center.res_center_id = transactions.responsibility_center_id');
             $this->db->join('users','users.user_id = transactions.created_by');
+             $this->db->where('transactions.status','completed');
             $this->db->order_by('transactions.pmas_no','desc');
             return $this->db->get()->result_array();
       }
@@ -152,18 +153,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 
-       // $purok = array(
-       //      'purok_records.purok_id' => $purok_info['purok_id'],
-       //      'purok_records.purok_name' => $purok_info['purok_name'],
-       //  );
+    public function get_user_chart($table,$m,$y,$where){
 
-       //  $this->db->select('count(*) as count');
-       //  $this->db->from('purok_records,resident_records ');
-       //  // $this->db->where('resident_records.household_id = household.household_id');
-       //  // $this->db->where('residence_household.household_id = household.household_id');
-       //  $this->db->where('purok_records.purok_id = resident_records.purok_id');
-       //  $this->db->where($purok);
-       //  return $this->db->get()->result_array()[0];
+         $this->db->from($table);
+         $this->db->where('MONTH(date_and_time_filed)',$m);
+          $this->db->where('YEAR(date_and_time_filed)',$y);
+          $this->db->where('transactions.status','completed');
+           $this->db->where($where);
+          return $this->db->get()->num_rows();
+      }
+
 
 
    } 

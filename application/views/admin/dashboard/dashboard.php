@@ -156,34 +156,67 @@
         }
 
         function load_user_chart(year){
-
             
 
-         new Chart(document.getElementById("user-bar-chart"), {
-    type: 'bar',
-    data: {
-      labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
-      datasets: [
-        {
-          label: "Population (millions)",
-          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-          data: [2478,5267,734,784,433]
-        }
-      ]
-    },
-    options: {
-      legend: { display: false },
-      title: {
-        display: true,
-        text: 'Transactions in ' + year
-      },
-      animation:{
-      onProgress: function (animation){
-         animation.animationObject.currentStep / animation.animationObject.numSteps;
-      }
-    }
-    }
-});
+
+            $.ajax({
+                url : base_url + 'Transactions/load_user_chart',
+                data:{year : year},
+                method : 'POST',
+                dataType : 'json',
+                success : function(data)
+                {
+                    console.log(data)
+                    try{
+                                 new Chart(document.getElementById("user-bar-chart"), {
+                                    type: 'bar',
+                                    data: {
+                                      labels: data.label,
+                                      datasets: [
+                                        {
+                                            label               : 'Transactions',
+                                             backgroundColor    :  "#3F6BA4",
+                                             borderColor: 'rgb(23, 125, 255)',
+                                            data                : data.data
+                                        }
+                                      ]
+                                    },
+                                    options: {
+                                     legend: {
+                                                position: 'top',
+                                                labels: {
+                                                    padding: 10,
+                                                    fontColor: '#007bff',
+                                                }
+                                            },
+
+                                     responsive: true,
+                                      title: {
+                                        display: true,
+                                        text: 'Transactions in year ' + year
+                                      },
+
+                                      scales: {
+                                            yAxes: [{
+                                                ticks: {
+                                                    beginAtZero: true
+                                                }
+                                            }]
+                                        },
+                                                  
+                                    }
+                                });
+                    }catch(error) {
+
+                    }
+                },
+                    error: function (xhr, status, error) {
+                // error here...
+            },
+            })
+            
+
+
 
      }
 

@@ -56,6 +56,28 @@ class Transactions extends CI_Controller {
 
 	}
 
+
+
+
+	public  function load_user_chart(){
+
+			$year = $this->input->post('year');
+			$months = array();
+			$transactions = array();
+
+			for ($m = 1; $m <= 12; $m++) {
+
+				$transaction = $this->GetModel->get_user_chart($this->transactions,$m,$year,array('created_by' => $this->session->userdata('user_id')));
+				array_push($transactions, $transaction);
+				$month =  date('M', mktime(0, 0, 0, $m, 1));
+				array_push($months, $month);
+
+			}
+
+			$data['label'] = $months;
+			$data['data'] = $transactions;
+			echo json_encode($data);
+	}
 	
 
 
