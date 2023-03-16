@@ -22,6 +22,7 @@ class Dashboard extends CI_Controller {
 		 	$data['count'] = $this->CountModel->count($this->transactions);
 		 	$data['count_admin_pending'] = $this->CountModel->count1($this->transactions,array('status' => 'pending'));
 		 	$data['count_admin_completed'] = $this->CountModel->count1($this->transactions,array('status' => 'completed'));
+		 	$this->load->view('admin/dashboard/admin_content/admin_dashboard',$data);
 		 }else {
 
 		 	$data['count_user_pending'] = $this->CountModel->countUserTran($this->transactions,array('created_by' => $this->session->userdata('user_id')),array('status' => 'pending'));
@@ -30,7 +31,7 @@ class Dashboard extends CI_Controller {
 		 }
 		 
 		
-		$this->load->view('admin/dashboard/dashboard',$data);
+		
 	}
 
 

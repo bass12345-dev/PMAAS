@@ -165,5 +165,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 
+    public function get_admin_chart($table,$m,$y){
+
+         $this->db->from($table);
+         $this->db->where('MONTH(date_and_time_filed)',$m);
+          $this->db->where('YEAR(date_and_time_filed)',$y);
+          $this->db->where('transactions.status','completed');
+
+          return $this->db->get()->num_rows();
+      }
+
+
+
    } 
  ?>

@@ -1,8 +1,41 @@
- <div class="main-content-inner">
+
+
+
+
+
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <?php $this->load->view('includes/meta.php') ?>
+    <?php $this->load->view('includes/css.php') ?> 
+
+    <!-- modernizr css -->
+</head>
+
+<body>
+   
+    <!-- preloader area start -->
+     <?php $this->load->view('includes/preloader.php') ?> 
+    <!-- preloader area end -->
+    <!-- page container area start -->
+    <div class="page-container">
+        <!-- sidebar menu area start -->
+        <?php $this->load->view('includes/sidebar.php') ?> 
+        <!-- sidebar menu area end -->
+        <!-- main content area start -->
+        <div class="main-content">
+            <!-- header area start -->
+            <?php $this->load->view('includes/topbar.php') ?> 
+            <!-- header area end -->
+            <!-- page title area start -->
+            <?php $this->load->view('includes/breadcrumbs.php') ?> 
+            <!-- page title area end -->
+                 <div class="main-content-inner">
                 <div class="row">
                     <div class="col-lg-8">
                         <div class="row">
-                            <div class="col-md-4 mt-5 mb-3">
+                            <div class="col-md-4 mt-3 mb-2">
                                 <div class="card">
                                     <div class="seo-fact sbg1">
                                         <div class="p-3 d-flex justify-content-between align-items-center">
@@ -18,7 +51,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-4 mt-5 mb-3">
+                            <div class="col-md-4 mt-3 mb-2">
                                 <div class="card">
                                     <div class="seo-fact sbg1">
                                         <div class="p-3 d-flex justify-content-between align-items-center">
@@ -109,15 +142,15 @@
                     <div class="card">
                     <div class="card-body">
                         <div class="col-md-2 pull-right "   >
-                            <select class="form-control " >
-                            <option >2023</option>
+                            <select class="form-control " id="admin_year" onchange="load_graph(this)"  >
+                            <option selected >2023</option>
                             <option>2024</option>
                             <option>2025</option>
                             
                         </select>
                         </div>
                         
-                        <canvas id="bar-chart" width="800" height="450"></canvas>
+                        <canvas id="admin-bar-chart" width="800" height="450"></canvas>
                   
                     </div>
                     </div>
@@ -128,3 +161,98 @@
 
 
                 </div>
+
+           
+            </div>
+        </div>
+      
+    </div>
+    <!-- page container area end -->
+    <!-- offset area start -->
+  
+<?php $this->load->view('includes/offset.php') ?> 
+     <?php $this->load->view('includes/scripts.php') ?> 
+
+     <script>
+
+        var year = $('#admin_year option:selected').val();;
+
+        function load_graph($this){
+
+                load_user_chart($this.value)
+        }
+
+        function load_user_chart(year){
+            
+
+
+            $.ajax({
+                url : base_url + 'Transactions/load_admin_chart',
+                data:{year : year},
+                method : 'POST',
+                dataType : 'json',
+                success : function(data)
+                {
+                    console.log(data)
+                    try{
+                                 new Chart(document.getElementById("admin-bar-chart"), {
+                                    type: 'bar',
+                                    data: {
+                                      labels: data.label,
+                                      datasets: [
+                                        {
+                                            label               : 'Transactions',
+                                             backgroundColor    :  "#3F6BA4",
+                                             borderColor: 'rgb(23, 125, 255)',
+                                            data                : data.data
+                                        }
+                                      ]
+                                    },
+                                    options: {
+
+                                     legend: {
+                                                position: 'top',
+                                                labels: {
+                                                    padding: 10,
+                                                    fontColor: '#007bff',
+                                                }
+                                            },
+
+                                     responsive: true,
+                                      title: {
+                                        display: true,
+                                        text: 'Transactions in year ' + year
+                                      },
+
+                                      scales: {
+                                            y: {
+                                                
+                                                    beginAtZero: true
+                                                
+                                            }
+                                        },
+                                                  
+                                    }
+                                });
+                    }catch(error) {
+
+                    }
+                },
+                    error: function (xhr, status, error) {
+                // error here...
+            },
+            })
+            
+
+
+
+     }
+
+
+
+     load_user_chart(year);
+     </script>
+   
+</body>
+
+</html>
