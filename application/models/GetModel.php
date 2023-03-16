@@ -40,7 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     public function get_last_pmas_number(){
 
             $this->db->from('transactions');
-            $this->db->order_by('pmas_no','desc');
+            $this->db->order_by('number','desc');
             return $this->db->get()->result_array()[0];
       }
 

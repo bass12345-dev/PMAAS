@@ -23,10 +23,10 @@
     ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9", "ee6b7db5b51705a13dc2339db3edaf6d"];
     </script>
     <!-- all line chart activation -->
-    <script src="<?php echo base_url(); ?>assets/js/line-chart.js"></script>
+<!--     <script src="<?php echo base_url(); ?>assets/js/line-chart.js"></script> -->
     <!-- all pie chart -->
-    <script src="<?php echo base_url(); ?>assets/js/pie-chart.js"></script>
-
+<!--     <script src="<?php echo base_url(); ?>assets/js/pie-chart.js"></script>
+ -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
       <!-- Start datatable js -->
     <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
@@ -56,6 +56,7 @@
 <script src="<?php echo base_url(); ?>assets/datepicker/bootstrap-datetimepicker.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.print/1.6.2/jQuery.print.min.js" integrity="sha512-t3XNbzH2GEXeT9juLjifw/5ejswnjWWMMDxsdCg4+MmvrM+MwqGhxlWeFJ53xN/SBHPDnW0gXYvBx/afZZfGMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
     <script type="text/javascript">
@@ -1940,6 +1941,8 @@
                        $('a.form-wizard-previous-btn').click();
                    
                 }
+
+                get_last_pmas_number();
            },
             error: function(xhr) { // if error occured
                 alert("Error occured.please try again");
