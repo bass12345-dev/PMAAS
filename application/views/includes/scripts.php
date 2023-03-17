@@ -1881,7 +1881,71 @@
         $('#add_remarks_modal').on('submit', function(e) {
         e.preventDefault();
 
-        
+        var myContent = tinymce.get("tiny").getContent();
+        var id = $('input[name=transac_id]').val();
+            
+        $.ajax({
+            type: "POST",
+            url: base_url + 'Transactions/add_remarks',
+            data: {content : myContent, id : id},
+            dataType: 'json',
+            beforeSend: function() {
+               $('.btn-add-remarks').html('<div class="loader"></div>');
+                $('.btn-add-remarks').prop("disabled", true);
+            },
+            success: function(data)
+            {            
+                if (data.response) {
+             
+                    $('.btn-add-remarks').prop("disabled", false);
+                    $('.btn-add-remarks').text('Submit');
+                        Toastify({
+                                  text: data.message,
+                                  className: "info",
+                                  style: {
+                                    "background" : "linear-gradient(to right, #00b09b, #96c93d)",
+                                    "height" : "60px",
+                                    "width" : "350px",
+                                    "font-size" : "20px"
+                                  }
+                                }).showToast();
+
+                      
+
+                      $('a.form-wizard-previous-btn').click();
+                     
+                           
+             
+                }else {
+                    $('.btn-add-remarks').prop("disabled", false);
+                    $('.btn-add-remarks').text('Submit');
+                      Toastify({
+                                  text: data.message,
+                                  className: "info",
+                                  style: {
+                                    "background" : "linear-gradient(to right, #00b09b, #96c93d)",
+                                    "height" : "60px",
+                                    "width" : "350px",
+                                    "font-size" : "20px"
+                                  }
+                                }).showToast();
+
+                       
+                   
+                }
+
+                get_last_pmas_number();
+           },
+            error: function(xhr) { // if error occured
+                alert("Error occured.please try again");
+                 $('.btn-add-remarks').prop("disabled", false);
+                 $('.btn-add-remarks').text('Submit');
+            },
+
+            })
+                
+
+
         })
 
 

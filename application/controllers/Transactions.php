@@ -204,6 +204,11 @@ public function get_user_transactions_num(){
 }
 
 
+	public function add_remarks(){
+		
+	}
+
+
 
 	public function add() {
 
