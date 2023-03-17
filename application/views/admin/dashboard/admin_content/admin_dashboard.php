@@ -102,35 +102,15 @@
                                         <thead class="bg-light text-capitalize">
                                             <th>PMAS NO</th>
                                             <th>Date & Time Filed</th>
+                                            <th>Responsible Section</th>
                                             <th>Type of Activity</th>
-                                            <th>CSO</th>
+                                            
                                             <th>Date And Time</th>
                                             <th>Person Responsible</th>
                                             <th>Action</th>
                                        </thead>
                                        <tbody>
-                                     <!--   <?php foreach ($pending_transactions_limit as $row) {
-                                           // code...
-                                        ?>
-                                        <tr>
-                                        <td style="font-weight: bold;"><?php echo date('Y', strtotime($row['date_and_time_filed'])).' - '.date('m', strtotime($row['date_and_time_filed'])).' - '.$row['number']; ?></td>
-                                        <td><?php echo date('M,d Y', strtotime($row['date_and_time_filed'])).' '.date('h:i a', strtotime($row['date_and_time_filed'])); ?></td>
-                                        <td><?php echo $row['type_act_name']; ?></td>
-                                        <td><?php echo $row['type_mon_name']; ?></td>
-                                        <td><?php echo date('M,d Y', strtotime($row['date_time'])).' '.date('h:i a', strtotime($row['date_time'])) ?></td>
-                                        <td><?php echo $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension'] ?></td>
-                                        <td><div class="btn-group dropleft">
-                                              <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                               <i class="ti-settings"></i>
-                                              </button>
-                                              <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="#">Action</a>
-                                                <a class="dropdown-item" href="#">Another action</a>
-                                                <a class="dropdown-item" href="#">Something else here</a>
-                                              </div>
-                                            </div></td>
-                                        </tr>
-                                        <?php } ?> -->
+                                
 
                                         </tbody>
 
@@ -177,8 +157,8 @@
     </div>
     <!-- page container area end -->
     <!-- offset area start -->
-  
-<?php $this->load->view('includes/offset.php') ?> 
+    <?php $this->load->view('admin/dashboard/admin_content/modals/add_remarks') ?> 
+    <?php $this->load->view('includes/offset.php') ?> 
      <?php $this->load->view('includes/scripts.php') ?> 
 
      <script>
@@ -301,11 +281,18 @@
                           
                         tr.append('<td class="py-1 px-2">' + resp[k].pmas_no + '</td>')
                         tr.append('<td class="py-1 px-2">' + resp[k].date_and_time_filed + '</td>')
-                        tr.append('<td class="py-1 px-2">' + resp[k].type_act_name + '</td>')
                         tr.append('<td class="py-1 px-2">' + resp[k].type_mon_name + '</td>')
+                        tr.append('<td class="py-1 px-2">' + resp[k].type_act_name + '</td>')
                         tr.append('<td class="py-1 px-2">' + resp[k].date_time +  '</td>')
                         tr.append('<td class="py-1 px-2">' + resp[k].name + '</td>')
-                        tr.append('<td class="py-1 px-2">' + resp[k].pmas_no + '</td>')
+                        tr.append('<td class="py-1 px-2"><div class="btn-group dropleft">\
+                                              <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
+                                               <i class="ti-settings" style="font-size : 15px;"></i>\
+                                              </button>\
+                                              <div class="dropdown-menu">\
+                                                <a class="dropdown-item" href="#" id="add-remarks" data-id="'+resp[k].transaction_id+'">Add Remarks</a>\
+                                              </div>\
+                                            </div></td>')
 
                        
                          
@@ -331,35 +318,11 @@
             }, 500)
 
 
-
-
-
-
-
-
-
-
-
-
-
-        //     $.ajax({
-        //         method : 'GET',
-        //         url : base_url + 'Transactions/load_admin_pending_l/'+show,
-        //         dataType : 'json',
-        //         success : function(data)
-        //         {
-
-
-        //             console.log(data)   
-
-                        
-        //          },  error: function (xhr, status, error) {
-        //         // error here...
-        //     },
-
-        // })
-
      }
+
+
+
+
 
 
      load_pending_transactions(show);

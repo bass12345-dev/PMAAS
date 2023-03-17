@@ -89,6 +89,7 @@
         <!-- main content area end -->
        
     <?php $this->load->view('admin/transactions/modal/view_more_transaction') ?> 
+        <?php $this->load->view('admin/dashboard/admin_content/modals/add_remarks') ?> 
      <?php $this->load->view('includes/scripts.php') ?> 
      <script type="text/javascript">
          $(function() {
@@ -98,6 +99,12 @@
             console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
           });
         });
+
+
+           
+
+
+              
      </script>
    
 </body>

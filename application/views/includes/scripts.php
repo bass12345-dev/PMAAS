@@ -52,11 +52,15 @@
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script src="<?php echo base_url(); ?>assets/datepicker/bootstrap-datetimepicker.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.print/1.6.2/jQuery.print.min.js" integrity="sha512-t3XNbzH2GEXeT9juLjifw/5ejswnjWWMMDxsdCg4+MmvrM+MwqGhxlWeFJ53xN/SBHPDnW0gXYvBx/afZZfGMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/datepicker/bootstrap-datetimepicker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.print/1.6.2/jQuery.print.min.js" integrity="sha512-t3XNbzH2GEXeT9juLjifw/5ejswnjWWMMDxsdCg4+MmvrM+MwqGhxlWeFJ53xN/SBHPDnW0gXYvBx/afZZfGMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdn.tiny.cloud/1/ds0fhm6q5wk0i2dye0vxwap3wi77umvl550koo9laumyhtg1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/ds0fhm6q5wk0i2dye0vxwap3wi77umvl550koo9laumyhtg1/tinymce/5/jquery.tinymce.min.js" referrerpolicy="origin"></script>
+
 
 
     <script type="text/javascript">
@@ -67,6 +71,19 @@
       var base_url = '<?php echo base_url(); ?>';
       var _validFileExtensions = [".pdf"];    
       var validImageExtensions = [".png",".jpg","jpeg"];
+
+
+      $('textarea#tiny').tinymce({
+        height: 500,
+        menubar: false,
+        plugins: [
+          'advlist autolink lists link image charmap print preview anchor',
+          'searchreplace visualblocks code fullscreen',
+          'insertdatetime media table paste code help wordcount'
+        ],
+        toolbar: 'undo redo | formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | help'
+      });
+
 
 
        function ValidateImage(oInput) {
@@ -1761,7 +1778,7 @@
 
 
 
-             var transaction_table = $('#pending_transactions_table').DataTable({
+             var pending_transaction_table = $('#pending_transactions_table').DataTable({
         scrollX: true,
         "ordering": false,
 
@@ -1833,10 +1850,16 @@
                 // data: "song_title",
                 data: null,
                 render: function (data, type, row) {
-                    return '<ul class="d-flex justify-content-center">\
-                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'+data['transaction_id']+'" data-a="'+data['is_training']+'" data-b="'+data['is_project_monitoring']+'"  id="view_more_transaction"><i class="fa fa-eye"></i></a></li>\
-                                <li><a href="javascript:;" data-id="'+data['type_act_id']+'"  id="delete-activity"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>\
-                                </ul>';
+                    return '<div class="btn-group dropleft">\
+                                              <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
+                                               <i class="ti-settings" style="font-size : 15px;"></i>\
+                                              </button>\
+                                              <div class="dropdown-menu">\
+                                                <a class="dropdown-item" href="javascript:;" data-id="'+row['transaction_id']+'" id="add-remarks">Add Remarks</a>\
+                                                <hr>\
+                                                <a class="dropdown-item" href="#">View Information</a>\
+                                              </div>\
+                                            </div>';
                 }
 
             },
@@ -1845,6 +1868,25 @@
 
 
       });
+
+
+        $(document).on('click','a#add-remarks',function (e) {
+
+               $("#add_remarks_modal").modal('show');
+               $('input[name=transact_id]').val($(this).data('id'));
+            
+        });
+
+
+        $('#add_remarks_modal').on('submit', function(e) {
+        e.preventDefault();
+
+        
+        })
+
+
+
+
 
 
 
