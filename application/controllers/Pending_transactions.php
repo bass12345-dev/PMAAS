@@ -62,7 +62,7 @@ class Pending_transactions extends CI_Controller {
 
             	$data[] = array(
             				'transaction_id' => $row['transaction_id'],
-            				'pmas_no' => $row['pmas_no'],
+            				'pmas_no' => date('Y', strtotime($row['date_and_time_filed'])).' - '.date('m', strtotime($row['date_and_time_filed'])).' - '.$row['number'],
             				'date_and_time_filed' => date('M,d Y', strtotime($row['date_and_time_filed'])).' '.date('h:i a', strtotime($row['date_and_time_filed'])),
             				'type_mon_name' => $row['type_mon_name'],
             				'type_act_name' => $row['type_act_name'],
@@ -70,6 +70,7 @@ class Pending_transactions extends CI_Controller {
             				'date_time' => date('M,d Y', strtotime($row['date_time'])).' '.date('h:i a', strtotime($row['date_time'])),
             				'is_training' => $row['is_training'] == 1 ? true : false,
             				'is_project_monitoring' =>  $row['is_project_monitoring'] == 1 ? true : false,
+            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension']
 
             	);
             # code...
@@ -83,7 +84,7 @@ class Pending_transactions extends CI_Controller {
 
             	$data[] = array(
             				'transaction_id' => $row['transaction_id'],
-            				'pmas_no' => $row['pmas_no'],
+            				'pmas_no' => date('Y', strtotime($row['date_and_time_filed'])).' - '.date('m', strtotime($row['date_and_time_filed'])).' - '.$row['number'],
             				'date_and_time_filed' => date('M,d Y', strtotime($row['date_and_time_filed'])).' '.date('h:i a', strtotime($row['date_and_time_filed'])),
             				'type_mon_name' => $row['type_mon_name'],
             				'type_act_name' => $row['type_act_name'],
@@ -91,6 +92,8 @@ class Pending_transactions extends CI_Controller {
             				'date_time' => date('M,d Y', strtotime($row['date_time'])).' '.date('h:i a', strtotime($row['date_time'])),
             				'is_training' => $row['is_training'] == 1 ? true : false,
             				'is_project_monitoring' =>  $row['is_project_monitoring'] == 1 ? true : false,
+            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension']
+
 
             	);
             # code...

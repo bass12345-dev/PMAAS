@@ -66,7 +66,7 @@
                                                         <th>Type of Activity</th>
                                                         <th>Responsibility Center</th>
                                                         <th>Date And Time</th>
-                                                        <!-- <th>Added By</th> -->
+                                                        <th>Person Responsible</th>
                                                         <th>Actions</th>  
                                                     </tr>
                                                 </thead> 

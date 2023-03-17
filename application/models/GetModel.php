@@ -114,6 +114,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             return $this->db->get()->result_array();
       }
 
+
+      public function getAdminPendingTransactionslimit($table,$limit){
+
+            $this->db->from($table);
+             $this->db->join('type_of_monitoring','type_of_monitoring.type_mon_id = transactions.type_of_monitoring_id');
+             $this->db->join('type_of_activity','type_of_activity.type_act_id = transactions.type_of_activity_id');
+              $this->db->join('responsibility_center','responsibility_center.res_center_id = transactions.responsibility_center_id');
+             // $this->db->join('trainings','trainings.transact_id = transactions.transaction_id');
+              $this->db->join('users','users.user_id = transactions.created_by');
+           
+               $this->db->where('transactions.status','pending');
+            $this->db->order_by('transactions.pmas_no','desc');
+            $this->db->limit(50);
+            return $this->db->get()->result_array();
+      }
+
       public function getUserCompletedTransactions($table,$where){
 
 

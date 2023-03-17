@@ -4,6 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Dashboard extends CI_Controller {
 
 	public $transactions = 'transactions';
+	public $limit5 = 5; 
 
 
 	public function __construct()
@@ -22,6 +23,7 @@ class Dashboard extends CI_Controller {
 		 	$data['count'] = $this->CountModel->count($this->transactions);
 		 	$data['count_admin_pending'] = $this->CountModel->count1($this->transactions,array('status' => 'pending'));
 		 	$data['count_admin_completed'] = $this->CountModel->count1($this->transactions,array('status' => 'completed'));
+		 	$data['pending_transactions_limit'] = $this->GetModel->getAdminPendingTransactionslimit($this->transactions,$this->limit5);
 		 	$this->load->view('admin/dashboard/admin_content/admin_dashboard',$data);
 		 }else {
 

@@ -86,49 +86,57 @@
 
 
                 <div class="row">
-                    <div class="col-lg-12 mt-sm-30 mt-xs-30">
+                    <div class="col-lg-12 mt-sm-10 mt-xs-10">
                         <div class="card">
                             <div class="card-body">
-                                <div class="d-sm-flex justify-content-between align-items-center">
-                                    <h4 class="header-title">New Transaction</h4>                             
-                                     <select class="custome-select border-0 pr-3">
-                                        <option selected>Last 24 Hours</option>
-                                        <option value="0">01 July 2018</option>
+                              <div class="d-sm-flex justify-content-between align-items-center">
+                                    <h4 class="header-title">Show</h4>                             
+                                     <select class="custome-select border-0 pr-3" id="show_" onchange="load_pending(this)">
+                                        <option selected>5</option>
+                                        <option value="10">10</option>
+                                        <option value="10">15</option>
                                     </select>
-                                </div>
+                                </div> 
                                 <div class="trad-history mt-4">
-                                    <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="buy_order" role="tabpanel">
-                                    <div class="table-responsive">
-                                    <table class="dbkit-table">
-                                    <tr class="heading-td">
-                                    <td>PMAS NO</td>
-                                    <td>Date & Time Filed</td>
-                                    <td>Person Responsible</td>
-                                    <td>Type of Activity</td>
-                                    <td>CSO</td>
-                                    <td>Date And Time</td>
-                                    </tr>
-                                
-                                 
-                                    </table>
-                                    </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="sell_order" role="tabpanel">
-                                    <div class="table-responsive">
-                                    <table class="dbkit-table">
-                                    <tr class="heading-td">
-                                    <td>Trading ID</td>
-                                    <td>Time</td>
-                                    <td>Status</td>
-                                    <td>Amount</td>
-                                    <td>Last Trade</td>
-                                    </tr>
-                                    
-                                    </table>
-                                    </div>
-                                    </div>
-                                    </div>
+                                    <table  style="width:100%" class="text-center stripe table" id="pending_transactions_limit">
+                                        <thead class="bg-light text-capitalize">
+                                            <th>PMAS NO</th>
+                                            <th>Date & Time Filed</th>
+                                            <th>Type of Activity</th>
+                                            <th>CSO</th>
+                                            <th>Date And Time</th>
+                                            <th>Person Responsible</th>
+                                            <th>Action</th>
+                                       </thead>
+                                       <tbody>
+                                     <!--   <?php foreach ($pending_transactions_limit as $row) {
+                                           // code...
+                                        ?>
+                                        <tr>
+                                        <td style="font-weight: bold;"><?php echo date('Y', strtotime($row['date_and_time_filed'])).' - '.date('m', strtotime($row['date_and_time_filed'])).' - '.$row['number']; ?></td>
+                                        <td><?php echo date('M,d Y', strtotime($row['date_and_time_filed'])).' '.date('h:i a', strtotime($row['date_and_time_filed'])); ?></td>
+                                        <td><?php echo $row['type_act_name']; ?></td>
+                                        <td><?php echo $row['type_mon_name']; ?></td>
+                                        <td><?php echo date('M,d Y', strtotime($row['date_time'])).' '.date('h:i a', strtotime($row['date_time'])) ?></td>
+                                        <td><?php echo $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension'] ?></td>
+                                        <td><div class="btn-group dropleft">
+                                              <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                               <i class="ti-settings"></i>
+                                              </button>
+                                              <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="#">Action</a>
+                                                <a class="dropdown-item" href="#">Another action</a>
+                                                <a class="dropdown-item" href="#">Something else here</a>
+                                              </div>
+                                            </div></td>
+                                        </tr>
+                                        <?php } ?> -->
+
+                                        </tbody>
+
+                                    </table> 
+
+                                    <a href="<?php echo base_url() ?>pending_transactions" class="btn btn-outline-secondary">See More</a> 
                                 </div>
                             </div>
                         </div>
@@ -175,8 +183,12 @@
 
      <script>
 
-        var year = $('#admin_year option:selected').val();;
-
+        var year = $('#admin_year option:selected').val();
+        var show = $('#show_ option:selected').val();;
+        
+        function load_pending($this){
+            load_pending_transactions($this.value)
+        }
         function load_graph($this){
 
                 load_user_chart($this.value)
@@ -193,7 +205,7 @@
                 dataType : 'json',
                 success : function(data)
                 {
-                    console.log(data)
+                  
                     try{
                                  new Chart(document.getElementById("admin-bar-chart"), {
                                     type: 'bar',
@@ -248,8 +260,109 @@
 
      }
 
+    
+
+     function load_pending_transactions(show){
+
+        var table = $('#pending_transactions_limit')
+        table.find('tbody').html('')
+        var tr1 = $('<tr>')
+        tr1.html('<th class="py-1 px-2 text-center">Please Wait</th>')
+        table.find('tbody').append(tr1)
+        setTimeout(() => {
 
 
+
+             $.ajax({
+             method : 'GET',
+            url : base_url + 'Transactions/load_admin_pending_l/'+show,
+            // Error Function
+            error: err => {
+                console.log(err)
+                alert("An error occured")
+               
+              
+            },
+            dataType: 'json',
+            // Succes Function
+            success: function(resp) {
+                console.log(resp)
+
+                tr1.html('')
+                    table.find('tbody').append(tr1)
+                if (resp.length > 0) {
+                    // If returned json data is not empty
+                    var i = 1;
+                    // looping the returned data
+                    Object.keys(resp).map(k => {
+                        // creating new table row element
+                        var tr = $('<tr>')
+                         
+                          
+                        tr.append('<td class="py-1 px-2">' + resp[k].pmas_no + '</td>')
+                        tr.append('<td class="py-1 px-2">' + resp[k].date_and_time_filed + '</td>')
+                        tr.append('<td class="py-1 px-2">' + resp[k].type_act_name + '</td>')
+                        tr.append('<td class="py-1 px-2">' + resp[k].type_mon_name + '</td>')
+                        tr.append('<td class="py-1 px-2">' + resp[k].date_time +  '</td>')
+                        tr.append('<td class="py-1 px-2">' + resp[k].name + '</td>')
+                        tr.append('<td class="py-1 px-2">' + resp[k].pmas_no + '</td>')
+
+                       
+                         
+
+                        // Append table row item to table body
+                        table.find('tbody').append(tr)
+                    })
+                } else {
+                    // If returned json data is empty
+                    var tr = $('<tr>')
+                    tr.append('<th class="py-1 px-2 text-center">No data to display</th>')
+                    table.find('tbody').append(tr)
+                }
+              
+            }
+        })
+
+
+
+
+
+
+            }, 500)
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //     $.ajax({
+        //         method : 'GET',
+        //         url : base_url + 'Transactions/load_admin_pending_l/'+show,
+        //         dataType : 'json',
+        //         success : function(data)
+        //         {
+
+
+        //             console.log(data)   
+
+                        
+        //          },  error: function (xhr, status, error) {
+        //         // error here...
+        //     },
+
+        // })
+
+     }
+
+
+     load_pending_transactions(show);
      load_user_chart(year);
      </script>
    
