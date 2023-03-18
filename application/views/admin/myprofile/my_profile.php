@@ -122,10 +122,13 @@
                                         </div>
                                     </div>
                                     
-                                    <div class="col-md-6  mt-2 ">                                       
+                                    <div class="col-md-6  mt-2 ">      
+
+
                                                 
                                                 <div class="text-center mb-2">
-                                                    <img src="" class="rounded" id="profile_pic" alt="..." style="height: 500px; width: 500px;">
+                                                    <img src="" lass="rounded mb-3" style="width: 250px; border-radius: 70px;"
+  alt="Avatar" id="profile_pic">
                                                 </div>                                            
                                                  <button class="btn btn-block btn-rounded btn-success update_profile_picture">Update Profile Picture</button>   
                                     </div>

@@ -67,6 +67,7 @@
                                                         <th>Responsibility Center</th>
                                                         <th>Date And Time</th>
                                                         <th>Person Responsible</th>
+                                                         <th></th>
                                                         <th>Actions</th>  
                                                     </tr>
                                                 </thead> 

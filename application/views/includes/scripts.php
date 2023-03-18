@@ -1691,6 +1691,7 @@
 
 
           var transaction_table = $('#transactions_table').DataTable({
+        scrollY: 200,
         scrollX: true,
         "ordering": false,
 
@@ -1777,8 +1778,35 @@
 
 
 
+        function count_pending_transactions(){
+
+                $.ajax({
+            type: "POST",
+            url: base_url + 'Pending_transactions/get_pending_transactions',
+            dataType: 'json',
+             success: function(data)
+            {   
+
+            $('.count_pending').text(data.length)        
+                
+           },
+            error: function(xhr) { // if error occured
+                
+            },
+
+
+        });
+
+        }
+
+
+        count_pending_transactions();
+
+
+
 
              var pending_transaction_table = $('#pending_transactions_table').DataTable({
+      scrollY: 500,
         scrollX: true,
         "ordering": false,
 
@@ -1843,6 +1871,15 @@
                 }
 
             },
+
+              {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return row.s;
+                }
+
+            },
             
              
 
@@ -1850,16 +1887,7 @@
                 // data: "song_title",
                 data: null,
                 render: function (data, type, row) {
-                    return '<div class="btn-group dropleft">\
-                                              <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
-                                               <i class="ti-settings" style="font-size : 15px;"></i>\
-                                              </button>\
-                                              <div class="dropdown-menu">\
-                                                <a class="dropdown-item" href="javascript:;" data-id="'+row['transaction_id']+'" id="add-remarks">Add Remarks</a>\
-                                                <hr>\
-                                                <a class="dropdown-item" href="#">View Information</a>\
-                                              </div>\
-                                            </div>';
+                    return row.action;
                 }
 
             },
@@ -1882,7 +1910,9 @@
         e.preventDefault();
 
         var myContent = tinymce.get("tiny").getContent();
-        var id = $('input[name=transac_id]').val();
+        var id = $('input[name=transact_id]').val();
+
+       
             
         $.ajax({
             type: "POST",
@@ -1911,9 +1941,10 @@
                                 }).showToast();
 
                       
-
-                      $('a.form-wizard-previous-btn').click();
-                     
+                        $('#add_remarks_modal').modal('hide')
+                         var myContent = tinymce.get("tiny").setContent('');
+                         var show = $('#show_ option:selected').val();
+                         load_pending_transactions(show);
                            
              
                 }else {
@@ -1934,7 +1965,7 @@
                    
                 }
 
-                get_last_pmas_number();
+                
            },
             error: function(xhr) { // if error occured
                 alert("Error occured.please try again");

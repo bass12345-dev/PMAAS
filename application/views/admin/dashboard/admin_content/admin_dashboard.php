@@ -107,6 +107,7 @@
                                             
                                             <th>Date And Time</th>
                                             <th>Person Responsible</th>
+                                            <th></th>
                                             <th>Action</th>
                                        </thead>
                                        <tbody>
@@ -279,20 +280,14 @@
                         var tr = $('<tr>')
                          
                           
-                        tr.append('<td class="py-1 px-2">' + resp[k].pmas_no + '</td>')
+                        tr.append('<td class="py-1 px-2" style="font-weight: bold;">' + resp[k].pmas_no + '</td>')
                         tr.append('<td class="py-1 px-2">' + resp[k].date_and_time_filed + '</td>')
                         tr.append('<td class="py-1 px-2">' + resp[k].type_mon_name + '</td>')
                         tr.append('<td class="py-1 px-2">' + resp[k].type_act_name + '</td>')
                         tr.append('<td class="py-1 px-2">' + resp[k].date_time +  '</td>')
                         tr.append('<td class="py-1 px-2">' + resp[k].name + '</td>')
-                        tr.append('<td class="py-1 px-2"><div class="btn-group dropleft">\
-                                              <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
-                                               <i class="ti-settings" style="font-size : 15px;"></i>\
-                                              </button>\
-                                              <div class="dropdown-menu">\
-                                                <a class="dropdown-item" href="#" id="add-remarks" data-id="'+resp[k].transaction_id+'">Add Remarks</a>\
-                                              </div>\
-                                            </div></td>')
+                         tr.append('<td class="py-1 px-2">' + resp[k].s + '</td>')
+                        tr.append(resp[k].actions)
 
                        
                          

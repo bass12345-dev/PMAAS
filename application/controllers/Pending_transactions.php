@@ -70,8 +70,17 @@ class Pending_transactions extends CI_Controller {
             				'date_time' => date('M,d Y', strtotime($row['date_time'])).' '.date('h:i a', strtotime($row['date_time'])),
             				'is_training' => $row['is_training'] == 1 ? true : false,
             				'is_project_monitoring' =>  $row['is_project_monitoring'] == 1 ? true : false,
-            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension']
-
+            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension'],
+            				's' => $row['remarks'] == '' ? '<a href="javascript:;" class="btn btn-danger btn-rounded p-1 pl-2 pr-2">no remarks</a>' : '<a href="javascript:;" class="btn btn-success btn-rounded p-1 pl-2 pr-2">remarks added</a>',
+            				'action' => $row['remarks'] == '' ? '<div class="btn-group dropleft">
+                                              <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                               <i class="ti-settings" style="font-size : 15px;"></i>
+                                              </button>
+                                              <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="javascript:;" data-id="'.$row['transaction_id'].'" id="add-remarks">Add Remarks</a>
+                                                <hr>
+                                                <a class="dropdown-item" href="#">View Information</a>
+                                              </di' : '',
             	);
             # code...
         }

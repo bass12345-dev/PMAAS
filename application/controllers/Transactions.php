@@ -121,7 +121,16 @@ class Transactions extends CI_Controller {
             				'date_time' => date('M,d Y', strtotime($row['date_time'])).' '.date('h:i a', strtotime($row['date_time'])),
             				'is_training' => $row['is_training'] == 1 ? true : false,
             				'is_project_monitoring' =>  $row['is_project_monitoring'] == 1 ? true : false,
-            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension']
+            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension'],
+            				's' => $row['remarks'] == '' ? '<a href="javascript:;" class="btn btn-danger btn-rounded p-1 pl-2 pr-2">no remarks</a>' : '<a href="javascript:;" class="btn btn-success btn-rounded p-1 pl-2 pr-2">remarks added</a>',
+            				'actions' => $row['remarks'] == '' ? '<td class="py-1 px-2"><div class="btn-group dropleft">
+                                              <button type="button" class="btn btn-secondary btn-rounded dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                               <i class="ti-settings" style="font-size : 15px;"></i>
+                                              </button>
+                                              <div class="dropdown-menu ">
+                                                <a class="dropdown-item" href="#" id="add-remarks" data-id="'.$row['transaction_id'].'"><i class="ti-plus mr-2" style="font-size : 15px;"></i>Add Remarks</a>
+                                              </div>
+                                            </div></td>' : '',
 
             	);
             # code...
@@ -205,6 +214,18 @@ public function get_user_transactions_num(){
 
 
 	public function add_remarks(){
+
+
+		$data = array(
+					'remarks' => $this->input->post('content'),
+					
+		);
+		$where = array('transaction_id'=>$this->input->post('id'));
+		$update = $this->UpdateModel->update1($where,$data,$this->transactions);
+		$params = array('cond' => $update, 'message' => 'Successfully Updated');
+		$this->load->library('Condition', $params);
+
+
 		
 	}
 
