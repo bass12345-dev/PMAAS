@@ -68,9 +68,22 @@
 
 
 
-      var base_url = '<?php echo base_url(); ?>';
-      var _validFileExtensions = [".pdf"];    
-      var validImageExtensions = [".png",".jpg","jpeg"];
+    var base_url = '<?php echo base_url(); ?>';
+    var _validFileExtensions = [".pdf"];    
+    var validImageExtensions = [".png",".jpg","jpeg"];
+    var url = window.location.href.toLowerCase(); 
+    console.log(getLastURLPart(url));
+
+
+    function getLastURLPart(url) {
+    var part = url.match(/.*\/(.+)/);
+    if(!part) {
+        return null;
+        }else {
+          return  part[1];
+        }
+
+    }
 
 
       $('textarea#tiny').tinymce({
@@ -1906,6 +1919,31 @@
         });
 
 
+          $(document).on('click','a#view-remarks',function (e) {
+
+
+             $.ajax({
+                    type: "POST",
+                    url: base_url + 'Pending_transactions/view_remarks',
+                    data: {id : $(this).data('id')},
+                    dataType: 'json',
+                    beforeSend: function() {
+                          // $('div#remarks').find('p').html($(this).data('remarks'));
+                           $('div#remarks').addClass('.loader');
+                    },
+                    success: function(data)
+                    {            
+                         $("#view_remarks_modal").modal('show');
+                    }
+            })
+                 
+              
+               
+          
+               
+            
+        });
+
         $('#add_remarks_modal').on('submit', function(e) {
         e.preventDefault();
 
@@ -1944,7 +1982,13 @@
                         $('#add_remarks_modal').modal('hide')
                          var myContent = tinymce.get("tiny").setContent('');
                          var show = $('#show_ option:selected').val();
-                         load_pending_transactions(show);
+                         if(getLastURLPart(url) == 'pending_transactions'){
+                            pending_transaction_table.ajax.reload();
+                         }else {
+                             load_pending_transactions(show);
+                         }
+                         
+                        
                            
              
                 }else {

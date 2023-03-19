@@ -45,7 +45,7 @@ class Pending_transactions extends CI_Controller {
 		$data['responsibility_centers'] = $this->GetModel->getALL($this->responsibility_center,$this->order_by_asc,$this->order_key_code); 
 		$data['responsible'] =  $this->GetModel->getALL($this->responsible_section,$this->order_by_asc,$this->order_key);
 		$data['cso'] = $this->GetModel->getALL($this->cso,$this->order_by_asc,$this->order_key);
-		$data['last'] = $this->GetModel->get_last_pmas_number();
+		
 		$this->load->view('admin/transactions/add_section/add_section',$data);
 	}
 
@@ -101,7 +101,21 @@ class Pending_transactions extends CI_Controller {
             				'date_time' => date('M,d Y', strtotime($row['date_time'])).' '.date('h:i a', strtotime($row['date_time'])),
             				'is_training' => $row['is_training'] == 1 ? true : false,
             				'is_project_monitoring' =>  $row['is_project_monitoring'] == 1 ? true : false,
-            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension']
+            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension'],
+            				's' => $row['remarks'] == '' ? '' :  '<a href="javascript:;" class="btn btn-danger btn-rounded p-1 pl-2 pr-2">remarks added</a><a href="javascript:;"  data-id="'.$row['transaction_id'].'" id="view-remarks">View Remarks</a>',
+            				'action' => '<ul class="d-flex justify-content-center">
+                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="" data-a="" data-b=""  id="view_more_transaction"><i class="fa fa-eye"></i></a></li>
+                                <li><a href="javascript:;" data-id=""  id="delete-activity"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>
+                                </ul>',
+            				// 'action' => $row['remarks'] == '' ? '<div class="btn-group dropleft">
+                //                               <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                //                                <i class="ti-settings" style="font-size : 15px;"></i>
+                //                               </button>
+                //                               <div class="dropdown-menu">
+                //                                 <a class="dropdown-item" href="javascript:;" data-id="'.$row['transaction_id'].'" id="add-remarks">Add Remarks</a>
+                //                                 <hr>
+                //                                 <a class="dropdown-item" href="#">View Information</a>
+                //                               </di' : '',
 
 
             	);
@@ -113,5 +127,11 @@ class Pending_transactions extends CI_Controller {
 
 	echo json_encode($data);
 }
+
+
+
+public function view_remarks(){
+		
+	}
 	
 }

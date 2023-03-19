@@ -90,7 +90,8 @@
         <!-- main content area end -->
        
     <?php $this->load->view('admin/transactions/modal/view_more_transaction') ?> 
-        <?php $this->load->view('admin/dashboard/admin_content/modals/add_remarks') ?> 
+    <?php $this->load->view('admin/dashboard/admin_content/modals/add_remarks') ?>
+    <?php $this->load->view('admin/transactions/modal/view_remarks') ?>  
      <?php $this->load->view('includes/scripts.php') ?> 
      <script type="text/javascript">
          $(function() {
