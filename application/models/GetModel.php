@@ -41,7 +41,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             $this->db->from('transactions');
             $this->db->order_by('number','desc');
-            return $this->db->get()->result_array()[0];
+            return $this->db->get();
       }
 
 

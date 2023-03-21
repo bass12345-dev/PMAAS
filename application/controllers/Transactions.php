@@ -50,12 +50,54 @@ class Transactions extends CI_Controller {
 
 	public function get_last_pmas_no(){
 
-		$last = $this->GetModel->get_last_pmas_number();
+		$l = 0;
 
-		echo $last['number'] + 1;
+		if ($this->GetModel->get_last_pmas_number()->num_rows()) {
+			$l = $this->GetModel->get_last_pmas_number()->result_array()[0]['number'] + 1;
+		}else {
+			$l = 1;
+		}
+
+		echo $l;
+
+		// $l = 0;
+		// $last = $this->GetModel->get_last_pmas_number();
+
+		// echo $l = $last['number'] + 1;
 
 	}
 
+
+	public function update_completed(){
+		
+
+		$data = array(
+				'status' => 'completed'
+		);
+
+		$where = array('transaction_id'=>$_POST['id']);
+
+		$update = $this->UpdateModel->update1($where,$data,$this->transactions);
+		$params = array('cond' => $update, 'message' => 'Successfully Updated');
+		$this->load->library('Condition', $params);
+	}
+
+
+
+
+	public function action(){
+		
+
+		$data = array(
+				'action_taken' =>date('Y-m-d H:i:s', time())
+		);
+
+		$where = array('transaction_id'=>$_POST['id']);
+
+		$update = $this->UpdateModel->update1($where,$data,$this->transactions);
+		$params = array('cond' => $update, 'message' => 'Successfully Updated');
+		$this->load->library('Condition', $params);
+	}
 
 	
 
@@ -105,41 +147,7 @@ class Transactions extends CI_Controller {
 
 
 
-	public function load_admin_pending_l($show){
 
-
-		
-		$data = [];	 
-		$items = $this->GetModel->getAdminPendingTransactionslimit($this->transactions,$show);
-		foreach ($items as $row ) {
-
-            	$data[] = array(
-            				'transaction_id' => $row['transaction_id'],
-            				'pmas_no' => date('Y', strtotime($row['date_and_time_filed'])).' - '.date('m', strtotime($row['date_and_time_filed'])).' - '.$row['number'],
-            				'date_and_time_filed' => date('M,d Y', strtotime($row['date_and_time_filed'])).' '.date('h:i a', strtotime($row['date_and_time_filed'])),
-            				'type_mon_name' => $row['type_mon_name'],
-            				'type_act_name' => $row['type_act_name'],
-            				'responsibility_center' => $row['res_center_code'].' - '.$row['res_center_name'],
-            				'date_time' => date('M,d Y', strtotime($row['date_time'])).' '.date('h:i a', strtotime($row['date_time'])),
-            				'is_training' => $row['is_training'] == 1 ? true : false,
-            				'is_project_monitoring' =>  $row['is_project_monitoring'] == 1 ? true : false,
-            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension'],
-            				's' => $row['remarks'] == '' ? '<a href="javascript:;" class="btn btn-danger btn-rounded p-1 pl-2 pr-2">no remarks</a>' : '<a href="javascript:;" class="btn btn-success btn-rounded p-1 pl-2 pr-2">remarks added</a>',
-            				'actions' => $row['remarks'] == '' ? '<td class="py-1 px-2"><div class="btn-group dropleft">
-                                              <button type="button" class="btn btn-secondary btn-rounded dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                               <i class="ti-settings" style="font-size : 15px;"></i>
-                                              </button>
-                                              <div class="dropdown-menu ">
-                                                <a class="dropdown-item" href="#" id="add-remarks" data-id="'.$row['transaction_id'].'"><i class="ti-plus mr-2" style="font-size : 15px;"></i>Add Remarks</a>
-                                              </div>
-                                            </div></td>' : '',
-
-            	);
-            # code...
-        }
-
-        echo json_encode($data);
-	}
 	
 
 

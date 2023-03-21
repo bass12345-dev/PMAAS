@@ -256,7 +256,7 @@
 
              $.ajax({
              method : 'GET',
-            url : base_url + 'Transactions/load_admin_pending_l/'+show,
+            url : base_url + 'Pending_transactions/load_admin_pending_l/'+show,
             // Error Function
             error: err => {
                 console.log(err)

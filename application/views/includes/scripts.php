@@ -1918,6 +1918,146 @@
             
         });
 
+         $(document).on('click','a#completed',function (e) {
+
+             e.preventDefault()
+            var id = $(this).data('id');
+
+                   Swal.fire({
+        title: "Are you sure?",
+        text: "",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Confirm",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true
+    }).then(function(result) {
+        if (result.value) {
+            
+                    $.ajax({
+                            type: "POST",
+                            url: base_url + 'Transactions/update_completed',
+                            data: {id:id},
+                            cache: false,
+                            dataType: 'json', 
+                            beforeSend : function(){
+
+                                  Swal.fire({
+                                title: "",
+                                text: "Please Wait",
+                                icon: "",
+                                showCancelButton: false,
+                                showConfirmButton : false,
+                                reverseButtons: false,
+                                allowOutsideClick : false
+                            })
+
+                            },
+                            success: function(data){
+                               if (data.response) {
+
+                                  Swal.fire(
+                "",
+                "Completed Successfully",
+                "success"
+            )
+                                
+                               }
+
+                               if(getLastURLPart(url) == 'pending_transactions'){
+                                    pending_transaction_table.ajax.reload();
+                                    count_pending_transactions();
+                                 }else {
+                                     load_pending_transactions(show);
+                                 }
+                                
+
+                            }
+                    })
+
+
+
+            // result.dismiss can be "cancel", "overlay",
+            // "close", and "timer"
+        } else if (result.dismiss === "cancel") {
+           swal.close()
+
+        }
+    });
+
+         })
+
+
+        $(document).on('click','button#btn-done-remarks',function (e) {
+            e.preventDefault()
+              var id = $('input[name=t_id]').val();
+
+              $.ajax({
+            type: "POST",
+            url: base_url + 'Transactions/action',
+            data: {id : id},
+            dataType: 'json',
+            beforeSend: function() {
+               $('button#btn-done-remarks').html('<div class="loader"></div>');
+                $('button#btn-done-remarks').prop("disabled", true);
+            },
+            success: function(data)
+            {            
+                if (data.response) {
+             
+                    $('button#btn-done-remarks').prop("disabled", false);
+                    $('button#btn-done-remarks').text('Done');
+                        Toastify({
+                                  text: 'Success',
+                                  className: "info",
+                                  style: {
+                                    "background" : "linear-gradient(to right, #00b09b, #96c93d)",
+                                    "height" : "60px",
+                                    "width" : "350px",
+                                    "font-size" : "20px"
+                                  }
+                                }).showToast();
+
+                      
+                        $('#view_remarks_modal').modal('hide')
+                       
+                         
+                         
+                        
+                           
+             
+                }else {
+                    $('button#btn-done-remarks').prop("disabled", false);
+                    $('button#btn-done-remarks').text('Submit');
+                      Toastify({
+                                  text: data.message,
+                                  className: "info",
+                                  style: {
+                                    "background" : "linear-gradient(to right, #00b09b, #96c93d)",
+                                    "height" : "60px",
+                                    "width" : "350px",
+                                    "font-size" : "20px"
+                                  }
+                                }).showToast();
+
+                       
+                   
+                }
+
+                
+           },
+
+            error: function(xhr) { // if error occured
+                alert("Error occured.please try again");
+                 $('.button#btn-done-remarks').prop("disabled", false);
+                 $('.button#btn-done-remarks').text('Submit');
+            },
+            
+            })
+
+              
+        });
+
 
           $(document).on('click','a#view-remarks',function (e) {
 
@@ -1928,12 +2068,15 @@
                     data: {id : $(this).data('id')},
                     dataType: 'json',
                     beforeSend: function() {
-                          // $('div#remarks').find('p').html($(this).data('remarks'));
+                         
                            $('div#remarks').addClass('.loader');
                     },
                     success: function(data)
                     {            
                          $("#view_remarks_modal").modal('show');
+                          $('div#remarks').find('p').html(data.remarks);
+                          $('input[name=t_id]').val(data.transaction_id);
+
                     }
             })
                  

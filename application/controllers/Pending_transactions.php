@@ -60,6 +60,32 @@ class Pending_transactions extends CI_Controller {
 
 		foreach ($items as $row ) {
 
+				$a = '';
+				$b = '';
+
+				if ($row['remarks'] == '' AND $row['action_taken'] == null) {
+					$b = '<div class="btn-group dropleft">
+                                              <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                               <i class="ti-settings" style="font-size : 15px;"></i>
+                                              </button>
+                                              <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="javascript:;" data-id="'.$row['transaction_id'].'" id="add-remarks">Add Remarks</a>
+                                                <hr>
+                                                <a class="dropdown-item" href="#">View Information</a>
+                                              </di>';
+					$a = '<a href="javascript:;" class="btn btn-danger btn-rounded p-1 pl-2 pr-2">no remarks</a>';
+					// code...
+				}else if ($row['remarks'] != '' AND $row['action_taken'] == null) {
+					$b = '';
+					$a = '<a href="javascript:;" class="btn btn-success btn-rounded p-1 pl-2 pr-2">remarks added</a>';
+				}
+				else if ($row['remarks'] != '' AND $row['action_taken'] != null) {
+					$b = '<a href="javascript:;" id="completed" data-id="'.$row['transaction_id'].'" class="btn sub-button btn-rounded p-1 pl-2 pr-2"><i class="ti-check"></i></a>';
+					$a = '';
+				}
+
+				// 
+
             	$data[] = array(
             				'transaction_id' => $row['transaction_id'],
             				'pmas_no' => date('Y', strtotime($row['date_and_time_filed'])).' - '.date('m', strtotime($row['date_and_time_filed'])).' - '.$row['number'],
@@ -71,16 +97,8 @@ class Pending_transactions extends CI_Controller {
             				'is_training' => $row['is_training'] == 1 ? true : false,
             				'is_project_monitoring' =>  $row['is_project_monitoring'] == 1 ? true : false,
             				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension'],
-            				's' => $row['remarks'] == '' ? '<a href="javascript:;" class="btn btn-danger btn-rounded p-1 pl-2 pr-2">no remarks</a>' : '<a href="javascript:;" class="btn btn-success btn-rounded p-1 pl-2 pr-2">remarks added</a>',
-            				'action' => $row['remarks'] == '' ? '<div class="btn-group dropleft">
-                                              <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                               <i class="ti-settings" style="font-size : 15px;"></i>
-                                              </button>
-                                              <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="javascript:;" data-id="'.$row['transaction_id'].'" id="add-remarks">Add Remarks</a>
-                                                <hr>
-                                                <a class="dropdown-item" href="#">View Information</a>
-                                              </di' : '',
+            				's' => $a,
+            				'action' => $b,
             	);
             # code...
         }
@@ -91,6 +109,8 @@ class Pending_transactions extends CI_Controller {
 		$items1 = $this->GetModel->getUserPendingTransactions($this->transactions,array('created_by' => $this->session->userdata('user_id'))); 
 		foreach ($items1 as $row ) {
 
+
+
             	$data[] = array(
             				'transaction_id' => $row['transaction_id'],
             				'pmas_no' => date('Y', strtotime($row['date_and_time_filed'])).' - '.date('m', strtotime($row['date_and_time_filed'])).' - '.$row['number'],
@@ -102,11 +122,12 @@ class Pending_transactions extends CI_Controller {
             				'is_training' => $row['is_training'] == 1 ? true : false,
             				'is_project_monitoring' =>  $row['is_project_monitoring'] == 1 ? true : false,
             				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension'],
-            				's' => $row['remarks'] == '' ? '' :  '<a href="javascript:;" class="btn btn-danger btn-rounded p-1 pl-2 pr-2">remarks added</a><a href="javascript:;"  data-id="'.$row['transaction_id'].'" id="view-remarks">View Remarks</a>',
-            				'action' => '<ul class="d-flex justify-content-center">
-                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="" data-a="" data-b=""  id="view_more_transaction"><i class="fa fa-eye"></i></a></li>
-                                <li><a href="javascript:;" data-id=""  id="delete-activity"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>
-                                </ul>',
+            				's' => $row['remarks'] == '' ? '' :  '<a href="javascript:;" class="btn btn-danger btn-rounded p-1 pl-2 pr-2">remarks added</a><br><a href="javascript:;"  data-id="'.$row['transaction_id'].'" id="view-remarks">View Remarks</a>',
+            				'action' => '',
+            				// 'action' => '<ul class="d-flex justify-content-center">
+                //                 <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="" data-a="" data-b=""  id="view_more_transaction"><i class="fa fa-eye"></i></a></li>
+                //                 <li><a href="javascript:;" data-id=""  id="delete-activity"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>
+                //                 </ul>',
             				// 'action' => $row['remarks'] == '' ? '<div class="btn-group dropleft">
                 //                               <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 //                                <i class="ti-settings" style="font-size : 15px;"></i>
@@ -130,7 +151,73 @@ class Pending_transactions extends CI_Controller {
 
 
 
+	public function load_admin_pending_l($show){
+
+
+		
+		$data = [];	 
+		if ($this->session->userdata('user_type') == 'admin') {
+		$items = $this->GetModel->getAdminPendingTransactionslimit($this->transactions,$show);
+		foreach ($items as $row ) {
+
+
+				$a = '';
+				$b = '';
+
+				if ($row['remarks'] == '' AND $row['action_taken'] == null) {
+					$b = '<div class="btn-group dropleft">
+                                              <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                               <i class="ti-settings" style="font-size : 15px;"></i>
+                                              </button>
+                                              <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="javascript:;" data-id="'.$row['transaction_id'].'" id="add-remarks">Add Remarks</a>
+                                                <hr>
+                                                <a class="dropdown-item" href="#">View Information</a>
+                                              </di>';
+					$a = '<a href="javascript:;" class="btn btn-danger btn-rounded p-1 pl-2 pr-2">no remarks</a>';
+					// code...
+				}else if ($row['remarks'] != '' AND $row['action_taken'] == null) {
+					$b = '';
+					$a = '<a href="javascript:;" class="btn btn-success btn-rounded p-1 pl-2 pr-2">remarks added</a>';
+				}
+				else if ($row['remarks'] != '' AND $row['action_taken'] != null) {
+					$b = '<a href="javascript:;" id="completed" data-id="'.$row['transaction_id'].'" class="btn sub-button btn-rounded p-1 pl-2 pr-2"><i class="ti-check"></i></a>';
+					$a = '';
+				}
+
+            	$data[] = array(
+            				'transaction_id' => $row['transaction_id'],
+            				'pmas_no' => date('Y', strtotime($row['date_and_time_filed'])).' - '.date('m', strtotime($row['date_and_time_filed'])).' - '.$row['number'],
+            				'date_and_time_filed' => date('M,d Y', strtotime($row['date_and_time_filed'])).' '.date('h:i a', strtotime($row['date_and_time_filed'])),
+            				'type_mon_name' => $row['type_mon_name'],
+            				'type_act_name' => $row['type_act_name'],
+            				'responsibility_center' => $row['res_center_code'].' - '.$row['res_center_name'],
+            				'date_time' => date('M,d Y', strtotime($row['date_time'])).' '.date('h:i a', strtotime($row['date_time'])),
+            				'is_training' => $row['is_training'] == 1 ? true : false,
+            				'is_project_monitoring' =>  $row['is_project_monitoring'] == 1 ? true : false,
+            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension'],
+            				's' => $a,
+            				'actions' => $b,
+
+            	);
+            # code...
+        }
+
+    }
+
+        echo json_encode($data);
+	}
+
+
+
 public function view_remarks(){
+
+
+		$data = [];
+		$where = array('transaction_id' => $_POST['id']);
+		$data['remarks'] = $this->GetModel->get($this->transactions,$where)[0]['remarks']; 
+		$data['transaction_id'] = $this->GetModel->get($this->transactions,$where)[0]['transaction_id']; 
+		echo json_encode($data);
 		
 	}
 	
