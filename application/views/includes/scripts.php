@@ -89,6 +89,56 @@
     }
 
 
+
+     function count_pending_transactions(){
+
+                $.ajax({
+            type: "POST",
+            url: base_url + 'Pending_transactions/get_pending_transactions',
+            dataType: 'json',
+             success: function(data)
+            {   
+
+            $('.count_pending').text(data.length);
+            $('h2#count-p').text(data.length);  
+                  
+                
+           },
+            error: function(xhr) { // if error occured
+                
+            },
+
+
+        });
+
+        }
+
+
+          function count_completed_transactions(){
+
+                $.ajax({
+            type: "POST",
+            url: base_url + 'Transactions/get_transactions',
+            dataType: 'json',
+             success: function(data)
+            {   
+
+            $('h2#count-c').text(data.length);  
+                  
+                
+           },
+            error: function(xhr) { // if error occured
+                
+            },
+
+
+        });
+
+        }
+        count_completed_transactions();
+        count_pending_transactions();
+
+
       $('textarea#tiny').tinymce({
         height: 500,
         menubar: false,

@@ -270,6 +270,11 @@
         });
 
 
+    $(document).on('click','a#reset',function (e) {
+          $('#transactions_table').DataTable().destroy();
+            fetch();
+    })      
+
           fetch();
      </script>
    

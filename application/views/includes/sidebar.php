@@ -8,7 +8,7 @@
             <div class="main-menu " >
                 <div class="menu-inner">
                     <nav>
-                        <ul class="metismenu" id="menu">
+                        <ul class="metismenu" id="menu" >
                             
 
                             <?php if ($this->session->userdata('user_type') == 'admin') {
@@ -22,9 +22,19 @@
                             <li><a href="<?php echo base_url() ?>responsible_section"><i class="ti-map-alt"></i> <span>Responsible Section</span></a></li>
                             <li><a href="<?php echo base_url() ?>type_of_activity"><i class="ti-map-alt"></i> <span>Type of Activity</span></a></li>
                             <li><a href="<?php echo base_url() ?>users"><i class="ti-map-alt"></i> <span>Users</span></a></li>
+                            
+                            
+
+
+                           
+
+                            <hr> 
+                            <span style="color: #fff;" class="ml-1 p-2 mb-5">Others</span>
                             <li><a href="<?php echo base_url() ?>back_up"><i class="ti-map-alt"></i> <span>Backup Database</span></a></li>
-                            <li><a href="<?php echo base_url() ?>users"><i class="ti-map-alt"></i> <span>Users</span></a></li>
-                            <li><a href="<?php echo base_url() ?>users"><i class="ti-map-alt"></i> <span>Users</span></a></li>
+                            <li><a href="<?php echo base_url() ?>back_up"><i class="ti-map-alt"></i> <span>Activity Log</span></a></li>
+                             <li><a href="<?php echo base_url() ?>back_up"><i class="ti-map-alt"></i> <span>Login Wallpaper</span></a></li>
+
+                           
 
                             <?php }else {?>
 
