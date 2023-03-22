@@ -153,11 +153,14 @@ class Transactions extends CI_Controller {
 
 	public function get_transactions(){
 
-		$data = [];
 
 
 
-		if ($this->session->userdata('user_type') == 'admin') {
+		if ($_POST['filter'] == 'false') {
+
+
+							$data = [];
+					if ($this->session->userdata('user_type') == 'admin') {
 		
 	
 		$items = $this->GetModel->getTransactions($this->transactions,$this->order_by_desc,'date_and_time_filed'); 
@@ -204,7 +207,123 @@ class Transactions extends CI_Controller {
 	
 	}
 
-	  echo json_encode($data);
+
+			echo json_encode($data);	
+			
+		}else {
+
+			$filter_data = array('start_date' => $this->input->post('start_date') , 'end_date' => $this->input->post('end_date') );
+
+			$data = [];
+		if ($this->session->userdata('user_type') == 'admin') {
+		
+	
+		$items = $this->GetModel->getTransactionsFilter($this->transactions,$this->order_by_desc,'date_and_time_filed',$filter_data['start_date'],$filter_data['end_date']); 
+
+		foreach ($items as $row ) {
+
+            	$data[] = array(
+            				'transaction_id' => $row['transaction_id'],
+            				'pmas_no' => date('Y', strtotime($row['date_and_time_filed'])).' - '.date('m', strtotime($row['date_and_time_filed'])).' - '.$row['number'],
+            				'date_and_time_filed' => date('M,d Y', strtotime($row['date_and_time_filed'])).' '.date('h:i a', strtotime($row['date_and_time_filed'])),
+            				'type_mon_name' => $row['type_mon_name'],
+            				'type_act_name' => $row['type_act_name'],
+            				'responsibility_center' => $row['res_center_code'].' - '.$row['res_center_name'],
+            				'date_time' => date('M,d Y', strtotime($row['date_time'])).' '.date('h:i a', strtotime($row['date_time'])),
+            				'is_training' => $row['is_training'] == 1 ? true : false,
+            				'is_project_monitoring' =>  $row['is_project_monitoring'] == 1 ? true : false,
+            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension']
+
+            	);
+            # code...
+        }
+
+      
+
+	}else {
+		$items1 = $this->GetModel->getUserCompletedTransactionsFilter($this->transactions,array('created_by' => $this->session->userdata('user_id')),$filter_data); 
+		foreach ($items1 as $row ) {
+
+            	$data[] = array(
+            				'transaction_id' => $row['transaction_id'],
+            				'pmas_no' => date('Y', strtotime($row['date_and_time_filed'])).' - '.date('m', strtotime($row['date_and_time_filed'])).' - '.$row['number'],
+            				'date_and_time_filed' => date('M,d Y', strtotime($row['date_and_time_filed'])).' '.date('h:i a', strtotime($row['date_and_time_filed'])),
+            				'type_mon_name' => $row['type_mon_name'],
+            				'type_act_name' => $row['type_act_name'],
+            				'responsibility_center' => $row['res_center_code'].' - '.$row['res_center_name'],
+            				'date_time' => date('M,d Y', strtotime($row['date_time'])).' '.date('h:i a', strtotime($row['date_time'])),
+            				'is_training' => $row['is_training'] == 1 ? true : false,
+            				'is_project_monitoring' =>  $row['is_project_monitoring'] == 1 ? true : false,
+            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension']
+
+            	);
+            # code...
+        }
+	
+	}
+
+	
+	echo json_encode($data);
+		}
+
+
+
+
+
+
+	// 				$data = [];
+	// 				if ($this->session->userdata('user_type') == 'admin') {
+		
+	
+	// 	$items = $this->GetModel->getTransactions($this->transactions,$this->order_by_desc,'date_and_time_filed'); 
+
+	// 	foreach ($items as $row ) {
+
+ //            	$data[] = array(
+ //            				'transaction_id' => $row['transaction_id'],
+ //            				'pmas_no' => date('Y', strtotime($row['date_and_time_filed'])).' - '.date('m', strtotime($row['date_and_time_filed'])).' - '.$row['number'],
+ //            				'date_and_time_filed' => date('M,d Y', strtotime($row['date_and_time_filed'])).' '.date('h:i a', strtotime($row['date_and_time_filed'])),
+ //            				'type_mon_name' => $row['type_mon_name'],
+ //            				'type_act_name' => $row['type_act_name'],
+ //            				'responsibility_center' => $row['res_center_code'].' - '.$row['res_center_name'],
+ //            				'date_time' => date('M,d Y', strtotime($row['date_time'])).' '.date('h:i a', strtotime($row['date_time'])),
+ //            				'is_training' => $row['is_training'] == 1 ? true : false,
+ //            				'is_project_monitoring' =>  $row['is_project_monitoring'] == 1 ? true : false,
+ //            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension']
+
+ //            	);
+ //            # code...
+ //        }
+
+      
+
+	// }else {
+	// 	$items1 = $this->GetModel->getUserCompletedTransactions($this->transactions,array('created_by' => $this->session->userdata('user_id'))); 
+	// 	foreach ($items1 as $row ) {
+
+ //            	$data[] = array(
+ //            				'transaction_id' => $row['transaction_id'],
+ //            				'pmas_no' => date('Y', strtotime($row['date_and_time_filed'])).' - '.date('m', strtotime($row['date_and_time_filed'])).' - '.$row['number'],
+ //            				'date_and_time_filed' => date('M,d Y', strtotime($row['date_and_time_filed'])).' '.date('h:i a', strtotime($row['date_and_time_filed'])),
+ //            				'type_mon_name' => $row['type_mon_name'],
+ //            				'type_act_name' => $row['type_act_name'],
+ //            				'responsibility_center' => $row['res_center_code'].' - '.$row['res_center_name'],
+ //            				'date_time' => date('M,d Y', strtotime($row['date_time'])).' '.date('h:i a', strtotime($row['date_time'])),
+ //            				'is_training' => $row['is_training'] == 1 ? true : false,
+ //            				'is_project_monitoring' =>  $row['is_project_monitoring'] == 1 ? true : false,
+ //            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension']
+
+ //            	);
+ //            # code...
+ //        }
+	
+	// }
+
+	// echo json_encode($data);
+
+
+
+	  
 
 }
 

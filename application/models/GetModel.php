@@ -71,6 +71,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       }
 
 
+
+          public function getTransactionsFilter($table,$order_by,$order_key,$start,$end){
+
+            $this->db->from($table);
+             $this->db->join('type_of_monitoring','type_of_monitoring.type_mon_id = transactions.type_of_monitoring_id');
+             $this->db->join('type_of_activity','type_of_activity.type_act_id = transactions.type_of_activity_id');
+              $this->db->join('responsibility_center','responsibility_center.res_center_id = transactions.responsibility_center_id');
+            $this->db->join('users','users.user_id = transactions.created_by');
+             $this->db->where('transactions.status','completed');
+              // $this->db->where("DATE_FORMAT(date_and_time_filed,'%Y-%m-%d') >='$start'");
+              //  $this->db->where("DATE_FORMAT(date_and_time_filed,'%Y-%m-%d') <='$end'");
+              $this->db->where("DATE_FORMAT(transactions.date_and_time_filed,'%Y-%m-%d') >= '".$start."' ");
+            $this->db->where("DATE_FORMAT(transactions.date_and_time_filed,'%Y-%m-%d') <= '".$end."'");
+            $this->db->order_by($order_key,'asc');
+            return $this->db->get()->result_array();
+      }
+
+
+
+
        public function getTransaction_data($table,$where){
 
             $this->db->from($table);
@@ -146,6 +166,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
       }
+
+
+      public function getUserCompletedTransactionsFilter($table,$where,$filter){
+
+
+         $this->db->from($table);
+             $this->db->join('type_of_monitoring','type_of_monitoring.type_mon_id = transactions.type_of_monitoring_id');
+             $this->db->join('type_of_activity','type_of_activity.type_act_id = transactions.type_of_activity_id');
+              $this->db->join('responsibility_center','responsibility_center.res_center_id = transactions.responsibility_center_id');
+             // $this->db->join('trainings','trainings.transact_id = transactions.transaction_id');
+              $this->db->join('users','users.user_id = transactions.created_by');
+              $this->db->where($where);
+               $this->db->where('transactions.status','completed');
+               $this->db->where("DATE_FORMAT(transactions.date_and_time_filed,'%Y-%m-%d') >= '".$filter['start_date']."' ");
+            $this->db->where("DATE_FORMAT(transactions.date_and_time_filed,'%Y-%m-%d') <= '".$filter['end_date']."'");
+            $this->db->order_by('transactions.pmas_no','desc');
+            return $this->db->get()->result_array();
+
+
+      }
+
+       
 
 
       public function getTransactionTraining_data($where){

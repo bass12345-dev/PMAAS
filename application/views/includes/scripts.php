@@ -38,6 +38,9 @@
     <script src="https://cdn.datatables.net/buttons/2.3.4/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/datetime/1.3.0/js/dataTables.dateTime.min.js"></script>
 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.3.1/js/buttons.html5.min.js"></script>
+
 
     <!-- others plugins -->
     <script src="<?php echo base_url(); ?>assets/js/plugins.js"></script>
@@ -60,8 +63,8 @@
 
     <script src="https://cdn.tiny.cloud/1/ds0fhm6q5wk0i2dye0vxwap3wi77umvl550koo9laumyhtg1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <script src="https://cdn.tiny.cloud/1/ds0fhm6q5wk0i2dye0vxwap3wi77umvl550koo9laumyhtg1/tinymce/5/jquery.tinymce.min.js" referrerpolicy="origin"></script>
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js" integrity="sha512-a9NgEEK7tsCvABL7KqtUTQjl69z7091EVPpw5KxPlZ93T141ffe1woLtbXTX+r2/8TtTvRX/v4zTL2UlMUPgwg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js" integrity="sha512-pAoMgvsSBQTe8P3og+SAnjILwnti03Kz92V3Mxm0WOtHuA482QeldNM5wEdnKwjOnQ/X11IM6Dn3nbmvOz365g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <script type="text/javascript">
 
@@ -1703,149 +1706,15 @@
     ==================================*/
 
 
-          var transaction_table = $('#transactions_table').DataTable({
-        scrollY: 600,
-        scrollX: true,
-        "ordering": false,
-
-        "ajax" : {
-                        "url": base_url + 'Transactions/get_transactions',
-                        "dataSrc": "",
-            },
-             'columns': [
-            {
-                // data: "song_title",
-                data: null,
-                render: function (data, type, row) {
-                    return '<b><a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['pmas_no']+'</a></b>';
-                }
-
-            },
-             {
-                // data: "song_title",
-                data: null,
-                render: function (data, type, row) {
-                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['date_and_time_filed']+'</a>';
-                }
-
-            },
-             {
-                // data: "song_title",
-                data: null,
-                render: function (data, type, row) {
-                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['type_mon_name']+'</a>';
-                }
-
-            },
-             {
-                // data: "song_title",
-                data: null,
-                render: function (data, type, row) {
-                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['type_act_name']+'</a>';
-                }
-
-            },
-             {
-                // data: "song_title",
-                data: null,
-                render: function (data, type, row) {
-                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['responsibility_center']+'</a>';
-                }
-
-            },
-             {
-                // data: "song_title",
-                data: null,
-                render: function (data, type, row) {
-                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['date_time']+'</a>';
-                }
-
-            },
-            // {
-            //     // data: "song_title",
-            //     data: null,
-            //     render: function (data, type, row) {
-            //         return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['name']+'</a>';
-            //     }
-
-            // },
-            
-             
-
-            {
-                // data: "song_title",
-                data: null,
-                render: function (data, type, row) {
-                    return '<ul class="d-flex justify-content-center">\
-                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'+data['transaction_id']+'" data-a="'+data['is_training']+'" data-b="'+data['is_project_monitoring']+'"  id="view_more_transaction"><i class="fa fa-eye"></i></a></li>\
-                                <li><a href="javascript:;" data-id="'+data['type_act_id']+'"  id="delete-activity"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>\
-                                </ul>';
-                }
-
-            },
-          ]
-
-
-
-      });
-
-
-
-        function count_pending_transactions(){
-
-                $.ajax({
-            type: "POST",
-            url: base_url + 'Pending_transactions/get_pending_transactions',
-            dataType: 'json',
-             success: function(data)
-            {   
-
-            $('.count_pending').text(data.length);
-            $('h2#count-p').text(data.length);  
-                  
-                
-           },
-            error: function(xhr) { // if error occured
-                
-            },
-
-
-        });
-
-        }
-
-
-          function count_completed_transactions(){
-
-                $.ajax({
-            type: "POST",
-            url: base_url + 'Transactions/get_transactions',
-            dataType: 'json',
-             success: function(data)
-            {   
-
-            $('h2#count-c').text(data.length);  
-                  
-                
-           },
-            error: function(xhr) { // if error occured
-                
-            },
-
-
-        });
-
-        }
-        count_completed_transactions();
-        count_pending_transactions();
 
 
 
 
-             var pending_transaction_table = $('#pending_transactions_table').DataTable({
+                var pending_transaction_table = $('#pending_transactions_table').DataTable({
       scrollY: 500,
         scrollX: true,
         "ordering": false,
+
 
         "ajax" : {
                         "url": base_url + 'Pending_transactions/get_pending_transactions',
@@ -1933,6 +1802,16 @@
 
 
       });
+
+
+
+
+    
+
+
+
+
+     
 
 
         $(document).on('click','a#add-remarks',function (e) {

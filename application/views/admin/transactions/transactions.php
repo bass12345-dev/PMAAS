@@ -41,9 +41,15 @@
                                     <div class="col-md-12 ">
 
                                         <div class="row">
-                                            <div class="col-md-3"><input type="text" class="form-control pull-right mt-2 mb-2" name="daterange" value="01/01/2023 - 01/15/2023" /></div>
+                                            
 
-
+                                            <div class="input-group mb-3 col-md-5">
+                                                <input type="text" class="form-control pull-right mt-2 mb-2" name="daterange" value="" style="height: 45px;" />
+                                             
+                                              <div class="input-group-append">
+                                                <div class="col-md-12">  <a href="javascript:;" id="reset" class="btn  mb-3 mt-2 sub-button pull-right" >Reload <i class="ti-loop"></i></a> </div>
+                                              </div>
+                                            </div>
                                            
                                             
                                         </div>
@@ -97,13 +103,174 @@
     <?php $this->load->view('admin/transactions/modal/view_more_transaction') ?> 
      <?php $this->load->view('includes/scripts.php') ?> 
      <script type="text/javascript">
+
+        function fetch(start_date = '', end_date = '', filter = false){
+
+            $.ajax({
+            url: base_url + 'Transactions/get_transactions',
+            type: "POST",
+            data: {
+                start_date: start_date,
+                end_date: end_date,
+                filter : filter
+            },
+            dataType: "json",
+            success: function(data) {
+
+                console.log(data)
+
+                $('#transactions_table').DataTable({
+
+                    
+                    scrollY: 600,
+                    scrollX: true,
+                    "ordering": false,
+                    "data": data,
+                    "dom": "<'row'<'col-sm-12 col-md-4'l><'col-sm-12 col-md-4'B><'col-sm-12 col-md-4'f>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                buttons: [
+                  {
+                     extend: 'excel',
+                     text: 'Excel',
+                     className: 'btn btn-default ',
+                     exportOptions: {
+                        columns: 'th:not(:last-child)'
+                     }
+                  },
+                   {
+                     extend: 'pdf',
+                     text: 'pdf',
+                     className: 'btn btn-default',
+                     exportOptions: {
+                        columns: 'th:not(:last-child)'
+                     }
+                  },
+
+                {
+                     extend: 'print',
+                     text: 'print',
+                     className: 'btn btn-default',
+                     exportOptions: {
+                        columns: 'th:not(:last-child)'
+                     }
+                  },
+
+
+
+               ],
+                    
+                                'columns': [
+            {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<b><a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['pmas_no']+'</a></b>';
+                }
+
+            },
+             {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['date_and_time_filed']+'</a>';
+                }
+
+            },
+             {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['type_mon_name']+'</a>';
+                }
+
+            },
+             {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['type_act_name']+'</a>';
+                }
+
+            },
+             {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['responsibility_center']+'</a>';
+                }
+
+            },
+             {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['date_time']+'</a>';
+                }
+
+            },
+            // {
+            //     // data: "song_title",
+            //     data: null,
+            //     render: function (data, type, row) {
+            //         return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['name']+'</a>';
+            //     }
+
+            // },
+            
+             
+
+            {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<ul class="d-flex justify-content-center">\
+                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'+data['transaction_id']+'" data-a="'+data['is_training']+'" data-b="'+data['is_project_monitoring']+'"  id="view_more_transaction"><i class="fa fa-eye"></i></a></li>\
+                                <li><a href="javascript:;" data-id="'+data['type_act_id']+'"  id="delete-activity"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>\
+                                </ul>';
+                }
+
+            },
+            ]
+                })
+
+            }
+
+
+        })
+
+
+
+
+
+    }
+
+
+
+
+
          $(function() {
+
   $('input[name="daterange"]').daterangepicker({
-            opens: 'left'
+            opens: 'right',
+             ranges:{
+            'Today' : [moment(), moment()],
+            'Yesterday' : [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days' : [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days' : [moment().subtract(29, 'days'), moment()],
+            'This Month' : [moment().startOf('month'), moment().endOf('month')],
+            'Last Month' : [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        format : 'YYYY-MM-DD'
           }, function(start, end, label) {
             console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+            $('#transactions_table').DataTable().destroy();
+            fetch(start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD'),filter = true );
           });
         });
+
+
+          fetch();
      </script>
    
 </body>
