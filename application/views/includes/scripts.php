@@ -94,13 +94,13 @@
 
                 $.ajax({
             type: "POST",
-            url: base_url + 'Pending_transactions/get_pending_transactions',
-            dataType: 'json',
+            url: base_url + 'Pending_transactions/count_pending_transactions',
+            dataType: 'text',
              success: function(data)
             {   
 
-            $('.count_pending').text(data.length);
-            $('h2#count-p').text(data.length);  
+            $('.count_pending').text(data);
+            $('h2#count-p').text(data);  
                   
                 
            },
@@ -118,12 +118,12 @@
 
                 $.ajax({
             type: "POST",
-            url: base_url + 'Transactions/get_transactions',
-            dataType: 'json',
+            url: base_url + 'Transactions/count_completed_transactions',
+            dataType: 'text',
              success: function(data)
             {   
 
-            $('h2#count-c').text(data.length);  
+            $('h2#count-c').text(data);  
                   
                 
            },
@@ -1760,98 +1760,6 @@
 
 
 
-                var pending_transaction_table = $('#pending_transactions_table').DataTable({
-      scrollY: 500,
-        scrollX: true,
-        "ordering": false,
-
-
-        "ajax" : {
-                        "url": base_url + 'Pending_transactions/get_pending_transactions',
-                        "dataSrc": "",
-            },
-             'columns': [
-            {
-                // data: "song_title",
-                data: null,
-                render: function (data, type, row) {
-                    return '<b><a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['pmas_no']+'</a></b>';
-                }
-
-            },
-             {
-                // data: "song_title",
-                data: null,
-                render: function (data, type, row) {
-                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['date_and_time_filed']+'</a>';
-                }
-
-            },
-             {
-                // data: "song_title",
-                data: null,
-                render: function (data, type, row) {
-                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['type_mon_name']+'</a>';
-                }
-
-            },
-             {
-                // data: "song_title",
-                data: null,
-                render: function (data, type, row) {
-                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['type_act_name']+'</a>';
-                }
-
-            },
-             {
-                // data: "song_title",
-                data: null,
-                render: function (data, type, row) {
-                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['responsibility_center']+'</a>';
-                }
-
-            },
-             {
-                // data: "song_title",
-                data: null,
-                render: function (data, type, row) {
-                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['date_time']+'</a>';
-                }
-
-            },
-            {
-                // data: "song_title",
-                data: null,
-                render: function (data, type, row) {
-                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['name']+'</a>';
-                }
-
-            },
-
-              {
-                // data: "song_title",
-                data: null,
-                render: function (data, type, row) {
-                    return row.s;
-                }
-
-            },
-            
-             
-
-            {
-                // data: "song_title",
-                data: null,
-                render: function (data, type, row) {
-                    return row.action;
-                }
-
-            },
-          ]
-
-
-
-      });
 
 
 

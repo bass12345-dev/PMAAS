@@ -50,6 +50,14 @@ class Pending_transactions extends CI_Controller {
 	}
 
 
+		public function count_pending_transactions(){
+
+		$number = $this->CountModel->count1($this->transactions,array('status' => 'pending')); 
+		echo $number;
+
+	}
+
+
 	public function get_pending_transactions(){
 		$data = [];
 

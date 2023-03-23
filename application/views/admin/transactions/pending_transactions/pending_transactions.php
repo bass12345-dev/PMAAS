@@ -42,14 +42,16 @@
 
                                         <div class="row">
                                            
-
+                                             <div class="col-md-12"> 
 
                                             <?php if ($this->session->userdata('user_type') == 'user') {
                                                 // code...
                                              ?>
-                                             <div class="col-md-12">  <a href="<?php echo base_url() ?>Pending_transactions/add_transactions" class="btn  mb-3 mt-2 sub-button pull-right" > Add Transactions</a> </div>
+
+                                             <a href="<?php echo base_url() ?>Pending_transactions/add_transactions" class="btn  mb-3 mt-2 sub-button pull-right" > Add Transactions</a>   
                                          <?php } ?>
-                                            
+                                            <a href="javascript:;" class="btn  mb-3 mt-2 sub-button pull-right mr-2" id="reload_pending" > Reload <i class="ti-loop"></i></a>
+                                            </div>
                                         </div>
                                           
                                        
@@ -94,13 +96,100 @@
     <?php $this->load->view('admin/transactions/modal/view_remarks') ?>  
      <?php $this->load->view('includes/scripts.php') ?> 
      <script type="text/javascript">
-         $(function() {
-  $('input[name="daterange"]').daterangepicker({
-            opens: 'left'
-          }, function(start, end, label) {
-            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-          });
-        });
+
+
+var pending_transaction_table = $('#pending_transactions_table').DataTable({
+      scrollY: 500,
+        scrollX: true,
+        "ordering": false,
+
+
+        "ajax" : {
+                        "url": base_url + 'Pending_transactions/get_pending_transactions',
+                        "dataSrc": "",
+            },
+             'columns': [
+            {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<b><a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['pmas_no']+'</a></b>';
+                }
+
+            },
+             {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['date_and_time_filed']+'</a>';
+                }
+
+            },
+             {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['type_mon_name']+'</a>';
+                }
+
+            },
+             {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['type_act_name']+'</a>';
+                }
+
+            },
+             {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['responsibility_center']+'</a>';
+                }
+
+            },
+             {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['date_time']+'</a>';
+                }
+
+            },
+            {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['name']+'</a>';
+                }
+
+            },
+
+              {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return row.s;
+                }
+
+            },
+            
+             
+
+            {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return row.action;
+                }
+
+            },
+          ]
+
+
+
+      });
 
 
            

@@ -146,6 +146,16 @@ class Transactions extends CI_Controller {
 	}
 
 
+	public function count_completed_transactions(){
+
+		$number = $this->CountModel->count1($this->transactions,array('status' => 'completed')); 
+		echo $number;
+
+	}
+
+
+
+
 
 
 	

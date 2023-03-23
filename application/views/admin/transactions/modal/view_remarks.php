@@ -12,7 +12,7 @@
                   
                   <div class="modal-body">
                     <input type="hidden" name="t_id">
-                    <div id="remarks">
+                    <div id="remarks" class="p-4">
                           <p>Modal body text goes here. Modal body text goes here. Modal body text goes here. Modal body text goes here. Modal body text goes here. Modal body text goes here. Modal body text goes here. Modal body text goes here. Modal body text goes here. Modal body text goes here. vModal body text goes here.Modal body text goes here. Modal body text goes here.Modal body text goes here.Modal body text goes here. Modal body text goes here.</p>
                     </div>  
                   </div>
