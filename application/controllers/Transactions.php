@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+date_default_timezone_set('Asia/Manila');
 
 class Transactions extends CI_Controller {
 
@@ -50,10 +51,26 @@ class Transactions extends CI_Controller {
 
 	public function get_last_pmas_no(){
 
+
+
+		// echo date('Y-m', strtotime($this->GetModel->get_last_pmas_number()->result_array()[0]['date_and_time_filed']));
 		$l = 0;
 
 		if ($this->GetModel->get_last_pmas_number()->num_rows()) {
-			$l = $this->GetModel->get_last_pmas_number()->result_array()[0]['number'] + 1;
+			if (date('Y-m', time()) > date('Y-m', strtotime($this->GetModel->get_last_pmas_number()->result_array()[0]['date_and_time_filed'])) ) {
+				$l = 1;
+			}else if (date('Y-m', time()) < date('Y-m', strtotime($this->GetModel->get_last_pmas_number()->result_array()[0]['date_and_time_filed']))) {
+				$l = $this->GetModel->get_last_pmas_number_where(date('Y-m-d', time()))->result_array()[0]['number'] + 1;
+			}
+
+			else if (date('Y-m', strtotime($this->GetModel->get_last_pmas_number()->result_array()[0]['date_and_time_filed'])) == date('Y-m', time())) 
+				// code...
+			 {
+
+		
+
+			$l = $this->GetModel->get_last_pmas_number_where(date('Y-m-d', time()))->result_array()[0]['number'] + 1;
+			}
 		}else {
 			$l = 1;
 		}
@@ -155,6 +172,31 @@ class Transactions extends CI_Controller {
 
 
 
+	public function get_all_transactions(){
+
+		$data = [];
+
+		$items = $this->GetModel->getAllTransactions($this->transactions,$this->order_by_desc,'date_and_time_filed'); 
+
+		foreach ($items as $row ) {
+
+            	$data[] = array(
+            				'transaction_id' => $row['transaction_id'],
+            				'pmas_no' => date('Y', strtotime($row['date_and_time_filed'])).' - '.date('m', strtotime($row['date_and_time_filed'])).' - '.$row['number'],
+            				'date_and_time_filed' => date('M,d Y', strtotime($row['date_and_time_filed'])).' '.date('h:i a', strtotime($row['date_and_time_filed'])),
+            				
+            				'date_time' => date('M,d Y', strtotime($row['date_time'])).' '.date('h:i a', strtotime($row['date_time'])),
+            				'is_training' => $row['is_training'] == 1 ? true : false,
+            				'is_project_monitoring' =>  $row['is_project_monitoring'] == 1 ? true : false,
+            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension']
+
+            	);
+            # code...
+        }
+
+        echo json_encode($data);
+
+	}
 
 
 
@@ -404,6 +446,9 @@ public function get_user_transactions_num(){
 					'cso_id' => $this->input->post('cso_id'),
 					'created_by' => $this->session->userdata('user_id')		
 		);
+
+
+	
 
 
 		if (!$this->GetModel->get($this->transactions,array('pmas_no' => $data['pmas_no']))) {

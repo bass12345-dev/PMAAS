@@ -10,6 +10,54 @@
     <?php $this->load->view('includes/meta.php') ?>
     <?php $this->load->view('includes/css.php') ?> 
 
+    <style type="text/css">
+        .media-29101 {
+  text-align: center; }
+  .media-29101 img {
+    margin-bottom: 20px;
+    border-radius: 50%;
+    width: 250px !important;
+    margin: 0 auto 40px auto;
+  
+    height: 180px;
+     }
+  .media-29101 h3 {
+    font-size: 18px;
+    font-weight: 900 !important;
+    margin-bottom: 10px; }
+    .media-29101 h3 a {
+      color: #6c757d; }
+.media-29101 p {
+    font-size: 18px;
+    font-weight: 900 !important;
+
+}
+.owl-2-style .owl-nav {
+  display: none; }
+
+.owl-2-style .owl-dots {
+  text-align: center;
+  position: relative;
+  bottom: -30px; }
+  .owl-2-style .owl-dots .owl-dot {
+    display: inline-block; }
+    .owl-2-style .owl-dots .owl-dot span {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 0px;
+      background: #cccccc;
+      -webkit-transition: 0.3s all cubic-bezier(0.32, 0.71, 0.53, 0.53);
+      -o-transition: 0.3s all cubic-bezier(0.32, 0.71, 0.53, 0.53);
+      transition: 0.3s all cubic-bezier(0.32, 0.71, 0.53, 0.53);
+      margin: 3px;
+      border-radius: 50%; }
+    .owl-2-style .owl-dots .owl-dot.active span {
+      background: #007bff; }
+    .owl-2-style .owl-dots .owl-dot:active, .owl-2-style .owl-dots .owl-dot:focus {
+      outline: none; }
+    </style>
+
     <!-- modernizr css -->
 </head>
 
@@ -92,7 +140,8 @@
                         <div class="card">
                             <div class="card-body">
                               <div class="d-sm-flex justify-content-between align-items-center">
-                                    <h4 class="header-title">Show</h4>                             
+                                    <h4 class="header-title">Show</h4>   
+                                     <                
                                      <select class="custome-select border-0 pr-3" id="show_" onchange="load_pending(this)">
                                         <option selected>5</option>
                                         <option value="10">10</option>
@@ -100,6 +149,7 @@
                                     </select>
                                 </div> 
                                 <div class="trad-history mt-4">
+                                    <a href="javascript:;" class="btn sub-button pull-right" id="reload_admin_pending">Reload <i class="ti-loop"></i></a>
                                     <table  style="width:100%" class="text-center stripe table" id="pending_transactions_limit">
                                         <thead class="bg-light text-capitalize">
                                             <th>PMAS NO</th>
@@ -146,6 +196,28 @@
                     </div>
                     </div>
                     </div>
+
+                </div>
+
+
+
+                <div class="row mt-2">
+               <div class="col-lg-12 mt-sm-30 mt-xs-30" id="owl">
+                <div class="container owl-2-style" >
+                    <div class="owl-carousel owl-2">
+                    <?php foreach ($users as $row) {
+                        // code...
+                     ?>
+                    <div class="media-29101" >
+                                <img src="<?php echo base_url() ?>uploads/profile_pic/<?php echo $row['profile_pic'] ?>">
+                                <h3><a href="#"><?php echo $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension'] ?></a></h3>
+                                <p><?php echo $row['user_type'] ?></p>
+                              </div>
+                           
+                    <?php } ?>
+                         </div>
+                    </div>
+                </div>
 
                 </div>
 
@@ -318,9 +390,46 @@
 
      }
 
-       
 
 
+    $(document).on('click','a#reload_admin_pending',function (e) {
+
+              load_pending_transactions(show);
+            
+    });
+
+
+    $(function() {
+
+    if ( $('.owl-2').length > 0 ) {
+        $('.owl-2').owlCarousel({
+            center: false,
+            items: 1,
+            loop: true,
+            stagePadding: 0,
+            margin: 20,
+            smartSpeed: 1000,
+            autoplay: true,
+            nav: true,
+            dots: true,
+            pauseOnHover: false,
+            responsive:{
+                600:{
+                    margin: 20,
+                    nav: true,
+                  items: 2
+                },
+                1000:{
+                    margin: 20,
+                    stagePadding: 0,
+                    nav: true,
+                  items: 3
+                }
+            }
+        });            
+    }
+
+})
 
 
      load_pending_transactions(show);

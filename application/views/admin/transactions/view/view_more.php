@@ -80,11 +80,12 @@
                                 <div class="row">
                                     <?php $this->load->view('admin/transactions/view/view_info') ?> 
                                         <div class="col-md-9 ">
-                                            <div class="card " style="border: 1px solid;">
+                                            <div class="card " >
                                             <div id="navigation_controls" class="mb-3" >
-                                                <a href="javascript:;" onclick="jQuery('.brgy-clearance').print()"  class="btn btn-success btn-rounded pull-right">Print</a>
+                                                 <!-- onclick="jQuery('.brgy-clearance').print()" -->
+                                                <a href="javascript:;" id="print"  class="btn btn-success btn-rounded pull-right">Print</a>
                                             </div>
-                                        <div class="card-body mt-5 brgy-clearance ">
+                                        <div class="card-body mt-1 brgy-clearance " style="border: 1px solid; background: #9b9c94;">
                                             <section id="header_section">                                           
                                                 <div class = "row justify-content-center mb-3">
                                                     <div class = "col-md-12 ml-auto mr-auto ">
@@ -97,7 +98,7 @@
                                                                 <label style="margin-top: 10px;">Date & Time Filed</label> : <span id="resident_name" style="font-weight: bold; text-decoration: underline;"><?php echo date('M,d Y', strtotime($transaction_data['date_and_time_filed'])).' '.date('h:i a', strtotime($transaction_data['date_and_time_filed'])) ?></span><br>
                                                                 <label>Approved By : _______________( )MC ( )MTC/B</label>
                                                             </div>
-                                                            <div class=" float-left ml-xl-5">
+                                                            <div class=" float-left ">
                                                                 <h6 style="font-weight: bold;">OFFICE OF THE CITY MAYOR</h6>
                                                                 <h6 style="font-weight: bold;">Cooperative & Public Employment Services Division</h6>
                                                                 <label style="font-size: 18px;">Oroquieta City</label>
@@ -171,36 +172,24 @@
                                             </section>
 
 
-                                            <section>
+                                            
 
-                                                <div class = "row justify-content-center mb-3">
-                                                    <div class = "col-md-12 ml-auto mr-auto ">
-                                                        <div class = "clearfix">
-                                                            <div class=" float-left ml-xl-5">
-                                                                 <div class="col-md-6"  style="border: 1px solid; padding: 20px 0 200px 0; margin: 0;">
-                                                                <div class="for_training_only " >
+                                              <section>
+                                                 <div class="row justify-content-center ">
+                                                    <div class="col-md-6"  >
+                                                        <div class="for_training_only " >
                                                                     <div class = "clearfix">
                                                                         <div class = "col-md-12 ml-auto mr-auto ">
                                                                             <div class=" float-left ml-xl-1">
-                                                                                <i><h6 style="font-weight: bold;">For Training Use Only</h6></i>
-                                                                            </div><br>
-                                                                            <label style="font-weight: bold;">Title of Training : </label><br>
-                                                                            <span>__________________________________________________________</span><br>
-                                                                             
-                                                                            <label style="font-weight: bold;">No. of Participants : </label>
-                                                                             <span>____</span>
-                                                                            
-
-                                                                          
-                                                                            <label style="font-weight: bold;">Female : </label>
-                                                                             <span>______</span>
-                                                                             <br>  
-                                                                             <label style="font-weight: bold;">Over-all Ratings : </label>
-                                                                             <span>______</span>
-                                                                             <br>  
-                                                                              <label style="font-weight: bold;">Name of Trainor : </label>
-                                                                             <span>______________-</span>
-                                                                             <br>                                                                                            
+                                                                                 <h7 style="font-weight: bold;">*RESPONSIBILITY CENTER  </h7>
+                                                                <h7>:</h7>
+                                                                <span>__________________________________</span>
+                                                                <br>
+                                                                <h7 style="font-weight: bold;">Date And Time  </h7>
+                                                                <h7 style="margin-left: 79px;">:</h7>
+                                                                <span >__________________________________</span>
+                                                                            </div>
+                                                                                                                                                     
 
 
 
@@ -211,45 +200,22 @@
                                                                     
                                                                 </div>
                                                     </div>
-                                                            </div>
-                                                            <div class=" float-left ml-xl-5">
-                                                                <div class="col-md-6">
+                                                    
+                                                     <div class="col-md-6"  >
                                                         <div class="for_training_only " >
                                                                     <div class = "clearfix">
-                                                                        <div class = "col-md-12 ">
-                                                                                                                                                              
-                                                                           <table style="white-space: nowrap;" class=" table table-sm ">
-                                                                                  <tr>
-                                                                                    <td>Period (Mo-Year)/as of</td>
-                                                                                    <td> : </td>
-                                                                                    <td><strong><u><span id="resident_name">_________________</span></u></strong></td>
-                                                                                  </tr>
-                                                                                  <tr>
-                                                                                    <td>Attendance</td>
-                                                                                    <td> : </td>
-                                                                                    <td><strong><u><label>Present : </label>&nbsp;<span id="resident_age">_____</span> <label>Absent : </label>&nbsp;<span id="resident_age">_____</span></u></strong></td>
-                                                                                  </tr>
-                                                                                   <tr>
-                                                                                    <td>NOM-Borrowers</td>
-                                                                                    <td> : </td>
-                                                                                    <td><strong><u><label>Delinquent : </label>&nbsp;<span id="resident_age">_____</span> <label>Overdue : </label>&nbsp;<span id="resident_age">_____</span></u></strong></td>
-                                                                                  </tr>
-                                                                                  <tr>
-                                                                                    <td>Status</td>
-                                                                                    <td> : </td>
-                                                                                    <td><strong><u><span id="resident_civil_status">______</span></u></strong></td>
-                                                                                  </tr>
-                                                                                  <tr>
-                                                                                    <td>Address</td>
-                                                                                    <td> : </td>
-                                                                                    <td><strong><u><span class="text-capitalize" id="resident_purok">_________</span></u></strong></td>
-                                                                                  </tr>
-                                                                                  <tr>
-                                                                                    <td>Record</td>
-                                                                                    <td> : </td>
-                                                                                    <td><strong><u><span id="resident_record">_______________
-                                                                                  </tr>
-                                                                                </table>
+                                                                        <div class = "col-md-12 ml-auto mr-auto ">
+                                                                            <div class=" float-left ml-xl-1">
+                                                                                 <h7 style="font-weight: bold;">*RESPONSIBILITY CENTER  </h7>
+                                                                <h7>:</h7>
+                                                                <span>__________________________________</span>
+                                                                <br>
+                                                                <h7 style="font-weight: bold;">Date And Time  </h7>
+                                                                <h7 style="margin-left: 79px;">:</h7>
+                                                                <span >__________________________________</span>
+                                                                            </div>
+                                                                                                                                                     
+
 
 
 
@@ -259,13 +225,10 @@
                                                                     
                                                                 </div>
                                                     </div>
-                                                            </div>     
-                                                        </div>
-                                                    </div>
                                                 </div>
+
                                                 
                                             </section>
-
 
 
 
@@ -485,8 +448,20 @@
 
 
      <script type="text/javascript">
+       $('#print').click(function(){
+            
+            $("#myElementId").print({
+    addGlobalStyles : true,
+    stylesheet : null,
+    rejectWindow : true,
+    noPrintSelector : ".no-print",
+    iframe : true,
+    append : null,
+    prepend : null
+});
 
-      
+              // $(".brgy-clearance").printArea({ mode: 'popup', popClose: true });
+        });
      </script>
    
 

@@ -1763,7 +1763,12 @@
 
 
 
+    $(document).on('click','a#reload_pending',function (e) {
 
+                $('#pending_transactions_table').DataTable().destroy();
+                fetch_pending();
+            
+        });
     
 
 
@@ -1826,7 +1831,8 @@
                                }
 
                                if(getLastURLPart(url) == 'pending_transactions'){
-                                    pending_transaction_table.ajax.reload();
+                                     $('#pending_transactions_table').DataTable().destroy();
+                                    fetch_pending();
                                     count_pending_transactions();
                                     
                                  }else {
@@ -1885,7 +1891,8 @@
 
                       
                         $('#view_remarks_modal').modal('hide')
-                       pending_transaction_table.ajax.reload();
+                       $('#pending_transactions_table').DataTable().destroy();
+                       fetch_pending();
                          
                          
                         
@@ -1991,7 +1998,8 @@
                          var myContent = tinymce.get("tiny").setContent('');
                          var show = $('#show_ option:selected').val();
                          if(getLastURLPart(url) == 'pending_transactions'){
-                            pending_transaction_table.ajax.reload();
+                             $('#pending_transactions_table').DataTable().destroy();
+                             fetch_pending();
                          }else {
                              load_pending_transactions(show);
                          }
@@ -2130,7 +2138,8 @@
                        $('a.form-wizard-previous-btn').click();
                    
                 }
-
+                $('#new_transactions_table').DataTable().destroy();
+                get_all_transactions();
                 get_last_pmas_number();
            },
             error: function(xhr) { // if error occured

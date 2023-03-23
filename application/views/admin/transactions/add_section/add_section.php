@@ -64,13 +64,24 @@
                 <section class="wizard-section" style="background-color: #fff;">
                     <div class="row no-gutters">
                         <div class="col-lg-6 col-md-6">
-                            <div class="wizard-content-left d-flex justify-content-center align-items-center">
+                            <a href="javascript:;" class="btn sub-button pull-right mt-2 mb-2" id="reload_all_transactions">reload <i class="ti-loop"></i></a>
+                             <table id="new_transactions_table" style="width:100%" class="text-center stripe">
+                                                <thead class="bg-light text-capitalize">
+                                                    <tr>
+                                                        <th>PMAS NO</th>
+                                                        <th>Date & Time Filed</th>
+                                                        <th>Person Responsible</th>
+                                                    </tr>
+                                                </thead> 
+                                               
+                                            </table>
+                           <!--  <div class="wizard-content-left d-flex justify-content-center align-items-center">
 
                                 
-                                 <!--    <canvas id="pdf_renderer" style="height: 500px;"  ></canvas> -->
+                               
                                
                                 
-                            </div>
+                            </div> -->
                         </div>
             <div class="col-lg-6 col-md-6">
                 <div class="form-wizard">
@@ -88,6 +99,7 @@
                         </div>
                         <fieldset class="wizard-fieldset show">
                             <h5>Information</h5>
+                            <?php echo date('Y-m', time()); ?>
                           
                               <div class="form-group">
                                 <label >PMAS NO</label>
@@ -540,9 +552,71 @@
 
          })
   
-        
+        function get_all_transactions(){
+
+            $.ajax({
+            url: base_url + 'Transactions/get_all_transactions',
+            type: "POST",
+            dataType: "json",
+            success: function(data) {
+
+                console.log(data);
+
+                $('#new_transactions_table').DataTable({
+
+                     scrollY: 500,
+                    scrollX: true,
+                    "ordering": false,
+                    pageLength: 20,
+                    "data": data,
+                    'columns': [
+                     {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<b><a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['pmas_no']+'</a></b>';
+                }
+
+            },
+             {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['date_and_time_filed']+'</a>';
+                }
+
+            },
+             {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['name']+'</a>';
+                }
+
+            },
 
 
+                    ]
+
+                })
+
+            }
+
+
+        })
+
+    }
+
+       get_all_transactions();
+       $(document).on('click','a#reload_all_transactions',function (e) {
+
+                $('#new_transactions_table').DataTable().destroy();
+                get_last_pmas_number()
+                get_all_transactions();
+            
+        });
+
+ 
 
 
      </script>

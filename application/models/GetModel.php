@@ -40,10 +40,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     public function get_last_pmas_number(){
 
             $this->db->from('transactions');
-            $this->db->order_by('number','desc');
+            $this->db->order_by('date_and_time_filed','desc');
             return $this->db->get();
       }
 
+
+          public function get_last_pmas_number_where($where){
+
+            $this->db->from('transactions');
+              $this->db->where("DATE_FORMAT(transactions.date_and_time_filed,'%Y-%m-%d') = '".$where."' ");
+            $this->db->order_by('date_and_time_filed','desc');
+            return $this->db->get();
+      }
 
 
     public function getAllunderTYPE(){
@@ -66,6 +74,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               $this->db->join('responsibility_center','responsibility_center.res_center_id = transactions.responsibility_center_id');
             $this->db->join('users','users.user_id = transactions.created_by');
              $this->db->where('transactions.status','completed');
+            $this->db->order_by($order_key,'desc');
+            return $this->db->get()->result_array();
+      }
+
+
+     public function getAllTransactions($table,$order_by,$order_key){
+
+            $this->db->from($table);
+            $this->db->join('users','users.user_id = transactions.created_by');
             $this->db->order_by($order_key,'desc');
             return $this->db->get()->result_array();
       }

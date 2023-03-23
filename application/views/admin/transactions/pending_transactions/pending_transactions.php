@@ -98,17 +98,22 @@
      <script type="text/javascript">
 
 
-var pending_transaction_table = $('#pending_transactions_table').DataTable({
-      scrollY: 500,
-        scrollX: true,
-        "ordering": false,
+function fetch_pending(){
 
 
-        "ajax" : {
-                        "url": base_url + 'Pending_transactions/get_pending_transactions',
-                        "dataSrc": "",
-            },
-             'columns': [
+      $.ajax({
+            url: base_url + 'Pending_transactions/get_pending_transactions',
+            type: "POST",
+            dataType: "json",
+            success: function(data) {
+
+                $('#pending_transactions_table').DataTable({
+
+                    scrollY: 500,
+                    scrollX: true,
+                    "ordering": false,
+                    "data": data,
+                    'columns': [
             {
                 // data: "song_title",
                 data: null,
@@ -187,9 +192,20 @@ var pending_transaction_table = $('#pending_transactions_table').DataTable({
             },
           ]
 
+                })
 
 
-      });
+            }
+
+        })
+
+
+
+}
+
+fetch_pending();
+
+
 
 
            
