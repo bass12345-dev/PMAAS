@@ -44,7 +44,7 @@
 
 
                                     <div class="invoice-table table-responsive mt-5">
-                                            <table class="table table-bordered table-hover text-right">
+                                            <table class="table table-bordered table-hover text-right" id="database_table">
                                             <thead>
                                             <tr class="text-capitalize">
                                             <th class="text-center" style="width: 5%;">#</th>
@@ -55,12 +55,7 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                            <td class="text-center">1</td>
-                                            <td class="text-center">Crazy Toys</td>
-                                            <td class="text-center">1</td>
                                            
-                                            </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -85,6 +80,68 @@
   
     <?php $this->load->view('includes/offset.php') ?> 
      <?php $this->load->view('includes/scripts.php') ?> 
+
+     <script type="text/javascript">
+         function fetch_database(){
+
+
+         var table = $('#database_table')
+         table.find('tbody').html('')
+          var tr1 = $('<tr>')
+          tr1.html('<th class="py-1 px-2 text-center">Please Wait</th>')
+          table.find('tbody').append(tr1)
+            setTimeout(() => {
+
+            $.ajax({     
+            url: base_url + 'Back_up/get_database',            
+            dataType: 'json',         
+            error: err => {
+                console.log(err)
+                alert("An error occured")
+                
+              
+            },
+                success: function(resp) {
+                tr1.html('')
+                    table.find('tbody').append(tr1)
+
+                resp.sort().reverse()    
+                if (resp.length > 0) {
+                    // If returned json data is not empty
+                    var i = 0;
+                    // looping the returned data
+                    Object.keys(resp).map(k => {
+                        // creating new table row element
+                        var tr = $('<tr>')
+                         i++;
+                            // second column data
+                        tr.append('<td class="text-center">' + i  + '</td>')
+                        tr.append('<td class="text-center">' + resp[k].database + '</td>')
+                            // third column data
+                        tr.append('<td class="py-1 px-2"><ul class="d-flex justify-content-center">\
+                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon"  id="import"><i class="fa fa-database"></i> Import</a>  </li>\
+                                </ul></td>')
+                         
+
+                        // Append table row item to table body
+                        table.find('tbody').append(tr)
+                    })
+                } else {
+                    // If returned json data is empty
+                    var tr = $('<tr>')
+                    tr.append('<th class="py-1 px-2 text-center">No data to display</th>')
+                    table.find('tbody').append(tr)
+                }
+              
+            }
+
+        }) }, 500)
+            // Succes Function
+         }
+
+
+         fetch_database();
+     </script>
    
 </body>
 

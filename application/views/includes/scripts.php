@@ -1727,6 +1727,7 @@
 
                     $('.back-up-database').prop("disabled", false);    
                      $('.back-up-database').text('Back up Now');
+                     fetch_database()
                     Toastify({
                                   text: data.message,
                                   className: "info",
