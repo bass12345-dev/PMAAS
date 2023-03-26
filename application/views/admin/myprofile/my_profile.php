@@ -83,12 +83,20 @@
                     <!-- data table start -->
                     <div class="col-12 mt-5">
                         <div class="card " style="border: 1px solid;">
-                            <div class="card-body">
+                            <div class="card-body  ">
                                
-                                <div class="row">
+                                <div class="row ">
 
-                                     <div class="col-md-6 ">
-                                        <div class="data-tables">
+                                     <div class="col-md-12 ">
+                                         <div class="text-center mb-2">
+                                                    <img src="" lass="rounded mb-3" style="width: 250px; border-radius: 70px;"
+  alt="Avatar" id="profile_pic">
+                                                </div>                                            
+                                                <!--  <button class="btn btn-block btn-rounded btn-success update_profile_picture">Update Profile Picture</button>    -->
+                                                <a  href    = "javascript:;" 
+                                                         class = "mt-1  mb-1  text-center  btn-rounded btn-md btn-block update_profile_picture"><i class = "fa fa-edit" aria-hidden = "true"></i> Update Profile Picture</a>
+                                    </div>
+                                    
                                              <table class="tablesaw table-bordered table-hover table" data-tablesaw-mode="swipe" data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap data-tablesaw-mode-switch id="_table">
                                                 
                                                    <tr>
@@ -119,10 +127,10 @@
                                             <button class="btn btn-block btn-rounded btn-success update_password">Update Credentials</button>
 
                                           
-                                        </div>
+                                       
                                     </div>
                                     
-                                    <div class="col-md-6  mt-2 ">      
+                                   <!--  <div class="col-md-6  mt-2 ">      
 
 
                                                 
@@ -131,7 +139,7 @@
   alt="Avatar" id="profile_pic">
                                                 </div>                                            
                                                  <button class="btn btn-block btn-rounded btn-success update_profile_picture">Update Profile Picture</button>   
-                                    </div>
+                                    </div> -->
 
                                    
                                     

@@ -2313,7 +2313,7 @@
      });
 
 
-    $(document).on('click','button.update_profile_picture',function (e) {
+    $(document).on('click','a.update_profile_picture',function (e) {
 
         $('#update_pic_modal').modal('show')
 

@@ -31,7 +31,7 @@
                             <hr> 
                             <span style="color: #fff;" class="ml-1 p-2 mb-5">Others</span>
                             <li><a href="<?php echo base_url() ?>back_up"><i class="ti-map-alt"></i> <span>Backup Database</span></a></li>
-                            <li><a href="<?php echo base_url() ?>back_up"><i class="ti-map-alt"></i> <span>Activity Log</span></a></li>
+                            <li><a href="<?php echo base_url() ?>Activity_logs"><i class="ti-map-alt"></i> <span>Activity Logs</span></a></li>
                              <li><a href="<?php echo base_url() ?>back_up"><i class="ti-map-alt"></i> <span>Login Wallpaper</span></a></li>
 
                            
@@ -41,9 +41,10 @@
                             <li><a href="<?php echo base_url() ?>"><i class="ti-map-alt"></i> <span>Dashboard</span></a></li>
                             <li><a href="<?php echo base_url() ?>Pending_transactions"><i class="ti-map-alt"></i> <span>My Pending Transactions</span></a></li>
                             <li><a href="<?php echo base_url() ?>transactions"><i class="ti-map-alt"></i> <span>Completed Transactions</span></a></li>
-                             <li><a href="<?php echo base_url() ?>transactions"><i class="ti-map-alt"></i> <span>Activity Logs</span></a></li>
+                            <li><a href="<?php echo base_url() ?>Activity_logs"><i class="ti-map-alt"></i> <span>Activity Logs</span></a></li>
                            
                             <?php }; ?>
+                            
 
                         </ul>
                     </nav>

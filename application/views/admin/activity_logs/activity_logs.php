@@ -19,54 +19,49 @@
         <?php $this->load->view('includes/sidebar.php') ?> 
         <!-- sidebar menu area end -->
         <!-- main content area start -->
-        <div class="main-content ">
+        <div class="main-content">
             <!-- header area start -->
             <?php $this->load->view('includes/topbar.php') ?> 
             <!-- header area end -->
             <!-- page title area start -->
             <?php $this->load->view('includes/breadcrumbs.php') ?> 
             <!-- page title area end -->
-            <div class="main-content-inner  ">
+            <div class="main-content-inner ">
 
 
                 <div class="row">
                     <!-- data table start -->
                     <div class="col-12 mt-5">
-                        <div class="card  animate__animated animate__zoomInDown " style="border: 1px solid;">
+                        <div class="card" style="border: 1px solid;">
                             <div class="card-body">
-                                <div class="row">
+                                <!-- <div class="row">
                                     <div class="col-md-6">
                                         <h4 class="header-title"><?php echo $title ?></h4>
                                     </div>
                                     <div class="col-md-6">
-                                         <button class="btn  pull-right mb-2 back-up-database sub-button">Back Up Now</button>
+                                         <button class="btn btn-primary pull-right mb-2">Add</button>
                                     </div>
-
-
-                                    <div class="invoice-table table-responsive mt-5">
-                                            <table class="table table-bordered table-hover text-right">
-                                            <thead>
-                                            <tr class="text-capitalize">
-                                            <th class="text-center" style="width: 5%;">#</th>
-                                            <th class="text-center" >Databse</th>
-                                            
-                                            <th  class="text-center">Action</th>
-                                           
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                            <td class="text-center">1</td>
-                                            <td class="text-center">Crazy Toys</td>
-                                            <td class="text-center">1</td>
-                                           
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>   
+                                </div>    -->
                                
-                              
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="data-tables">
+                                            <table id="responsibility_tabe" style="width:100%" class="text-center">
+                                                <thead class="bg-light text-capitalize">
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Action</th>
+                                                        <th>Date And Time</th>
+                                                      
+                                                        
+                                                    </tr>
+                                                </thead>
+                                            </table>
+                                             <!-- <button  type="button" class="btn mt-1 mb-4 pr-4 pl-4  btn-danger " id="delete-multiple-center">Delete</button> -->
+                                        </div>
+                                    </div>
+                                   
+                                </div>
                             </div>
                         </div>
                     </div>

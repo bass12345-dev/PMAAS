@@ -19,14 +19,38 @@ class Back_up extends CI_Controller {
 	public function index()
 	{
 
-        if ($this->session->userdata('user_type') == 'admin' ) {
-           $data['title'] = 'Back Up Database';
-        $this->load->view('admin/back_up_database/back_up',$data);
-        }else {
-            echo 'error';
-        }
+        $dir = FCPATH . '/database/';
+
+        $files = scandir($dir);
+
+        $files = array_diff($files,array('.','..'));
+
+        $files = array_values($files);
+
+        $files = array();
+
+        $files = array_values(array_diff(scandir($dir), array('.','..')));
+
+        $files = array();
+
+        $files = $this->clean_dir($dir);
+
+
+      
+
+      
+        // if ($this->session->userdata('user_type') == 'admin' ) {
+        //    $data['title'] = 'Back Up Database';
+        // $this->load->view('admin/back_up_database/back_up',$data);
+        // }else {
+        //     echo 'error';
+        // }
 		
 	}
+
+    function clean_dir($d) {
+        return  array_values(array_diff(scandir($d), array('.','..')));
+    }
 
 
 	public function save(){
