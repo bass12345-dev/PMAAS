@@ -36,7 +36,9 @@
 
  <style type="text/css">
 
-
+          table > thead > tr > th{
+             background-color: #3F6BA4; color: #fff;
+            }
   
             .action-icon {
                 font-size: 25px;

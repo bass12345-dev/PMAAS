@@ -46,7 +46,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="data-tables">
-                                            <table id="responsibility_tabe" style="width:100%" class="text-center">
+                                            <table id="logs_table" style="width:100%" class="text-center">
                                                 <thead class="bg-light text-capitalize">
                                                     <tr>
                                                         <th>#</th>
@@ -80,6 +80,12 @@
   
     <?php $this->load->view('includes/offset.php') ?> 
      <?php $this->load->view('includes/scripts.php') ?> 
+
+     <script type="text/javascript">
+          var logs_table = $('#logs_table').DataTable({
+
+      });
+     </script>
    
 </body>
 

@@ -2620,6 +2620,10 @@ function update_credentials_swal(){
 
 
 
+
+      
+
+
         //delete function
 
      function del(id,table,url){
