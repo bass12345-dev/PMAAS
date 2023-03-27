@@ -78,6 +78,7 @@
                                                         <th>Type of Activity</th>
                                                         <th>Responsibility Center</th>
                                                         <th>Date And Time</th>
+                                                        <th>CSO</th>
                                                         <!-- <th>Added By</th> -->
                                                         <th>Actions</th>  
                                                     </tr>
@@ -206,6 +207,15 @@
                 data: null,
                 render: function (data, type, row) {
                     return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['date_time']+'</a>';
+                }
+
+            },
+
+             {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['res_center_id']+'"  style="color: #000;"  >'+data['cso']+'</a>';
                 }
 
             },

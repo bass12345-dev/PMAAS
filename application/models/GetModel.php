@@ -33,7 +33,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
             $this->db->from($table);
              $this->db->join('users','users.user_id = activity_logs.user_id');  
-            $this->db->order_by('activity_logs.created','desc');
+            $this->db->order_by('activity_logs.created_','desc');
             return $this->db->get();
       }
 
@@ -87,6 +87,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
              $this->db->join('type_of_monitoring','type_of_monitoring.type_mon_id = transactions.type_of_monitoring_id');
              $this->db->join('type_of_activity','type_of_activity.type_act_id = transactions.type_of_activity_id');
               $this->db->join('responsibility_center','responsibility_center.res_center_id = transactions.responsibility_center_id');
+              $this->db->join('cso','cso.cso_id = transactions.cso_Id');
             $this->db->join('users','users.user_id = transactions.created_by');
              $this->db->where('transactions.status','completed');
             $this->db->order_by($order_key,'desc');
@@ -111,6 +112,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
              $this->db->join('type_of_activity','type_of_activity.type_act_id = transactions.type_of_activity_id');
               $this->db->join('responsibility_center','responsibility_center.res_center_id = transactions.responsibility_center_id');
             $this->db->join('users','users.user_id = transactions.created_by');
+            $this->db->join('cso','cso.cso_id = transactions.cso_Id');
              $this->db->where('transactions.status','completed');
               // $this->db->where("DATE_FORMAT(date_and_time_filed,'%Y-%m-%d') >='$start'");
               //  $this->db->where("DATE_FORMAT(date_and_time_filed,'%Y-%m-%d') <='$end'");
@@ -130,6 +132,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
              $this->db->join('type_of_activity','type_of_activity.type_act_id = transactions.type_of_activity_id');
               $this->db->join('responsibility_center','responsibility_center.res_center_id = transactions.responsibility_center_id');
              // $this->db->join('trainings','trainings.transact_id = transactions.transaction_id');
+              $this->db->join('cso','cso.cso_id = transactions.cso_Id');
               $this->db->join('users','users.user_id = transactions.created_by');
               $this->db->where($where);
             $this->db->order_by('transactions.pmas_no','desc');
@@ -146,6 +149,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               $this->db->join('responsibility_center','responsibility_center.res_center_id = transactions.responsibility_center_id');
              // $this->db->join('trainings','trainings.transact_id = transactions.transaction_id');
               $this->db->join('users','users.user_id = transactions.created_by');
+              $this->db->join('cso','cso.cso_id = transactions.cso_Id');
               $this->db->where($where);
                $this->db->where('transactions.status','pending');
             $this->db->order_by('transactions.pmas_no','desc');
@@ -160,7 +164,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               $this->db->join('responsibility_center','responsibility_center.res_center_id = transactions.responsibility_center_id');
              // $this->db->join('trainings','trainings.transact_id = transactions.transaction_id');
               $this->db->join('users','users.user_id = transactions.created_by');
-           
+           $this->db->join('cso','cso.cso_id = transactions.cso_Id');
                $this->db->where('transactions.status','pending');
             $this->db->order_by('transactions.pmas_no','desc');
             return $this->db->get()->result_array();
@@ -175,7 +179,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               $this->db->join('responsibility_center','responsibility_center.res_center_id = transactions.responsibility_center_id');
              // $this->db->join('trainings','trainings.transact_id = transactions.transaction_id');
               $this->db->join('users','users.user_id = transactions.created_by');
-           
+           $this->db->join('cso','cso.cso_id = transactions.cso_Id');
                $this->db->where('transactions.status','pending');
             $this->db->order_by('transactions.pmas_no','desc');
             $this->db->limit(50);
@@ -191,9 +195,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               $this->db->join('responsibility_center','responsibility_center.res_center_id = transactions.responsibility_center_id');
              // $this->db->join('trainings','trainings.transact_id = transactions.transaction_id');
               $this->db->join('users','users.user_id = transactions.created_by');
+              $this->db->join('cso','cso.cso_id = transactions.cso_Id');
               $this->db->where($where);
                $this->db->where('transactions.status','completed');
-            $this->db->order_by('transactions.pmas_no','desc');
+            $this->db->order_by('transactions.date_and_time_filed','desc');
             return $this->db->get()->result_array();
 
 
@@ -209,6 +214,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               $this->db->join('responsibility_center','responsibility_center.res_center_id = transactions.responsibility_center_id');
              // $this->db->join('trainings','trainings.transact_id = transactions.transaction_id');
               $this->db->join('users','users.user_id = transactions.created_by');
+              $this->db->join('cso','cso.cso_id = transactions.cso_Id');
               $this->db->where($where);
                $this->db->where('transactions.status','completed');
                $this->db->where("DATE_FORMAT(transactions.date_and_time_filed,'%Y-%m-%d') >= '".$filter['start_date']."' ");

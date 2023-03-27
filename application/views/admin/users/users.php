@@ -50,7 +50,7 @@ src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="data-tables">
-                                            <table id="users_table" style="width:100%" class="text-center">
+                                            <table id="users_table" style="width:100%" class="text-center ">
                                                 <thead class="bg-light text-capitalize">
                                                     <tr>
                                                       
