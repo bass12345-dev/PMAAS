@@ -19,6 +19,7 @@ class Transactions extends CI_Controller {
 	public $order_key_code = 'res_center_code';
 	public $order_key_name = 'type_act_name';
 	public $order_under_type_act_name = 'under_type_act_name';
+	public $logs = 'activity_logs';
 
 	public function __construct()
     {
@@ -94,6 +95,20 @@ class Transactions extends CI_Controller {
 		$where = array('transaction_id'=>$_POST['id']);
 
 		$update = $this->UpdateModel->update1($where,$data,$this->transactions);
+		$get = $this->GetModel->getTransaction_data($this->transactions,array('transaction_id' => $where['transaction_id']))[0];
+
+		if ($update) {
+
+			$logs = array(
+
+				'action' => 'Approved PMAS NO '.$get['pmas_no'],
+				'user_id' => $this->session->userdata('user_id'),
+				'created_' => date('Y-m-d H:i:s', time())
+		);
+
+		$this->AddModel->addData($this->logs,$logs);
+			// code...
+		}
 		$params = array('cond' => $update, 'message' => 'Successfully Updated');
 		$this->load->library('Condition', $params);
 	}
@@ -111,6 +126,20 @@ class Transactions extends CI_Controller {
 		$where = array('transaction_id'=>$_POST['id']);
 
 		$update = $this->UpdateModel->update1($where,$data,$this->transactions);
+		$get = $this->GetModel->getTransaction_data($this->transactions,array('transaction_id' => $where['transaction_id']))[0];
+
+		if ($update) {
+
+			$logs = array(
+
+				'action' => 'Added Action Taken to PMAS NO '.$get['pmas_no'],
+				'user_id' => $this->session->userdata('user_id'),
+				'created_' => date('Y-m-d H:i:s', time())
+		);
+
+		$this->AddModel->addData($this->logs,$logs);
+			// code...
+		}
 		$params = array('cond' => $update, 'message' => 'Successfully Updated');
 		$this->load->library('Condition', $params);
 	}
@@ -402,6 +431,20 @@ public function get_user_transactions_num(){
 		);
 		$where = array('transaction_id'=>$this->input->post('id'));
 		$update = $this->UpdateModel->update1($where,$data,$this->transactions);
+		$get = $this->GetModel->getTransaction_data($this->transactions,array('transaction_id' => $where['transaction_id']))[0];
+
+		if ($update) {
+
+			$logs = array(
+
+				'action' => 'Added Remarks to PMAS NO '.$get['pmas_no'],
+				'user_id' => $this->session->userdata('user_id'),
+				'created_' => date('Y-m-d H:i:s', time())
+		);
+
+		$this->AddModel->addData($this->logs,$logs);
+			// code...
+		}
 		$params = array('cond' => $update, 'message' => 'Successfully Updated');
 		$this->load->library('Condition', $params);
 
@@ -559,8 +602,15 @@ public function get_user_transactions_num(){
 						}
 				}
 
+		$logs = array(
 
+				'action' => 'Added Transactions || PMAS NO '.$data['pmas_no'],
+				'user_id' => $this->session->userdata('user_id'),
+				'created_' => date('Y-m-d H:i:s', time())
+		);
 
+		$this->AddModel->addData($this->logs,$logs);
+		
 		$resp = array(
 				'message' => 'Successfully Added',
 				'response' => true

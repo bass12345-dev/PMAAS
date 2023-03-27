@@ -23,7 +23,9 @@ class Back_up extends CI_Controller {
            $data['title'] = 'Back Up Database';
         $this->load->view('admin/back_up_database/back_up',$data);
         }else {
-            echo 'error';
+            $data['heading']  = 'heading';
+            $data['message']  = '1232';
+           $this->load->view('errors/error',$data);
         }
 		
 	}

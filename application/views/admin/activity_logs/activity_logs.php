@@ -50,6 +50,7 @@
                                                 <thead class="bg-light text-capitalize">
                                                     <tr>
                                                         <th>#</th>
+                                                        <th>User</th>
                                                         <th>Action</th>
                                                         <th>Date And Time</th>
                                                       
@@ -83,7 +84,48 @@
 
      <script type="text/javascript">
           var logs_table = $('#logs_table').DataTable({
+            "ordering": false,
+            "ajax" : {
+                        "url": base_url + 'Activity_logs/get_logs',
+                        "dataSrc": "",
+            },
 
+              'columns': [
+            {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"     style="color: #000;" class="table-font-size "  >'+data['n']+'</a>';
+                }
+
+            },
+              {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['user_id']+'"  style="color: #000;" class="table-font-size "  >'+data['user']+'</a>';
+                }
+
+            },
+              {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['user_id']+'"  style="color: #000;" class="table-font-size "  >'+data['action']+'</a>';
+                }
+
+            },
+
+             {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['user_id']+'"  style="color: #000;" class="table-font-size "  >'+data['date_and_time']+'</a>';
+                }
+
+            },
+
+          ]
       });
      </script>
    

@@ -26,11 +26,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
       /*================================
-    Responsibility Center
+    Logs
     ==================================*/
     
+    public function getALLlogs($table){
+
+            $this->db->from($table);
+             $this->db->join('users','users.user_id = activity_logs.user_id');  
+            $this->db->order_by('activity_logs.created','desc');
+            return $this->db->get();
+      }
 
 
+       public function getALLlogsUser($table){
+
+            $this->db->from($table);
+            $this->db->where('activity_logs.user_id',$this->session->userdata('user_id'));
+             $this->db->join('users','users.user_id = activity_logs.user_id');  
+            $this->db->order_by('activity_logs.created_','desc');
+            return $this->db->get();
+      }
 
     /*================================
     Under Type of Activity

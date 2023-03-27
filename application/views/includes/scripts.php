@@ -2184,7 +2184,8 @@
 
        var users_table = $('#users_table').DataTable({
 
-             scrollX: true,
+             scrollX: true, 
+             
 
            "ajax" : {
                         "url": base_url + 'Users/get',

@@ -1,5 +1,5 @@
 
-<link rel="shortcut icon" type="image/png" href="assets/images/icon/favicon.ico">
+<link rel="shortcut icon" type="image/png" href="<?php echo base_url() ?>peso_logo.png">
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/font-awesome.min.css">
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/themify-icons.css">

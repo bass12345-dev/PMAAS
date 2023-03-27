@@ -148,8 +148,8 @@
                                         <option value="10">15</option>
                                     </select>
                                 </div> 
-                                <div class="trad-history mt-4">
-                                    <a href="javascript:;" class="btn sub-button pull-right" id="reload_admin_pending">Reload <i class="ti-loop"></i></a>
+                                <div class="trad-history mt-4 ">
+                                    <a href="javascript:;" class="btn sub-button pull-right mb-2" id="reload_admin_pending">Reload <i class="ti-loop"></i></a>
                                     <table  style="width:100%" class="text-center stripe table" id="pending_transactions_limit">
                                         <thead class="bg-light text-capitalize">
                                             <th>PMAS NO</th>

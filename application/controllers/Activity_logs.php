@@ -9,6 +9,7 @@ class Activity_logs extends CI_Controller {
 	public $order_by_desc = 'desc';
 	public $order_key = 'created';
 	public $limit5 = 5; 
+	public $logs = 'activity_logs';
 
 
 	public function __construct()
@@ -27,6 +28,57 @@ class Activity_logs extends CI_Controller {
 		 		
 	}
 
+
+	public function get_logs(){
+
+		$data = [];
+
+
+		if ($this->session->userdata('user_type') == 'admin') {
+
+		$items = $this->GetModel->getALLlogs($this->logs)->result_array(); 
+
+		$i = 0;
+		foreach ($items as $row ) {
+
+		$i++;
+            	$data[] = array(
+            				'n' => $i,
+            				'action' => $row['action'],
+            				'user' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension'],
+            				'date_and_time' => date('M,d Y', strtotime($row['created'])).' '.date('h:i a', strtotime($row['created']))
+            				
+
+            	);
+            # code...
+        }
+
+        echo json_encode($data);
+     }else {
+
+
+     		
+		$items = $this->GetModel->getALLlogsUser($this->logs)->result_array(); 
+
+		$i = 0;
+		foreach ($items as $row ) {
+
+		$i++;
+            	$data[] = array(
+            				'n' => $i,
+            				'action' => $row['action'],
+            				'user' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension'],
+            				'date_and_time' => date('M,d Y', strtotime($row['created_'])).' '.date('h:i a', strtotime($row['created_']))
+            				
+
+            	);
+            # code...
+        }
+
+     		echo json_encode($data);
+     }
+
+	}
 
 	
 }

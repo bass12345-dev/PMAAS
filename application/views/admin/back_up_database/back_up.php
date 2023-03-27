@@ -119,7 +119,8 @@
                         tr.append('<td class="text-center">' + resp[k].database + '</td>')
                             // third column data
                         tr.append('<td class="py-1 px-2"><ul class="d-flex justify-content-center">\
-                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon"  id="import"><i class="fa fa-database"></i> Import</a>  </li>\
+                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon"  id="import"><i class="fa fa-database"></i> </a> <span style="font-size=: 15px;">Import</span> </li>\
+                                 <li class="mr-3 "><a href="'+base_url+'database/'+resp[k].database+'" class="text-secondary action-icon"  id="import"><i class="fa fa-download"></i></a>   Download</li>\
                                 </ul></td>')
                          
 
