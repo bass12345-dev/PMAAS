@@ -54,7 +54,7 @@ class Transactions extends CI_Controller {
 
 
 		// echo date('Y-m', strtotime($this->GetModel->get_last_pmas_number()->result_array()[0]['date_and_time_filed']));
-		$l = 0;
+		$l = '';
 
 		if ($this->GetModel->get_last_pmas_number()->num_rows()) {
 			if (date('Y-m', time()) > date('Y-m', strtotime($this->GetModel->get_last_pmas_number()->result_array()[0]['date_and_time_filed'])) ) {
@@ -63,13 +63,12 @@ class Transactions extends CI_Controller {
 				$l = $this->GetModel->get_last_pmas_number_where(date('Y-m-d', time()))->result_array()[0]['number'] + 1;
 			}
 
-			else if (date('Y-m', strtotime($this->GetModel->get_last_pmas_number()->result_array()[0]['date_and_time_filed'])) == date('Y-m', time())) 
+			else if (date('Y-m', strtotime($this->GetModel->get_last_pmas_number()->result_array()[0]['date_and_time_filed'])) === date('Y-m', time())) 
 				// code...
 			 {
 
-		
-
-			$l = $this->GetModel->get_last_pmas_number_where(date('Y-m-d', time()))->result_array()[0]['number'] + 1;
+	
+			$l = $this->GetModel->get_last_pmas_number_where(date('Y-m', time()))->result_array()[0]['number'] + 1;
 			}
 		}else {
 			$l = 1;

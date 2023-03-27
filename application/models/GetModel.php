@@ -48,7 +48,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           public function get_last_pmas_number_where($where){
 
             $this->db->from('transactions');
-              $this->db->where("DATE_FORMAT(transactions.date_and_time_filed,'%Y-%m-%d') = '".$where."' ");
+              $this->db->where("DATE_FORMAT(transactions.date_and_time_filed,'%Y-%m') = '".$where."' ");
             $this->db->order_by('date_and_time_filed','desc');
             return $this->db->get();
       }
