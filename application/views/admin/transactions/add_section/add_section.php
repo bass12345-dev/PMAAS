@@ -99,7 +99,7 @@
                         </div>
                         <fieldset class="wizard-fieldset show">
                             <h5>Information</h5>
-                            <?php echo date('Y-m', time()); ?>
+                           
                           
                               <div class="form-group">
                                 <label >PMAS NO</label>

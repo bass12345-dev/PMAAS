@@ -2559,7 +2559,7 @@ function update_credentials_swal(){
           title: 'Update Credentials Form',
           html: `<input type="text" id="password" class="swal2-input" placeholder="Password">
           <input type="text" id="confirm_password" class="swal2-input" placeholder="Confirm Password">`,
-          confirmButtonText: 'Sign in',
+          confirmButtonText: 'Update',
           focusConfirm: false,
           showLoaderOnConfirm: true,
           preConfirm: () => {
