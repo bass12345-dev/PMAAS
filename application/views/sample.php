@@ -1,6 +1,6 @@
 <?php
 
-
+require_once(APPPATH.'helpers/TCPDF/tcpdf.php');
 // create new PDF document
 $pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
@@ -59,6 +59,26 @@ $pdf->AddPage();
 
 // define some HTML content with style
 $html = <<<EOF
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!-- EXAMPLE OF CSS STYLE -->
 <style>
     h2 {

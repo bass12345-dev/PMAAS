@@ -103,7 +103,11 @@
        
     <?php $this->load->view('admin/transactions/modal/view_more_transaction') ?> 
      <?php $this->load->view('includes/scripts.php') ?> 
+      
      <script type="text/javascript">
+
+
+
 
         function fetch(start_date = '', end_date = '', filter = false){
 
@@ -118,7 +122,7 @@
             dataType: "json",
             success: function(data) {
 
-                console.log(data)
+                
 
                 $('#transactions_table').DataTable({
 

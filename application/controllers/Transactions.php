@@ -43,7 +43,7 @@ class Transactions extends CI_Controller {
 		$data['title'] = 'Transactions';
 		$data['transaction_data'] = $this->GetModel->getTransaction_data($this->transactions,array('transaction_id' => $_GET['id']))[0];
 		$data['responsible'] =  $this->GetModel->getALL($this->responsible_section,$this->order_by_asc,$this->order_key);
-		$this->load->view('admin/transactions/view/view_more',$data);
+		$this->load->view('admin/transactions/view/view_pmas',$data);
 
 	}
 
@@ -608,7 +608,7 @@ public function get_user_transactions_num(){
 
 		$logs = array(
 
-				'action' => 'Added Transactions || PMAS NO '.$data['pmas_no'],
+				'action' => 'Added Transactions || PMAS NO '.date('Y', time()).'-'.date('m', time()).'-'.$this->input->post('pmas_number'),
 				'user_id' => $this->session->userdata('user_id'),
 				'created_' => date('Y-m-d H:i:s', time())
 		);

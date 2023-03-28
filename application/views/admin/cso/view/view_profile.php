@@ -82,11 +82,10 @@
                                                    <tr>
                                                         <td colspan = "2">
                                                         <a  href    = "javascript:;" class = "mt-2  mb-2 btn sub-button text-center  btn-rounded btn-md btn-block"><i class = "fa fa-user" aria-hidden = "true"></i> CSO Information</a>
+                                                      
                                                         <a  href    = "javascript:;" id="update-cso"
-
-                                                       
-
                                                          class = "mt-2  mb-2  text-center  btn-rounded btn-md btn-block"><i class = "fa fa-edit" aria-hidden = "true"></i> Update CSO Information</a>
+                                                        
                                                     </td>
 
                                                     </tr>

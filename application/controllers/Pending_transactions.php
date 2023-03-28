@@ -80,7 +80,7 @@ class Pending_transactions extends CI_Controller {
                                               <div class="dropdown-menu">
                                                 <a class="dropdown-item" href="javascript:;" data-id="'.$row['transaction_id'].'" id="add-remarks">Add Remarks</a>
                                                 <hr>
-                                                <a class="dropdown-item" href="#">View Information</a>
+                                                <a class="dropdown-item" href="#" data-id="'.$row['transaction_id'].'">View Information</a>
                                               </di>';
 					$a = '<a href="javascript:;" class="btn btn-danger btn-rounded p-1 pl-2 pr-2">no remarks</a>';
 					// code...
@@ -90,7 +90,7 @@ class Pending_transactions extends CI_Controller {
 				}
 				else if ($row['remarks'] != '' AND $row['action_taken'] != null) {
 					$b = '<a href="javascript:;" id="completed" data-id="'.$row['transaction_id'].'" class="btn sub-button btn-rounded p-1 pl-2 pr-2"><i class="ti-check"></i></a>';
-					$a = '<a href="javascript:;" class="btn btn-success btn-rounded p-1 pl-2 pr-2">Action Taken</a>';
+					$a = '<a href="javascript:;" class="btn btn-success btn-rounded p-1 pl-2 pr-2">Action Taken</a><br><a href="javascript:;" >'.date('M, d Y', strtotime($row['action_taken'])).'</a>';
 				}
 
 				// 
@@ -124,21 +124,21 @@ class Pending_transactions extends CI_Controller {
 
 				if ($row['remarks'] == '' AND $row['action_taken'] == null) {
 					$b = '<ul class="d-flex justify-content-center">
-                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="" data-a="" data-b=""  id="view_more_transaction"><i class="fa fa-eye"></i></a></li>
+                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'.$row['transaction_id'].'" data-a="" data-b=""  id="view_more_transaction"><i class="fa fa-eye"></i></a></li>
                                 <li><a href="javascript:;" data-id=""  id="delete-activity"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>
                                 </ul>';
 					$a = '<a href="javascript:;" class="btn btn-secondary btn-rounded p-1 pl-2 pr-2">Waiting for Remarks....</a>';
 					
 				}else if ($row['remarks'] != '' AND $row['action_taken'] == null) {
 					$b = '<ul class="d-flex justify-content-center">
-                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="" data-a="" data-b=""  id="view_more_transaction"><i class="fa fa-eye"></i></a></li>
+                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'.$row['transaction_id'].'" data-a="" data-b=""  id="view_more_transaction"><i class="fa fa-eye"></i></a></li>
                                 </ul>';
 					$a = '<a href="javascript:;" class="btn btn-danger btn-rounded p-1 pl-2 pr-2">remarks added</a><br><a href="javascript:;"  data-id="'.$row['transaction_id'].'" id="view-remarks">View Remarks</a>';
 					
 				}
 				else if ($row['remarks'] != '' AND $row['action_taken'] != null) {
 					$b = '<ul class="d-flex justify-content-center">
-                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="" data-a="" data-b=""  id="view_more_transaction"><i class="fa fa-eye"></i></a></li>
+                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'.$row['transaction_id'].'" data-a="" data-b=""  id="view_more_transaction" ><i class="fa fa-eye"></i></a></li>
                                 </ul>';
 					$a = '<a href="javascript:;" class="btn btn-success btn-rounded p-1 pl-2 pr-2">Waiting for Confirmation</a>';
 				}
