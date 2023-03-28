@@ -47,6 +47,8 @@ class Users extends CI_Controller {
 					'password' => $this->input->post('password'),
 					'created' =>  date('Y-m-d H:i:s', time()),
 				  	'profile_pic' => ($_FILES['profile_pic']['tmp_name'] === '' ) ? '' : $this->upload_image(),
+				  	'user_status' => 'active',
+
 
 					
 					
@@ -106,9 +108,20 @@ class Users extends CI_Controller {
 	public function get(){
 
 		$data = [];
-		$item = $this->GetModel->getALL($this->users,$this->order_by_asc,$this->order_key); 
+		$where = array('user_status' => 'active');
+		$item = $this->GetModel->get($this->users,$where); 
 
 		foreach ($item as $row) {
+
+
+			$a = '';
+
+			if ($row['user_type'] == 'admin') {
+				$a = '';
+			}else {
+				$a = '<ul class="d-flex justify-content-center"><li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user"  class="text-secondary action-icon"><i class="ti-eye"></i></a></li><li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user"  class="text-danger action-icon"><i class="ti-trash"></i></a></li></ul>';
+			}
+
 				
 				$data[] = array(
 
@@ -116,8 +129,44 @@ class Users extends CI_Controller {
 						'user_type' => $row['user_type'],
 						'username' => $row['username'],
 						'user_id' => $row['user_id'],
-						'action' => ($this->session->userdata('user_type') == 'admin') ? '<li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>' : ' ',
-						'action1' => ($this->session->userdata('user_type') == 'admin') ? '<li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user"  class="text-secondary action-icon"><i class="ti-edit"></i></a></li>' : '<li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="view-user"  class="text-secondary action-icon"><i class="ti-eye"></i></a></li>',
+						// 'action2' => ($this->session->userdata('user_type') == 'admin') ? '<li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>' : ' ',
+						// 'action1' => ($this->session->userdata('user_type') == 'admin') ? '<li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user"  class="text-secondary action-icon"><i class="ti-edit"></i></a></li>' : '<li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="view-user"  class="text-secondary action-icon"><i class="ti-eye"></i></a></li>',
+						'action' => $a
+
+				);
+		}
+
+		echo json_encode($data);
+	}
+
+
+	public function get_inactive(){
+
+		$data = [];
+		$where = array('user_status' => 'inactive');
+		$item = $this->GetModel->get($this->users,$where); 
+
+		foreach ($item as $row) {
+
+
+			$a = '';
+
+			if ($row['user_type'] == 'admin') {
+				$a = '';
+			}else {
+				$a = '<ul class="d-flex justify-content-center"><li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user"  class="text-secondary action-icon"><i class="ti-eye"></i></a></li><li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user"  class="text-danger action-icon"><i class="ti-trash"></i></a></li></ul>';
+			}
+
+				
+				$data[] = array(
+
+						'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension'],
+						'user_type' => $row['user_type'],
+						'username' => $row['username'],
+						'user_id' => $row['user_id'],
+						// 'action2' => ($this->session->userdata('user_type') == 'admin') ? '<li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>' : ' ',
+						// 'action1' => ($this->session->userdata('user_type') == 'admin') ? '<li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user"  class="text-secondary action-icon"><i class="ti-edit"></i></a></li>' : '<li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="view-user"  class="text-secondary action-icon"><i class="ti-eye"></i></a></li>',
+						'action' => $a
 
 				);
 		}
@@ -129,10 +178,23 @@ class Users extends CI_Controller {
 
 	public function delete(){
 
+
+
+		$data = array(
+
+				'user_status' => 'inactive',
+			
+		);
+
 		$where = 'user_id ='.$_POST['id'];
-		$delete = $this->DeleteModel->delete($this->users,$where);
-		$params = array('cond' => $delete, 'message' => 'Successfully Deleted');
+
+		$update = $this->UpdateModel->update1($where,$data,$this->users);
+		$params = array('cond' => $update, 'message' => 'Success');
 		$this->load->library('Condition', $params);
+		// $where = 'user_id ='.$_POST['id'];
+		// $delete = $this->DeleteModel->delete($this->users,$where);
+		// $params = array('cond' => $delete, 'message' => 'Successfully Deleted');
+		// $this->load->library('Condition', $params);
 	}
 
 

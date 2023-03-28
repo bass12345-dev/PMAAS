@@ -44,9 +44,19 @@ class Login extends CI_Controller {
             $user = $this->GetModel->get($this->users_table,$where)[0];
             // $x = password_verify($pass,$user['password']); 
             if ($pass == $user['password']) {
-                      $data['res'] = true;
+
+            	if ($user['user_status'] == 'active') {
+
+            		$data['res'] = true;
                       $data['message'] = 'Success';
                       $this->session->set_userdata($user);
+            		// code...
+            	}else {
+            			$data['res'] = false;
+                      $data['message'] = 'Account is inactive';
+                      
+            	}
+                      
 
             }else {
 

@@ -36,7 +36,7 @@ class Activity_logs extends CI_Controller {
 
 		if ($this->session->userdata('user_type') == 'admin') {
 
-		$items = $this->GetModel->getALLlogs($this->logs)->result_array(); 
+		$items = $this->GetModel->getALLlogs($this->logs);
 
 		$i = 0;
 		foreach ($items as $row ) {
@@ -46,7 +46,7 @@ class Activity_logs extends CI_Controller {
             				'n' => $i,
             				'action' => $row['action'],
             				'user' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension'],
-            				'date_and_time' => date('M,d Y', strtotime($row['created'])).' '.date('h:i a', strtotime($row['created']))
+            				'date_and_time' => date('M,d Y', strtotime($row['created_'])).' '.date('h:i a', strtotime($row['created_']))
             				
 
             	);

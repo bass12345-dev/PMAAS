@@ -31,10 +31,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     
     public function getALLlogs($table){
 
-            $this->db->from($table);
+            $this->db->from('activity_logs');
              $this->db->join('users','users.user_id = activity_logs.user_id');  
             $this->db->order_by('activity_logs.created_','desc');
-            return $this->db->get();
+            return $this->db->get()->result_array();;
       }
 
 

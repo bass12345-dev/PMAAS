@@ -50,7 +50,8 @@ src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="data-tables">
-                                            <table id="users_table" style="width:100%" class="text-center ">
+                                             <h4 class="header-title">Active</h4>
+                                            <table id="users_table" style="width:100%" class="text-center mb-3">
                                                 <thead class="bg-light text-capitalize">
                                                     <tr>
                                                       
@@ -62,63 +63,22 @@ src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js">
                                                     </tr>
                                                 </thead>
                                             </table>
-                                            
+                                            <h4 class="header-title">InActive</h4>
+                                              <table id="inactiveusers_table" style="width:100%" class="text-center ">
+                                                <thead class="bg-light text-capitalize">
+                                                    <tr>
+                                                      
+                                                        <th>Name</th>  
+                                                        <th>Username</th> 
+                                                         <th>Type</th>                                                     
+                                                       <th>Actions</th>
+                                                        
+                                                    </tr>
+                                                </thead>
+                                            </table>
                                         </div>
                                     </div>
-                                <div class="col-md-6">
-                                        <div class="card">                                     
-                                            <h4 class="header-title">Add User</h4>
-                                                <form id="add_user_form">
-                                                    <div class="form-group">
-                                                        <label>First Name</label>
-                                                            <input  type="text" class="form-control" name="first_name"  placeholder="" required>      
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Middle Name</label>
-                                                            <input  type="text" class="form-control" name="middle_name"  placeholder="" >      
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>Last Name</label>
-                                                            <input  type="text" class="form-control" name="last_name"  placeholder="" required>      
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>Extension</label>
-                                                            <input  type="text" class="form-control" name="ext"  placeholder="" >      
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>Profile Pic</label>
-                                                            <input  type="file" class="form-control" name="profile_pic"  placeholder="" >      
-                                                    </div>
- 
-                                                     <div class="form-group ">
-                                                      <label for="inputEmail4">User Type</label>
-                                                        <select id="inputState" name="user_type" class="form-control">
-                                                            
-                                                            <option selected value="user">User</option> 
-                                                            <option value="admin">Admin</option> 
-                                                                                                
-                                                      </select>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>Username</label>
-                                                            <input  type="text" class="form-control" name="username"  placeholder="" required>      
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>Password</label>
-                                                            <input  type="text" class="form-control" name="password"  placeholder="" required>      
-                                                    </div>
-
-                                                    <button  type="submit" class="btn mt-1 pr-4 pl-4 btn-add-user sub-button"> Submit</button>
-                                                    
-                                                    <div class="alert"></div>
-                                                 
-                                                </form>                                         
-                                        </div>
-                                    </div> 
+                                    <?php $this->load->view('admin/users/section/add')?>
                                 </div>
                                 
                             </div>
@@ -140,6 +100,69 @@ src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js">
     <?php $this->load->view('includes/offset.php') ?> 
      <?php $this->load->view('includes/scripts.php') ?> 
 
+
+     <script type="text/javascript">
+         var inactiveusers_table = $('#inactiveusers_table').DataTable({
+
+             scrollX: true, 
+             
+
+           "ajax" : {
+                        "url": base_url + 'Users/get_inactive',
+                        "dataSrc": "",
+            },
+             'columns': [
+            {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['user_id']+'"  style="color: #000;" class="table-font-size "  >'+data['name']+'</a>';
+                }
+
+            },
+              {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['user_id']+'"  style="color: #000;" class="table-font-size "  >'+data['username']+'</a>';
+                }
+
+            },
+              {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['user_id']+'"  style="color: #000;" class="table-font-size "  >'+data['user_type']+'</a>';
+                }
+
+            },
+
+
+            {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return row.action;
+                }
+
+            },
+
+            // {
+            //     // data: "song_title",
+            //     data: null,
+            //     render: function (data, type, row) {
+            //         return '<ul class="d-flex justify-content-center">\
+            //                     '+row.action1+'\
+            //                     '+row.action2+'\
+            //                     \
+            //                     </ul>';
+            //     }
+
+            // },
+          ]
+
+         })
+     </script>
 
   
    

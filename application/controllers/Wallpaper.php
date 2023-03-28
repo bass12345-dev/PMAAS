@@ -18,8 +18,8 @@ class Wallpaper extends CI_Controller {
 
 	public function index()
 	{
-      
-        echo 'asd';
+           $data['title'] = 'wallpaper';
+        $this->load->view('admin/wallpaper/wallpaper',$data);
 		
 	}
 

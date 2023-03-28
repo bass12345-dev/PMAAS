@@ -27,7 +27,7 @@
                             <span style="color: #fff;" class="ml-1 p-2 mb-5">Others</span>
                             <li><a href="<?php echo base_url() ?>back_up"><i class="fa fa-database"></i> <span>Backup Database</span></a></li>
                             <li><a href="<?php echo base_url() ?>Activity_logs"><i class="fa fa-history"></i> <span>Activity Logs</span></a></li>
-                             <li><a href="<?php echo base_url() ?>Wallpaper"><i class="ti-map-alt"></i> <span>Login Wallpaper</span></a></li>
+                            <!--  <li><a href="<?php echo base_url() ?>Wallpaper"><i class="ti-map-alt"></i> <span>Login Wallpaper</span></a></li> -->
                              <br>
                              <br>
                              <br>

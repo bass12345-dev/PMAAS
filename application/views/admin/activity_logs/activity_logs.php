@@ -85,6 +85,7 @@
      <script type="text/javascript">
           var logs_table = $('#logs_table').DataTable({
             "ordering": false,
+            pageLength: 20,
             "ajax" : {
                         "url": base_url + 'Activity_logs/get_logs',
                         "dataSrc": "",

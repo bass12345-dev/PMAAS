@@ -76,6 +76,13 @@
     var url = window.location.href.toLowerCase(); 
     console.log(getLastURLPart(url));
 
+     $(document).on('click','#back-button',function (e) {
+
+      window.history.back();
+
+
+ })
+
 
     function getLastURLPart(url) {
     var part = url.match(/.*\/(.+)/);
@@ -2206,18 +2213,28 @@
 
             },
 
+
             {
                 // data: "song_title",
                 data: null,
                 render: function (data, type, row) {
-                    return '<ul class="d-flex justify-content-center">\
-                                '+row.action1+'\
-                                '+row.action+'\
-                                \
-                                </ul>';
+                    return row.action;
                 }
 
             },
+
+            // {
+            //     // data: "song_title",
+            //     data: null,
+            //     render: function (data, type, row) {
+            //         return '<ul class="d-flex justify-content-center">\
+            //                     '+row.action1+'\
+            //                     '+row.action2+'\
+            //                     \
+            //                     </ul>';
+            //     }
+
+            // },
           ]
 
 
@@ -2660,6 +2677,7 @@ function update_credentials_swal(){
                                }
 
                                 table.ajax.reload();
+                                inactiveusers_table.ajax.reload()
                             }
                     })
 
