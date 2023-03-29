@@ -37,6 +37,20 @@ class Pending_transactions extends CI_Controller {
 	}
 
 
+		public function view_info() {
+
+		$data['title'] = 'Transactions';
+		$data['transaction_data'] = $this->GetModel->getTransaction_data($this->transactions,array('transaction_id' => $_GET['id']))[0];
+		$data['activities'] = $this->GetModel->getALL($this->type_of_activity,$this->order_by_asc,$this->order_key_name); 
+		$data['under_type_activies'] = $this->GetModel->getALL($this->under_type_of_activity,$this->order_by_asc,$this->order_under_type_act_name);
+		$data['responsibility_centers'] = $this->GetModel->getALL($this->responsibility_center,$this->order_by_asc,$this->order_key_code); 
+		$data['responsible'] =  $this->GetModel->getALL($this->responsible_section,$this->order_by_asc,$this->order_key);
+		$data['cso'] = $this->GetModel->getALL($this->cso,$this->order_by_asc,$this->order_key);
+		$this->load->view('admin/transactions/view/view_pmas',$data);
+
+	}
+
+
 
 	public function add_transactions(){
 

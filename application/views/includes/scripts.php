@@ -81,7 +81,41 @@
       window.history.back();
 
 
- })
+ });
+
+
+         $(function() {
+
+    if ( $('.owl-2').length > 0 ) {
+        $('.owl-2').owlCarousel({
+            center: false,
+            items: 1,
+            loop: true,
+            stagePadding: 0,
+            margin: 20,
+            smartSpeed: 1000,
+            autoplay: true,
+            nav: true,
+            dots: true,
+            pauseOnHover: false,
+            responsive:{
+                600:{
+                    margin: 20,
+                    nav: true,
+                  items: 2
+                },
+                1000:{
+                    margin: 20,
+                    stagePadding: 0,
+                    nav: true,
+                  items: 3
+                }
+            }
+        });            
+    }
+
+})
+
 
 
     function getLastURLPart(url) {
@@ -2046,7 +2080,7 @@
         $(document).on('click','a#view_more_transaction',function (e) {
 
 
-            window.location.href = base_url + 'transactions/view_info?id=' + $(this).data('id');
+            window.location.href = base_url + 'Pending_transactions/view_info?id=' + $(this).data('id');
             // ('#view_more_modal').modal('show')
                 
             //     const a = $(this).data('a');

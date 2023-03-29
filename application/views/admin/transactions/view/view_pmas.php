@@ -62,7 +62,7 @@
                             <h4 class="page-title pull-left"><?php echo $title ?></h4>
                             <ul class="breadcrumbs pull-left">
                                 <li><a href="<?php echo base_url() ?>">Home</a></li>
-                                 <li><a href="<?php echo base_url() ?>transactions">Transactions</a></li>
+                                 <li><a href="<?php echo base_url() ?>Pending_transactions">Pending transactions</a></li>
                                 <li><a href="<?php echo base_url() ?>transactions/view_info">View Information</a></li>
                             
                             </ul>
@@ -96,13 +96,13 @@
 
 
    <script type="text/javascript">
-         $(document).on('click','a#update-pmas',function (e) {
+     //     $(document).on('click','a#update-pmas',function (e) {
 
    
-        $('#update_pmas_modal').modal('show');
+     //    $('#update_pmas_modal').modal('show');
       
 
-     });
+     // });
 
 
 
@@ -218,6 +218,72 @@ jQuery(document).ready(function() {
         }
     });
 });
+
+      $('#id_0').datetimepicker({
+            "allowInputToggle": true,
+            "showClose": true,
+            "showClear": true,
+            "showTodayButton": true,
+            "format": "YYYY/MM/DD hh:mm:ss A",
+        });
+
+
+         $('#id_1').datetimepicker({
+            "allowInputToggle": true,
+            "showClose": true,
+            "showClear": true,
+            "showTodayButton": true,
+            "format": "YYYY/MM/DD hh:mm:ss A",
+        });
+
+  // var select2 =     $('#update_responsibility_center_id').select2({});
+  // select2.data('select2').$selection.css({'height' : '40px','border' : '1px solid'});
+
+function load_pmas_info(){
+
+
+
+        $.ajax({
+                            type: "POST",
+                            url: base_url + 'Transactions/get_pmas_info',
+                            data : {'id' : '<?php echo $_GET['id'] ?>'},
+                            cache: false,
+                            dataType: 'json',  
+                            success: function(data){
+                              
+                            $('input[name=year]').val(data.year);
+                            $('input[name=month]').val(data.month)
+                            $('input[name=pmas_number]').val(data.number);
+                            $("#update_type_of_monitoring_id option[value='"+data.responsible_section+"']").prop('selected', true);
+                            $("#update_responsibility_center_id option[value='"+data.responsibility_center_id+"']").prop('selected', true);
+                              $("#myselect option[value='"+data.activity_id+"']").prop('selected', true);
+                            $('input[name=update_date_time]').val(data.date_and_time);
+
+
+                            $("#update_cso_id option[value='"+data.cso_id+"']").prop('selected', true);
+
+                            if (data.is_training) {
+                                console.log('training')
+                            }else {
+                                console.log('not training')
+                            }
+
+
+                            if (data.is_project_monitoring) {
+                                console.log('project')
+                            }else {
+                                console.log('not project')
+                            }
+
+
+
+                                       
+                            }
+
+                    })
+
+                }
+load_pmas_info();
 
    </script>
 

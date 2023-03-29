@@ -109,6 +109,28 @@
 
                 </div>
 
+                
+                <div class="row mt-2">
+               <div class="col-lg-12 mt-sm-30 mt-xs-30" id="owl">
+                <div class="container owl-2-style" >
+                    <div class="owl-carousel owl-2">
+                    <?php foreach ($users as $row) {
+                        // code...
+                     ?>
+                    <div class="media-29101" >
+                                <img src="<?php echo base_url() ?>uploads/profile_pic/<?php echo $row['profile_pic'] ?>">
+                                <h3><a href="#"><?php echo $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension'] ?></a></h3>
+                                <p><?php echo $row['user_type'] ?></p>
+                              </div>
+                           
+                    <?php } ?>
+                         </div>
+                    </div>
+                </div>
+
+                </div>
+
+
 
               
 

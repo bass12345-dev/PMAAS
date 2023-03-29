@@ -7,13 +7,13 @@
                                                         <a  href    = "javascript:;" class = "mt-2  mb-2 btn sub-button text-center  btn-rounded btn-md btn-block"><i class = "fa fa-user" aria-hidden = "true"></i>PMAS Information</a>
                                                        
 
-                                                         <?php if ($transaction_data['status'] == 'pending') {
+                                                        <!--  <?php if ($transaction_data['status'] == 'pending') {
                                                            
                                                          ?>
                                                           <a  href    = "javascript:;" id="update-pmas"
                                                          class = "mt-2  mb-2  text-center  btn-rounded btn-md btn-block"><i class = "fa fa-edit" aria-hidden = "true"></i>Update PMAS</a>
 
-                                                      <?php }  ?>
+                                                      <?php }  ?> -->
 
                                                     </td>
 

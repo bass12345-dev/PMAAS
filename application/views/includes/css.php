@@ -39,6 +39,53 @@
           table > thead > tr > th{
              background-color: #3F6BA4; color: #fff;
             }
+
+
+                    .media-29101 {
+  text-align: center; }
+  .media-29101 img {
+    margin-bottom: 20px;
+    border-radius: 50%;
+    width: 250px !important;
+    margin: 0 auto 40px auto;
+  
+    height: 180px;
+     }
+  .media-29101 h3 {
+    font-size: 18px;
+    font-weight: 900 !important;
+    margin-bottom: 10px; }
+    .media-29101 h3 a {
+      color: #6c757d; }
+.media-29101 p {
+    font-size: 18px;
+    font-weight: 900 !important;
+
+}
+.owl-2-style .owl-nav {
+  display: none; }
+
+.owl-2-style .owl-dots {
+  text-align: center;
+  position: relative;
+  bottom: -30px; }
+  .owl-2-style .owl-dots .owl-dot {
+    display: inline-block; }
+    .owl-2-style .owl-dots .owl-dot span {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 0px;
+      background: #cccccc;
+      -webkit-transition: 0.3s all cubic-bezier(0.32, 0.71, 0.53, 0.53);
+      -o-transition: 0.3s all cubic-bezier(0.32, 0.71, 0.53, 0.53);
+      transition: 0.3s all cubic-bezier(0.32, 0.71, 0.53, 0.53);
+      margin: 3px;
+      border-radius: 50%; }
+    .owl-2-style .owl-dots .owl-dot.active span {
+      background: #007bff; }
+    .owl-2-style .owl-dots .owl-dot:active, .owl-2-style .owl-dots .owl-dot:focus {
+      outline: none; }
   
             .action-icon {
                 font-size: 25px;

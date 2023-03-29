@@ -34,6 +34,7 @@ class Dashboard extends CI_Controller {
 
 		 	$data['count_user_pending'] = $this->CountModel->countUserTran($this->transactions,array('created_by' => $this->session->userdata('user_id')),array('status' => 'pending'));
 		 	$data['count_user_completed'] = $this->CountModel->countUserTran($this->transactions,array('created_by' => $this->session->userdata('user_id')),array('status' => 'completed'));
+		 	$data['users'] = $this->GetModel->getALL($this->users,'asc',$this->order_key);
 		 	$this->load->view('admin/dashboard/user_content/user_dashboard',$data);
 		 }
 		 

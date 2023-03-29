@@ -42,7 +42,11 @@ class Transactions extends CI_Controller {
 
 		$data['title'] = 'Transactions';
 		$data['transaction_data'] = $this->GetModel->getTransaction_data($this->transactions,array('transaction_id' => $_GET['id']))[0];
+		$data['activities'] = $this->GetModel->getALL($this->type_of_activity,$this->order_by_asc,$this->order_key_name); 
+		$data['under_type_activies'] = $this->GetModel->getALL($this->under_type_of_activity,$this->order_by_asc,$this->order_under_type_act_name);
+		$data['responsibility_centers'] = $this->GetModel->getALL($this->responsibility_center,$this->order_by_asc,$this->order_key_code); 
 		$data['responsible'] =  $this->GetModel->getALL($this->responsible_section,$this->order_by_asc,$this->order_key);
+		$data['cso'] = $this->GetModel->getALL($this->cso,$this->order_by_asc,$this->order_key);
 		$this->load->view('admin/transactions/view/view_pmas',$data);
 
 	}
@@ -645,6 +649,31 @@ public function get_user_transactions_num(){
 
 
 
+
+	}
+
+
+
+	public function get_pmas_info(){
+		
+		$item = $this->GetModel->getTransaction_data($this->transactions,array('transaction_id' => $this->input->post('id')))[0];
+
+		$data['transaction_id'] = $item['transaction_id'];
+		$data['year'] = date('Y', strtotime($item['date_and_time_filed']));
+		$data['month'] = date('m', strtotime($item['date_and_time_filed']));
+		$data['number'] = $item['number'];
+		$data['responsible_section'] = $item['type_of_monitoring_id'];
+		$data['activity_id'] = $item['type_of_activity_id'];
+		$data['cso_id'] = $item['cso_Id'];
+		$data['responsibility_center_id'] = $item['responsibility_center_id'];
+		$data['date_and_time'] = date('Y-m-d h:i:s A', strtotime($item['date_time']));
+
+		$data['is_training'] = $item['is_training'] == 1 ? true : false;
+		$data['is_project_monitoring'] = $item['is_project_monitoring'] == 1 ? true : false;
+
+	
+	
+	echo json_encode($data);
 
 	}
 }
