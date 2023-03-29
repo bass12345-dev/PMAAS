@@ -2178,67 +2178,6 @@
     ==================================*/
 
 
-       var users_table = $('#users_table').DataTable({
-
-             scrollX: true, 
-             
-
-           "ajax" : {
-                        "url": base_url + 'Users/get',
-                        "dataSrc": "",
-            },
-             'columns': [
-            {
-                // data: "song_title",
-                data: null,
-                render: function (data, type, row) {
-                    return '<a href="javascript:;"   data-id="'+data['user_id']+'"  style="color: #000;" class="table-font-size "  >'+data['name']+'</a>';
-                }
-
-            },
-              {
-                // data: "song_title",
-                data: null,
-                render: function (data, type, row) {
-                    return '<a href="javascript:;"   data-id="'+data['user_id']+'"  style="color: #000;" class="table-font-size "  >'+data['username']+'</a>';
-                }
-
-            },
-              {
-                // data: "song_title",
-                data: null,
-                render: function (data, type, row) {
-                    return '<a href="javascript:;"   data-id="'+data['user_id']+'"  style="color: #000;" class="table-font-size "  >'+data['user_type']+'</a>';
-                }
-
-            },
-
-
-            {
-                // data: "song_title",
-                data: null,
-                render: function (data, type, row) {
-                    return row.action;
-                }
-
-            },
-
-            // {
-            //     // data: "song_title",
-            //     data: null,
-            //     render: function (data, type, row) {
-            //         return '<ul class="d-flex justify-content-center">\
-            //                     '+row.action1+'\
-            //                     '+row.action2+'\
-            //                     \
-            //                     </ul>';
-            //     }
-
-            // },
-          ]
-
-
-      });
 
 
 
@@ -2316,10 +2255,136 @@
 
         var id = $(this).data('id');   
         var table = users_table;
-        var url = 'Users/delete'
-        del(id,table,url);        
+        var url = 'Users/update_user_status';
+        var status = $(this).data('set');
+
+          Swal.fire({
+        title: "",
+        text: "Set this user to inactive",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true
+    }).then(function(result) {
+        if (result.value) {
+            
+                    $.ajax({
+                            type: "POST",
+                            url: base_url + url,
+                            data: {id:id,status : status},
+                            cache: false,
+                            dataType: 'json', 
+                            beforeSend : function(){
+
+                                  Swal.fire({
+                                title: "",
+                                text: "Please Wait",
+                                icon: "",
+                                showCancelButton: false,
+                                showConfirmButton : false,
+                                reverseButtons: false,
+                                allowOutsideClick : false
+                            })
+
+                            },
+                            success: function(data){
+                               if (data.response) {
+
+                                  Swal.fire(
+                "",
+                "Success",
+                "success"
+            )
+                                
+                               }
+
+                                table.ajax.reload();
+                                inactiveusers_table.ajax.reload()
+                            }
+                    })
+
+
+
+            // result.dismiss can be "cancel", "overlay",
+            // "close", and "timer"
+        } else if (result.dismiss === "cancel") {
+           swal.close()
+
+        }
+    });
+        // del(id,table,url);        
      });
 
+
+
+
+ $(document).on('click','a#active-user',function (e) {
+
+
+        var id = $(this).data('id');   
+        var table = users_table;
+        var url = 'Users/update_user_status';
+        var status = $(this).data('set');
+
+          Swal.fire({
+        title: "",
+        text: "Set this user to Active",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true
+    }).then(function(result) {
+        if (result.value) {
+            
+                    $.ajax({
+                            type: "POST",
+                            url: base_url + url,
+                            data: {id:id,status : status},
+                            cache: false,
+                            dataType: 'json', 
+                            beforeSend : function(){
+
+                                  Swal.fire({
+                                title: "",
+                                text: "Please Wait",
+                                icon: "",
+                                showCancelButton: false,
+                                showConfirmButton : false,
+                                reverseButtons: false,
+                                allowOutsideClick : false
+                            })
+
+                            },
+                            success: function(data){
+                               if (data.response) {
+
+                                  Swal.fire(
+                "",
+                "Success",
+                "success"
+            )
+                                
+                               }
+
+                                table.ajax.reload();
+                                inactiveusers_table.ajax.reload()
+                            }
+                    })
+
+
+
+            // result.dismiss can be "cancel", "overlay",
+            // "close", and "timer"
+        } else if (result.dismiss === "cancel") {
+           swal.close()
+
+        }
+    });
+
+        
+    });
 
     $(document).on('click','a.update_profile_picture',function (e) {
 

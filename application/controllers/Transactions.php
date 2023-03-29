@@ -479,7 +479,8 @@ public function get_user_transactions_num(){
 
 		
 		$data = array(
-					'pmas_no' => date('Y', time()).'-'.date('m', time()).'-'.$this->input->post('pmas_number'),
+					'pmas_no' => $this->input->post('year').'-'.$this->input->post('month').'-'.$this->input->post('pmas_number'),
+					// 'pmas_no' => date('Y', time()).'-'.date('m', time()).'-'.$this->input->post('pmas_number'),
 					'number' => $this->input->post('pmas_number'),
 					// 'date_and_time_filed' => $this->input->post('date_and_time_filed'),
 					// 'date_and_time_filed' =>  date("Y/m/d H:i:s", strtotime($this->input->post('date_and_time_filed'))),

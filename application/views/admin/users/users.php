@@ -147,6 +147,57 @@ src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js">
 
             },
 
+          ]
+
+         });
+
+
+
+                var users_table = $('#users_table').DataTable({
+
+             scrollX: true, 
+             
+
+           "ajax" : {
+                        "url": base_url + 'Users/get',
+                        "dataSrc": "",
+            },
+             'columns': [
+            {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['user_id']+'"  style="color: #000;" class="table-font-size "  >'+data['name']+'</a>';
+                }
+
+            },
+              {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['user_id']+'"  style="color: #000;" class="table-font-size "  >'+data['username']+'</a>';
+                }
+
+            },
+              {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return '<a href="javascript:;"   data-id="'+data['user_id']+'"  style="color: #000;" class="table-font-size "  >'+data['user_type']+'</a>';
+                }
+
+            },
+
+
+            {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return row.action;
+                }
+
+            },
+
             // {
             //     // data: "song_title",
             //     data: null,
@@ -161,7 +212,9 @@ src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js">
             // },
           ]
 
-         })
+
+      });
+
      </script>
 
   

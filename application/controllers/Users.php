@@ -119,7 +119,7 @@ class Users extends CI_Controller {
 			if ($row['user_type'] == 'admin') {
 				$a = '';
 			}else {
-				$a = '<ul class="d-flex justify-content-center"><li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user"  class="text-secondary action-icon"><i class="ti-eye"></i></a></li><li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user"  class="text-danger action-icon"><i class="ti-trash"></i></a></li></ul>';
+				$a = '<ul class="d-flex justify-content-center"><li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user"  class="text-secondary action-icon"><i class="ti-eye"></i></a></li><li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user" data-set="inactive" class="text-danger action-icon"><i class="ti-close"></i></a></li></ul>';
 			}
 
 				
@@ -154,7 +154,7 @@ class Users extends CI_Controller {
 			if ($row['user_type'] == 'admin') {
 				$a = '';
 			}else {
-				$a = '<ul class="d-flex justify-content-center"><li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user"  class="text-secondary action-icon"><i class="ti-eye"></i></a></li><li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user"  class="text-danger action-icon"><i class="ti-trash"></i></a></li></ul>';
+				$a = '<ul class="d-flex justify-content-center"><li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user"  class="text-secondary action-icon"><i class="ti-eye"></i></a></li><li><a href="javascript:;" data-id="'.$row['user_id'].'" data-set="active" id="active-user"  class="text-success action-icon"><i class="ti-check"></i></a></li></ul>';
 			}
 
 				
@@ -176,13 +176,11 @@ class Users extends CI_Controller {
 
 
 
-	public function delete(){
-
-
+	public function update_user_status(){
 
 		$data = array(
 
-				'user_status' => 'inactive',
+				'user_status' => $this->input->post('status'),
 			
 		);
 
@@ -191,13 +189,53 @@ class Users extends CI_Controller {
 		$update = $this->UpdateModel->update1($where,$data,$this->users);
 		$params = array('cond' => $update, 'message' => 'Success');
 		$this->load->library('Condition', $params);
-		// $where = 'user_id ='.$_POST['id'];
-		// $delete = $this->DeleteModel->delete($this->users,$where);
-		// $params = array('cond' => $delete, 'message' => 'Successfully Deleted');
-		// $this->load->library('Condition', $params);
+		
+
 	}
 
+	// public function delete(){
 
+
+
+	// 	$data = array(
+
+	// 			'user_status' => 'inactive',
+			
+	// 	);
+
+	// 	$where = 'user_id ='.$_POST['id'];
+
+	// 	$update = $this->UpdateModel->update1($where,$data,$this->users);
+	// 	$params = array('cond' => $update, 'message' => 'Success');
+	// 	$this->load->library('Condition', $params);
+	// 	// $where = 'user_id ='.$_POST['id'];
+	// 	// $delete = $this->DeleteModel->delete($this->users,$where);
+	// 	// $params = array('cond' => $delete, 'message' => 'Successfully Deleted');
+	// 	// $this->load->library('Condition', $params);
+	// }
+
+
+
+	// public function set_to_active(){
+
+
+
+	// 	$data = array(
+
+	// 			'user_status' => 'active',
+			
+	// 	);
+
+	// 	$where = 'user_id ='.$_POST['id'];
+
+	// 	$update = $this->UpdateModel->update1($where,$data,$this->users);
+	// 	$params = array('cond' => $update, 'message' => 'Success');
+	// 	$this->load->library('Condition', $params);
+	// 	// $where = 'user_id ='.$_POST['id'];
+	// 	// $delete = $this->DeleteModel->delete($this->users,$where);
+	// 	// $params = array('cond' => $delete, 'message' => 'Successfully Deleted');
+	// 	// $this->load->library('Condition', $params);
+	// }
 
 
 

@@ -182,7 +182,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
            $this->db->join('cso','cso.cso_id = transactions.cso_Id');
                $this->db->where('transactions.status','pending');
             $this->db->order_by('transactions.pmas_no','desc');
-            $this->db->limit(50);
+            $this->db->limit($limit);
             return $this->db->get()->result_array();
       }
 

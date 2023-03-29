@@ -121,7 +121,7 @@ function fetch_pending(){
 
                 $('#pending_transactions_table').DataTable({
 
-                    scrollY: 500,
+                    scrollY: 800,
                     scrollX: true,
                     "ordering": false,
                     "data": data,

@@ -106,8 +106,9 @@
                               
                                 <div class="input-group mb-3">
                                <div class="input-group-prepend">
-                                    <button class="btn btn-outline-secondary " type="button" ><?php echo date('Y', time()) ?></button>
-                                   <div class="dropdown-menu">
+                                    <!-- <button class="btn btn-outline-secondary " type="button" ><?php echo date('Y', time()) ?></button> -->
+                                    <input type="text" name="year" class="form-control"  value="<?php echo date('Y', time()) ?>" readonly>
+                                   <!-- <div class="dropdown-menu">
 
                                            <?php
 
@@ -121,20 +122,15 @@
 
                                          ?> 
                                       
-                                    </div> 
+                                    </div>  -->
                                   </div>
 
                                   <div class="input-group-prepend">
                                     <!-- <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo date('m', time()) ?></button> -->
 
-                                    <button class="btn btn-outline-secondary " type="button" ><?php echo date('m', time()) ?></button>
-                                <div class="dropdown-menu">
-                                      <a class="dropdown-item" href="#">Action</a>
-                                      <a class="dropdown-item" href="#">Another action</a>
-                                      <a class="dropdown-item" href="#">Something else here</a>
-                                      
-                                    </div>
-
+                                    <!-- <button class="btn btn-outline-secondary " type="button" ><?php echo date('m', time()) ?></button> -->
+                              
+                                     <input type="text" name="month" class="form-control" value="<?php echo date('m', time()) ?>" readonly>
                                     
                                     
                                   </div>

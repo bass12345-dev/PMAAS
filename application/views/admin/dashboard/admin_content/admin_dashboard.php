@@ -141,7 +141,7 @@
                             <div class="card-body">
                               <div class="d-sm-flex justify-content-between align-items-center">
                                     <h4 class="header-title">Show</h4>   
-                                     <                
+                                                    
                                      <select class="custome-select border-0 pr-3" id="show_" onchange="load_pending(this)">
                                         <option selected>5</option>
                                         <option value="10">10</option>
@@ -331,7 +331,7 @@
     
 
      function load_pending_transactions(show){
-
+        
         var table = $('#pending_transactions_limit')
         table.find('tbody').html('')
         var tr1 = $('<tr>')

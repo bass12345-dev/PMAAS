@@ -1,4 +1,4 @@
- <div class="col-md-12 ">
+ <div class="col-md-6 ">
                                         <div class="data-tables">
                                              <table class="tablesaw table-bordered table-hover table" >
                                                 
