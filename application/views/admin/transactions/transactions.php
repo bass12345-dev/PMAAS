@@ -70,7 +70,7 @@
 
                                       
                                             <table id="transactions_table" style="width:100%" class="text-center stripe">
-                                                <thead class="bg-light text-capitalize">
+                                                <thead class="bg-light text-capitalize" >
                                                     <tr>
                                                         <th>PMAS NO</th>
                                                         <th>Date & Time Filed</th>

@@ -186,7 +186,8 @@
                                             label               : 'Transactions',
                                              backgroundColor    :  "#3F6BA4",
                                              borderColor: 'rgb(23, 125, 255)',
-                                            data                : data.data
+                                            data                : data.data,
+                                            
                                         }
                                       ]
                                     },
