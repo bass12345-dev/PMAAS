@@ -20,7 +20,7 @@
                 <form id="login_form">
                     <div class="login-form-head">                    
                         <img src="peso_logo.png" width="150" height="200">
-                        <h1 class="mt-4" style="color: #fff;">PMAAS </h1>
+                        <h1 class="mt-2" style="color: #fff;">PMAAS </h1>
                     </div>
                         <div class="login-form-body">
                             <div class="form-gp">

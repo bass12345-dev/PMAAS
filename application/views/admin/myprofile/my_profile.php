@@ -64,7 +64,7 @@
                             <h4 class="page-title pull-left"><?php echo $title ?></h4>
                             <ul class="breadcrumbs pull-left">
                                 <li><a href="<?php echo base_url() ?>">Home</a></li>
-                                <li><a href="<?php echo base_url() ?>MyProfile"><?php echo $title ?></a></li>
+                                <li><a href="<?php echo base_url() ?>View/user_profile?id=<?php echo $_GET['id'] ?>"><?php echo $title ?></a></li>
                               
                                 
                                 
@@ -92,9 +92,13 @@
                                                     <img src="" lass="rounded mb-3" style="width: 250px; border-radius: 70px;"
   alt="Avatar" id="profile_pic">
                                                 </div>                                            
-                                                <!--  <button class="btn btn-block btn-rounded btn-success update_profile_picture">Update Profile Picture</button>    -->
+                                                <?php if ($this->session->userdata('user_id') == $_GET['id']) {
+                                                    // code...
+                                                 ?>
                                                 <a  href    = "javascript:;" 
                                                          class = "mt-1  mb-1  text-center  btn-rounded btn-md btn-block update_profile_picture"><i class = "fa fa-edit" aria-hidden = "true"></i> Update Profile Picture</a>
+
+                                                <?php } ?>
                                     </div>
                                     
                                              <table class="tablesaw table-bordered table-hover table" data-tablesaw-mode="swipe" data-tablesaw-sortable data-tablesaw-sortable-switch data-tablesaw-minimap data-tablesaw-mode-switch id="_table">
@@ -102,10 +106,12 @@
                                                    <tr>
                                                         <td colspan = "2">
                                                         <a  href    = "javascript:;" class = "mt-2  mb-2 btn sub-button text-center  btn-rounded btn-md btn-block"><i class = "fa fa-user" aria-hidden = "true"></i> Personal Information</a>
-
+                                                     <?php if ($this->session->userdata('user_id') == $_GET['id']) {
+                                                    // code...
+                                                 ?>    
                                                         <a  href    = "javascript:;"  id="update-personal-information"
                                                          class = "mt-2  mb-2  text-center  btn-rounded btn-md btn-block"><i class = "fa fa-edit" aria-hidden = "true"></i> Update Personal Information</a>
-                                                       
+                                                    <?php } ?>   
                                                     </td>
 
                                                     </tr>
@@ -124,8 +130,11 @@
                                                     
                                                   
                                             </table>
+                                            <?php if ($this->session->userdata('user_id') == $_GET['id']) {
+                                                    // code...
+                                                 ?>
                                             <button class="btn btn-block btn-rounded btn-success update_password">Update Credentials</button>
-
+                                            <?php } ?>
                                           
                                        
                                     </div>
@@ -165,7 +174,7 @@
 
             $.ajax({
                             type: "POST",
-                            url: base_url + 'MyProfile/get_my_profile',
+                            url: base_url + 'MyProfile/get_my_profile?id=<?php echo $_GET['id'] ?>',
                             cache: false,
                             dataType: 'json',  
                             success: function(data){

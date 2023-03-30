@@ -1,4 +1,14 @@
- <div class="col-md-6 ">
+                                 <div class="col-md-12 ">
+                                       <?php if ($this->session->userdata('user_type') == 'admin') {
+                                                // code...
+                                             ?>
+                                          <div class="row">                                          
+                                             <div class="col-md-12">                                            
+                                             <a href="<?php echo base_url() ?>Pending_transactions/add_transactions" class="btn  mb-3 mt-2 sub-button pull-right" >Update</a>                                              
+                                            </div>
+                                        </div>
+                                        <?php } ?>
+
                                         <div class="data-tables">
                                              <table class="tablesaw table-bordered table-hover table" >
                                                 
@@ -42,12 +52,12 @@
                                                         <td class="t_title">Date & Time</td>
                                                         <td class="email"><?php echo date('M,d Y', strtotime($transaction_data['date_time'])).' '.date('h:i a', strtotime($transaction_data['date_time'])) ?></</td>
                                                     </tr>
-<!-- 
+
                                                      <tr>
                                                         <td class="t_title">Added By</td>
-                                                        <td class="email"><?php echo $transaction_data['first_name'].' '.$transaction_data['middle_name'].' '.$transaction_data['last_name'].' '.$transaction_data['extension'] ?></td>
+                                                        <td class="email"><?php echo $transaction_data['first_name'].' '.$transaction_data['middle_name'].' '.$transaction_data['last_name'].' '.$transaction_data['extension'] ?></</td>
                                                     </tr>
- -->
+
                                                     <?php
 
                                                         if ($transaction_data['is_training'] == 1) {

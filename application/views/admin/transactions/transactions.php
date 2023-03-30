@@ -223,6 +223,19 @@
                 }
 
             },
+
+
+            {
+                // data: "song_title",
+                data: null,
+                render: function (data, type, row) {
+                    return row.action;
+                }
+
+            },
+
+
+
             // {
             //     // data: "song_title",
             //     data: null,
@@ -234,17 +247,17 @@
             
              
 
-            {
-                // data: "song_title",
-                data: null,
-                render: function (data, type, row) {
-                    return '<ul class="d-flex justify-content-center">\
-                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'+data['transaction_id']+'" data-a="'+data['is_training']+'" data-b="'+data['is_project_monitoring']+'"  id="view_more_transaction"><i class="fa fa-eye"></i></a></li>\
-                                <li><a href="javascript:;" data-id="'+data['type_act_id']+'"  id="delete-activity"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>\
-                                </ul>';
-                }
+            // {
+            //     // data: "song_title",
+            //     data: null,
+            //     render: function (data, type, row) {
+            //         return '<ul class="d-flex justify-content-center">\
+            //                     <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'+data['transaction_id']+'" data-a="'+data['is_training']+'" data-b="'+data['is_project_monitoring']+'"  id="view_more_transaction"><i class="fa fa-eye"></i></a></li>\
+            //                     <li><a href="javascript:;" data-id="'+data['type_act_id']+'"  id="delete-activity"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>\
+            //                     </ul>';
+            //     }
 
-            },
+            // },
             ]
                 })
 

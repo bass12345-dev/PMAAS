@@ -62,9 +62,8 @@
                             <h4 class="page-title pull-left"><?php echo $title ?></h4>
                             <ul class="breadcrumbs pull-left">
                                 <li><a href="<?php echo base_url() ?>">Home</a></li>
-                                 <li><a href="<?php echo base_url() ?>Pending_transactions">Pending transactions</a></li>
-                                <li><a href="<?php echo base_url() ?>Pending_transactions/view_info?id=<?php echo $_GET['id'] ?>&&type=<?php echo $_GET['type'] ?>">View Information</a></li>
-                               
+                                 <li><a href="<?php echo base_url() ?>Transactions">Completed transactions</a></li>
+                                <li><a href="<?php echo base_url() ?>transactions/view_info?id=<?php echo $_GET['id'] ?>&&type=<?php echo $_GET['type'] ?>">View Information</a></li>
                             
                             </ul>
                         </div>
@@ -79,14 +78,9 @@
                     <div class="col-12 mt-5">
                         <div class="card " style="border: 1px solid;">
                             <div class="card-body">
-                                <div class="row">                                          
-                                             <div class="col-md-12">                                            
-                                             <label  class="  mb-2 mt-1  pull-left" style="font-size: 18px; font-weight: bold;" >Added By : <span style="font-size: 18px; font-weight: bold;" id="added_by"><?php echo $transaction_data['first_name'].' '.$transaction_data['middle_name'].' '.$transaction_data['last_name'].' '.$transaction_data['extension'] ?></span>  </label>                                           
-                                            </div>
-                                        </div>
                                 <div class="row">
-                                    <?php $this->load->view('admin/transactions/view/view_more') ?> 
-                                    <?php $this->load->view('admin/transactions/view/update_pmas') ?> 
+                                    <?php $this->load->view('admin/transactions/view/completed/view_more') ?> 
+                                   
                                 </div>
                             </div>
                         </div>

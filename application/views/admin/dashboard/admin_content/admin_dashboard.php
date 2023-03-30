@@ -164,7 +164,7 @@
                      ?>
                     <div class="media-29101" >
                                 <img src="<?php echo base_url() ?>uploads/profile_pic/<?php echo $row['profile_pic'] ?>">
-                                <h3><a href="#"><?php echo $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension'] ?></a></h3>
+                                <h3><a href="<?php echo base_url() ?>View/user_profile?id=<?php echo $row['user_id'] ?>"><?php echo $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension'] ?></a></h3>
                                 <p><?php echo $row['user_type'] ?></p>
                               </div>
                            

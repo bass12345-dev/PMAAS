@@ -39,14 +39,28 @@ class Pending_transactions extends CI_Controller {
 
 		public function view_info() {
 
-		$data['title'] = 'Transactions';
+	if ($_GET['type'] == 'pending') {
+
+		
 		$data['transaction_data'] = $this->GetModel->getTransaction_data($this->transactions,array('transaction_id' => $_GET['id']))[0];
 		$data['activities'] = $this->GetModel->getALL($this->type_of_activity,$this->order_by_asc,$this->order_key_name); 
 		$data['under_type_activies'] = $this->GetModel->getALL($this->under_type_of_activity,$this->order_by_asc,$this->order_under_type_act_name);
 		$data['responsibility_centers'] = $this->GetModel->getALL($this->responsibility_center,$this->order_by_asc,$this->order_key_code); 
 		$data['responsible'] =  $this->GetModel->getALL($this->responsible_section,$this->order_by_asc,$this->order_key);
 		$data['cso'] = $this->GetModel->getALL($this->cso,$this->order_by_asc,$this->order_key);
-		$this->load->view('admin/transactions/view/view_pmas',$data);
+		$data['title'] = 'PMAS '.$data['transaction_data']['pmas_no'];
+
+		if ($data['transaction_data']['status'] == 'pending') {
+			$this->load->view('admin/transactions/view/view_pmas',$data);
+		}else {
+			echo 'error';
+		}
+
+	}else {
+		
+		echo 'error';
+	}
+
 
 	}
 
@@ -94,12 +108,19 @@ class Pending_transactions extends CI_Controller {
                                               <div class="dropdown-menu">
                                                 <a class="dropdown-item" href="javascript:;" data-id="'.$row['transaction_id'].'" id="add-remarks">Add Remarks</a>
                                                 <hr>
-                                                <a class="dropdown-item" href="#" data-id="'.$row['transaction_id'].'">View Information</a>
+                                                <a class="dropdown-item" href="javascript:;" data-id="'.$row['transaction_id'].'" data-status="'.$row['status'].'"  id="view_transaction_pending">View Information</a>
                                               </di>';
 					$a = '<a href="javascript:;" class="btn btn-danger btn-rounded p-1 pl-2 pr-2">no remarks</a>';
 					// code...
 				}else if ($row['remarks'] != '' AND $row['action_taken'] == null) {
-					$b = '';
+					$b = '<div class="btn-group dropleft">
+                                              <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                               <i class="ti-settings" style="font-size : 15px;"></i>
+                                              </button>
+                                              <div class="dropdown-menu">
+                                               
+                                                <a class="dropdown-item" href="javascript:;" data-id="'.$row['transaction_id'].'" data-status="'.$row['status'].'"  id="view_transaction_pending">View Information</a>
+                                              </di>';
 					$a = '<a href="javascript:;" class="btn btn-success btn-rounded p-1 pl-2 pr-2">remarks added</a>';
 				}
 				else if ($row['remarks'] != '' AND $row['action_taken'] != null) {
@@ -138,21 +159,21 @@ class Pending_transactions extends CI_Controller {
 
 				if ($row['remarks'] == '' AND $row['action_taken'] == null) {
 					$b = '<ul class="d-flex justify-content-center">
-                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'.$row['transaction_id'].'" data-a="" data-b=""  id="view_more_transaction"><i class="fa fa-eye"></i></a></li>
+                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'.$row['transaction_id'].'" data-status="'.$row['status'].'"  id="view_transaction_pending"><i class="fa fa-eye"></i></a></li>
                                 <li><a href="javascript:;" data-id=""  id="delete-activity"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>
                                 </ul>';
 					$a = '<a href="javascript:;" class="btn btn-secondary btn-rounded p-1 pl-2 pr-2">Waiting for Remarks....</a>';
 					
 				}else if ($row['remarks'] != '' AND $row['action_taken'] == null) {
 					$b = '<ul class="d-flex justify-content-center">
-                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'.$row['transaction_id'].'" data-a="" data-b=""  id="view_more_transaction"><i class="fa fa-eye"></i></a></li>
+                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'.$row['transaction_id'].'" data-status="'.$row['status'].'"  id="view_transaction_pending"><i class="fa fa-eye"></i></a></li>
                                 </ul>';
 					$a = '<a href="javascript:;" class="btn btn-danger btn-rounded p-1 pl-2 pr-2">remarks added</a><br><a href="javascript:;"  data-id="'.$row['transaction_id'].'" id="view-remarks">View Remarks</a>';
 					
 				}
 				else if ($row['remarks'] != '' AND $row['action_taken'] != null) {
 					$b = '<ul class="d-flex justify-content-center">
-                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'.$row['transaction_id'].'" data-a="" data-b=""  id="view_more_transaction" ><i class="fa fa-eye"></i></a></li>
+                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'.$row['transaction_id'].'" data-status="'.$row['status'].'"  id="view_transaction_pending" ><i class="fa fa-eye"></i></a></li>
                                 </ul>';
 					$a = '<a href="javascript:;" class="btn btn-success btn-rounded p-1 pl-2 pr-2">Waiting for Confirmation</a>';
 				}
@@ -171,21 +192,7 @@ class Pending_transactions extends CI_Controller {
             				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension'],
             				's' => $a,
             				'action' => $b,
-            				// 'action' => '<ul class="d-flex justify-content-center">
-                //                 <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="" data-a="" data-b=""  id="view_more_transaction"><i class="fa fa-eye"></i></a></li>
-                //                 <li><a href="javascript:;" data-id=""  id="delete-activity"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>
-                //                 </ul>',
-            				// 'action' => $row['remarks'] == '' ? '<div class="btn-group dropleft">
-                //                               <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                //                                <i class="ti-settings" style="font-size : 15px;"></i>
-                //                               </button>
-                //                               <div class="dropdown-menu">
-                //                                 <a class="dropdown-item" href="javascript:;" data-id="'.$row['transaction_id'].'" id="add-remarks">Add Remarks</a>
-                //                                 <hr>
-                //                                 <a class="dropdown-item" href="#">View Information</a>
-                //                               </di' : '',
-
-
+            				
             	);
             # code...
         }

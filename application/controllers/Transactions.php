@@ -33,12 +33,16 @@ class Transactions extends CI_Controller {
 
 	public function index()
 	{	
-		$data['title'] = 'Transactions';
+		$data['title'] = 'Completed Transactions';
 		$this->load->view('admin/transactions/transactions',$data);
 	}
 
 
 	public function view_info() {
+
+		if ($_GET['type'] == 'completed') {
+			// code...
+		
 
 		$data['title'] = 'Transactions';
 		$data['transaction_data'] = $this->GetModel->getTransaction_data($this->transactions,array('transaction_id' => $_GET['id']))[0];
@@ -47,7 +51,18 @@ class Transactions extends CI_Controller {
 		$data['responsibility_centers'] = $this->GetModel->getALL($this->responsibility_center,$this->order_by_asc,$this->order_key_code); 
 		$data['responsible'] =  $this->GetModel->getALL($this->responsible_section,$this->order_by_asc,$this->order_key);
 		$data['cso'] = $this->GetModel->getALL($this->cso,$this->order_by_asc,$this->order_key);
-		$this->load->view('admin/transactions/view/view_pmas',$data);
+
+		if ($data['transaction_data']['status'] == 'completed') {
+			$this->load->view('admin/transactions/view/completed/view_pmas',$data);
+		}else {
+			echo 'error';
+		}
+
+
+	}else {
+		
+		echo 'error';
+	}
 
 	}
 
@@ -262,7 +277,12 @@ class Transactions extends CI_Controller {
             				'is_training' => $row['is_training'] == 1 ? true : false,
             				'is_project_monitoring' =>  $row['is_project_monitoring'] == 1 ? true : false,
             				'cso' =>  $row['cso_name'],
-            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension']
+            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension'],
+            				'action' => '<ul class="d-flex justify-content-center">
+                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'.$row['transaction_id'].'"  data-status="'.$row['status'].'"   id="view_transaction_completed"><i class="fa fa-eye"></i></a></li>
+                                <li><a href="javascript:;"    class="text-danger action-icon"><i class="ti-trash"></i></a></li>
+                                </ul>',
+                            'status' => $row['status']
 
             	);
             # code...
@@ -272,6 +292,7 @@ class Transactions extends CI_Controller {
 
 	}else {
 		$items1 = $this->GetModel->getUserCompletedTransactions($this->transactions,array('created_by' => $this->session->userdata('user_id'))); 
+		$action = '';
 		foreach ($items1 as $row ) {
 
             	$data[] = array(
@@ -285,7 +306,12 @@ class Transactions extends CI_Controller {
             				'is_training' => $row['is_training'] == 1 ? true : false,
             				'is_project_monitoring' =>  $row['is_project_monitoring'] == 1 ? true : false,
             				'cso' =>  $row['cso_name'],
-            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension']
+            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension'],
+            				'action' => '<ul class="d-flex justify-content-center">
+                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'.$row['transaction_id'].'" data-status="'.$row['status'].'"   id="view_transaction_completed"><i class="fa fa-eye"></i></a></li>
+                                
+                                </ul>',
+                                'status' => $row['status']
 
             	);
             # code...
@@ -319,7 +345,12 @@ class Transactions extends CI_Controller {
             				'is_training' => $row['is_training'] == 1 ? true : false,
             				'is_project_monitoring' =>  $row['is_project_monitoring'] == 1 ? true : false,
             				'cso' =>  $row['cso_name'],
-            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension']
+            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension'],
+            				'action' => '<ul class="d-flex justify-content-center">
+                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'.$row['transaction_id'].'"  data-status="'.$row['status'].'"  id="view_transaction_completed"><i class="fa fa-eye"></i></a></li>
+                                <li><a href="javascript:;"    class="text-danger action-icon"><i class="ti-trash"></i></a></li>
+                                </ul>',
+                            'status' => $row['status']
 
             	);
             # code...
@@ -342,7 +373,12 @@ class Transactions extends CI_Controller {
             				'is_training' => $row['is_training'] == 1 ? true : false,
             				'is_project_monitoring' =>  $row['is_project_monitoring'] == 1 ? true : false,
             				'cso' =>  $row['cso_name'],
-            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension']
+            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension'],
+            				'action' => '<ul class="d-flex justify-content-center">
+                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="'.$row['transaction_id'].'" data-status="'.$row['status'].'"   id="view_transaction_completed"><i class="fa fa-eye"></i></a></li>
+                                
+                                </ul>',
+                            'status' => $row['status']
 
             	);
             # code...
@@ -359,55 +395,7 @@ class Transactions extends CI_Controller {
 
 
 
-	// 				$data = [];
-	// 				if ($this->session->userdata('user_type') == 'admin') {
-		
-	
-	// 	$items = $this->GetModel->getTransactions($this->transactions,$this->order_by_desc,'date_and_time_filed'); 
 
-	// 	foreach ($items as $row ) {
-
- //            	$data[] = array(
- //            				'transaction_id' => $row['transaction_id'],
- //            				'pmas_no' => date('Y', strtotime($row['date_and_time_filed'])).' - '.date('m', strtotime($row['date_and_time_filed'])).' - '.$row['number'],
- //            				'date_and_time_filed' => date('M,d Y', strtotime($row['date_and_time_filed'])).' '.date('h:i a', strtotime($row['date_and_time_filed'])),
- //            				'type_mon_name' => $row['type_mon_name'],
- //            				'type_act_name' => $row['type_act_name'],
- //            				'responsibility_center' => $row['res_center_code'].' - '.$row['res_center_name'],
- //            				'date_time' => date('M,d Y', strtotime($row['date_time'])).' '.date('h:i a', strtotime($row['date_time'])),
- //            				'is_training' => $row['is_training'] == 1 ? true : false,
- //            				'is_project_monitoring' =>  $row['is_project_monitoring'] == 1 ? true : false,
- //            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension']
-
- //            	);
- //            # code...
- //        }
-
-      
-
-	// }else {
-	// 	$items1 = $this->GetModel->getUserCompletedTransactions($this->transactions,array('created_by' => $this->session->userdata('user_id'))); 
-	// 	foreach ($items1 as $row ) {
-
- //            	$data[] = array(
- //            				'transaction_id' => $row['transaction_id'],
- //            				'pmas_no' => date('Y', strtotime($row['date_and_time_filed'])).' - '.date('m', strtotime($row['date_and_time_filed'])).' - '.$row['number'],
- //            				'date_and_time_filed' => date('M,d Y', strtotime($row['date_and_time_filed'])).' '.date('h:i a', strtotime($row['date_and_time_filed'])),
- //            				'type_mon_name' => $row['type_mon_name'],
- //            				'type_act_name' => $row['type_act_name'],
- //            				'responsibility_center' => $row['res_center_code'].' - '.$row['res_center_name'],
- //            				'date_time' => date('M,d Y', strtotime($row['date_time'])).' '.date('h:i a', strtotime($row['date_time'])),
- //            				'is_training' => $row['is_training'] == 1 ? true : false,
- //            				'is_project_monitoring' =>  $row['is_project_monitoring'] == 1 ? true : false,
- //            				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension']
-
- //            	);
- //            # code...
- //        }
-	
-	// }
-
-	// echo json_encode($data);
 
 
 

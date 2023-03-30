@@ -71,7 +71,7 @@ class MyProfile extends CI_Controller {
 	public function get_my_profile(){
 
 		$data = [];
-		$item = $this->GetModel->get($this->users,array('user_id' => $this->session->userdata('user_id')))[0];
+		$item = $this->GetModel->get($this->users,array('user_id' => $_GET['id']))[0];
 		$data['name'] = $item['first_name'].' '.$item['middle_name'].' '.$item['last_name'].' '.$item['extension'];
 		$data['first_name'] = $item['first_name'];
 		$data['middle_name'] = $item['middle_name'];

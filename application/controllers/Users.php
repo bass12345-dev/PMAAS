@@ -30,6 +30,8 @@ class Users extends CI_Controller {
 	}
 
 
+
+
 	
 
 
@@ -119,7 +121,7 @@ class Users extends CI_Controller {
 			if ($row['user_type'] == 'admin') {
 				$a = '';
 			}else {
-				$a = '<ul class="d-flex justify-content-center"><li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user"  class="text-secondary action-icon"><i class="ti-eye"></i></a></li><li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user" data-set="inactive" class="text-danger action-icon"><i class="ti-close"></i></a></li></ul>';
+				$a = '<ul class="d-flex justify-content-center"><li><a href="'.base_url().'View/user_profile?id='.$row['user_id'].'" data-id="'.$row['user_id'].'"   class="text-secondary action-icon"><i class="ti-eye"></i></a></li><li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user" data-set="inactive" class="text-danger action-icon"><i class="ti-close"></i></a></li></ul>';
 			}
 
 				
@@ -129,8 +131,7 @@ class Users extends CI_Controller {
 						'user_type' => $row['user_type'],
 						'username' => $row['username'],
 						'user_id' => $row['user_id'],
-						// 'action2' => ($this->session->userdata('user_type') == 'admin') ? '<li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>' : ' ',
-						// 'action1' => ($this->session->userdata('user_type') == 'admin') ? '<li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="delete-user"  class="text-secondary action-icon"><i class="ti-edit"></i></a></li>' : '<li><a href="javascript:;" data-id="'.$row['user_id'].'"  id="view-user"  class="text-secondary action-icon"><i class="ti-eye"></i></a></li>',
+						
 						'action' => $a
 
 				);

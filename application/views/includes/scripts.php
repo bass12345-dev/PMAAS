@@ -84,6 +84,8 @@
  });
 
 
+
+
          $(function() {
 
     if ( $('.owl-2').length > 0 ) {
@@ -1272,11 +1274,22 @@
                 // data: "song_title",
                 data: null,
                 render: function (data, type, row) {
-                    return '<ul class="d-flex justify-content-center">\
-                               \
-                                  <li class="mr-1 "><a href="javascript:;" data-id="'+data['cso_id']+'"  id="view-cso"  class="text-secondary action-icon"><i class="ti-eye"></i></a></li>\
-                                <li><a href="javascript:;" data-id="'+data['cso_id']+'"  id="delete-cso"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>\
-                                </ul>';
+                    return '<div class="btn-group dropleft">\
+                                              <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">\
+                                               <i class="ti-settings" style="font-size : 15px;"></i>\
+                                              </button>\
+                                              <div class="dropdown-menu">\
+                                                <a class="dropdown-item" href="javascript:;" data-id="'+data['cso_id']+'"  id="view-cso" > <i class="ti-eye"></i> View Information</a>\
+                                                <hr>\
+                                                <a class="dropdown-item" href="javascript:;" data-id="'+data['cso_id']+'" id="view_trans"> <i class="ti-eye"></i> View Transactions</a>\
+                                                <hr>\
+                                                <a class="dropdown-item text-danger" href="javascript:;" data-id="'+data['cso_id']+'" id="delete-cso"  id="view_transaction_pending" > <i class="ti-trash"></i> Delete</a>\
+                                              </di>';
+                    // return '<ul class="d-flex justify-content-center">\
+                    //            \
+                    //               <li class="mr-1 "><a href="javascript:;" data-id="'+data['cso_id']+'"  id="view-cso"  class="text-secondary action-icon"><i class="ti-eye"></i></a></li>\
+                    //             <li><a href="javascript:;" data-id="'+data['cso_id']+'"  id="delete-cso"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>\
+                    //             </ul>';
                 }
 
             },
@@ -2077,34 +2090,15 @@
 
 
 
-        $(document).on('click','a#view_more_transaction',function (e) {
+        $(document).on('click','a#view_transaction_completed',function (e) {
+            window.location.href = base_url + 'Transactions/view_info?id=' + $(this).data('id') + '&&type=' +$(this).data('status');
+           });
 
 
-            window.location.href = base_url + 'Pending_transactions/view_info?id=' + $(this).data('id');
-            // ('#view_more_modal').modal('show')
-                
-            //     const a = $(this).data('a');
-            //     const b = $(this).data('b');
-            //     const id = $(this).data('id');
+        $(document).on('click','a#view_transaction_pending',function (e) {
+            // window.location.href = base_url + 'Pending_transactions/view_info?id=' + $(this).data('id') + '&&type=' +$(this).data('status');
 
-
-            // if (a == 1 || b ==  1) {
-            //     if (a) {
-                    
-            //         load_training_modal();
-            //     }
-
-            //     if (b) {
-            //         alert('project')
-            //     }
-
-            // }else {
-
-            //     alert('wala')
-            // }
-
-
-
+            window.open( base_url + 'Pending_transactions/view_info?id=' + $(this).data('id') + '&&type=' +$(this).data('status'),'_blank');
            });
 
 

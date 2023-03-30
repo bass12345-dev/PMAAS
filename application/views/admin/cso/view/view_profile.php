@@ -28,7 +28,7 @@
                     <!-- nav and search button -->
                     <div class="col-md-6 col-sm-8 clearfix">
                         <span style="font-size:23px;">
-                            <a href="<?php echo base_url() ?>cso/view_transactions?id=<?php echo $_GET['id'] ?>" style="color: #000;">
+                            <a href="javascript:;" id="back-button" style="color: #000;">
                             <i class="fa fa-arrow-left"></i>
                             </a>
                         </span>
@@ -51,7 +51,7 @@
                             <ul class="breadcrumbs pull-left">
                                 <li><a href="<?php echo base_url() ?>">Home</a></li>
                                  <li><a href="<?php echo base_url() ?>cso">CSO</a></li>
-                                <li><a href="<?php echo base_url() ?>cso/view_transactions?id=<?php echo $_GET['id'] ?>">View Transactions</a></li>
+                               
                                 <li><a href="<?php echo base_url() ?>cso/view_profile?id=<?php echo $_GET['id'] ?>"><?php echo $title ?></a></li>
                               
                                 
