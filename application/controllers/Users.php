@@ -46,7 +46,7 @@ class Users extends CI_Controller {
 					'extension' => ($this->input->post('extension') == '') ?  '' : $this->input->post('extension') ,
 					'user_type' => $this->input->post('user_type'),
 					'username' => $this->input->post('username'),
-					'password' => $this->input->post('password'),
+					'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
 					'created' =>  date('Y-m-d H:i:s', time()),
 				  	'profile_pic' => ($_FILES['profile_pic']['tmp_name'] === '' ) ? '' : $this->upload_image(),
 				  	'user_status' => 'active',

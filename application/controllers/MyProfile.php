@@ -34,7 +34,7 @@ class MyProfile extends CI_Controller {
 		$where = array('user_id' => $this->session->userdata('user_id'));
 		$user = $this->GetModel->get($this->users,$where)[0];
 
-		if ($password == $user['password']) {
+		if (password_verify($pass,$user['password'])) {
 
 			$data = array(
 				'message' => "Success",
@@ -58,7 +58,7 @@ class MyProfile extends CI_Controller {
 
 
 		$data = array(
-				'password' =>  $this->input->post('pass')
+				'password' =>  password_hash($this->input->post('pass'), PASSWORD_DEFAULT),
 		);
 
 		$where = array('user_id'=> $this->session->userdata('user_id'));

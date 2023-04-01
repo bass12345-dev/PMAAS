@@ -44,7 +44,7 @@ class Login extends CI_Controller {
     
             $user = $this->GetModel->get($this->users_table,$where)[0];
             // $x = password_verify($pass,$user['password']); 
-            if ($pass == $user['password']) {
+            if (password_verify($pass,$user['password'])) {
 
             	if ($user['user_status'] == 'active') {
 
