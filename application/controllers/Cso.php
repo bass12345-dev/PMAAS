@@ -404,26 +404,13 @@ class Cso extends CI_Controller {
 	public function update_cor(){
 
 
-		$data = array(
-
-					
-					'cor' => ($_FILES['update_cor']['tmp_name'] === '' ) ? $this->input->post('cor_name') : $this->upload_update_cor(),
-					
-					
-		);
+		$data = array('cor' => ($_FILES['update_cor']['tmp_name'] === '' ) ? $this->input->post('cor_name') : $this->upload_update_cor());
 
 	
 		$where = array('cso_id'=>$this->input->post('cor_cso_id'));
 
 		$update = $this->UpdateModel->update1($where,$data,$this->cso);
-		if ($update) {
-			$Path = './uploads/cso_files/cor/'.$this->input->post('cor_name');
-			if (file_exists($Path)){
-				    unlink($Path);
-				}else {
-
-				}
-		}
+		
 		$params = array('cond' => $update, 'message' => 'Successfully Updated');
 		$this->load->library('Condition', $params);
 
@@ -463,12 +450,6 @@ class Cso extends CI_Controller {
 
 		$update = $this->UpdateModel->update1($where,$data,$this->cso);
 
-		if ($update) {
-			$Path = './uploads/cso_files/bylaws/'.$this->input->post('bylaws_name');
-			if (file_exists($Path)){
-				    unlink($Path);
-				} 
-		}
 		$params = array('cond' => $update, 'message' => 'Successfully Updated');
 		$this->load->library('Condition', $params);
 
@@ -500,6 +481,8 @@ function upload_update_bylaws(){
  public function update_article(){
 
 
+
+
 		$data = array(
 
 					
@@ -507,16 +490,11 @@ function upload_update_bylaws(){
 					
 					
 		);
-
+		
 	
 		$where = array('cso_id'=>$this->input->post('article_cso_id'));
 		$update = $this->UpdateModel->update1($where,$data,$this->cso);
-		if ($update) {
-			$Path = './uploads/cso_files/articles/'.$this->input->post('article_name');
-			if (file_exists($Path)){
-				    unlink($Path);
-				} 
-		}
+		
 		$params = array('cond' => $update, 'message' => 'Successfully Updated');
 		$this->load->library('Condition', $params);
 

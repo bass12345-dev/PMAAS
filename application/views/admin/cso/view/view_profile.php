@@ -112,18 +112,18 @@
 
                                                      <tr>
                                                         <td>COR</td>
-                                                        <td><a href="javascript:;" id="view_cor" >View COR</a>
+                                                        <td><a href="javascript:;" class="view-pdf" id="view_cor" data-type="cor" >View COR</a>
                                                         <a href="javascript:;" class="btn btn-rounded btn-secondary pull-right" id="update_cor" >Update COR</a></td>
                                                     </tr>
 
                                                      <tr>
                                                         <td>Bylaws</td>
-                                                       <td><a href="javascript:;"  id="view_bylaws" >View Bylaws</a> <a href="javascript:;" class="btn btn-rounded btn-secondary pull-right" id="update_bylaws"   >Update Bylaws</a></td>
+                                                       <td><a href="javascript:;" class="view-pdf" id="view_bylaws" data-type="bylaws" >View Bylaws</a> <a href="javascript:;" class="btn btn-rounded btn-secondary pull-right" id="update_bylaws"   >Update Bylaws</a></td>
                                                     </tr>
 
                                                       <tr>
                                                         <td>Article</td>
-                                                        <td><a href="javascript:;" id="view_article"  >View Article</a> <a href="javascript:;" class="btn btn-rounded btn-secondary pull-right" id="update_article"  >Update Article</a></td>
+                                                        <td><a href="javascript:; " class="view-pdf" id="view_article" data-type="articles"  >View Article</a> <a href="javascript:;" class="btn btn-rounded btn-secondary pull-right" id="update_article"  >Update Article</a></td>
                                                     </tr>
                                                   
                                             </table>
@@ -131,31 +131,35 @@
                                     </div>
                                     
                                     <div class="col-md-6 ">
-
                                         <div id="navigation_controls" class="mb-3" hidden>
                                             <button id="go_previous" class="btn sub-button btn-rounded">Previous</button>
                                             <input id="current_page" value="1" type="number" disabled />
                                             <button id="go_next" class="btn sub-button btn-rounded">Next</button>
-
-                                        <!--      <button id="zoom_in" class="btn sub-button btn-rounded" >+</button>
-                                            <button id="zoom_out" class="btn sub-button btn-rounded">-</button> -->
-
+                                             <button id="zoom_in" class="btn sub-button btn-rounded" >+</button>
+                                            <button id="zoom_out" class="btn sub-button btn-rounded">-</button>
                                              <a href="" id="download" class="btn btn-success btn-rounded pull-right">Download</a>
                                         </div>
+                                        
+                                        <div id="canvas_container" >
+                                            <div id="pdf_alert"></div>
+                                            <img src="./../assets/images/not_found.jpg" id="pdf_error" height="600px"  width ="600px" >
+                                        <canvas id="pdf_renderer" style="width: 100%;"></canvas>
+                                        
+                                    </div>
                                         
                                            
                                        
                                         
-                                            <div id="canvas_container" >
+                                            <!-- <div id="canvas_container" >
 
-                                                <div class="loader-div" hidden >
+                                                <div class="loader-div" >
                                                     <div class="loader"></div>
                                                 </div>
                                                 <img src="./../assets/images/not_found.jpg" id="pdf_error" height="600px"  width ="600px" >
                                         <canvas id="pdf_renderer" style="width: 100%;"></canvas>
                                         
                                     </div>
-                                        
+                                         -->
                                        
                                     </div>
 
@@ -187,81 +191,76 @@
         }
 
 
-        $(document).on('click','a#view_cor',function (e) {
-            $('.loader-div').removeAttr('hidden');
+        $(document).on('click','a.view-pdf',function (e) {
+            e.preventDefault();
+            $('#pdf_error').attr('hidden','hidden');
+            $('#pdf_renderer').attr('hidden','hidden');
+            $('#pdf_alert').html('<p class="py-1 px-2 text-center">Please Wait....</p>');
 
-            if ($(this).data('id') == '') {
+            var alert_text;
 
-                 $('#pdf_error').removeAttr('hidden');
-                  $('#pdf_renderer').attr('hidden','hidden');
-                   $('#navigation_controls').attr('hidden','hidden');
-                    $('.loader-div').attr('hidden','hidden');
-                   
-                    
-            }
-            else {
-                $("a#download").attr("href", base_url + "uploads/cso_files/cor/" + $(this).data('id') );
-                 $('#navigation_controls').removeAttr('hidden');
-                 $('#pdf_renderer').removeAttr('hidden');
-                  $('#pdf_error').attr('hidden','hidden');
-                    
-                    $('.loader-div').attr('hidden','hidden');
-
-
-
-            pdfjsLib.getDocument('./../uploads/cso_files/cor/'+$(this).data('id')).then((pdf) => {
-     
-                myState.pdf = pdf;
-                render();
-                 });
+            if ($(this).data('type') == 'cor') {
+                alert_text = 'COR';
+            }else if ($(this).data('type') == 'articles') {
+                alert_text = 'Article';
+            }else if($(this).data('type') == 'bylaws'){
+                    alert_text = 'ByLaws';
             }
 
-         })
+               setTimeout(() => {
 
+                if ($(this).data('id') == '') {
+                        alert("PDF can't be found! Please Update " + alert_text);
+                        $('#pdf_alert').html('');
+                        $('#pdf_error').removeAttr('hidden');
+                }else {
+                    $('#pdf_alert').html('');
+                    path = './../uploads/cso_files/'+$(this).data('type')+'/';
+                    $('#navigation_controls').removeAttr('hidden');
+                    $('#pdf_renderer').removeAttr('hidden');
+                    $('#pdf_error').attr('hidden','hidden');
+                    view_pdf($(this).data('type'),$(this).data('id'),path);
+                }
 
-        $(document).on('click','a#view_bylaws',function (e) {
-             $('.loader-div').removeAttr('hidden');
-            if ($(this).data('id') == '') {
-                 $('#pdf_error').removeAttr('hidden');
-                 $('#pdf_renderer').attr('hidden','hidden');
-                 $('#navigation_controls').attr('hidden','hidden');
-                 $('.loader-div').attr('hidden','hidden');
-              
-            }else{
-             $("a#download").attr("href", base_url + "uploads/cso_files/bylaws/" + $(this).data('id') );
-             $('#navigation_controls').removeAttr('hidden');
-             $('#pdf_renderer').removeAttr('hidden');
-              $('#pdf_error').attr('hidden','hidden');
-              $('.loader-div').attr('hidden','hidden');
-            pdfjsLib.getDocument('./../uploads/cso_files/bylaws/'+$(this).data('id')).then((pdf) => {
-                myState.pdf = pdf;
-                render();
-                 });
-             }
-         })
-         $(document).on('click','a#view_article',function (e) {
-            $('.loader-div').removeAttr('hidden');
-            if ($(this).data('id') == '') {               
-                $('#pdf_error').removeAttr('hidden');
-                $('#pdf_renderer').attr('hidden','hidden');
-                $('#navigation_controls').attr('hidden','hidden');
-                $('.loader-div').attr('hidden','hidden');
+                }, 1000)
                
-            }else{
-                $("a#download").attr("href", base_url + "uploads/cso_files/articles/" + $(this).data('id') );
-                $('#navigation_controls').removeAttr('hidden');
-                $('#pdf_renderer').removeAttr('hidden');
-                 $('#pdf_error').attr('hidden','hidden');
-                 $('.loader-div').attr('hidden','hidden');
-                pdfjsLib.getDocument('./../uploads/cso_files/articles/'+$(this).data('id')).then((pdf) => {
-     
+
+        });
+
+        function view_pdf(pdf_type,pdf_name,path){
+
+                switch(pdf_type) {
+
+                    case 'cor':
+                        load_pdf(path + pdf_name);
+                    break;
+
+                    case 'bylaws':
+                    load_pdf(path + pdf_name);
+                    break;
+
+                    case 'articles':
+                    load_pdf(path + pdf_name);
+                    break;
+
+                    default:
+                    alert( "Error" );
+                }
+
+        }
+
+        function load_pdf(pdf){
+
+           pdfjsLib.getDocument(pdf).then((pdf) => {    
                 myState.pdf = pdf;
                 render();
-                 });
-            }
-         })
-         
-     
+            });
+
+
+        }
+
+
+
      
         
         function render() {
