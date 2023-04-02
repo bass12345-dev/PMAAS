@@ -2150,7 +2150,22 @@
      $('#add_user_form').on('submit', function(e) {
     e.preventDefault();
 
-    $.ajax({
+    const password = $('input[name=password]').val();
+    const confirm_password = $('input[name=confirm_password]').val();
+
+    if (password != confirm_password) {
+                Swal.fire({
+                        text: "Password Don't Match",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+    }else {
+            
+              $.ajax({
             type: "POST",
             url: base_url + 'Users/add',
             data: new FormData(this),
@@ -2201,6 +2216,13 @@
 
         });
 
+    }
+    
+
+ 
+
+
+  
     });
 
 

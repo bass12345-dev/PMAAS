@@ -42,7 +42,12 @@
 
                                                     <div class="form-group">
                                                         <label>Password</label>
-                                                            <input  type="text" class="form-control" name="password"  placeholder="" required>      
+                                                            <input  type="password" class="form-control" name="password"  placeholder="" required>      
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Confirm Password</label>
+                                                            <input  type="password" class="form-control" name="confirm_password"  placeholder="" required>      
                                                     </div>
 
                                                     <button  type="submit" class="btn mt-1 pr-4 pl-4 btn-add-user sub-button"> Submit</button>
