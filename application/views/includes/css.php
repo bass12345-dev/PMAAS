@@ -41,8 +41,9 @@
             }
 
 
-                    .media-29101 {
-  text-align: center; }
+  .media-29101 {
+  
+    text-align: center; }
   .media-29101 img {
     margin-bottom: 20px;
     border-radius: 50%;

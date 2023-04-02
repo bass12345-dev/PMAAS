@@ -89,7 +89,7 @@ class Cso extends CI_Controller {
 	public function view_profile(){
 
 		if ($this->session->userdata('user_type') == 'admin' ) {
-        	$data['title'] = 'View Profile';
+        $data['title'] = 'View Profile';
 		$data['data'] = $this->GetModel->get($this->cso,array('cso_id' => $_GET['id']))[0];
 		$this->load->view('admin/cso/view/view_profile',$data);
         }else {

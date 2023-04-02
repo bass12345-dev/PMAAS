@@ -251,6 +251,7 @@
 
         function load_pdf(pdf){
 
+        $("a#download").attr("href", pdf)
            pdfjsLib.getDocument(pdf).then((pdf) => {    
                 myState.pdf = pdf;
                 render();

@@ -30,7 +30,7 @@
                             </div>
                             <div class="form-gp">
                                 <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" id="exampleInputPassword1" name="password" required>
+                                    <input type="text" id="exampleInputPassword1" name="password" style="-webkit-text-security: disc;" required>
                                     <i class="ti-lock lock"></i>
                                      
 
