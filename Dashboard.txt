@@ -1,15 +1,12 @@
 CPESD Information System	
 
 
+RFA
+
 Document Tracking
 		if simple = One person
 					Accomplished
 		if complex = Tracking
-
-
-RFA
-
-
 
 Dashboard 
 include pending
@@ -17,6 +14,7 @@ include pending
 include to user
 graph
 	green og red
+
 Volume of business
 		-> Total Collection/Sales	
 		  Total Released/Purchases
