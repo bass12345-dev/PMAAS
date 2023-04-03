@@ -1,0 +1,74 @@
+CPESD Information System	
+
+
+Document Tracking
+		if simple = One person
+					Accomplished
+		if complex = Tracking
+
+
+RFA
+
+
+
+Dashboard 
+include pending
+
+include to user
+graph
+	green og red
+Volume of business
+		-> Total Collection/Sales	
+		  Total Released/Purchases
+
+Cash Position 
+		Cash in bank	₱ 0.00
+			Cash on hand	₱ 2323.00
+		Inventories(Store)
+
+CSO
+->
+	Number of PO's
+	Number of COOP's
+	No. NSC
+	Others
+		President/BOD Chairperson/BOT
+		Vice President/BOD Vice Chairperson
+		Secretary
+		Treasurer
+		Auditor
+		Manager
+	
+		
+	Telephone number:
+	Email Address
+	Complete Address
+
+	Purok = text
+	Barangay = Dropdown
+
+Filter CSO 
+print list
+
+ARTICLE to AOC/AOI
+
+Add Other docs
+
+
+
+Action taken to Accomplished
+
+
+Report
+	PMAS NO
+	Date & Time Filed	
+	Type Of Activity
+	CSO
+	Person Responsible
+	
+Total Transactions
+
+Filter Type of activity
+
+Count Type of activity
+	->Admin 
