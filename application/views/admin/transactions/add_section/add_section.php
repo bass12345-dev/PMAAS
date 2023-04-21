@@ -126,7 +126,7 @@
                                     
                                     
                                   </div>
-                                  <input type="number" class="form-control  wizard-required input " value="" name="pmas_number"  >
+                                  <input type="number" class="form-control  wizard-required input " value="" name="pmas_number" readonly >
                               </div>
                                 <div class="wizard-form-error"></div>
                             </div>

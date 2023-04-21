@@ -1704,7 +1704,7 @@
 
 
           var transaction_table = $('#transactions_table').DataTable({
-        scrollY: 200,
+        scrollY: 600,
         scrollX: true,
         "ordering": false,
 
@@ -1800,7 +1800,9 @@
              success: function(data)
             {   
 
-            $('.count_pending').text(data.length)        
+            $('.count_pending').text(data.length);
+            $('h2#count-p').text(data.length);  
+                  
                 
            },
             error: function(xhr) { // if error occured
@@ -1813,6 +1815,28 @@
         }
 
 
+          function count_completed_transactions(){
+
+                $.ajax({
+            type: "POST",
+            url: base_url + 'Transactions/get_transactions',
+            dataType: 'json',
+             success: function(data)
+            {   
+
+            $('h2#count-c').text(data.length);  
+                  
+                
+           },
+            error: function(xhr) { // if error occured
+                
+            },
+
+
+        });
+
+        }
+        count_completed_transactions();
         count_pending_transactions();
 
 
@@ -1967,8 +1991,12 @@
                                if(getLastURLPart(url) == 'pending_transactions'){
                                     pending_transaction_table.ajax.reload();
                                     count_pending_transactions();
+                                    
                                  }else {
+                                    count_pending_transactions();
+                                    count_completed_transactions();
                                      load_pending_transactions(show);
+                                     load_admin_chart(year);
                                  }
                                 
 
@@ -2020,7 +2048,7 @@
 
                       
                         $('#view_remarks_modal').modal('hide')
-                       
+                       pending_transaction_table.ajax.reload();
                          
                          
                         

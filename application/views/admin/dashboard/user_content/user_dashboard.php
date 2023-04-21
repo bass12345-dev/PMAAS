@@ -41,7 +41,7 @@
                                         <div class="p-3 d-flex justify-content-between align-items-center">
                                             <div class="seofct-icon">
                                                 <!-- <i class="ti-thumb-up"></i>  -->
-                                                Number of all Transactions</div>
+                                                Completed Transactions</div>
                                                 <h2><?php echo $count_user_completed ?></h2>
                                         </div>
 

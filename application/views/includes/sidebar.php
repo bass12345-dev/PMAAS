@@ -30,7 +30,7 @@
 
                             <li><a href="<?php echo base_url() ?>"><i class="ti-map-alt"></i> <span>Dashboard</span></a></li>
                             <li><a href="<?php echo base_url() ?>Pending_transactions"><i class="ti-map-alt"></i> <span>My Pending Transactions</span></a></li>
-                            <li><a href="<?php echo base_url() ?>transactions"><i class="ti-map-alt"></i> <span>All Transactions</span></a></li>
+                            <li><a href="<?php echo base_url() ?>transactions"><i class="ti-map-alt"></i> <span>Completed Transactions</span></a></li>
                            
                             <?php }; ?>
 

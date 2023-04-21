@@ -66,7 +66,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               $this->db->join('responsibility_center','responsibility_center.res_center_id = transactions.responsibility_center_id');
             $this->db->join('users','users.user_id = transactions.created_by');
              $this->db->where('transactions.status','completed');
-            $this->db->order_by('transactions.pmas_no','desc');
+            $this->db->order_by($order_key,'desc');
             return $this->db->get()->result_array();
       }
 

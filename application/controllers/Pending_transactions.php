@@ -81,7 +81,7 @@ class Pending_transactions extends CI_Controller {
 				}
 				else if ($row['remarks'] != '' AND $row['action_taken'] != null) {
 					$b = '<a href="javascript:;" id="completed" data-id="'.$row['transaction_id'].'" class="btn sub-button btn-rounded p-1 pl-2 pr-2"><i class="ti-check"></i></a>';
-					$a = '';
+					$a = '<a href="javascript:;" class="btn btn-success btn-rounded p-1 pl-2 pr-2">Action Taken</a>';
 				}
 
 				// 
@@ -110,6 +110,30 @@ class Pending_transactions extends CI_Controller {
 		foreach ($items1 as $row ) {
 
 
+				$a = '';
+				$b = '';
+
+				if ($row['remarks'] == '' AND $row['action_taken'] == null) {
+					$b = '<ul class="d-flex justify-content-center">
+                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="" data-a="" data-b=""  id="view_more_transaction"><i class="fa fa-eye"></i></a></li>
+                                <li><a href="javascript:;" data-id=""  id="delete-activity"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>
+                                </ul>';
+					$a = '<a href="javascript:;" class="btn btn-secondary btn-rounded p-1 pl-2 pr-2">Waiting for Remarks....</a>';
+					
+				}else if ($row['remarks'] != '' AND $row['action_taken'] == null) {
+					$b = '<ul class="d-flex justify-content-center">
+                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="" data-a="" data-b=""  id="view_more_transaction"><i class="fa fa-eye"></i></a></li>
+                                </ul>';
+					$a = '<a href="javascript:;" class="btn btn-danger btn-rounded p-1 pl-2 pr-2">remarks added</a><br><a href="javascript:;"  data-id="'.$row['transaction_id'].'" id="view-remarks">View Remarks</a>';
+					
+				}
+				else if ($row['remarks'] != '' AND $row['action_taken'] != null) {
+					$b = '<ul class="d-flex justify-content-center">
+                                <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="" data-a="" data-b=""  id="view_more_transaction"><i class="fa fa-eye"></i></a></li>
+                                </ul>';
+					$a = '<a href="javascript:;" class="btn btn-success btn-rounded p-1 pl-2 pr-2">Waiting for Confirmation</a>';
+				}
+
 
             	$data[] = array(
             				'transaction_id' => $row['transaction_id'],
@@ -122,8 +146,8 @@ class Pending_transactions extends CI_Controller {
             				'is_training' => $row['is_training'] == 1 ? true : false,
             				'is_project_monitoring' =>  $row['is_project_monitoring'] == 1 ? true : false,
             				'name' => $row['first_name'].' '.$row['middle_name'].' '.$row['last_name'].' '.$row['extension'],
-            				's' => $row['remarks'] == '' ? '' :  '<a href="javascript:;" class="btn btn-danger btn-rounded p-1 pl-2 pr-2">remarks added</a><br><a href="javascript:;"  data-id="'.$row['transaction_id'].'" id="view-remarks">View Remarks</a>',
-            				'action' => '',
+            				's' => $a,
+            				'action' => $b,
             				// 'action' => '<ul class="d-flex justify-content-center">
                 //                 <li class="mr-3 "><a href="javascript:;" class="text-secondary action-icon" data-id="" data-a="" data-b=""  id="view_more_transaction"><i class="fa fa-eye"></i></a></li>
                 //                 <li><a href="javascript:;" data-id=""  id="delete-activity"  class="text-danger action-icon"><i class="ti-trash"></i></a></li>
@@ -181,8 +205,9 @@ class Pending_transactions extends CI_Controller {
 					$a = '<a href="javascript:;" class="btn btn-success btn-rounded p-1 pl-2 pr-2">remarks added</a>';
 				}
 				else if ($row['remarks'] != '' AND $row['action_taken'] != null) {
-					$b = '<a href="javascript:;" id="completed" data-id="'.$row['transaction_id'].'" class="btn sub-button btn-rounded p-1 pl-2 pr-2"><i class="ti-check"></i></a>';
-					$a = '';
+					$b = '<a href="javascript:;" id="completed" data-id="'.$row['transaction_id'].'" class="btn sub-button btn-rounded p-1 pl-2 pr-2 mt-2"><i class="ti-check"></i></a>';
+					$a = '<a href="javascript:;" class="btn btn-success btn-rounded p-1 pl-2 pr-2 mb-1">Action Taken</a><br>
+					<a href="javascript:;" >'.date('M, d Y', strtotime($row['action_taken'])).'</a>';
 				}
 
             	$data[] = array(

@@ -42,7 +42,8 @@
                                             <div class="seofct-icon">
                                                 <!-- <i class="ti-thumb-up"></i>  -->
                                                 Number of all Transactions</div>
-                                                <h2><?php echo $count_admin_completed ?></h2>
+                                                <h2 id="count-c">0</h2>
+                                                <!-- <h2><?php echo $count_admin_completed ?></h2> -->
                                         </div>
 
                                                 <!-- <canvas id="seolinechart1" height="50"></canvas> -->
@@ -58,7 +59,8 @@
                                             <div class="seofct-icon">
                                                 <!-- <i class="ti-thumb-up"></i>  -->
                                                 Pending Transactions</div>
-                                                <h2><?php echo $count_admin_pending ?></h2>
+                                                
+                                                <h2 id="count-p">0</h2>
                                         </div>
                                         
                                                 <!-- <canvas id="seolinechart1" height="50"></canvas> -->
@@ -172,10 +174,10 @@
         }
         function load_graph($this){
 
-                load_user_chart($this.value)
+                load_admin_chart($this.value)
         }
 
-        function load_user_chart(year){
+        function load_admin_chart(year){
             
 
 
@@ -321,7 +323,7 @@
 
 
      load_pending_transactions(show);
-     load_user_chart(year);
+     load_admin_chart(year);
      </script>
    
 </body>
